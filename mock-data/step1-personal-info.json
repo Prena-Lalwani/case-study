@@ -1,0 +1,30 @@
+{
+  "pageTitle": "Personal information",
+  "sessionInfo": "Session secure · auto-saved 2s ago",
+
+  "form": {
+    "legalName": "John A. Doe",
+    "dateOfBirth": "1985-03-14",
+    "address": "142 W 57th St, Apt 4B, New York NY 10019",
+    "phone": "+1 (555) 000-0000",
+    "ssn": "123-45-6789"
+  },
+
+  "uploadBanner": {
+    "title": "AI pre-fill active",
+    "sub": "Upload your ID and AI will fill the form for you automatically",
+    "badge": "BETA"
+  },
+
+  "aiActivityPanel": {
+    "title": "AI activity",
+    "status": "Live",
+    "entries": [
+      { "color": "error",   "title": "SSN format mismatch",     "detail": "Expected XXX-XX-XXXX",      "time": "10:42:24" },
+      { "color": "warning", "title": "Address low confidence",   "detail": "62% — apartment unclear",   "time": "10:42:21" },
+      { "color": "success", "title": "DOB extracted",            "detail": "14 Mar 1985",               "time": "10:42:19" },
+      { "color": "success", "title": "Name extracted",           "detail": "John A. Doe",               "time": "10:42:18" },
+      { "color": "success", "title": "ID document classified",   "detail": "US driver's licence · NY",  "time": "10:42:14" }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "pageTitle": "Activated",
+  "sessionInfo": "Account active",
+
+  "hero": {
+    "title": "Account activated!",
+    "welcomeMessage": "Welcome to Meridian Wealth, John.",
+    "sub": "Your account is fully verified and ready to use."
+  },
+
+  "summaryCards": [
+    {
+      "label": "Personal info",
+      "sub": "5 / 5 fields confirmed · AI pre-filled 3",
+      "theme": "blue"
+    },
+    {
+      "label": "Identity verified",
+      "sub": "Biometric passed · 99% confidence",
+      "theme": "green"
+    },
+    {
+      "label": "Documents",
+      "sub": "3 / 3 verified · 1 flag resolved",
+      "theme": "amber"
+    },
+    {
+      "label": "Risk profile",
+      "sub": "12 / 12 answered · Moderate Growth",
+      "theme": "purple"
+    }
+  ],
+
+  "advisor": {
+    "name": "Sarah Reynolds",
+    "initials": "SR",
+    "title": "Senior Wealth Advisor",
+    "contactNote": "Will contact you within 1 business day"
+  },
+
+  "compliance": [
+    "KYC complete",
+    "AML passed",
+    "SOC 2 verified",
+    "WCAG 2.1"
+  ],
+
+  "aiStats": {
+    "totalTimeMinutes": 12,
+    "totalTimeSeconds": 44,
+    "fieldsAutoFilled": 3,
+    "documentsVerified": 3,
+    "documentsTotal": 3,
+    "advisorsMatched": 47,
+    "model": "Meridian-IDX v3.2"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "pageTitle": "Verify identity",
+  "sessionInfo": "Session secure · auto-saved 2s ago",
+
+  "methods": [
+    {
+      "id": "biometric",
+      "title": "Biometric scan",
+      "sub": "FaceID or fingerprint — instant verification with no documents to upload.",
+      "badge": "Most secure",
+      "buttonLabel": "Use biometric"
+    },
+    {
+      "id": "gov-id",
+      "title": "Government ID scan",
+      "sub": "Take a photo of your ID front + back. Verification in about 45 seconds.",
+      "buttonLabel": "Scan ID"
+    }
+  ],
+
+  "whatWeVerify": [
+    { "title": "Identity confirmed",  "sub": "Face match to your ID" },
+    { "title": "ID authenticity",     "sub": "Document is genuine" },
+    { "title": "Liveness check",      "sub": "Real person, present now" }
+  ],
+
+  "privacyNote": "Your biometric data is processed locally and never stored on our servers.",
+
+  "verificationStatusPanel": {
+    "title": "Verification status",
+    "steps": [
+      { "label": "Capture ID front",  "status": "complete" },
+      { "label": "Capture ID back",   "status": "complete" },
+      { "label": "Liveness check",    "status": "in_progress" },
+      { "label": "Match & confirm",   "status": "pending" }
+    ],
+    "securityNote": "256-bit encrypted · FIDO2 certified · SOC 2 Type II"
+  }
+}

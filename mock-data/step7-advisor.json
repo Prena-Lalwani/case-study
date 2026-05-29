@@ -1,0 +1,51 @@
+{
+  "pageTitle": "Your advisor",
+  "sessionInfo": "Approved · advisor matched",
+
+  "matchBanner": {
+    "totalAdvisors": 47,
+    "model": "Meridian-IDX"
+  },
+
+  "advisor": {
+    "name": "Sarah Reynolds",
+    "initials": "SR",
+    "title": "Senior Wealth Advisor",
+    "yearsExperience": 12,
+    "specialty": "Moderate Growth · Equity Focus",
+    "rating": 4.9,
+    "totalClients": 124,
+    "stats": {
+      "matches": 47,
+      "assetsManaged": "$2.4B",
+      "responseTime": "< 2 hrs"
+    }
+  },
+
+  "whyThisMatch": [
+    { "text": "Matches your Moderate Growth profile" },
+    { "text": "Specializes in 3–7 year horizons" },
+    { "text": "Top performer in equity portfolios" }
+  ],
+
+  "nextSteps": [
+    { "n": 1, "main": "Sarah will contact you",    "rest": " to introduce herself",    "meta": "Within 1 business day" },
+    { "n": 2, "main": "Initial consultation call", "rest": " to discuss your goals",   "meta": "30 min · free" },
+    { "n": 3, "main": "Portfolio strategy session","rest": " to build your plan",       "meta": "Scheduled together" }
+  ],
+
+  "advisorMatchPanel": {
+    "title": "Match details",
+    "matchScore": 94,
+    "attributes": [
+      { "label": "Risk alignment", "value": "Moderate" },
+      { "label": "Horizon",        "value": "3–7 yrs" },
+      { "label": "Goal",           "value": "Capital growth" }
+    ],
+    "aiConfidence": {
+      "percent": 94,
+      "totalAdvisors": 47,
+      "note": "Selected from 47 available advisors for your profile."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "pageTitle": "AI review",
+  "sessionInfoLoading": "Session secure · review in progress",
+  "sessionInfoComplete": "Review complete",
+
+  "model": "Meridian-IDX v3.2",
+
+  "loadingSteps": [
+    { "title": "Document authenticity check", "sub": "Scanning documents…", "status": "in_progress" },
+    { "title": "Data extraction",             "sub": "Waiting…",           "status": "pending" },
+    { "title": "Fraud detection scan",        "sub": "Waiting…",           "status": "pending" },
+    { "title": "Final confidence scoring",    "sub": "Waiting…",           "status": "pending" }
+  ],
+
+  "analysisResult": {
+    "confidence": 99,
+    "checks": [
+      { "title": "Document authenticity check", "sub": "All 3 documents passed",       "status": "complete" },
+      { "title": "Data extraction",             "sub": "14 fields extracted",           "status": "complete" },
+      { "title": "Fraud detection scan",        "sub": "No fraud patterns detected",    "status": "complete" },
+      { "title": "Final confidence scoring",    "sub": "99% overall confidence",        "status": "complete" }
+    ],
+    "extractedFields": {
+      "fullName":  "John A. Doe",
+      "dob":       "14 Mar 1985",
+      "address":   "142 W 57th St, Apt 4B, New York NY 10019",
+      "idNumber":  "D123-456-789"
+    }
+  },
+
+  "whatAiChecks": [
+    { "title": "Fraud patterns",        "sub": "Cross-referenced against 2M+ known fraud cases" },
+    { "title": "Document tampering",    "sub": "Pixel-level authenticity and edit detection" },
+    { "title": "Identity verification", "sub": "Matched against government identity databases" }
+  ],
+
+  "liveLogPanel": {
+    "title": "Live AI log",
+    "entries": [
+      { "time": "10:46:15", "icon": "circle",   "iconStyle": "indigo", "text": "Fraud scan running..." },
+      { "time": "10:46:12", "icon": "check",    "iconStyle": "success","text": "14 fields extracted" },
+      { "time": "10:46:03", "icon": "circle",   "iconStyle": "indigo", "text": "Extracting fields..." },
+      { "time": "10:46:01", "icon": "file",     "iconStyle": "secondary","text": "Documents received" }
+    ],
+    "model": {
+      "name": "Meridian-IDX v3.2",
+      "accuracy": "99.4%",
+      "casesTrained": "2.1M"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(netstat -ano)",
+      "PowerShell(Get-Process -Id 5552)",
+      "PowerShell(\\(Get-WmiObject Win32_Process -Filter \"ProcessId=5552\"\\).ExecutablePath)"
+    ]
+  }
+}

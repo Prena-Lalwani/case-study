@@ -1,0 +1,52 @@
+{
+  "pageTitle": "Risk assessment",
+  "sessionInfo": "Session secure · auto-saved 2s ago",
+  "totalQuestions": 12,
+
+  "answeredQuestions": [
+    {
+      "n": 1,
+      "text": "What is your primary investment goal?",
+      "options": ["Capital growth", "Regular income", "Capital preservation"],
+      "answer": "Capital growth"
+    },
+    {
+      "n": 2,
+      "text": "What is your investment time horizon?",
+      "options": ["Less than 2 yrs", "3–7 years", "8+ years"],
+      "answer": "3–7 years"
+    },
+    {
+      "n": 3,
+      "text": "How would you react to a 20% portfolio drop?",
+      "options": ["Sell immediately", "Hold and wait", "Buy more"],
+      "answer": "Hold and wait"
+    }
+  ],
+
+  "currentQuestion": {
+    "n": 4,
+    "text": "What percentage of your savings are you investing?",
+    "options": ["Less than 25%", "25–50%", "More than 50%"]
+  },
+
+  "lockedRemaining": {
+    "label": "Q5–Q12 · 8 more questions",
+    "sub": "Unlock as you answer · about 6 minutes remaining"
+  },
+
+  "aiMatchPanel": {
+    "title": "Match details",
+    "matchScore": 94,
+    "attributes": [
+      { "label": "Risk alignment", "value": "Moderate" },
+      { "label": "Horizon",        "value": "3–7 yrs" },
+      { "label": "Goal",           "value": "Capital growth" }
+    ],
+    "aiConfidence": {
+      "percent": 94,
+      "totalAdvisors": 47,
+      "note": "Selected from 47 available advisors for your profile."
+    }
+  }
+}

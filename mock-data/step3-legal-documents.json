@@ -1,0 +1,57 @@
+{
+  "pageTitle": "Legal documents",
+  "sessionInfo": "Session secure · auto-saved 2s ago",
+  "totalRequired": 3,
+
+  "aiBanner": {
+    "title": "AI verification active — documents scanned automatically",
+    "sub": "Each file is classified and read on upload · no manual data entry needed"
+  },
+
+  "documents": [
+    {
+      "id": "gov-id",
+      "label": "Government ID",
+      "status": "verified",
+      "fileName": "Drivers_License_MA.pdf",
+      "fileSize": "1.2 MB",
+      "uploadedAt": "10:44:01",
+      "aiResult": "AI extracted: Name, DOB, Address, ID number",
+      "confidence": 99
+    },
+    {
+      "id": "proof-of-address",
+      "label": "Proof of address",
+      "status": "needs_review",
+      "fileName": "Utility_Bill_Feb2024.pdf",
+      "fileSize": "0.8 MB",
+      "uploadedAt": "10:45:32",
+      "aiResult": "Apartment number partially obscured — please verify manually"
+    },
+    {
+      "id": "bank-statement",
+      "label": "Bank statement",
+      "status": "pending_upload",
+      "hint": "PDF, JPG, PNG · Max 10 MB · Last 3 months required",
+      "required": true
+    }
+  ],
+
+  "uploadConstraints": {
+    "acceptedTypes": ["application/pdf", "image/jpeg", "image/png"],
+    "maxBytes": 10485760,
+    "maxLabel": "10 MB"
+  },
+
+  "aiDocumentReviewPanel": {
+    "title": "AI document review",
+    "model": "Meridian-IDX v3.2",
+    "accuracy": "99.4%",
+    "casesTrained": "2.1M",
+    "entries": [
+      { "status": "complete",    "label": "Government ID",      "detail": "Name, DOB, Address, ID No." },
+      { "status": "needs_review","label": "Proof of address",   "detail": "Apartment number unclear" },
+      { "status": "pending",     "label": "Bank statement",     "detail": "Awaiting upload" }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  fullName  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  application OnboardingApplication?
+}
+
+model OnboardingApplication {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  currentStep Int    @default(1)
+  status      String @default("in_progress") // in_progress | submitted | approved | rejected
+
+  // Step 1 — Personal info
+  legalName String?
+  dob       String?
+  address   String?
+  phone     String?
+  ssn       String?  // store encrypted in production
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

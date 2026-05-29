@@ -1,0 +1,65 @@
+{
+  "pageTitle": "Compliance review",
+  "sessionInfo": "Submitted · under review",
+
+  "submission": {
+    "submittedAt": "May 29, 2026 · 9:04 AM",
+    "estimatedCompletion": "May 30, 2026 · ~3:00 AM",
+    "progressPercent": 20
+  },
+
+  "reviewItems": [
+    { "label": "AML screening",             "status": "cleared" },
+    { "label": "PEP check",                 "status": "cleared" },
+    { "label": "Sanctions screening",       "status": "cleared" },
+    { "label": "Source of funds",           "status": "cleared" },
+    { "label": "Risk profile validation",   "status": "in_progress" },
+    { "label": "Regulatory filing",         "status": "pending" },
+    { "label": "Final compliance sign-off", "status": "pending" }
+  ],
+
+  "notifications": [
+    { "channel": "Email", "address": "j.doe@email.com",    "confirmed": true },
+    { "channel": "SMS",   "address": "+1 (555) 000-0000",  "confirmed": true }
+  ],
+
+  "whileYouWait": [
+    { "label": "Portfolio tools",   "sub": "Explore investment options" },
+    { "label": "Market insights",   "sub": "See current trends" },
+    { "label": "Advisor preview",   "sub": "Meet your potential advisors" }
+  ],
+
+  "reviewTimelinePanel": {
+    "title": "Review timeline",
+    "stages": [
+      {
+        "label": "Application submitted",
+        "sub": "All documents received",
+        "status": "complete",
+        "time": "May 29, 9:04 AM"
+      },
+      {
+        "label": "Document verification",
+        "sub": "Reviewing identity & address docs",
+        "status": "in_progress",
+        "time": "In progress"
+      },
+      {
+        "label": "Compliance check",
+        "sub": "AML, PEP & sanctions screening",
+        "status": "pending",
+        "time": "Est. ~4 hrs"
+      },
+      {
+        "label": "Final approval",
+        "sub": "Sign-off & account activation",
+        "status": "pending",
+        "time": "Est. ~14 hrs"
+      }
+    ],
+    "avgApproval": {
+      "totalHours": 18,
+      "approvalRate": 98
+    }
+  }
+}
