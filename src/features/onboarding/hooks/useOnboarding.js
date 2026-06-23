@@ -36,8 +36,9 @@ export const useOnboarding = () => {
   // Overall onboarding progress as a percentage (based on completed steps)
   const overallProgress = Math.round((state.completedSteps.length / 8) * 100)
 
-  // How many more documents still need uploading
-  const documentsRemaining = 3 - state.documents.uploadedCount
+  // How many document slots have been received
+  const documentsReceived  = Object.values(state.documents).filter(v => v?.status === 'received').length
+  const documentsRemaining = 3 - documentsReceived
 
   // Check if a specific step number has been marked complete
   const isStepComplete = (step) => state.completedSteps.includes(step)
@@ -53,8 +54,8 @@ export const useOnboarding = () => {
         state.personalInfo.fullName.trim().length >= 2 &&
         state.personalInfo.email.trim().length > 0
       )
-      case 3: return state.documents.uploadedCount >= 2   // at least bank uploaded
-      case 5: return state.riskAnswers[4] != null         // Q4 must be answered
+      case 3: return ['govId', 'proofOfAddress', 'bankStatement'].every(k => state.documents[k]?.status === 'received')
+      case 5: return Object.keys(state.riskAnswers).length >= 12 // all 12 questions answered
       default: return true
     }
   }
@@ -75,17 +76,32 @@ export const useOnboarding = () => {
     isStepComplete,
     canProceed,
 
-    // Step 1 — Personal info
+    // Step 1 — Personal info (single field)
     updatePersonalInfo: (field, value) =>
       dispatch({ type: 'UPDATE_PERSONAL_INFO', field, value }),
+
+    // Step 1 — Bulk-fill from AI extraction ({ fullName, dob, address, idNumber })
+    fillPersonalInfoFromAi: (fields) =>
+      dispatch({ type: 'FILL_PERSONAL_INFO_FROM_AI', fields }),
 
     // Step 2 — Identity verification
     setIdentityMethod: (method) =>
       dispatch({ type: 'SET_IDENTITY_METHOD', method }),
 
+    setVerificationStatus: (status) =>
+      dispatch({ type: 'SET_VERIFICATION_STATUS', status }),
+
+    setVerificationSteps: (steps) =>
+      dispatch({ type: 'SET_VERIFICATION_STEPS', steps }),
+
     // Step 3 — Documents
-    incrementDocuments: () =>
-      dispatch({ type: 'INCREMENT_DOCUMENTS' }),
+    setDocumentReceived: (slot, { fileName, fileSize, preview } = {}) =>
+      dispatch({ type: 'SET_DOCUMENT_RECEIVED', slot, fileName, fileSize, preview }),
+
+    clearDocument: (slot) =>
+      dispatch({ type: 'CLEAR_DOCUMENT', slot }),
+
+    documentsReceived,
 
     // Step 5 — Risk assessment
     setRiskAnswer: (questionNum, answer) =>
@@ -94,5 +110,19 @@ export const useOnboarding = () => {
     // Any step — mark as complete
     completeStep: (step) =>
       dispatch({ type: 'COMPLETE_STEP', step }),
+
+    // Step 4 — KYC AI review
+    setKycReviewLoading: () =>
+      dispatch({ type: 'SET_KYC_REVIEW_LOADING' }),
+
+    setKycReviewResult: (result) =>
+      dispatch({ type: 'SET_KYC_REVIEW_RESULT', result }),
+
+    setKycReviewError: (error) =>
+      dispatch({ type: 'SET_KYC_REVIEW_ERROR', error }),
+
+    // Restore DB-saved personal info without clearing AI confidence
+    loadFromDb: (data) =>
+      dispatch({ type: 'LOAD_FROM_DB', data }),
   }
 }

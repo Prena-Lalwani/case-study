@@ -1,0 +1,140 @@
+{
+  "id": "APP-24808",
+  "status": "auto_rejected",
+  "submittedAt": "2026-05-31T10:17:33Z",
+  "personalInfo": {
+    "fullName": "Lucia Fernandez",
+    "dateOfBirth": "2000-09-11",
+    "address": "38 Garden View Apt 1F, Houston, TX 77001",
+    "phone": "+1 713-555-0812",
+    "email": "lucia.fernandez@email.com",
+    "ssn": "***-**-3341",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "part_time",
+    "employer": "The Rustic Table Restaurant",
+    "jobTitle": "Waitress",
+    "yearsEmployed": 0.9,
+    "employmentStartDate": "2025-07-20",
+    "annualSalary": 33600,
+    "monthlyGross": 2800,
+    "monthlyNet": 2380,
+    "note": "Income includes variable tips — base hourly $9.50"
+  },
+  "financials": {
+    "creditScore": 598,
+    "creditRating": "Poor",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 500,
+        "balance": 22400,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 355,
+        "balance": 5600,
+        "status": "current — balance at 90% of limit"
+      }
+    ],
+    "totalMonthlyDebtPayments": 855,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 2
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 28000,
+    "termYears": 5,
+    "interestRate": 8.5,
+    "estimatedMonthlyPayment": 575,
+    "purpose": "Purchase used vehicle — Honda Civic 2023",
+    "vehicleMake": "Honda",
+    "vehicleModel": "Civic",
+    "vehicleYear": 2023
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Texas DPS",
+      "idNumber": "TX-33001-882",
+      "fullName": "LUCIA FERNANDEZ",
+      "dateOfBirth": "2000-09-11",
+      "address": "38 Garden View Apt 1F, Houston, TX 77001",
+      "issueDate": "2021-10-15",
+      "expiryDate": "2027-09-11",
+      "aiConfidence": 96,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "The Rustic Table Restaurant",
+      "employeeId": "TRT-0281",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 2800,
+      "deductions": {
+        "federalTax": 168,
+        "stateTax": 0,
+        "socialSecurity": 174,
+        "medicare": 41,
+        "healthInsurance": 0,
+        "other": 17
+      },
+      "totalDeductions": 400,
+      "netPay": 2400,
+      "ytdGross": 8400,
+      "note": "Tips included — actual take-home varies week to week",
+      "aiConfidence": 88,
+      "status": "needs_review",
+      "flags": [
+        "Tip income included — not reliably verifiable",
+        "Less than 12 months tenure at employer"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Chime",
+      "accountHolder": "Lucia Fernandez",
+      "accountNumber": "****7790",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 680,
+          "totalCredits": 2940,
+          "totalDebits": 2890,
+          "closingBalance": 730,
+          "salaryDeposit": 2400,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 730,
+          "totalCredits": 2600,
+          "totalDebits": 2710,
+          "closingBalance": 620,
+          "salaryDeposit": 2400,
+          "flags": [
+            "Balance below $100 on Apr 14–17"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 620,
+          "totalCredits": 2820,
+          "totalDebits": 2750,
+          "closingBalance": 690,
+          "salaryDeposit": 2400,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 2787,
+      "averageMonthlyDebit": 2783,
+      "averageClosingBalance": 680,
+      "aiConfidence": 90,
+      "status": "verified"
+    }
+  }
+}

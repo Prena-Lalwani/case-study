@@ -7,6 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ── Auth (existing, unchanged) ────────────────────────────────────────
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -24,15 +26,265 @@ model OnboardingApplication {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   currentStep Int    @default(1)
-  status      String @default("in_progress") // in_progress | submitted | approved | rejected
+  status      String @default("in_progress")
 
-  // Step 1 — Personal info
   legalName String?
   dob       String?
   address   String?
   phone     String?
-  ssn       String?  // store encrypted in production
+  ssn       String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// ── Underwriting domain ───────────────────────────────────────────────
+
+model Advisor {
+  id              String   @id @default(uuid())
+  legacyId        String?  @unique             // e.g. "ADV-001" from seed
+  name            String
+  initials        String
+  title           String
+  specialty       String
+  yearsExperience Int      @default(0)
+  clientLoad      Int      @default(0)
+  bio             String?
+
+  languages       String[] @default([])
+  credentials     String[] @default([])
+  focus           String[] @default([])        // 'personal-advisory' | 'business-advisory' | …
+
+  assignments     AdvisorAssignment[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  deletedAt       DateTime?
+
+  @@index([deletedAt])
+}
+
+model Client {
+  id              String   @id @default(uuid())
+  legacyId        String?  @unique             // e.g. "CL-1042" or "APP-24832"-derived
+
+  name            String
+  email           String
+  phone           String?
+  type            String   @default("individual")   // 'individual' | 'business'
+  company         String?
+  status          String   @default("pending")      // 'active' | 'pending' | 'inactive'
+  location        String?
+
+  dateOfBirth     String?
+  address         String?
+  idNumber        String?
+  nationality     String?
+  joinedDate      DateTime?
+
+  // Employment / business operations
+  employer        String?
+  jobTitle        String?
+  monthlyGross    Float?
+  monthlyNet      Float?
+  yearsEmployed   Int?
+  creditScore     Int?
+
+  // Banking summary
+  bankName              String?
+  accountHolder         String?
+  accountNumber         String?
+  statementPeriod       String?
+  averageMonthlyCredit  Float?
+  averageMonthlyDebit   Float?
+  averageClosingBalance Float?
+
+  notes           String?
+
+  loanApplications    LoanApplication[]
+  advisoryEngagements AdvisoryEngagement[]
+  queueItems          QueueItem[]
+  documents           Document[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+}
+
+model LoanApplication {
+  id              String   @id @default(uuid())
+  legacyId        String?  @unique             // e.g. "APP-24832"
+  clientId        String
+  client          Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  loanType        String                       // 'Home loan' | 'Auto loan' | 'Personal loan' | 'Business loan'
+  amount          Float
+  termYears       Int?
+  interestRate    Float?
+  monthlyPayment  Float?
+  purpose         String?
+
+  // Home-loan specific
+  propertyAddress String?
+  propertyValue   Float?
+  ltv             Float?
+
+  status          String   @default("submitted")  // 'submitted' | 'needs_review' | 'approved' | 'auto_rejected' | 'ai_reviewing'
+  aiSummary       String?
+  analysedInSeconds Int?
+
+  // Officer-decision audit
+  decidedBy       String?                              // officer name
+  decidedAt       DateTime?
+  decisionType    String?                              // 'approved' | 'rejected' | 'override' | 'escalated'
+  decisionReason  String?
+
+  aiAnalysis      AiAnalysis?
+  queueItem       QueueItem?
+
+  submittedAt     DateTime @default(now())
+
+  @@index([clientId])
+  @@index([status])
+}
+
+model AdvisoryEngagement {
+  id              String   @id @default(uuid())
+  clientId        String
+  client          Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  flowKey         String                       // 'personal-advisory' | 'business-advisory'
+  goals           Json?
+  timeHorizonYears Int?
+  riskTolerance   String?
+  monthlySurplus  Float?
+  currentNetWorth Float?
+
+  // Engagement lifecycle status — drives UI on the review page
+  // 'pending' = AI still processing
+  // 'proposed' = AI picked an advisor, awaiting officer action
+  // 'confirmed' = officer confirmed the assignment
+  // 'declined' = officer declined the engagement
+  status          String   @default("pending")
+
+  aiAnalysis      AiAnalysis?
+  assignment      AdvisorAssignment?
+  queueItem       QueueItem?
+  events          EngagementTimelineEvent[]
+
+  submittedAt     DateTime @default(now())
+
+  @@index([clientId])
+  @@index([flowKey])
+  @@index([status])
+}
+
+model AiAnalysis {
+  id                   String   @id @default(uuid())
+
+  // Exactly one of these is set
+  loanApplicationId    String?  @unique
+  loanApplication      LoanApplication? @relation(fields: [loanApplicationId], references: [id], onDelete: Cascade)
+  advisoryEngagementId String?  @unique
+  advisoryEngagement   AdvisoryEngagement? @relation(fields: [advisoryEngagementId], references: [id], onDelete: Cascade)
+
+  // Loan-specific
+  aiScore           Int?
+  dti               Float?
+  recommendation    String?         // 'APPROVE' | 'REVIEW' | 'REJECT' | 'PENDING'
+
+  // Advisory-specific
+  completenessScore Int?
+  recommendedAdvisorId String?
+  advisorRationale     String?
+
+  // Shared
+  strengths         Json?           // string[]
+  issues            Json?           // string[]
+  recommendations   Json?           // string[]
+  documentChecklist Json?           // {name, status, note}[]
+  extractedData     Json?           // any structured extraction (loan)
+  confidenceScores  Json?           // {identity, income, document}
+  summary           String?
+  explanation       String?
+  analysedInSeconds Int?
+
+  processedAt       DateTime @default(now())
+}
+
+model AdvisorAssignment {
+  id                   String   @id @default(uuid())
+  advisorId            String
+  advisor              Advisor  @relation(fields: [advisorId], references: [id], onDelete: Cascade)
+
+  advisoryEngagementId String   @unique
+  advisoryEngagement   AdvisoryEngagement @relation(fields: [advisoryEngagementId], references: [id], onDelete: Cascade)
+
+  rationale            String?
+  confirmedByOfficer   Boolean  @default(false)
+  status               String   @default("proposed")   // 'proposed' | 'confirmed' | 'declined'
+  assignedAt           DateTime @default(now())
+
+  // Officer audit fields
+  confirmedAt          DateTime?
+  confirmedBy          String?
+  declineReason        String?
+
+  @@index([advisorId])
+}
+
+model EngagementTimelineEvent {
+  id                   String   @id @default(uuid())
+  advisoryEngagementId String
+  advisoryEngagement   AdvisoryEngagement @relation(fields: [advisoryEngagementId], references: [id], onDelete: Cascade)
+
+  eventType            String                            // 'submitted'|'analysed'|'proposed'|'confirmed'|'reassigned'|'declined'|'note'
+  description          String
+  actor                String?                           // who performed the action (officer name)
+  meta                 Json?                             // { previousAdvisorId, newAdvisorId, reason, ... }
+  occurredAt           DateTime @default(now())
+
+  @@index([advisoryEngagementId, occurredAt])
+}
+
+model Document {
+  id              String   @id @default(uuid())
+  clientId        String
+  client          Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  docType         String                                  // 'national-id' | 'salary-slip' | ...
+  filename        String?
+  parsedJson      Json?
+  uploadSource    String?                                 // 'image' | 'json'
+  aiConfidence    Int?
+  status          String?                                 // 'verified' | 'pending' | 'flagged'
+  uploadedAt      DateTime @default(now())
+
+  @@index([clientId])
+  @@index([docType])
+}
+
+model QueueItem {
+  id              String   @id @default(uuid())
+  clientId        String
+  client          Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  flowKey         String                                  // 'personal-loan' | 'business-loan' | 'personal-advisory' | 'business-advisory'
+  status          String   @default("queued")             // 'queued' | 'processing' | 'ready' | 'error'
+  errorMessage    String?
+
+  // Snapshot of the modal payload so the AI processor doesn't need to fan-out joins.
+  // Real fields live in Client/LoanApplication/etc. — this is just intake context.
+  payload         Json?
+
+  loanApplicationId    String?  @unique
+  loanApplication      LoanApplication?    @relation(fields: [loanApplicationId], references: [id])
+  advisoryEngagementId String?  @unique
+  advisoryEngagement   AdvisoryEngagement? @relation(fields: [advisoryEngagementId], references: [id])
+
+  createdAt       DateTime @default(now())
+  processedAt     DateTime?
+
+  @@index([flowKey])
+  @@index([status])
 }

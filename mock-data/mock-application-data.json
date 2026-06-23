@@ -1,0 +1,1929 @@
+{
+  "applications": [
+    {
+      "id": "APP-24817",
+      "status": "needs_review",
+      "submittedAt": "2026-06-02T09:14:22Z",
+      "personalInfo": {
+        "fullName": "Eleanor Whitfield",
+        "dateOfBirth": "1983-05-14",
+        "address": "218 Maple Grove Ave, Boston, MA 02134",
+        "phone": "+1 617-555-0142",
+        "email": "eleanor.whitfield@email.com",
+        "ssn": "***-**-4821",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Beacon Health Group",
+        "jobTitle": "Senior Marketing Director",
+        "yearsEmployed": 8,
+        "employmentStartDate": "2018-03-01",
+        "annualSalary": 114000,
+        "monthlyGross": 9500,
+        "monthlyNet": 6846
+      },
+      "financials": {
+        "creditScore": 748,
+        "creditRating": "Good",
+        "existingDebts": [
+          { "type": "Car loan", "monthlyPayment": 220, "balance": 6800, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 50, "balance": 1400, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 270,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Home loan",
+        "amount": 420000,
+        "termYears": 30,
+        "interestRate": 5.5,
+        "estimatedMonthlyPayment": 2384,
+        "purpose": "Purchase primary residence",
+        "propertyAddress": "84 Birchwood Lane, Newton, MA 02458",
+        "propertyValue": 510000,
+        "ltv": 82.4
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Massachusetts RMV",
+          "idNumber": "S12-345-678",
+          "fullName": "ELEANOR DIANE WHITFIELD",
+          "dateOfBirth": "1983-05-14",
+          "address": "218 Maple Grove Ave, Boston, MA 02134",
+          "issueDate": "2021-07-19",
+          "expiryDate": "2029-05-14",
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Beacon Health Group",
+          "employeeId": "BHG-00419",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 9500,
+          "deductions": {
+            "federalTax": 1615,
+            "stateTax": 475,
+            "socialSecurity": 589,
+            "medicare": 138,
+            "healthInsurance": 200,
+            "pension401k": 285,
+            "other": 352
+          },
+          "totalDeductions": 3654,
+          "netPay": 5846,
+          "ytdGross": 47500,
+          "aiConfidence": 97,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Citizens Bank",
+          "accountHolder": "Eleanor D. Whitfield",
+          "accountNumber": "****8821",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            {
+              "month": "March 2026",
+              "openingBalance": 12440,
+              "totalCredits": 9820,
+              "totalDebits": 8350,
+              "closingBalance": 13910,
+              "salaryDeposit": 5846,
+              "flags": []
+            },
+            {
+              "month": "April 2026",
+              "openingBalance": 13910,
+              "totalCredits": 9640,
+              "totalDebits": 8580,
+              "closingBalance": 14970,
+              "salaryDeposit": 5846,
+              "flags": []
+            },
+            {
+              "month": "May 2026",
+              "openingBalance": 14970,
+              "totalCredits": 9500,
+              "totalDebits": 8240,
+              "closingBalance": 16230,
+              "salaryDeposit": 5846,
+              "flags": []
+            }
+          ],
+          "averageMonthlyCredit": 9653,
+          "averageMonthlyDebit": 8390,
+          "averageClosingBalance": 15037,
+          "aiConfidence": 96,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "APPROVE",
+        "aiScore": 87,
+        "dti": 28,
+        "analysedInSeconds": 36,
+        "extractedData": {
+          "verifiedName": "Eleanor Diane Whitfield",
+          "verifiedMonthlyIncome": 9500,
+          "verifiedEmployer": "Beacon Health Group",
+          "averageBankCredit3Months": 9653,
+          "proposedMonthlyPayment": 2384,
+          "existingMonthlyObligations": 270,
+          "totalMonthlyObligations": 2654,
+          "effectiveDTI": 27.9
+        },
+        "strengths": [
+          "Credit score 748 — above 680 threshold",
+          "DTI 28% — well within 43% policy limit",
+          "8 years continuous employment — same employer",
+          "All 3 documents verified with high AI confidence",
+          "Bank balance growing month-over-month",
+          "Zero late payments in last 24 months"
+        ],
+        "issues": [],
+        "explanation": "Eleanor Whitfield presents a strong borrower profile. Her credit score of 748, 8 years of uninterrupted employment, and a DTI of 28% all fall comfortably within approval thresholds. Bank statements confirm consistent salary deposits and a steadily growing balance. All documents were authenticated with high confidence. No derogatory marks detected. Recommend approval subject to standard property appraisal.",
+        "confidenceScores": { "identityVerification": 99, "incomeVerification": 97, "documentAuthenticity": 98 }
+      }
+    },
+
+    {
+      "id": "APP-24816",
+      "status": "needs_review",
+      "submittedAt": "2026-06-02T10:02:11Z",
+      "personalInfo": {
+        "fullName": "David Osei",
+        "dateOfBirth": "1990-11-03",
+        "address": "47 Lakeview Drive, Chicago, IL 60614",
+        "phone": "+1 312-555-0877",
+        "email": "david.osei@email.com",
+        "ssn": "***-**-6634",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Meridian Software Inc.",
+        "jobTitle": "Software Engineer II",
+        "yearsEmployed": 4,
+        "employmentStartDate": "2022-02-14",
+        "annualSalary": 86400,
+        "monthlyGross": 7200,
+        "monthlyNet": 5310
+      },
+      "financials": {
+        "creditScore": 712,
+        "creditRating": "Good",
+        "existingDebts": [
+          { "type": "Mortgage", "monthlyPayment": 1500, "balance": 188000, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 195, "balance": 3800, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 1695,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Auto loan",
+        "amount": 38500,
+        "termYears": 5,
+        "interestRate": 7.0,
+        "estimatedMonthlyPayment": 761,
+        "purpose": "Purchase new vehicle — Toyota Camry 2026",
+        "vehicleMake": "Toyota",
+        "vehicleModel": "Camry",
+        "vehicleYear": 2026
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Illinois Secretary of State",
+          "idNumber": "IL-D492-8810",
+          "fullName": "DAVID KWAME OSEI",
+          "dateOfBirth": "1990-11-03",
+          "address": "47 Lakeview Drive, Chicago, IL 60614",
+          "issueDate": "2022-09-10",
+          "expiryDate": "2028-11-03",
+          "aiConfidence": 98,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Meridian Software Inc.",
+          "employeeId": "MSI-1144",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 7200,
+          "deductions": {
+            "federalTax": 1080,
+            "stateTax": 360,
+            "socialSecurity": 446,
+            "medicare": 104,
+            "healthInsurance": 180,
+            "pension401k": 216,
+            "other": 504
+          },
+          "totalDeductions": 2890,
+          "netPay": 4310,
+          "ytdGross": 36000,
+          "aiConfidence": 96,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Chase Bank",
+          "accountHolder": "David K. Osei",
+          "accountNumber": "****3341",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 6220, "totalCredits": 7420, "totalDebits": 6980, "closingBalance": 6660, "salaryDeposit": 4310, "flags": [] },
+            { "month": "April 2026", "openingBalance": 6660, "totalCredits": 7200, "totalDebits": 7050, "closingBalance": 6810, "salaryDeposit": 4310, "flags": [] },
+            { "month": "May 2026", "openingBalance": 6810, "totalCredits": 7310, "totalDebits": 6940, "closingBalance": 7180, "salaryDeposit": 4310, "flags": [] }
+          ],
+          "averageMonthlyCredit": 7310,
+          "averageMonthlyDebit": 6990,
+          "averageClosingBalance": 6883,
+          "aiConfidence": 95,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "APPROVE",
+        "aiScore": 78,
+        "dti": 34,
+        "analysedInSeconds": 41,
+        "extractedData": {
+          "verifiedName": "David Kwame Osei",
+          "verifiedMonthlyIncome": 7200,
+          "verifiedEmployer": "Meridian Software Inc.",
+          "averageBankCredit3Months": 7310,
+          "proposedMonthlyPayment": 761,
+          "existingMonthlyObligations": 1695,
+          "totalMonthlyObligations": 2456,
+          "effectiveDTI": 34.1
+        },
+        "strengths": [
+          "Credit score 712 — above threshold",
+          "DTI 34% — within 43% limit",
+          "4 years stable employment at same company",
+          "Consistent salary deposits confirmed across 3 months",
+          "Zero late payments in 24 months"
+        ],
+        "issues": [
+          "Existing mortgage reduces available capacity — monitor carefully"
+        ],
+        "explanation": "David Osei is a solid borrower. His credit score of 712 and stable 4-year employment record at Meridian Software support approval. DTI of 34% is within policy. Bank statements confirm consistent income. The existing mortgage accounts for the bulk of his debt load, but the proposed auto loan remains serviceable. Recommend approval.",
+        "confidenceScores": { "identityVerification": 98, "incomeVerification": 96, "documentAuthenticity": 96 }
+      }
+    },
+
+    {
+      "id": "APP-24815",
+      "status": "needs_review",
+      "submittedAt": "2026-06-02T11:33:47Z",
+      "personalInfo": {
+        "fullName": "Priya Natarajan",
+        "dateOfBirth": "1995-08-22",
+        "address": "310 Westbrook Ct, Austin, TX 78701",
+        "phone": "+1 512-555-0294",
+        "email": "priya.natarajan@email.com",
+        "ssn": "***-**-7712",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Pixel Studio Agency",
+        "jobTitle": "Graphic Designer",
+        "yearsEmployed": 0.7,
+        "employmentStartDate": "2025-10-15",
+        "annualSalary": 57600,
+        "monthlyGross": 4800,
+        "monthlyNet": 3640
+      },
+      "financials": {
+        "creditScore": 668,
+        "creditRating": "Fair",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 890, "balance": 34200, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 400, "balance": 5100, "status": "current" },
+          { "type": "Car loan", "monthlyPayment": 200, "balance": 4800, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 1490,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 1
+      },
+      "loanRequest": {
+        "type": "Personal loan",
+        "amount": 22000,
+        "termYears": 4,
+        "interestRate": 12.0,
+        "estimatedMonthlyPayment": 580,
+        "purpose": "Debt consolidation and home improvement"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Texas DPS",
+          "idNumber": "TX-29941-003",
+          "fullName": "PRIYA NATARAJAN",
+          "dateOfBirth": "1995-08-22",
+          "address": "310 Westbrook Ct, Austin, TX 78701",
+          "issueDate": "2023-03-12",
+          "expiryDate": "2029-08-22",
+          "aiConfidence": 97,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Pixel Studio Agency",
+          "employeeId": "PSA-0312",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 4800,
+          "deductions": {
+            "federalTax": 528,
+            "stateTax": 0,
+            "socialSecurity": 298,
+            "medicare": 70,
+            "healthInsurance": 180,
+            "pension401k": 0,
+            "other": 84
+          },
+          "totalDeductions": 1160,
+          "netPay": 3640,
+          "ytdGross": 14400,
+          "aiConfidence": 94,
+          "status": "verified",
+          "flags": ["Employment start date Oct 2025 — less than 12 months tenure"]
+        },
+        "bankStatement": {
+          "bank": "Bank of America",
+          "accountHolder": "Priya Natarajan",
+          "accountNumber": "****4490",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 1840, "totalCredits": 4900, "totalDebits": 4780, "closingBalance": 1960, "salaryDeposit": 3640, "flags": [] },
+            { "month": "April 2026", "openingBalance": 1960, "totalCredits": 4640, "totalDebits": 4820, "closingBalance": 1780, "salaryDeposit": 3640, "flags": ["Balance dipped below $500 on Apr 18"] },
+            { "month": "May 2026", "openingBalance": 1780, "totalCredits": 4800, "totalDebits": 4710, "closingBalance": 1870, "salaryDeposit": 3640, "flags": [] }
+          ],
+          "averageMonthlyCredit": 4780,
+          "averageMonthlyDebit": 4770,
+          "averageClosingBalance": 1870,
+          "aiConfidence": 91,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REVIEW",
+        "aiScore": 61,
+        "dti": 43,
+        "analysedInSeconds": 39,
+        "extractedData": {
+          "verifiedName": "Priya Natarajan",
+          "verifiedMonthlyIncome": 4800,
+          "verifiedEmployer": "Pixel Studio Agency",
+          "averageBankCredit3Months": 4780,
+          "proposedMonthlyPayment": 580,
+          "existingMonthlyObligations": 1490,
+          "totalMonthlyObligations": 2070,
+          "effectiveDTI": 43.1
+        },
+        "strengths": [
+          "All documents verified — identity confirmed",
+          "Salary deposits consistent with stated income"
+        ],
+        "issues": [
+          "Employment tenure only 8 months — below 12-month policy preference",
+          "DTI 43% — at the upper limit of acceptable range",
+          "Low average bank balance ($1,870) — limited savings buffer",
+          "1 late payment in last 24 months",
+          "Credit score 668 — below 680 preferred threshold",
+          "Balance fell below $500 in April — cash flow concern"
+        ],
+        "explanation": "Priya Natarajan is a borderline case. Her DTI of 43% sits exactly at the policy ceiling, leaving no buffer for unexpected expenses. The recent job change (8 months ago) introduces employment stability risk. Her bank balance is thin, with one instance of near-overdraft in April. Credit score of 668 is below the preferred 680 threshold. However, income is verified, salary deposits are consistent, and documents are clean. A human officer should assess repayment capacity and may request a co-signer.",
+        "confidenceScores": { "identityVerification": 97, "incomeVerification": 94, "documentAuthenticity": 93 }
+      }
+    },
+
+    {
+      "id": "APP-24814",
+      "status": "needs_review",
+      "submittedAt": "2026-06-01T14:22:09Z",
+      "personalInfo": {
+        "fullName": "Thomas Brennan",
+        "dateOfBirth": "1978-03-30",
+        "address": "92 Ridgecrest Rd, Denver, CO 80203",
+        "phone": "+1 720-555-0561",
+        "email": "thomas.brennan@email.com",
+        "ssn": "***-**-3309",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "self_employed",
+        "employer": "Brennan Contracting LLC",
+        "jobTitle": "Owner / General Contractor",
+        "yearsEmployed": 2.1,
+        "employmentStartDate": "2024-03-01",
+        "annualSalary": 74400,
+        "monthlyGross": 6200,
+        "monthlyNet": 4650,
+        "incomeVariance": "High — seasonal construction work, 3 months with income below $4,000"
+      },
+      "financials": {
+        "creditScore": 634,
+        "creditRating": "Borderline",
+        "existingDebts": [
+          { "type": "Car loan", "monthlyPayment": 520, "balance": 18600, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 400, "balance": 8900, "status": "current — 1 late payment 14 months ago" }
+        ],
+        "totalMonthlyDebtPayments": 920,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 1
+      },
+      "loanRequest": {
+        "type": "Home loan",
+        "amount": 310000,
+        "termYears": 25,
+        "interestRate": 6.0,
+        "estimatedMonthlyPayment": 1994,
+        "purpose": "Purchase primary residence",
+        "propertyAddress": "14 Aspen Ridge Blvd, Lakewood, CO 80215",
+        "propertyValue": 370000,
+        "ltv": 83.8
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Colorado DMV",
+          "idNumber": "CO-7714-9920",
+          "fullName": "THOMAS JAMES BRENNAN",
+          "dateOfBirth": "1978-03-30",
+          "address": "92 Ridgecrest Rd, Denver, CO 80203",
+          "issueDate": "2020-04-15",
+          "expiryDate": "2026-03-30",
+          "aiConfidence": 88,
+          "status": "needs_review",
+          "flags": ["License expired March 2026 — applicant must provide renewal or alternative ID"]
+        },
+        "salarySlip": {
+          "employer": "Brennan Contracting LLC",
+          "employeeId": "SELF",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 7800,
+          "deductions": {
+            "selfEmploymentTax": 1100,
+            "federalTax": 840,
+            "stateTax": 312,
+            "healthInsurance": 420,
+            "businessExpenses": 0,
+            "other": 0
+          },
+          "totalDeductions": 2672,
+          "netPay": 5128,
+          "ytdGross": 28600,
+          "note": "Self-employed — income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
+          "aiConfidence": 79,
+          "status": "needs_review",
+          "flags": ["Self-employed income — high month-to-month variance", "YTD avg $5,720/mo vs stated $6,200/mo"]
+        },
+        "bankStatement": {
+          "bank": "Wells Fargo",
+          "accountHolder": "Thomas J. Brennan",
+          "accountNumber": "****7703",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 3110, "totalCredits": 8900, "totalDebits": 8420, "closingBalance": 3590, "salaryDeposit": 8100, "flags": ["Large one-time project payment $8,100 — not recurring"] },
+            { "month": "April 2026", "openingBalance": 3590, "totalCredits": 7200, "totalDebits": 6980, "closingBalance": 3810, "salaryDeposit": 6400, "flags": [] },
+            { "month": "May 2026", "openingBalance": 3810, "totalCredits": 7800, "totalDebits": 7500, "closingBalance": 4110, "salaryDeposit": 7100, "flags": [] }
+          ],
+          "averageMonthlyCredit": 7967,
+          "averageMonthlyDebit": 7633,
+          "averageClosingBalance": 3837,
+          "aiConfidence": 82,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REVIEW",
+        "aiScore": 54,
+        "dti": 47,
+        "analysedInSeconds": 44,
+        "extractedData": {
+          "verifiedName": "Thomas James Brennan",
+          "verifiedMonthlyIncome": 6200,
+          "verifiedEmployer": "Brennan Contracting LLC (self-employed)",
+          "averageBankCredit3Months": 7967,
+          "proposedMonthlyPayment": 1994,
+          "existingMonthlyObligations": 920,
+          "totalMonthlyObligations": 2914,
+          "effectiveDTI": 47.0
+        },
+        "strengths": [
+          "Bank credits trending upward over 3 months",
+          "No bankruptcy or foreclosure history",
+          "Owns and operates established contracting business"
+        ],
+        "issues": [
+          "DTI 47% — exceeds 43% standard policy limit",
+          "Credit score 634 — below 650 minimum threshold",
+          "Driver's license expired March 2026 — ID not currently valid",
+          "Self-employed income is highly seasonal and variable",
+          "1 late credit card payment 14 months ago",
+          "Only 2 years of self-employment history — insufficient for some lenders"
+        ],
+        "explanation": "Thomas Brennan presents a mixed profile. While his contracting business shows growing revenue, the high income variance typical of seasonal construction work makes income reliability difficult to confirm. His DTI of 47% exceeds standard policy limits, and his credit score of 634 falls below the 650 threshold. The expired driver's license is a compliance blocker that must be resolved before any approval. A senior officer should review with 2 years of tax returns to verify self-employment income.",
+        "confidenceScores": { "identityVerification": 88, "incomeVerification": 79, "documentAuthenticity": 82 }
+      }
+    },
+
+    {
+      "id": "APP-24813",
+      "status": "needs_review",
+      "submittedAt": "2026-06-01T08:55:33Z",
+      "personalInfo": {
+        "fullName": "Sofia Marchetti",
+        "dateOfBirth": "1986-01-19",
+        "address": "501 Harborview Blvd, San Diego, CA 92101",
+        "phone": "+1 619-555-0388",
+        "email": "sofia.marchetti@email.com",
+        "ssn": "***-**-5514",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Pacific Shore Pharmacy Group",
+        "jobTitle": "Clinical Pharmacist",
+        "yearsEmployed": 11,
+        "employmentStartDate": "2015-02-01",
+        "annualSalary": 126000,
+        "monthlyGross": 10500,
+        "monthlyNet": 7480
+      },
+      "financials": {
+        "creditScore": 789,
+        "creditRating": "Very Good",
+        "existingDebts": [
+          { "type": "Mortgage", "monthlyPayment": 1100, "balance": 142000, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 1100,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Auto loan",
+        "amount": 52000,
+        "termYears": 6,
+        "interestRate": 6.5,
+        "estimatedMonthlyPayment": 886,
+        "purpose": "Purchase new vehicle — Mercedes GLC 2026",
+        "vehicleMake": "Mercedes-Benz",
+        "vehicleModel": "GLC 300",
+        "vehicleYear": 2026
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "California DMV",
+          "idNumber": "CA-B1204499",
+          "fullName": "SOFIA ELENA MARCHETTI",
+          "dateOfBirth": "1986-01-19",
+          "address": "501 Harborview Blvd, San Diego, CA 92101",
+          "issueDate": "2022-01-19",
+          "expiryDate": "2030-01-19",
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Pacific Shore Pharmacy Group",
+          "employeeId": "PSPG-2241",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 10500,
+          "deductions": {
+            "federalTax": 1890,
+            "stateTax": 1050,
+            "socialSecurity": 651,
+            "medicare": 152,
+            "healthInsurance": 0,
+            "pension401k": 525,
+            "other": 752
+          },
+          "totalDeductions": 5020,
+          "netPay": 5480,
+          "ytdGross": 52500,
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Wells Fargo",
+          "accountHolder": "Sofia E. Marchetti",
+          "accountNumber": "****6612",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 28400, "totalCredits": 11200, "totalDebits": 9800, "closingBalance": 29800, "salaryDeposit": 7480, "flags": [] },
+            { "month": "April 2026", "openingBalance": 29800, "totalCredits": 10800, "totalDebits": 9600, "closingBalance": 31000, "salaryDeposit": 7480, "flags": [] },
+            { "month": "May 2026", "openingBalance": 31000, "totalCredits": 10500, "totalDebits": 9400, "closingBalance": 32100, "salaryDeposit": 7480, "flags": [] }
+          ],
+          "averageMonthlyCredit": 10833,
+          "averageMonthlyDebit": 9600,
+          "averageClosingBalance": 30967,
+          "aiConfidence": 99,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "APPROVE",
+        "aiScore": 91,
+        "dti": 19,
+        "analysedInSeconds": 33,
+        "extractedData": {
+          "verifiedName": "Sofia Elena Marchetti",
+          "verifiedMonthlyIncome": 10500,
+          "verifiedEmployer": "Pacific Shore Pharmacy Group",
+          "averageBankCredit3Months": 10833,
+          "proposedMonthlyPayment": 886,
+          "existingMonthlyObligations": 1100,
+          "totalMonthlyObligations": 1986,
+          "effectiveDTI": 18.9
+        },
+        "strengths": [
+          "Credit score 789 — excellent",
+          "DTI 19% — very low, strong capacity",
+          "11 years with same employer — exceptional stability",
+          "All documents verified with highest confidence (99%)",
+          "Average bank balance $30,967 — robust savings",
+          "Zero late payments on record",
+          "Income increasing year-over-year"
+        ],
+        "issues": [],
+        "explanation": "Sofia Marchetti is an exceptionally strong borrower. A credit score of 789, 11 years of uninterrupted employment, and a DTI of just 19% make this a low-risk application. Bank statements show a growing balance above $30,000, providing ample cushion. All documents verified at 99% confidence. Automatic approval recommended with no conditions.",
+        "confidenceScores": { "identityVerification": 99, "incomeVerification": 99, "documentAuthenticity": 99 }
+      }
+    },
+
+    {
+      "id": "APP-24812",
+      "status": "needs_review",
+      "submittedAt": "2026-06-01T15:41:02Z",
+      "personalInfo": {
+        "fullName": "James Holloway",
+        "dateOfBirth": "1988-07-06",
+        "address": "77 Pinecrest Ave, Atlanta, GA 30301",
+        "phone": "+1 404-555-0733",
+        "email": "james.holloway@email.com",
+        "ssn": "***-**-9901",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "SouthTech Solutions",
+        "jobTitle": "Regional Sales Representative",
+        "yearsEmployed": 2.5,
+        "employmentStartDate": "2023-12-01",
+        "annualSalary": 61200,
+        "monthlyGross": 5100,
+        "monthlyNet": 3820
+      },
+      "financials": {
+        "creditScore": 681,
+        "creditRating": "Fair",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 740, "balance": 28400, "status": "current" },
+          { "type": "Car loan", "monthlyPayment": 410, "balance": 11200, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 300, "balance": 4200, "status": "1 late payment — 18 months ago" }
+        ],
+        "totalMonthlyDebtPayments": 1450,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 1
+      },
+      "loanRequest": {
+        "type": "Personal loan",
+        "amount": 15000,
+        "termYears": 3,
+        "interestRate": 12.0,
+        "estimatedMonthlyPayment": 498,
+        "purpose": "Home improvement — kitchen renovation"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Georgia DDS",
+          "idNumber": "GA-055-892-003",
+          "fullName": "JAMES ROBERT HOLLOWAY",
+          "dateOfBirth": "1988-07-06",
+          "address": "77 Pinecrest Ave, Atlanta, GA 30301",
+          "issueDate": "2021-08-20",
+          "expiryDate": "2029-07-06",
+          "aiConfidence": 98,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "SouthTech Solutions",
+          "employeeId": "STS-4490",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 5100,
+          "deductions": {
+            "federalTax": 561,
+            "stateTax": 306,
+            "socialSecurity": 316,
+            "medicare": 74,
+            "healthInsurance": 145,
+            "pension401k": 153,
+            "other": 325
+          },
+          "totalDeductions": 1880,
+          "netPay": 3220,
+          "ytdGross": 25500,
+          "aiConfidence": 95,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Truist Bank",
+          "accountHolder": "James R. Holloway",
+          "accountNumber": "****2214",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 2110, "totalCredits": 5200, "totalDebits": 4980, "closingBalance": 2330, "salaryDeposit": 3220, "flags": [] },
+            { "month": "April 2026", "openingBalance": 2330, "totalCredits": 5100, "totalDebits": 5020, "closingBalance": 2410, "salaryDeposit": 3220, "flags": [] },
+            { "month": "May 2026", "openingBalance": 2410, "totalCredits": 5300, "totalDebits": 5140, "closingBalance": 2570, "salaryDeposit": 3220, "flags": [] }
+          ],
+          "averageMonthlyCredit": 5200,
+          "averageMonthlyDebit": 5047,
+          "averageClosingBalance": 2437,
+          "aiConfidence": 94,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REVIEW",
+        "aiScore": 67,
+        "dti": 38,
+        "analysedInSeconds": 37,
+        "extractedData": {
+          "verifiedName": "James Robert Holloway",
+          "verifiedMonthlyIncome": 5100,
+          "verifiedEmployer": "SouthTech Solutions",
+          "averageBankCredit3Months": 5200,
+          "proposedMonthlyPayment": 498,
+          "existingMonthlyObligations": 1450,
+          "totalMonthlyObligations": 1948,
+          "effectiveDTI": 38.2
+        },
+        "strengths": [
+          "Income consistently verified across all 3 months",
+          "DTI 38% — within acceptable range",
+          "No bankruptcy or foreclosure",
+          "All documents verified and authentic"
+        ],
+        "issues": [
+          "1 late payment 18 months ago — credit card",
+          "Credit score 681 — just above 680 threshold, marginal",
+          "Low savings buffer — average balance $2,437",
+          "High existing student and auto debt load"
+        ],
+        "explanation": "James Holloway is a borderline approval. His DTI of 38% is manageable and income is verified. However, the single late payment 18 months ago, marginal credit score of 681, and thin savings buffer introduce moderate risk. The loan purpose (home improvement) is legitimate. Officer should review the credit incident and confirm it was isolated before approving.",
+        "confidenceScores": { "identityVerification": 98, "incomeVerification": 95, "documentAuthenticity": 95 }
+      }
+    },
+
+    {
+      "id": "APP-24811",
+      "status": "needs_review",
+      "submittedAt": "2026-06-01T09:28:14Z",
+      "personalInfo": {
+        "fullName": "Grace Adeyemi",
+        "dateOfBirth": "1981-12-04",
+        "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
+        "phone": "+1 215-555-0614",
+        "email": "grace.adeyemi@email.com",
+        "ssn": "***-**-8803",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Penn General Hospital",
+        "jobTitle": "Registered Nurse (RN)",
+        "yearsEmployed": 6,
+        "employmentStartDate": "2020-05-01",
+        "annualSalary": 93600,
+        "monthlyGross": 7800,
+        "monthlyNet": 5650
+      },
+      "financials": {
+        "creditScore": 731,
+        "creditRating": "Good",
+        "existingDebts": [
+          { "type": "Credit card", "monthlyPayment": 200, "balance": 2800, "status": "current" },
+          { "type": "Student loan", "monthlyPayment": 200, "balance": 9400, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 400,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Home loan",
+        "amount": 285000,
+        "termYears": 20,
+        "interestRate": 5.75,
+        "estimatedMonthlyPayment": 2014,
+        "purpose": "Purchase primary residence",
+        "propertyAddress": "88 Chestnut Grove Ln, Ardmore, PA 19003",
+        "propertyValue": 340000,
+        "ltv": 83.8
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Passport",
+          "issuedBy": "US Department of State",
+          "idNumber": "US-528819042",
+          "fullName": "GRACE ADESOLA ADEYEMI",
+          "dateOfBirth": "1981-12-04",
+          "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
+          "issueDate": "2019-11-10",
+          "expiryDate": "2029-11-10",
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Penn General Hospital",
+          "employeeId": "PGH-7812",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 7800,
+          "deductions": {
+            "federalTax": 1092,
+            "stateTax": 249,
+            "socialSecurity": 484,
+            "medicare": 113,
+            "healthInsurance": 0,
+            "pension403b": 390,
+            "other": 622
+          },
+          "totalDeductions": 2950,
+          "netPay": 4850,
+          "ytdGross": 39000,
+          "aiConfidence": 98,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "PNC Bank",
+          "accountHolder": "Grace A. Adeyemi",
+          "accountNumber": "****5509",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 9200, "totalCredits": 8100, "totalDebits": 7420, "closingBalance": 9880, "salaryDeposit": 4850, "flags": [] },
+            { "month": "April 2026", "openingBalance": 9880, "totalCredits": 7900, "totalDebits": 7280, "closingBalance": 10500, "salaryDeposit": 4850, "flags": [] },
+            { "month": "May 2026", "openingBalance": 10500, "totalCredits": 8200, "totalDebits": 7600, "closingBalance": 11100, "salaryDeposit": 4850, "flags": [] }
+          ],
+          "averageMonthlyCredit": 8067,
+          "averageMonthlyDebit": 7433,
+          "averageClosingBalance": 10493,
+          "aiConfidence": 98,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "APPROVE",
+        "aiScore": 83,
+        "dti": 31,
+        "analysedInSeconds": 35,
+        "extractedData": {
+          "verifiedName": "Grace Adesola Adeyemi",
+          "verifiedMonthlyIncome": 7800,
+          "verifiedEmployer": "Penn General Hospital",
+          "averageBankCredit3Months": 8067,
+          "proposedMonthlyPayment": 2014,
+          "existingMonthlyObligations": 400,
+          "totalMonthlyObligations": 2414,
+          "effectiveDTI": 30.9
+        },
+        "strengths": [
+          "Credit score 731 — above threshold",
+          "DTI 31% — comfortably within limits",
+          "6 years continuous nursing employment — stable sector",
+          "All documents verified at highest confidence",
+          "Bank balance growing consistently month-over-month",
+          "Zero late payments in 24 months",
+          "Low existing debt load"
+        ],
+        "issues": [],
+        "explanation": "Grace Adeyemi presents a strong application. Her healthcare employment provides income security, and her 6-year tenure at Penn General Hospital demonstrates stability. DTI of 31% and a credit score of 731 both clear policy thresholds. Bank statements show a growing savings balance. Recommend approval.",
+        "confidenceScores": { "identityVerification": 99, "incomeVerification": 98, "documentAuthenticity": 99 }
+      }
+    },
+
+    {
+      "id": "APP-24810",
+      "status": "needs_review",
+      "submittedAt": "2026-06-01T16:09:55Z",
+      "personalInfo": {
+        "fullName": "Rafael Mendes",
+        "dateOfBirth": "1992-04-17",
+        "address": "23 Crestwood Circle, Miami, FL 33101",
+        "phone": "+1 305-555-0241",
+        "email": "rafael.mendes@email.com",
+        "ssn": "***-**-4418",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "self_employed",
+        "employer": "Rafael Mendes Photography",
+        "jobTitle": "Freelance Photographer",
+        "yearsEmployed": 3.5,
+        "employmentStartDate": "2022-11-01",
+        "annualSalary": 66000,
+        "monthlyGross": 5500,
+        "monthlyNet": 4010,
+        "incomeVariance": "Moderate — event-driven income, peaks in wedding season (Apr–Oct)"
+      },
+      "financials": {
+        "creditScore": 661,
+        "creditRating": "Fair",
+        "existingDebts": [
+          { "type": "Mortgage", "monthlyPayment": 1000, "balance": 118000, "status": "current" },
+          { "type": "Student loan", "monthlyPayment": 280, "balance": 12800, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 150, "balance": 2900, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 1430,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Auto loan",
+        "amount": 44000,
+        "termYears": 6,
+        "interestRate": 8.0,
+        "estimatedMonthlyPayment": 771,
+        "purpose": "Purchase cargo van for photography equipment transport",
+        "vehicleMake": "Ford",
+        "vehicleModel": "Transit Custom 2026",
+        "vehicleYear": 2026
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Florida DHSMV",
+          "idNumber": "FL-M112-449-88-019",
+          "fullName": "RAFAEL ANDRE MENDES",
+          "dateOfBirth": "1992-04-17",
+          "address": "23 Crestwood Circle, Miami, FL 33101",
+          "issueDate": "2020-05-02",
+          "expiryDate": "2028-04-17",
+          "aiConfidence": 97,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Rafael Mendes Photography (Self-employed)",
+          "employeeId": "SELF",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 6800,
+          "deductions": {
+            "selfEmploymentTax": 960,
+            "federalTax": 680,
+            "stateTax": 0,
+            "healthInsurance": 380,
+            "businessExpenses": 750,
+            "other": 0
+          },
+          "totalDeductions": 2770,
+          "netPay": 4030,
+          "ytdGross": 24400,
+          "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 — peak season April–September",
+          "aiConfidence": 80,
+          "status": "needs_review",
+          "flags": ["Self-employed — income is seasonal", "YTD avg $4,880/mo vs stated $5,500/mo avg — gap in low season"]
+        },
+        "bankStatement": {
+          "bank": "SunTrust Bank",
+          "accountHolder": "Rafael A. Mendes",
+          "accountNumber": "****8841",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 3400, "totalCredits": 5600, "totalDebits": 5200, "closingBalance": 3800, "salaryDeposit": 4900, "flags": [] },
+            { "month": "April 2026", "openingBalance": 3800, "totalCredits": 8100, "totalDebits": 7400, "closingBalance": 4500, "salaryDeposit": 7200, "flags": [] },
+            { "month": "May 2026", "openingBalance": 4500, "totalCredits": 7600, "totalDebits": 7100, "closingBalance": 5000, "salaryDeposit": 6800, "flags": [] }
+          ],
+          "averageMonthlyCredit": 7100,
+          "averageMonthlyDebit": 6567,
+          "averageClosingBalance": 4433,
+          "aiConfidence": 88,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REVIEW",
+        "aiScore": 58,
+        "dti": 40,
+        "analysedInSeconds": 47,
+        "extractedData": {
+          "verifiedName": "Rafael Andre Mendes",
+          "verifiedMonthlyIncome": 5500,
+          "verifiedEmployer": "Rafael Mendes Photography (self-employed)",
+          "averageBankCredit3Months": 7100,
+          "proposedMonthlyPayment": 771,
+          "existingMonthlyObligations": 1430,
+          "totalMonthlyObligations": 2201,
+          "effectiveDTI": 40.0
+        },
+        "strengths": [
+          "Bank credits strong during peak season (Apr–May)",
+          "No late payments in 24 months",
+          "Existing mortgage being serviced without issues",
+          "Loan purpose is business-related — vehicle increases earning capacity"
+        ],
+        "issues": [
+          "Self-employed with seasonal income — low-season months below $3,500",
+          "Credit score 661 — below 680 threshold",
+          "DTI 40% — elevated, limited buffer if income drops in off-season",
+          "YTD income ($4,880/mo avg) lower than stated $5,500/mo"
+        ],
+        "explanation": "Rafael Mendes has a serviceable profile during peak photography season but presents elevated risk in low-season months when income can drop below $3,500. The DTI of 40% based on average income leaves limited margin. Credit score of 661 is below the preferred 680. Officer should review full 12-month income data and assess off-season cash flow before approving.",
+        "confidenceScores": { "identityVerification": 97, "incomeVerification": 80, "documentAuthenticity": 88 }
+      }
+    },
+
+    {
+      "id": "APP-24809",
+      "status": "auto_rejected",
+      "submittedAt": "2026-05-31T13:02:44Z",
+      "personalInfo": {
+        "fullName": "Kwame Asante",
+        "dateOfBirth": "1998-02-28",
+        "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
+        "phone": "+1 313-555-0099",
+        "email": "kwame.asante@email.com",
+        "ssn": "***-**-2201",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "part_time",
+        "employer": "GameStop — Michigan Ave",
+        "jobTitle": "Part-Time Sales Associate",
+        "yearsEmployed": 1.2,
+        "employmentStartDate": "2025-03-10",
+        "annualSalary": 25200,
+        "monthlyGross": 2100,
+        "monthlyNet": 1780
+      },
+      "financials": {
+        "creditScore": 542,
+        "creditRating": "Poor",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 340, "balance": 18900, "status": "current — 2 missed payments (Oct 2024, Jan 2025)" },
+          { "type": "Car loan", "monthlyPayment": 300, "balance": 7200, "status": "current — 1 late payment (Mar 2025)" },
+          { "type": "Credit card", "monthlyPayment": 200, "balance": 3800, "status": "2 missed payments — 30 days overdue" }
+        ],
+        "totalMonthlyDebtPayments": 840,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 5
+      },
+      "loanRequest": {
+        "type": "Personal loan",
+        "amount": 9500,
+        "termYears": 2,
+        "interestRate": 15.0,
+        "estimatedMonthlyPayment": 462,
+        "purpose": "Pay off credit card debt and cover living expenses"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "State ID",
+          "issuedBy": "Michigan SOS",
+          "idNumber": "MI-D291-009-944",
+          "fullName": "KWAME ASANTE",
+          "dateOfBirth": "1998-02-28",
+          "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
+          "issueDate": "2022-04-01",
+          "expiryDate": "2026-02-28",
+          "aiConfidence": 91,
+          "status": "needs_review",
+          "flags": ["State ID expired February 2026 — less than 3 months ago"]
+        },
+        "salarySlip": {
+          "employer": "GameStop",
+          "employeeId": "GS-991-44",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 2100,
+          "deductions": {
+            "federalTax": 147,
+            "stateTax": 84,
+            "socialSecurity": 130,
+            "medicare": 30,
+            "healthInsurance": 0,
+            "pension401k": 0,
+            "other": 30
+          },
+          "totalDeductions": 421,
+          "netPay": 1679,
+          "ytdGross": 10500,
+          "aiConfidence": 94,
+          "status": "verified",
+          "flags": ["Part-time income only — hours may vary"]
+        },
+        "bankStatement": {
+          "bank": "Chime",
+          "accountHolder": "Kwame Asante",
+          "accountNumber": "****1122",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 320, "totalCredits": 2200, "totalDebits": 2180, "closingBalance": 340, "salaryDeposit": 1679, "flags": ["Balance at $0 on Mar 4", "Balance at $12 on Mar 19"] },
+            { "month": "April 2026", "openingBalance": 340, "totalCredits": 2100, "totalDebits": 2190, "closingBalance": 250, "salaryDeposit": 1679, "flags": ["Overdraft attempt Apr 22 — declined"] },
+            { "month": "May 2026", "openingBalance": 250, "totalCredits": 2050, "totalDebits": 2010, "closingBalance": 290, "salaryDeposit": 1679, "flags": [] }
+          ],
+          "averageMonthlyCredit": 2117,
+          "averageMonthlyDebit": 2127,
+          "averageClosingBalance": 293,
+          "aiConfidence": 93,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REJECT",
+        "aiScore": 31,
+        "dti": 62,
+        "analysedInSeconds": 28,
+        "extractedData": {
+          "verifiedName": "Kwame Asante",
+          "verifiedMonthlyIncome": 2100,
+          "verifiedEmployer": "GameStop (part-time)",
+          "averageBankCredit3Months": 2117,
+          "proposedMonthlyPayment": 462,
+          "existingMonthlyObligations": 840,
+          "totalMonthlyObligations": 1302,
+          "effectiveDTI": 62.0
+        },
+        "strengths": [
+          "Income verified — salary deposits confirmed"
+        ],
+        "issues": [
+          "DTI 62% — far exceeds 43% maximum threshold",
+          "Credit score 542 — well below 600 minimum",
+          "5 late payments in last 24 months across 3 accounts",
+          "Average bank balance $293 — insufficient for any financial emergency",
+          "Overdraft attempt in April 2026 — critical cash flow signal",
+          "State ID expired — compliance issue",
+          "Part-time employment only — income unstable",
+          "Loan purpose includes living expenses — not productive debt"
+        ],
+        "explanation": "Kwame Asante does not meet minimum lending criteria on multiple grounds. A DTI of 62% is nearly 50% above the policy ceiling. Five late payments across three accounts in the past 24 months indicate serious difficulty managing existing debt. The bank account shows near-zero balances with an overdraft attempt, confirming severe cash flow strain. The credit score of 542 is below the 600 floor. Auto-rejection is warranted. Financial counselling recommended before reapplying.",
+        "confidenceScores": { "identityVerification": 91, "incomeVerification": 94, "documentAuthenticity": 92 }
+      }
+    },
+
+    {
+      "id": "APP-24808",
+      "status": "auto_rejected",
+      "submittedAt": "2026-05-31T10:17:33Z",
+      "personalInfo": {
+        "fullName": "Lucia Fernandez",
+        "dateOfBirth": "2000-09-11",
+        "address": "38 Garden View Apt 1F, Houston, TX 77001",
+        "phone": "+1 713-555-0812",
+        "email": "lucia.fernandez@email.com",
+        "ssn": "***-**-3341",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "part_time",
+        "employer": "The Rustic Table Restaurant",
+        "jobTitle": "Waitress",
+        "yearsEmployed": 0.9,
+        "employmentStartDate": "2025-07-20",
+        "annualSalary": 33600,
+        "monthlyGross": 2800,
+        "monthlyNet": 2380,
+        "note": "Income includes variable tips — base hourly $9.50"
+      },
+      "financials": {
+        "creditScore": 598,
+        "creditRating": "Poor",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 500, "balance": 22400, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 355, "balance": 5600, "status": "current — balance at 90% of limit" }
+        ],
+        "totalMonthlyDebtPayments": 855,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 2
+      },
+      "loanRequest": {
+        "type": "Auto loan",
+        "amount": 28000,
+        "termYears": 5,
+        "interestRate": 8.5,
+        "estimatedMonthlyPayment": 575,
+        "purpose": "Purchase used vehicle — Honda Civic 2023",
+        "vehicleMake": "Honda",
+        "vehicleModel": "Civic",
+        "vehicleYear": 2023
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Texas DPS",
+          "idNumber": "TX-33001-882",
+          "fullName": "LUCIA FERNANDEZ",
+          "dateOfBirth": "2000-09-11",
+          "address": "38 Garden View Apt 1F, Houston, TX 77001",
+          "issueDate": "2021-10-15",
+          "expiryDate": "2027-09-11",
+          "aiConfidence": 96,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "The Rustic Table Restaurant",
+          "employeeId": "TRT-0281",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 2800,
+          "deductions": {
+            "federalTax": 168,
+            "stateTax": 0,
+            "socialSecurity": 174,
+            "medicare": 41,
+            "healthInsurance": 0,
+            "other": 17
+          },
+          "totalDeductions": 400,
+          "netPay": 2400,
+          "ytdGross": 8400,
+          "note": "Tips included — actual take-home varies week to week",
+          "aiConfidence": 88,
+          "status": "needs_review",
+          "flags": ["Tip income included — not reliably verifiable", "Less than 12 months tenure at employer"]
+        },
+        "bankStatement": {
+          "bank": "Chime",
+          "accountHolder": "Lucia Fernandez",
+          "accountNumber": "****7790",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 680, "totalCredits": 2940, "totalDebits": 2890, "closingBalance": 730, "salaryDeposit": 2400, "flags": [] },
+            { "month": "April 2026", "openingBalance": 730, "totalCredits": 2600, "totalDebits": 2710, "closingBalance": 620, "salaryDeposit": 2400, "flags": ["Balance below $100 on Apr 14–17"] },
+            { "month": "May 2026", "openingBalance": 620, "totalCredits": 2820, "totalDebits": 2750, "closingBalance": 690, "salaryDeposit": 2400, "flags": [] }
+          ],
+          "averageMonthlyCredit": 2787,
+          "averageMonthlyDebit": 2783,
+          "averageClosingBalance": 680,
+          "aiConfidence": 90,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REJECT",
+        "aiScore": 44,
+        "dti": 51,
+        "analysedInSeconds": 31,
+        "extractedData": {
+          "verifiedName": "Lucia Fernandez",
+          "verifiedMonthlyIncome": 2800,
+          "verifiedEmployer": "The Rustic Table Restaurant (part-time)",
+          "averageBankCredit3Months": 2787,
+          "proposedMonthlyPayment": 575,
+          "existingMonthlyObligations": 855,
+          "totalMonthlyObligations": 1430,
+          "effectiveDTI": 51.1
+        },
+        "strengths": [
+          "Identity document verified",
+          "No bankruptcy history"
+        ],
+        "issues": [
+          "DTI 51% — exceeds 43% policy maximum",
+          "Credit score 598 — below 600 floor",
+          "Income includes unverifiable tip earnings",
+          "Employment tenure less than 12 months",
+          "2 late payments in last 24 months",
+          "Credit card utilization at 90% — financial stress indicator",
+          "Average bank balance $680 — insufficient reserves",
+          "Near-zero balance event in April 2026"
+        ],
+        "explanation": "Lucia Fernandez does not qualify under current policy. Her DTI of 51% exceeds the 43% maximum when the proposed loan payment is included. A credit score of 598 falls just below the 600 minimum. The income source — hospitality tips — is inherently variable and cannot be reliably projected. Combined with thin savings, high credit utilization, and two recent late payments, the risk profile is too high for approval at this time.",
+        "confidenceScores": { "identityVerification": 96, "incomeVerification": 88, "documentAuthenticity": 90 }
+      }
+    },
+
+    {
+      "id": "APP-24807",
+      "status": "auto_rejected",
+      "submittedAt": "2026-05-31T09:44:21Z",
+      "personalInfo": {
+        "fullName": "Brandon Cole",
+        "dateOfBirth": "1985-06-14",
+        "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
+        "phone": "+1 615-555-0445",
+        "email": "brandon.cole@email.com",
+        "ssn": "***-**-6612",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "self_employed",
+        "employer": "Cole's Artisan Bakery LLC",
+        "jobTitle": "Owner",
+        "yearsEmployed": 1.2,
+        "employmentStartDate": "2025-03-01",
+        "annualSalary": 46800,
+        "monthlyGross": 3900,
+        "monthlyNet": 2840,
+        "note": "Personal draw from LLC. Business revenue $6,200/mo, expenses $5,100/mo, net $1,100/mo"
+      },
+      "financials": {
+        "creditScore": 611,
+        "creditRating": "Borderline",
+        "existingDebts": [
+          { "type": "Car loan", "monthlyPayment": 300, "balance": 12400, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 360, "balance": 7200, "status": "current — utilization 72%" }
+        ],
+        "totalMonthlyDebtPayments": 660,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Business loan",
+        "amount": 75000,
+        "termYears": 5,
+        "interestRate": 9.0,
+        "estimatedMonthlyPayment": 1557,
+        "purpose": "Purchase commercial baking equipment and expand kitchen facility"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Tennessee DOS",
+          "idNumber": "TN-D-19900614",
+          "fullName": "BRANDON KEITH COLE",
+          "dateOfBirth": "1985-06-14",
+          "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
+          "issueDate": "2022-07-01",
+          "expiryDate": "2030-06-14",
+          "aiConfidence": 97,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Cole's Artisan Bakery LLC",
+          "employeeId": "SELF",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 3900,
+          "deductions": {
+            "selfEmploymentTax": 551,
+            "federalTax": 312,
+            "stateTax": 0,
+            "healthInsurance": 280,
+            "businessExpenses": 0,
+            "other": 0
+          },
+          "totalDeductions": 1143,
+          "netPay": 2757,
+          "ytdGross": 15600,
+          "note": "Business monthly P&L: Revenue $6,200 / Expenses $5,100 / EBITDA $1,100. Owner draw $3,900 from savings reserves.",
+          "aiConfidence": 74,
+          "status": "needs_review",
+          "flags": [
+            "Owner draw ($3,900) exceeds business net income ($1,100) — drawing from reserves",
+            "Business operating only 14 months — insufficient trading history",
+            "No audited financials submitted — only bank statements"
+          ]
+        },
+        "bankStatement": {
+          "bank": "Regions Bank",
+          "accountHolder": "Cole's Artisan Bakery LLC",
+          "accountNumber": "****3301",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 8100, "totalCredits": 6400, "totalDebits": 6800, "closingBalance": 7700, "salaryDeposit": 6400, "flags": ["Expenses exceed revenue this month"] },
+            { "month": "April 2026", "openingBalance": 7700, "totalCredits": 6200, "totalDebits": 6600, "closingBalance": 7300, "salaryDeposit": 6200, "flags": ["Expenses exceed revenue this month"] },
+            { "month": "May 2026", "openingBalance": 7300, "totalCredits": 6200, "totalDebits": 5900, "closingBalance": 7600, "salaryDeposit": 6200, "flags": [] }
+          ],
+          "averageMonthlyCredit": 6267,
+          "averageMonthlyDebit": 6433,
+          "averageClosingBalance": 7533,
+          "aiConfidence": 85,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REJECT",
+        "aiScore": 38,
+        "dti": 57,
+        "analysedInSeconds": 42,
+        "extractedData": {
+          "verifiedName": "Brandon Keith Cole",
+          "verifiedMonthlyIncome": 3900,
+          "verifiedEmployer": "Cole's Artisan Bakery LLC (self-employed)",
+          "averageBankCredit3Months": 6267,
+          "proposedMonthlyPayment": 1557,
+          "existingMonthlyObligations": 660,
+          "totalMonthlyObligations": 2217,
+          "effectiveDTI": 56.8
+        },
+        "strengths": [
+          "Identity document verified",
+          "Clean personal payment history (0 late payments)"
+        ],
+        "issues": [
+          "DTI 57% — well above 43% policy maximum",
+          "Business operating for only 14 months — below 2-year minimum for business loans",
+          "Business bank account showing net cash outflow in 2 of 3 months",
+          "Owner draw ($3,900) far exceeds business net income ($1,100) — unsustainable",
+          "Credit score 611 — below 650 business loan threshold",
+          "High credit card utilization (72%)",
+          "No audited financials or tax returns submitted",
+          "Loan repayment ($1,557/mo) would consume 141% of business net income"
+        ],
+        "explanation": "Brandon Cole's bakery business does not yet generate sufficient income to service the proposed loan. The business has only been operating for 14 months — below the 24-month minimum typically required for business lending. Net business income of $1,100/month cannot support a $1,557 monthly repayment. The owner is currently drawing personal salary from reserves, which will deplete quickly. DTI of 57% and a credit score of 611 both fall below policy floors. Rejection recommended.",
+        "confidenceScores": { "identityVerification": 97, "incomeVerification": 74, "documentAuthenticity": 85 }
+      }
+    },
+
+    {
+      "id": "APP-24806",
+      "status": "auto_rejected",
+      "submittedAt": "2026-05-30T11:22:18Z",
+      "personalInfo": {
+        "fullName": "Yuki Tanaka",
+        "dateOfBirth": "1996-03-08",
+        "address": "91 Sunrise Lane, Apt 2C, Seattle, WA 98101",
+        "phone": "+1 206-555-0347",
+        "email": "yuki.tanaka@email.com",
+        "ssn": "***-**-8812",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "self_employed",
+        "employer": "Freelance (various clients)",
+        "jobTitle": "Graphic Illustrator",
+        "yearsEmployed": 1.8,
+        "employmentStartDate": "2024-08-01",
+        "annualSalary": 16800,
+        "monthlyGross": 1400,
+        "monthlyNet": 1140,
+        "note": "Highly inconsistent — stated 'ongoing client work' but no contracts submitted"
+      },
+      "financials": {
+        "creditScore": 498,
+        "creditRating": "Poor",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 200, "balance": 11200, "status": "current" },
+          { "type": "Credit card A", "monthlyPayment": 150, "balance": 4100, "status": "default — charged off 8 months ago" },
+          { "type": "Credit card B", "monthlyPayment": 140, "balance": 2200, "status": "30 days past due" }
+        ],
+        "totalMonthlyDebtPayments": 490,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 8,
+        "chargeOffHistory": true,
+        "chargeOffDate": "2025-09-01",
+        "chargeOffAmount": 4100
+      },
+      "loanRequest": {
+        "type": "Personal loan",
+        "amount": 12000,
+        "termYears": 3,
+        "interestRate": 18.0,
+        "estimatedMonthlyPayment": 434,
+        "purpose": "General expenses and debt consolidation"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Washington DOL",
+          "idNumber": "WA-TANAK-019-YK",
+          "fullName": "YUKI TANAKA",
+          "dateOfBirth": "1996-03-08",
+          "address": "91 Sunrise Lane, Apt 2C, Seattle, WA 98101",
+          "issueDate": "2019-04-10",
+          "expiryDate": "2027-03-08",
+          "aiConfidence": 95,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Self — Freelance",
+          "employeeId": "N/A",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 1400,
+          "deductions": {
+            "selfEmploymentTax": 198,
+            "federalTax": 56,
+            "stateTax": 78,
+            "other": 0
+          },
+          "totalDeductions": 332,
+          "netPay": 1068,
+          "ytdGross": 4200,
+          "note": "Income represented by 3 PayPal invoices submitted — not formal payslip",
+          "aiConfidence": 55,
+          "status": "unverified",
+          "flags": [
+            "No formal payslip — PayPal invoices only",
+            "Only 3 clients identified — income concentration risk",
+            "YTD $4,200 over 5 months = $840/mo avg — significantly below stated $1,400/mo",
+            "No signed client contracts submitted"
+          ]
+        },
+        "bankStatement": {
+          "bank": "Chase Bank",
+          "accountHolder": "Yuki Tanaka",
+          "accountNumber": "****0041",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 180, "totalCredits": 1100, "totalDebits": 1220, "closingBalance": 60, "salaryDeposit": 800, "flags": ["Balance near zero entire month", "Overdraft fee charged Mar 28 — $35"] },
+            { "month": "April 2026", "openingBalance": 60, "totalCredits": 1900, "totalDebits": 1880, "closingBalance": 80, "salaryDeposit": 1900, "flags": ["Credits spike — origin unverified (possible one-time project)"] },
+            { "month": "May 2026", "openingBalance": 80, "totalCredits": 1200, "totalDebits": 1150, "closingBalance": 130, "salaryDeposit": 800, "flags": ["Balance below $50 on May 8 and May 21"] }
+          ],
+          "averageMonthlyCredit": 1400,
+          "averageMonthlyDebit": 1417,
+          "averageClosingBalance": 90,
+          "aiConfidence": 82,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "REJECT",
+        "aiScore": 22,
+        "dti": 66,
+        "analysedInSeconds": 25,
+        "extractedData": {
+          "verifiedName": "Yuki Tanaka",
+          "verifiedMonthlyIncome": 1400,
+          "verifiedEmployer": "Freelance — unverified",
+          "averageBankCredit3Months": 1400,
+          "proposedMonthlyPayment": 434,
+          "existingMonthlyObligations": 490,
+          "totalMonthlyObligations": 924,
+          "effectiveDTI": 66.0
+        },
+        "strengths": [],
+        "issues": [
+          "DTI 66% — more than 50% above maximum threshold",
+          "Credit score 498 — severely below 600 floor",
+          "Charged-off credit card ($4,100) — active default on record",
+          "8 late payments in last 24 months",
+          "Second credit card 30 days past due — current delinquency",
+          "Income entirely unverifiable — no formal payslip, no contracts",
+          "YTD bank income ($840/mo) far below stated $1,400/mo",
+          "Average bank balance $90 — functionally zero",
+          "Overdraft fee detected — no financial buffer",
+          "Loan purpose includes 'general expenses' — no productive use"
+        ],
+        "explanation": "Yuki Tanaka presents the highest-risk profile in this queue. A credit score of 498, a charged-off account from 8 months ago, 8 late payments in 24 months, and a second card currently delinquent together indicate a severe and sustained inability to manage debt. The DTI of 66% is more than 50% above maximum policy. Income cannot be verified — no formal payslip was submitted, and bank deposits average $840/month against a stated $1,400. The account balance averages $90 with an overdraft incident. Approving this application would pose unacceptable credit risk. Hard rejection.",
+        "confidenceScores": { "identityVerification": 95, "incomeVerification": 55, "documentAuthenticity": 72 }
+      }
+    },
+
+    {
+      "id": "APP-24805",
+      "status": "ai_reviewing",
+      "submittedAt": "2026-06-02T12:04:30Z",
+      "personalInfo": {
+        "fullName": "Amara Okonkwo",
+        "dateOfBirth": "1984-08-21",
+        "address": "312 Willow Creek Dr, Charlotte, NC 28201",
+        "phone": "+1 704-555-0118",
+        "email": "amara.okonkwo@email.com",
+        "ssn": "***-**-7744",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "Charlotte Unified School District",
+        "jobTitle": "High School Mathematics Teacher",
+        "yearsEmployed": 9,
+        "employmentStartDate": "2017-08-15",
+        "annualSalary": 62400,
+        "monthlyGross": 5200,
+        "monthlyNet": 3920
+      },
+      "financials": {
+        "creditScore": 704,
+        "creditRating": "Good",
+        "existingDebts": [
+          { "type": "Student loan", "monthlyPayment": 320, "balance": 14800, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 120, "balance": 1900, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 440,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Home loan",
+        "amount": 195000,
+        "termYears": 15,
+        "interestRate": 5.75,
+        "estimatedMonthlyPayment": 1621,
+        "purpose": "Purchase primary residence",
+        "propertyAddress": "57 Magnolia Street, Concord, NC 28025",
+        "propertyValue": 235000,
+        "ltv": 83.0
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "North Carolina DMV",
+          "idNumber": "NC-1144-8820-009",
+          "fullName": "AMARA CHIDINMA OKONKWO",
+          "dateOfBirth": "1984-08-21",
+          "address": "312 Willow Creek Dr, Charlotte, NC 28201",
+          "issueDate": "2022-09-01",
+          "expiryDate": "2030-08-21",
+          "aiConfidence": null,
+          "status": "processing",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "Charlotte Unified School District",
+          "employeeId": "CUSD-4412",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 5200,
+          "deductions": null,
+          "totalDeductions": null,
+          "netPay": null,
+          "ytdGross": null,
+          "aiConfidence": null,
+          "status": "processing",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Wells Fargo",
+          "accountHolder": "Amara C. Okonkwo",
+          "accountNumber": "****2290",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": null,
+          "averageMonthlyCredit": null,
+          "averageMonthlyDebit": null,
+          "averageClosingBalance": null,
+          "aiConfidence": null,
+          "status": "processing"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "PENDING",
+        "aiScore": null,
+        "dti": null,
+        "analysedInSeconds": null,
+        "extractedData": null,
+        "strengths": [],
+        "issues": [],
+        "explanation": "Documents uploaded at 12:04. AI extraction and analysis in progress — estimated completion in 45 seconds.",
+        "confidenceScores": null
+      }
+    },
+
+    {
+      "id": "APP-24804",
+      "status": "ai_reviewing",
+      "submittedAt": "2026-06-02T11:41:09Z",
+      "personalInfo": {
+        "fullName": "Miguel Torres",
+        "dateOfBirth": "1979-12-22",
+        "address": "88 Brickell Terrace, Suite 4, Miami, FL 33130",
+        "phone": "+1 786-555-0614",
+        "email": "miguel.torres@email.com",
+        "ssn": "***-**-5519",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "self_employed",
+        "employer": "La Mesa Viva LLC (Restaurant Owner)",
+        "jobTitle": "Owner / Executive Chef",
+        "yearsEmployed": 5,
+        "employmentStartDate": "2021-04-01",
+        "annualSalary": 69600,
+        "monthlyGross": 5800,
+        "monthlyNet": 4200,
+        "note": "Business monthly revenue ~$22,000. Owner personal draw $5,800/mo. Business has been profitable for 3 consecutive years."
+      },
+      "financials": {
+        "creditScore": 698,
+        "creditRating": "Fair",
+        "existingDebts": [
+          { "type": "Business equipment loan", "monthlyPayment": 1100, "balance": 34000, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 280, "balance": 6200, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 1380,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Business loan",
+        "amount": 120000,
+        "termYears": 7,
+        "interestRate": 8.5,
+        "estimatedMonthlyPayment": 1871,
+        "purpose": "Open second restaurant location in Coral Gables, FL"
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Passport",
+          "issuedBy": "US Department of State",
+          "idNumber": "US-804412991",
+          "fullName": "MIGUEL ANGEL TORRES",
+          "dateOfBirth": "1979-12-22",
+          "address": "88 Brickell Terrace, Miami, FL 33130",
+          "issueDate": "2020-02-14",
+          "expiryDate": "2030-02-14",
+          "aiConfidence": null,
+          "status": "processing",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "La Mesa Viva LLC",
+          "employeeId": "SELF",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 5800,
+          "deductions": null,
+          "totalDeductions": null,
+          "netPay": null,
+          "ytdGross": null,
+          "aiConfidence": null,
+          "status": "processing",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "Bank of America",
+          "accountHolder": "La Mesa Viva LLC",
+          "accountNumber": "****9910",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": null,
+          "averageMonthlyCredit": null,
+          "averageMonthlyDebit": null,
+          "averageClosingBalance": null,
+          "aiConfidence": null,
+          "status": "processing"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "PENDING",
+        "aiScore": null,
+        "dti": null,
+        "analysedInSeconds": null,
+        "extractedData": null,
+        "strengths": [],
+        "issues": [],
+        "explanation": "Documents uploaded at 11:41. AI extraction and analysis in progress — estimated completion in 45 seconds.",
+        "confidenceScores": null
+      }
+    },
+
+    {
+      "id": "APP-24803",
+      "status": "approved",
+      "submittedAt": "2026-06-02T08:30:00Z",
+      "personalInfo": {
+        "fullName": "Natasha Ivanova",
+        "dateOfBirth": "1985-04-02",
+        "address": "19 Crescent Hill Rd, Seattle, WA 98102",
+        "phone": "+1 206-555-0891",
+        "email": "natasha.ivanova@email.com",
+        "ssn": "***-**-3312",
+        "nationality": "US Citizen"
+      },
+      "employment": {
+        "type": "salaried",
+        "employer": "NovaTech Analytics Corp.",
+        "jobTitle": "Senior Data Analyst",
+        "yearsEmployed": 5,
+        "employmentStartDate": "2021-04-01",
+        "annualSalary": 97200,
+        "monthlyGross": 8100,
+        "monthlyNet": 5960
+      },
+      "financials": {
+        "creditScore": 756,
+        "creditRating": "Very Good",
+        "existingDebts": [
+          { "type": "Car loan", "monthlyPayment": 285, "balance": 9100, "status": "current" },
+          { "type": "Student loan", "monthlyPayment": 200, "balance": 7400, "status": "current" },
+          { "type": "Credit card", "monthlyPayment": 120, "balance": 1600, "status": "current" }
+        ],
+        "totalMonthlyDebtPayments": 605,
+        "bankruptcyHistory": false,
+        "foreclosureHistory": false,
+        "latePaymentsLast24Months": 0
+      },
+      "loanRequest": {
+        "type": "Home loan",
+        "amount": 245000,
+        "termYears": 25,
+        "interestRate": 5.5,
+        "estimatedMonthlyPayment": 1503,
+        "purpose": "Purchase primary residence",
+        "propertyAddress": "92 Lakeside Crescent, Bellevue, WA 98004",
+        "propertyValue": 296000,
+        "ltv": 82.8
+      },
+      "documents": {
+        "nationalId": {
+          "documentType": "Driver's License",
+          "issuedBy": "Washington DOL",
+          "idNumber": "WA-IVANO-044-NI",
+          "fullName": "NATASHA ELENA IVANOVA",
+          "dateOfBirth": "1985-04-02",
+          "address": "19 Crescent Hill Rd, Seattle, WA 98102",
+          "issueDate": "2021-05-20",
+          "expiryDate": "2029-04-02",
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "salarySlip": {
+          "employer": "NovaTech Analytics Corp.",
+          "employeeId": "NTAC-0882",
+          "payPeriod": "May 2026",
+          "payDate": "2026-05-31",
+          "grossSalary": 8100,
+          "deductions": {
+            "federalTax": 1296,
+            "stateTax": 0,
+            "socialSecurity": 502,
+            "medicare": 117,
+            "healthInsurance": 210,
+            "pension401k": 405,
+            "other": 610
+          },
+          "totalDeductions": 3140,
+          "netPay": 4960,
+          "ytdGross": 40500,
+          "aiConfidence": 99,
+          "status": "verified",
+          "flags": []
+        },
+        "bankStatement": {
+          "bank": "US Bank",
+          "accountHolder": "Natasha E. Ivanova",
+          "accountNumber": "****7712",
+          "statementPeriod": "March 2026 – May 2026",
+          "months": [
+            { "month": "March 2026", "openingBalance": 18200, "totalCredits": 8600, "totalDebits": 7900, "closingBalance": 18900, "salaryDeposit": 4960, "flags": [] },
+            { "month": "April 2026", "openingBalance": 18900, "totalCredits": 8200, "totalDebits": 7700, "closingBalance": 19400, "salaryDeposit": 4960, "flags": [] },
+            { "month": "May 2026", "openingBalance": 19400, "totalCredits": 8400, "totalDebits": 7800, "closingBalance": 20000, "salaryDeposit": 4960, "flags": [] }
+          ],
+          "averageMonthlyCredit": 8400,
+          "averageMonthlyDebit": 7800,
+          "averageClosingBalance": 19433,
+          "aiConfidence": 99,
+          "status": "verified"
+        }
+      },
+      "aiAnalysis": {
+        "recommendation": "APPROVE",
+        "aiScore": 88,
+        "dti": 26,
+        "analysedInSeconds": 29,
+        "extractedData": {
+          "verifiedName": "Natasha Elena Ivanova",
+          "verifiedMonthlyIncome": 8100,
+          "verifiedEmployer": "NovaTech Analytics Corp.",
+          "averageBankCredit3Months": 8400,
+          "proposedMonthlyPayment": 1503,
+          "existingMonthlyObligations": 605,
+          "totalMonthlyObligations": 2108,
+          "effectiveDTI": 26.0
+        },
+        "strengths": [
+          "Credit score 756 — very good",
+          "DTI 26% — strong capacity",
+          "5 years continuous employment at same employer",
+          "All documents verified at 99% confidence",
+          "Bank balance growing steadily — $18,200 to $20,000 over 3 months",
+          "Zero late payments on record",
+          "Low debt-to-balance ratio on all accounts"
+        ],
+        "issues": [],
+        "explanation": "Natasha Ivanova is a strong, well-qualified borrower. A credit score of 756, 5 years of stable tech-sector employment, and a DTI of 26% all comfortably satisfy approval criteria. Bank statements show a consistently growing balance above $18,000, and all three documents were verified at 99% confidence. Approved — no conditions.",
+        "confidenceScores": { "identityVerification": 99, "incomeVerification": 99, "documentAuthenticity": 99 }
+      }
+    }
+  ]
+}

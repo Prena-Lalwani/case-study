@@ -1,0 +1,19 @@
+{
+  "employer": "Microsoft Corporation",
+  "employeeId": "MS-887412",
+  "payPeriod": "May 2026",
+  "payDate": "2026-05-31",
+  "grossSalary": 11500,
+  "deductions": {
+    "federalTax": 2070,
+    "stateTax": 0,
+    "socialSecurity": 713,
+    "medicare": 167,
+    "healthInsurance": 240,
+    "pension401k": 920,
+    "other": 90
+  },
+  "totalDeductions": 4200,
+  "netPay": 7300,
+  "ytdGross": 57500
+}

@@ -1,0 +1,134 @@
+{
+  "id": "APP-24821",
+  "status": "approved",
+  "submittedAt": "2026-06-01T10:30:00Z",
+  "personalInfo": {
+    "fullName": "Sarah Kim",
+    "dateOfBirth": "1988-11-22",
+    "address": "14 Magnolia Court, Portland, OR 97201",
+    "phone": "+1 503-555-0312",
+    "email": "sarah.kim@email.com",
+    "ssn": "***-**-6634",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Vertex Technologies Inc.",
+    "jobTitle": "Senior Software Engineer",
+    "yearsEmployed": 7,
+    "employmentStartDate": "2019-05-01",
+    "annualSalary": 126000,
+    "monthlyGross": 10500,
+    "monthlyNet": 7200
+  },
+  "financials": {
+    "creditScore": 781,
+    "creditRating": "Very Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 290,
+        "balance": 8400,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 80,
+        "balance": 1900,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 370,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 310000,
+    "termYears": 25,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 1902,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "77 Cedar Ridge Ln, Lake Oswego, OR 97034",
+    "propertyValue": 385000,
+    "ltv": 80.5
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Oregon DMV",
+      "idNumber": "OR-KIM-077-SK",
+      "fullName": "SARAH JIYEON KIM",
+      "dateOfBirth": "1988-11-22",
+      "address": "14 Magnolia Court, Portland, OR 97201",
+      "issueDate": "2022-03-10",
+      "expiryDate": "2030-11-22",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Vertex Technologies Inc.",
+      "employeeId": "VTI-4421",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 10500,
+      "deductions": {
+        "federalTax": 1890,
+        "stateTax": 630,
+        "socialSecurity": 651,
+        "medicare": 152,
+        "healthInsurance": 230,
+        "pension401k": 315,
+        "other": 232
+      },
+      "totalDeductions": 4100,
+      "netPay": 6400,
+      "ytdGross": 52500,
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Bank of the West",
+      "accountHolder": "Sarah J. Kim",
+      "accountNumber": "****8802",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 44100,
+          "totalCredits": 11200,
+          "totalDebits": 10100,
+          "closingBalance": 45200,
+          "salaryDeposit": 7200,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 45200,
+          "totalCredits": 10900,
+          "totalDebits": 9800,
+          "closingBalance": 46300,
+          "salaryDeposit": 7200,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 46300,
+          "totalCredits": 11400,
+          "totalDebits": 10200,
+          "closingBalance": 47500,
+          "salaryDeposit": 7200,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 11167,
+      "averageMonthlyDebit": 10033,
+      "averageClosingBalance": 46333,
+      "aiConfidence": 99,
+      "status": "verified"
+    }
+  }
+}

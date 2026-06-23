@@ -1,0 +1,142 @@
+{
+  "id": "APP-24814",
+  "status": "needs_review",
+  "submittedAt": "2026-06-01T14:22:09Z",
+  "personalInfo": {
+    "fullName": "Thomas Brennan",
+    "dateOfBirth": "1978-03-30",
+    "address": "92 Ridgecrest Rd, Denver, CO 80203",
+    "phone": "+1 720-555-0561",
+    "email": "thomas.brennan@email.com",
+    "ssn": "***-**-3309",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Brennan Contracting LLC",
+    "jobTitle": "Owner / General Contractor",
+    "yearsEmployed": 2.1,
+    "employmentStartDate": "2024-03-01",
+    "annualSalary": 74400,
+    "monthlyGross": 6200,
+    "monthlyNet": 4650,
+    "incomeVariance": "High — seasonal construction work, 3 months with income below $4,000"
+  },
+  "financials": {
+    "creditScore": 634,
+    "creditRating": "Borderline",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 520,
+        "balance": 18600,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 400,
+        "balance": 8900,
+        "status": "current — 1 late payment 14 months ago"
+      }
+    ],
+    "totalMonthlyDebtPayments": 920,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 1
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 310000,
+    "termYears": 25,
+    "interestRate": 6,
+    "estimatedMonthlyPayment": 1994,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "14 Aspen Ridge Blvd, Lakewood, CO 80215",
+    "propertyValue": 370000,
+    "ltv": 83.8
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Colorado DMV",
+      "idNumber": "CO-7714-9920",
+      "fullName": "THOMAS JAMES BRENNAN",
+      "dateOfBirth": "1978-03-30",
+      "address": "92 Ridgecrest Rd, Denver, CO 80203",
+      "issueDate": "2020-04-15",
+      "expiryDate": "2026-03-30",
+      "aiConfidence": 88,
+      "status": "needs_review",
+      "flags": [
+        "License expired March 2026 — applicant must provide renewal or alternative ID"
+      ]
+    },
+    "salarySlip": {
+      "employer": "Brennan Contracting LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 7800,
+      "deductions": {
+        "selfEmploymentTax": 1100,
+        "federalTax": 840,
+        "stateTax": 312,
+        "healthInsurance": 420,
+        "businessExpenses": 0,
+        "other": 0
+      },
+      "totalDeductions": 2672,
+      "netPay": 5128,
+      "ytdGross": 28600,
+      "note": "Self-employed — income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
+      "aiConfidence": 79,
+      "status": "needs_review",
+      "flags": [
+        "Self-employed income — high month-to-month variance",
+        "YTD avg $5,720/mo vs stated $6,200/mo"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Wells Fargo",
+      "accountHolder": "Thomas J. Brennan",
+      "accountNumber": "****7703",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 3110,
+          "totalCredits": 8900,
+          "totalDebits": 8420,
+          "closingBalance": 3590,
+          "salaryDeposit": 8100,
+          "flags": [
+            "Large one-time project payment $8,100 — not recurring"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 3590,
+          "totalCredits": 7200,
+          "totalDebits": 6980,
+          "closingBalance": 3810,
+          "salaryDeposit": 6400,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 3810,
+          "totalCredits": 7800,
+          "totalDebits": 7500,
+          "closingBalance": 4110,
+          "salaryDeposit": 7100,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 7967,
+      "averageMonthlyDebit": 7633,
+      "averageClosingBalance": 3837,
+      "aiConfidence": 82,
+      "status": "verified"
+    }
+  }
+}

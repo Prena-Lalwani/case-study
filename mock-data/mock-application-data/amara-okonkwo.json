@@ -1,0 +1,98 @@
+{
+  "id": "APP-24805",
+  "status": "ai_reviewing",
+  "submittedAt": "2026-06-02T12:04:30Z",
+  "personalInfo": {
+    "fullName": "Amara Okonkwo",
+    "dateOfBirth": "1984-08-21",
+    "address": "312 Willow Creek Dr, Charlotte, NC 28201",
+    "phone": "+1 704-555-0118",
+    "email": "amara.okonkwo@email.com",
+    "ssn": "***-**-7744",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Charlotte Unified School District",
+    "jobTitle": "High School Mathematics Teacher",
+    "yearsEmployed": 9,
+    "employmentStartDate": "2017-08-15",
+    "annualSalary": 62400,
+    "monthlyGross": 5200,
+    "monthlyNet": 3920
+  },
+  "financials": {
+    "creditScore": 704,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 320,
+        "balance": 14800,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 120,
+        "balance": 1900,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 440,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 195000,
+    "termYears": 15,
+    "interestRate": 5.75,
+    "estimatedMonthlyPayment": 1621,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "57 Magnolia Street, Concord, NC 28025",
+    "propertyValue": 235000,
+    "ltv": 83
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "North Carolina DMV",
+      "idNumber": "NC-1144-8820-009",
+      "fullName": "AMARA CHIDINMA OKONKWO",
+      "dateOfBirth": "1984-08-21",
+      "address": "312 Willow Creek Dr, Charlotte, NC 28201",
+      "issueDate": "2022-09-01",
+      "expiryDate": "2030-08-21",
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Charlotte Unified School District",
+      "employeeId": "CUSD-4412",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 5200,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Wells Fargo",
+      "accountHolder": "Amara C. Okonkwo",
+      "accountNumber": "****2290",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": null,
+      "averageMonthlyCredit": null,
+      "averageMonthlyDebit": null,
+      "averageClosingBalance": null,
+      "aiConfidence": null,
+      "status": "processing"
+    }
+  }
+}

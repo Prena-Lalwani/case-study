@@ -1,0 +1,19 @@
+{
+  "employer": "Houston Independent School District",
+  "employeeId": "HISD-22198",
+  "payPeriod": "May 2026",
+  "payDate": "2026-05-31",
+  "grossSalary": 6400,
+  "deductions": {
+    "federalTax": 880,
+    "stateTax": 0,
+    "socialSecurity": 397,
+    "medicare": 93,
+    "healthInsurance": 220,
+    "pension401k": 320,
+    "other": 40
+  },
+  "totalDeductions": 1950,
+  "netPay": 4450,
+  "ytdGross": 32000
+}

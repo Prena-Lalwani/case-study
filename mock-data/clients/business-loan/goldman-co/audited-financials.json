@@ -1,0 +1,42 @@
+{
+  "years": [
+    {
+      "year": 2023,
+      "revenue": 9800000,
+      "cogs": 4100000,
+      "opex": 3900000,
+      "ebitda": 1800000,
+      "netIncome": 1310000,
+      "totalAssets": 7400000,
+      "totalLiabilities": 1900000,
+      "equity": 5500000,
+      "cashAndEquivalents": 2100000
+    },
+    {
+      "year": 2024,
+      "revenue": 11200000,
+      "cogs": 4700000,
+      "opex": 4300000,
+      "ebitda": 2200000,
+      "netIncome": 1650000,
+      "totalAssets": 8600000,
+      "totalLiabilities": 2100000,
+      "equity": 6500000,
+      "cashAndEquivalents": 2700000
+    },
+    {
+      "year": 2025,
+      "revenue": 12900000,
+      "cogs": 5350000,
+      "opex": 4750000,
+      "ebitda": 2800000,
+      "netIncome": 2140000,
+      "totalAssets": 9900000,
+      "totalLiabilities": 2200000,
+      "equity": 7700000,
+      "cashAndEquivalents": 3400000
+    }
+  ],
+  "auditor": "Sterling Hayes CPA",
+  "opinion": "Unqualified"
+}

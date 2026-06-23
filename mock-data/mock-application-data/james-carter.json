@@ -1,0 +1,134 @@
+{
+  "id": "APP-24818",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T08:15:00Z",
+  "personalInfo": {
+    "fullName": "James Carter",
+    "dateOfBirth": "1980-09-12",
+    "address": "44 Birchwood Dr, Chicago, IL 60614",
+    "phone": "+1 312-555-0174",
+    "email": "james.carter@email.com",
+    "ssn": "***-**-7741",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Brightfield Media",
+    "jobTitle": "Marketing Director",
+    "yearsEmployed": 6,
+    "employmentStartDate": "2020-06-01",
+    "annualSalary": 96000,
+    "monthlyGross": 8000,
+    "monthlyNet": 5350
+  },
+  "financials": {
+    "creditScore": 731,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 420,
+        "balance": 14800,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 140,
+        "balance": 3600,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 560,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 380000,
+    "termYears": 25,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 2332,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "88 Sycamore Blvd, Newton, MA 02458",
+    "propertyValue": 465000,
+    "ltv": 81.7
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Illinois SOS",
+      "idNumber": "IL-CART-088-JC",
+      "fullName": "JAMES EDWARD CARTER",
+      "dateOfBirth": "1980-09-12",
+      "address": "44 Birchwood Dr, Chicago, IL 60614",
+      "issueDate": "2020-10-01",
+      "expiryDate": "2028-09-12",
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Brightfield Media",
+      "employeeId": "BM-00341",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 8000,
+      "deductions": {
+        "federalTax": 1120,
+        "stateTax": 280,
+        "socialSecurity": 496,
+        "medicare": 116,
+        "healthInsurance": 220,
+        "pension401k": 240,
+        "other": 178
+      },
+      "totalDeductions": 2650,
+      "netPay": 5350,
+      "ytdGross": 40000,
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Chase",
+      "accountHolder": "James E. Carter",
+      "accountNumber": "****4421",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 19200,
+          "totalCredits": 8800,
+          "totalDebits": 8100,
+          "closingBalance": 19900,
+          "salaryDeposit": 5350,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 19900,
+          "totalCredits": 8600,
+          "totalDebits": 8200,
+          "closingBalance": 20300,
+          "salaryDeposit": 5350,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 20300,
+          "totalCredits": 8900,
+          "totalDebits": 8400,
+          "closingBalance": 20800,
+          "salaryDeposit": 5350,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 8767,
+      "averageMonthlyDebit": 8233,
+      "averageClosingBalance": 20333,
+      "aiConfidence": 96,
+      "status": "verified"
+    }
+  }
+}

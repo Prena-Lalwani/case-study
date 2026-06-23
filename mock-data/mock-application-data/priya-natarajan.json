@@ -1,0 +1,141 @@
+{
+  "id": "APP-24815",
+  "status": "needs_review",
+  "submittedAt": "2026-06-02T11:33:47Z",
+  "personalInfo": {
+    "fullName": "Priya Natarajan",
+    "dateOfBirth": "1995-08-22",
+    "address": "310 Westbrook Ct, Austin, TX 78701",
+    "phone": "+1 512-555-0294",
+    "email": "priya.natarajan@email.com",
+    "ssn": "***-**-7712",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Pixel Studio Agency",
+    "jobTitle": "Graphic Designer",
+    "yearsEmployed": 0.7,
+    "employmentStartDate": "2025-10-15",
+    "annualSalary": 57600,
+    "monthlyGross": 4800,
+    "monthlyNet": 3640
+  },
+  "financials": {
+    "creditScore": 668,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 890,
+        "balance": 34200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 400,
+        "balance": 5100,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 200,
+        "balance": 4800,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1490,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 1
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 22000,
+    "termYears": 4,
+    "interestRate": 12,
+    "estimatedMonthlyPayment": 580,
+    "purpose": "Debt consolidation and home improvement"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Texas DPS",
+      "idNumber": "TX-29941-003",
+      "fullName": "PRIYA NATARAJAN",
+      "dateOfBirth": "1995-08-22",
+      "address": "310 Westbrook Ct, Austin, TX 78701",
+      "issueDate": "2023-03-12",
+      "expiryDate": "2029-08-22",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Pixel Studio Agency",
+      "employeeId": "PSA-0312",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 4800,
+      "deductions": {
+        "federalTax": 528,
+        "stateTax": 0,
+        "socialSecurity": 298,
+        "medicare": 70,
+        "healthInsurance": 180,
+        "pension401k": 0,
+        "other": 84
+      },
+      "totalDeductions": 1160,
+      "netPay": 3640,
+      "ytdGross": 14400,
+      "aiConfidence": 94,
+      "status": "verified",
+      "flags": [
+        "Employment start date Oct 2025 — less than 12 months tenure"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Bank of America",
+      "accountHolder": "Priya Natarajan",
+      "accountNumber": "****4490",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 1840,
+          "totalCredits": 4900,
+          "totalDebits": 4780,
+          "closingBalance": 1960,
+          "salaryDeposit": 3640,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 1960,
+          "totalCredits": 4640,
+          "totalDebits": 4820,
+          "closingBalance": 1780,
+          "salaryDeposit": 3640,
+          "flags": [
+            "Balance dipped below $500 on Apr 18"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 1780,
+          "totalCredits": 4800,
+          "totalDebits": 4710,
+          "closingBalance": 1870,
+          "salaryDeposit": 3640,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 4780,
+      "averageMonthlyDebit": 4770,
+      "averageClosingBalance": 1870,
+      "aiConfidence": 91,
+      "status": "verified"
+    }
+  }
+}

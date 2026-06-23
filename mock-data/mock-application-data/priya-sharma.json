@@ -1,0 +1,133 @@
+{
+  "id": "APP-24825",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T13:10:00Z",
+  "personalInfo": {
+    "fullName": "Priya Sharma",
+    "dateOfBirth": "1982-08-25",
+    "address": "19 Lakeview Terrace, Austin, TX 78746",
+    "phone": "+1 512-555-0889",
+    "email": "priya.sharma@email.com",
+    "ssn": "***-**-7724",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Sharma Analytics Consulting",
+    "jobTitle": "Principal Consultant",
+    "yearsEmployed": 5,
+    "employmentStartDate": "2021-01-01",
+    "annualSalary": 114000,
+    "monthlyGross": 9500,
+    "monthlyNet": 6600,
+    "note": "Average quarterly revenue $85,500. Two long-term enterprise contracts."
+  },
+  "financials": {
+    "creditScore": 719,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Home mortgage",
+        "monthlyPayment": 1820,
+        "balance": 268000,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 310,
+        "balance": 9800,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 200,
+        "balance": 5200,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 2330,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Business loan",
+    "amount": 150000,
+    "termYears": 7,
+    "interestRate": 8.5,
+    "estimatedMonthlyPayment": 2366,
+    "purpose": "Expand team and office space for consulting practice"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Passport",
+      "issuedBy": "US Department of State",
+      "idNumber": "US-881200445",
+      "fullName": "PRIYA ANANYA SHARMA",
+      "dateOfBirth": "1982-08-25",
+      "address": "19 Lakeview Terrace, Austin, TX 78746",
+      "issueDate": "2021-06-30",
+      "expiryDate": "2031-06-30",
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Sharma Analytics Consulting",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 9500,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": 92,
+      "status": "verified",
+      "flags": [
+        "Self-employed — income based on client contracts",
+        "Revenue concentration risk — 2 primary clients represent 70% of income"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Chase",
+      "accountHolder": "Sharma Analytics Consulting",
+      "accountNumber": "****3317",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 28400,
+          "totalCredits": 11200,
+          "totalDebits": 9800,
+          "closingBalance": 29800,
+          "salaryDeposit": 9500,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 29800,
+          "totalCredits": 8400,
+          "totalDebits": 8100,
+          "closingBalance": 30100,
+          "salaryDeposit": 9500,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 30100,
+          "totalCredits": 14200,
+          "totalDebits": 11600,
+          "closingBalance": 32700,
+          "salaryDeposit": 9500,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 11267,
+      "averageMonthlyDebit": 9833,
+      "averageClosingBalance": 30867,
+      "aiConfidence": 95,
+      "status": "verified"
+    }
+  }
+}

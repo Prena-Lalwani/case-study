@@ -1,0 +1,102 @@
+{
+  "id": "APP-24830",
+  "status": "ai_reviewing",
+  "submittedAt": "2026-06-03T15:02:00Z",
+  "personalInfo": {
+    "fullName": "Henry Okafor",
+    "dateOfBirth": "1977-05-16",
+    "address": "34 Commerce Blvd, Houston, TX 77002",
+    "phone": "+1 713-555-0774",
+    "email": "henry.okafor@email.com",
+    "ssn": "***-**-6622",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Okafor Construction Group LLC",
+    "jobTitle": "CEO/Owner",
+    "yearsEmployed": 8,
+    "employmentStartDate": "2018-03-01",
+    "annualSalary": 168000,
+    "monthlyGross": 14000,
+    "monthlyNet": 9200,
+    "note": "Construction firm with 12 employees. Annual revenue ~$2.4M."
+  },
+  "financials": {
+    "creditScore": 728,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Commercial property mortgage",
+        "monthlyPayment": 3200,
+        "balance": 680000,
+        "status": "current"
+      },
+      {
+        "type": "Business line of credit",
+        "monthlyPayment": 800,
+        "balance": 90000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 220,
+        "balance": 5800,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 4220,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Business loan",
+    "amount": 200000,
+    "termYears": 10,
+    "interestRate": 8,
+    "estimatedMonthlyPayment": 2426,
+    "purpose": "Purchase new excavator and fleet vehicles"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Texas DPS",
+      "idNumber": "TX-OKAF-055-HO",
+      "fullName": "HENRY CHUKWUEMEKA OKAFOR",
+      "dateOfBirth": "1977-05-16",
+      "address": "34 Commerce Blvd, Houston, TX 77002",
+      "issueDate": null,
+      "expiryDate": null,
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Okafor Construction Group LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 14000,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Comerica Bank",
+      "accountHolder": "Okafor Construction Group LLC",
+      "accountNumber": "****8833",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": null,
+      "averageMonthlyCredit": null,
+      "averageMonthlyDebit": null,
+      "averageClosingBalance": null,
+      "aiConfidence": null,
+      "status": "processing"
+    }
+  }
+}

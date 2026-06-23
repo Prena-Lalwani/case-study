@@ -1,0 +1,140 @@
+{
+  "id": "APP-24807",
+  "status": "auto_rejected",
+  "submittedAt": "2026-05-31T09:44:21Z",
+  "personalInfo": {
+    "fullName": "Brandon Cole",
+    "dateOfBirth": "1985-06-14",
+    "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
+    "phone": "+1 615-555-0445",
+    "email": "brandon.cole@email.com",
+    "ssn": "***-**-6612",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Cole's Artisan Bakery LLC",
+    "jobTitle": "Owner",
+    "yearsEmployed": 1.2,
+    "employmentStartDate": "2025-03-01",
+    "annualSalary": 46800,
+    "monthlyGross": 3900,
+    "monthlyNet": 2757,
+    "note": "Personal draw from LLC. Business revenue $6,200/mo, expenses $5,100/mo, net $1,100/mo"
+  },
+  "financials": {
+    "creditScore": 611,
+    "creditRating": "Borderline",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 300,
+        "balance": 12400,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 360,
+        "balance": 7200,
+        "status": "current — utilization 72%"
+      }
+    ],
+    "totalMonthlyDebtPayments": 660,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Business loan",
+    "amount": 75000,
+    "termYears": 5,
+    "interestRate": 9,
+    "estimatedMonthlyPayment": 1557,
+    "purpose": "Purchase commercial baking equipment and expand kitchen facility"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Tennessee DOS",
+      "idNumber": "TN-D-19900614",
+      "fullName": "BRANDON KEITH COLE",
+      "dateOfBirth": "1985-06-14",
+      "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
+      "issueDate": "2022-07-01",
+      "expiryDate": "2030-06-14",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Cole's Artisan Bakery LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 3900,
+      "deductions": {
+        "selfEmploymentTax": 551,
+        "federalTax": 312,
+        "stateTax": 0,
+        "healthInsurance": 280,
+        "businessExpenses": 0,
+        "other": 0
+      },
+      "totalDeductions": 1143,
+      "netPay": 2757,
+      "ytdGross": 15600,
+      "note": "Business monthly P&L: Revenue $6,200 / Expenses $5,100 / EBITDA $1,100. Owner draw $3,900 from savings reserves.",
+      "aiConfidence": 74,
+      "status": "needs_review",
+      "flags": [
+        "Owner draw ($3,900) exceeds business net income ($1,100) — drawing from reserves",
+        "Business operating only 14 months — insufficient trading history",
+        "No audited financials submitted — only bank statements"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Regions Bank",
+      "accountHolder": "Cole's Artisan Bakery LLC",
+      "accountNumber": "****3301",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 8100,
+          "totalCredits": 6400,
+          "totalDebits": 6800,
+          "closingBalance": 7700,
+          "salaryDeposit": 6400,
+          "flags": [
+            "Expenses exceed revenue this month"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 7700,
+          "totalCredits": 6200,
+          "totalDebits": 6600,
+          "closingBalance": 7300,
+          "salaryDeposit": 6200,
+          "flags": [
+            "Expenses exceed revenue this month"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 7300,
+          "totalCredits": 6200,
+          "totalDebits": 5900,
+          "closingBalance": 7600,
+          "salaryDeposit": 6200,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 6267,
+      "averageMonthlyDebit": 6433,
+      "averageClosingBalance": 7533,
+      "aiConfidence": 85,
+      "status": "verified"
+    }
+  }
+}

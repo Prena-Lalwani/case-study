@@ -1,0 +1,139 @@
+{
+  "id": "APP-24823",
+  "status": "needs_review",
+  "submittedAt": "2026-06-02T16:40:00Z",
+  "personalInfo": {
+    "fullName": "Fatima Al-Hassan",
+    "dateOfBirth": "1990-02-14",
+    "address": "88 Crescent Moon Dr, Dearborn, MI 48126",
+    "phone": "+1 313-555-0567",
+    "email": "fatima.alhassan@email.com",
+    "ssn": "***-**-3390",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Mercy General Hospital",
+    "jobTitle": "Registered Nurse",
+    "yearsEmployed": 5,
+    "employmentStartDate": "2021-04-01",
+    "annualSalary": 57600,
+    "monthlyGross": 4800,
+    "monthlyNet": 3280
+  },
+  "financials": {
+    "creditScore": 668,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 560,
+        "balance": 28400,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 260,
+        "balance": 7900,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 150,
+        "balance": 3800,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 970,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 1
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 25000,
+    "termYears": 4,
+    "interestRate": 12,
+    "estimatedMonthlyPayment": 658,
+    "purpose": "Home renovation — kitchen and bathroom"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Michigan SOS",
+      "idNumber": "MI-ALHA-022-FA",
+      "fullName": "FATIMA ZARA AL-HASSAN",
+      "dateOfBirth": "1990-02-14",
+      "address": "88 Crescent Moon Dr, Dearborn, MI 48126",
+      "issueDate": "2022-06-01",
+      "expiryDate": "2030-02-14",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Mercy General Hospital",
+      "employeeId": "MGH-7712",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 4800,
+      "deductions": {
+        "federalTax": 480,
+        "stateTax": 192,
+        "socialSecurity": 298,
+        "medicare": 70,
+        "healthInsurance": 210,
+        "pension401k": 144,
+        "other": 126
+      },
+      "totalDeductions": 1520,
+      "netPay": 3280,
+      "ytdGross": 24000,
+      "aiConfidence": 96,
+      "status": "verified",
+      "flags": [
+        "Includes shift differential pay — base salary $4,200/mo"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Fifth Third Bank",
+      "accountHolder": "Fatima Z. Al-Hassan",
+      "accountNumber": "****2281",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 3100,
+          "totalCredits": 4800,
+          "totalDebits": 4600,
+          "closingBalance": 3300,
+          "salaryDeposit": 3280,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 3300,
+          "totalCredits": 4900,
+          "totalDebits": 4700,
+          "closingBalance": 3500,
+          "salaryDeposit": 3280,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 3500,
+          "totalCredits": 4800,
+          "totalDebits": 4500,
+          "closingBalance": 3800,
+          "salaryDeposit": 3280,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 4833,
+      "averageMonthlyDebit": 4600,
+      "averageClosingBalance": 3533,
+      "aiConfidence": 95,
+      "status": "verified"
+    }
+  }
+}

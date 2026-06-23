@@ -1,27 +1,92 @@
+import { useState, useRef } from 'react'
 import {
   TbFingerprint, TbCamera, TbCircleCheck, TbFileCheck,
-  TbShieldCheck, TbLock, TbSparkles,
+  TbShieldCheck, TbLock, TbSparkles, TbLoader, TbCheck,
 } from 'react-icons/tb'
 import { useOnboarding } from '../hooks/useOnboarding'
+import { onboardingService } from '../services/onboardingService'
 import TopNavbar from '../components/TopNavbar'
 import StepStepper from '../components/StepStepper'
 import SidebarProgress from '../components/SidebarProgress'
 import VerificationStatusPanel from '../components/VerificationStatusPanel'
 import BottomBar from '../components/BottomBar'
 
-/* ─── What we verify items ─────────────────────────────────────────── */
+/* ─── Static info ──────────────────────────────────────────────────── */
 const VERIFY_ITEMS = [
   { icon: TbCircleCheck, title: 'Identity confirmed',  sub: 'Face match to your ID' },
   { icon: TbFileCheck,   title: 'ID authenticity',     sub: 'Document is genuine' },
   { icon: TbShieldCheck, title: 'Liveness check',      sub: 'Real person, present now' },
 ]
 
+/* ─── Biometric simulation steps ──────────────────────────────────── */
+const BIOMETRIC_STAGES = [
+  [
+    { label: 'Capturing biometric',  status: 'in_progress' },
+    { label: 'Liveness check',       status: 'pending'     },
+    { label: 'Identity match',       status: 'pending'     },
+  ],
+  [
+    { label: 'Capturing biometric',  status: 'complete'    },
+    { label: 'Liveness check',       status: 'in_progress' },
+    { label: 'Identity match',       status: 'pending'     },
+  ],
+  [
+    { label: 'Capturing biometric',  status: 'complete'    },
+    { label: 'Liveness check',       status: 'complete'    },
+    { label: 'Identity match',       status: 'in_progress' },
+  ],
+  [
+    { label: 'Capturing biometric',  status: 'complete'    },
+    { label: 'Liveness check',       status: 'complete'    },
+    { label: 'Identity match',       status: 'complete'    },
+  ],
+]
+
 /* ─── Page ─────────────────────────────────────────────────────────── */
 const VerifyIdentityPage = () => {
   const [leftOpen,  setLeftOpen]  = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
-  const { state, setIdentityMethod } = useOnboarding()
+
+  const { state, setIdentityMethod, setVerificationStatus, setVerificationSteps } = useOnboarding()
   const selected = state.identity.method
+  const verStatus = state.identity.verificationStatus
+
+  const govIdInputRef = useRef(null)
+
+  /* ── Biometric — simulated step-by-step scan ── */
+  const handleBiometricScan = () => {
+    if (verStatus === 'scanning' || verStatus === 'verified') return
+    setVerificationStatus('scanning')
+    setVerificationSteps(BIOMETRIC_STAGES[0])
+    setTimeout(() => setVerificationSteps(BIOMETRIC_STAGES[1]), 1500)
+    setTimeout(() => setVerificationSteps(BIOMETRIC_STAGES[2]), 3000)
+    setTimeout(() => {
+      setVerificationSteps(BIOMETRIC_STAGES[3])
+      setVerificationStatus('verified')
+      onboardingService.patch({ currentStep: 3 }).catch(() => {})
+    }, 4500)
+  }
+
+  /* ── Government ID — upload only, verification at Step 4 ── */
+  const handleGovIdFile = (file) => {
+    if (!file) return
+    setVerificationStatus('scanning')
+    setVerificationSteps([
+      { label: 'Receiving document',       status: 'in_progress' },
+      { label: 'AI verification (Step 4)', status: 'pending'     },
+    ])
+    setTimeout(() => {
+      setVerificationSteps([
+        { label: 'Document received',        status: 'complete' },
+        { label: 'AI verification (Step 4)', status: 'pending'  },
+      ])
+      setVerificationStatus('received')
+      onboardingService.patch({ currentStep: 3 }).catch(() => {})
+    }, 1500)
+  }
+
+  const isVerified = verStatus === 'verified' || verStatus === 'received'
+  const isScanning = verStatus === 'scanning'
 
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden">
@@ -30,20 +95,23 @@ const VerifyIdentityPage = () => {
         onMenuClick={() => setLeftOpen(true)}
         onAiClick={() => setRightOpen(true)}
         pageTitle="Verify identity"
+        sessionInfo={isVerified ? 'Identity verified' : 'Session secure · verification pending'}
+        sessionDotColor={isVerified ? 'text-success' : 'text-indigo-500'}
       />
       <StepStepper activeStep={2} />
 
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Left sidebar */}
         <div className="hidden md:flex shrink-0">
-          <SidebarProgress currentStep={2} />
+          <SidebarProgress
+            currentStep={2}
+            stepBadge={verStatus === 'verified' ? 'VERIFIED' : verStatus === 'received' ? 'RECEIVED' : isScanning ? 'SCANNING' : 'PENDING'}
+            stepBadgeColor={isVerified ? 'text-success' : isScanning ? 'text-indigo-500' : 'text-warning'}
+          />
         </div>
 
-        {/* Main content */}
         <main className="flex-1 overflow-y-auto bg-gray-50 px-3 sm:px-5 md:px-6 lg:px-8 py-4 md:py-6">
 
-          {/* Page header */}
           <div className="mb-5">
             <h1 className="text-[19px] md:text-[22px] font-semibold text-gray-900 leading-tight">
               Verify your identity
@@ -53,27 +121,51 @@ const VerifyIdentityPage = () => {
             </p>
           </div>
 
+          {/* Success banner */}
+          {verStatus === 'verified' && (
+            <div className="flex items-center gap-3 bg-green-50 border border-green-100 rounded-xl px-4 py-3 mb-5">
+              <TbCircleCheck className="text-success shrink-0" style={{ fontSize: 20 }} />
+              <p className="text-[14px] font-semibold text-success">
+                Identity verified successfully — you can continue
+              </p>
+            </div>
+          )}
+          {verStatus === 'received' && (
+            <div className="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 mb-5">
+              <TbCircleCheck className="text-blue-action shrink-0" style={{ fontSize: 20 }} />
+              <p className="text-[14px] font-semibold text-blue-action">
+                Document received — AI verification will run at Step 4
+              </p>
+            </div>
+          )}
+
+
           {/* Method cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
 
             {/* Biometric card */}
             <div
-              onClick={() => setIdentityMethod('biometric')}
-              className={`relative rounded-xl border-2 p-5 cursor-pointer transition-all ${
+              onClick={() => !isScanning && setIdentityMethod('biometric')}
+              className={`relative rounded-xl border-2 p-5 transition-all ${
+                isScanning || isVerified ? 'cursor-default' : 'cursor-pointer'
+              } ${
                 selected === 'biometric'
-                  ? 'border-navy bg-white shadow-sm'
+                  ? isVerified ? 'border-success bg-green-50/30' : 'border-navy bg-white shadow-sm'
                   : 'border-gray-200 bg-white hover:border-gray-300'
               }`}
             >
-              {/* Most secure badge */}
               <div className="absolute -top-3 left-4 flex items-center gap-1 bg-white border border-navy rounded-full px-2.5 py-0.5">
                 <TbShieldCheck className="text-navy" style={{ fontSize: 11 }} />
                 <span className="text-[10px] font-semibold text-navy uppercase tracking-wide">Most secure</span>
               </div>
 
-              {/* Icon */}
               <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-3 mt-1">
-                <TbFingerprint className="text-blue-action" style={{ fontSize: 26 }} />
+                {selected === 'biometric' && isScanning
+                  ? <TbLoader className="text-blue-action animate-spin" style={{ fontSize: 26 }} />
+                  : selected === 'biometric' && isVerified
+                  ? <TbCheck className="text-success" style={{ fontSize: 26 }} />
+                  : <TbFingerprint className="text-blue-action" style={{ fontSize: 26 }} />
+                }
               </div>
 
               <h3 className="text-[16px] font-semibold text-gray-900 mb-1">Biometric scan</h3>
@@ -83,38 +175,83 @@ const VerifyIdentityPage = () => {
 
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-2 bg-navy text-white text-[14px] font-medium rounded-lg py-2.5 hover:bg-opacity-90 transition-colors"
+                onClick={(e) => { e.stopPropagation(); if (selected === 'biometric') handleBiometricScan() }}
+                disabled={selected !== 'biometric' || isScanning || isVerified}
+                className={`w-full flex items-center justify-center gap-2 text-[14px] font-medium rounded-lg py-2.5 transition-colors ${
+                  selected !== 'biometric'
+                    ? 'bg-gray-100 text-gray-400 cursor-default'
+                    : isVerified
+                    ? 'bg-success text-white cursor-default'
+                    : isScanning
+                    ? 'bg-indigo-400 text-white cursor-default'
+                    : 'bg-navy text-white hover:bg-opacity-90'
+                }`}
               >
-                <TbSparkles style={{ fontSize: 15 }} />
-                Use biometric
+                {selected === 'biometric' && isScanning
+                  ? <><TbLoader className="animate-spin" style={{ fontSize: 15 }} /> Scanning…</>
+                  : selected === 'biometric' && isVerified
+                  ? <><TbCircleCheck style={{ fontSize: 15 }} /> Verified</>
+                  : <><TbSparkles style={{ fontSize: 15 }} /> Use biometric</>
+                }
               </button>
             </div>
 
             {/* Government ID card */}
             <div
-              onClick={() => setIdentityMethod('gov-id')}
-              className={`relative rounded-xl border-2 p-5 cursor-pointer transition-all flex flex-col ${
+              onClick={() => !isScanning && setIdentityMethod('gov-id')}
+              className={`relative rounded-xl border-2 p-5 transition-all flex flex-col ${
+                isScanning || isVerified ? 'cursor-default' : 'cursor-pointer'
+              } ${
                 selected === 'gov-id'
-                  ? 'border-navy bg-white shadow-sm'
+                  ? verStatus === 'received' ? 'border-blue-action bg-blue-50/30' : 'border-navy bg-white shadow-sm'
                   : 'border-gray-200 bg-white hover:border-gray-300'
               }`}
             >
-              {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center mb-3">
-                <TbCamera className="text-secondary" style={{ fontSize: 26 }} />
+              <input
+                ref={govIdInputRef}
+                type="file"
+                accept="image/*,.json"
+                className="hidden"
+                onChange={(e) => handleGovIdFile(e.target.files?.[0])}
+              />
+
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${verStatus === 'received' && selected === 'gov-id' ? 'bg-blue-50' : 'bg-gray-50'}`}>
+                {selected === 'gov-id' && isScanning
+                  ? <TbLoader className="text-secondary animate-spin" style={{ fontSize: 26 }} />
+                  : selected === 'gov-id' && verStatus === 'received'
+                  ? <TbCheck className="text-blue-action" style={{ fontSize: 26 }} />
+                  : <TbCamera className="text-secondary" style={{ fontSize: 26 }} />
+                }
               </div>
 
               <h3 className="text-[16px] font-semibold text-gray-900 mb-1">Government ID scan</h3>
               <p className="text-[13px] text-secondary leading-snug mb-4 flex-1">
-                Take a photo of your ID front + back. Verification in about 45 seconds.
+                Upload a photo of your ID. Gemini AI verifies authenticity in seconds.
               </p>
 
               <button
                 type="button"
-                className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 text-[14px] font-medium rounded-lg py-2.5 hover:bg-gray-50 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  if (selected === 'gov-id' && !isScanning && !isVerified) govIdInputRef.current?.click()
+                }}
+                disabled={selected !== 'gov-id' || isScanning || isVerified}
+                className={`w-full flex items-center justify-center gap-2 text-[14px] font-medium rounded-lg py-2.5 transition-colors ${
+                  selected !== 'gov-id'
+                    ? 'bg-gray-100 text-gray-400 cursor-default'
+                    : verStatus === 'received'
+                    ? 'bg-blue-action text-white cursor-default'
+                    : isScanning
+                    ? 'bg-indigo-400 text-white cursor-default'
+                    : 'bg-navy text-white hover:bg-opacity-90'
+                }`}
               >
-                <TbCamera style={{ fontSize: 15 }} />
-                Scan ID
+                {selected === 'gov-id' && isScanning
+                  ? <><TbLoader className="animate-spin" style={{ fontSize: 15 }} /> Uploading…</>
+                  : selected === 'gov-id' && verStatus === 'received'
+                  ? <><TbCircleCheck style={{ fontSize: 15 }} /> Received</>
+                  : <><TbCamera style={{ fontSize: 15 }} /> Upload ID</>
+                }
               </button>
             </div>
           </div>
@@ -152,7 +289,6 @@ const VerifyIdentityPage = () => {
 
         </main>
 
-        {/* Right panel */}
         <div className="hidden lg:flex shrink-0">
           <VerificationStatusPanel />
         </div>
@@ -161,18 +297,24 @@ const VerifyIdentityPage = () => {
       <BottomBar
         backPath="/onboarding/step-1"
         continuePath="/onboarding/step-3"
-        continueLabel="Start verification"
+        continueLabel={isVerified ? 'Continue to documents' : 'Verify identity to continue'}
+        continueDisabled={!isVerified}
       />
 
-      {/* Left drawer — mobile */}
+      {/* Left drawer */}
       <div className={`fixed inset-0 z-50 md:hidden flex transition-opacity duration-300 ${leftOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setLeftOpen(false)} />
         <div className={`relative flex flex-col bg-white shadow-2xl transition-transform duration-300 ${leftOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ width: 240 }}>
-          <SidebarProgress currentStep={2} onClose={() => setLeftOpen(false)} />
+          <SidebarProgress
+            currentStep={2}
+            stepBadge={verStatus === 'verified' ? 'VERIFIED' : verStatus === 'received' ? 'RECEIVED' : isScanning ? 'SCANNING' : 'PENDING'}
+            stepBadgeColor={isVerified ? 'text-success' : isScanning ? 'text-indigo-500' : 'text-warning'}
+            onClose={() => setLeftOpen(false)}
+          />
         </div>
       </div>
 
-      {/* Right drawer — mobile + tablet */}
+      {/* Right drawer */}
       <div className={`fixed inset-0 z-50 lg:hidden flex justify-end transition-opacity duration-300 ${rightOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setRightOpen(false)} />
         <div className={`relative flex flex-col bg-white shadow-2xl transition-transform duration-300 ${rightOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: 280 }}>

@@ -1,0 +1,14 @@
+{
+  "slug": "goldman-co",
+  "flow": "business-loan",
+  "documents": [
+    "cert-incorporation",
+    "business-license",
+    "audited-financials",
+    "corporate-tax-return",
+    "corporate-bank-statement",
+    "debt-schedule",
+    "personal-guarantor",
+    "loan-request"
+  ]
+}

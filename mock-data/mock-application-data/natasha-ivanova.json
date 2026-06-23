@@ -1,0 +1,140 @@
+{
+  "id": "APP-24803",
+  "status": "approved",
+  "submittedAt": "2026-06-02T08:30:00Z",
+  "personalInfo": {
+    "fullName": "Natasha Ivanova",
+    "dateOfBirth": "1985-04-02",
+    "address": "19 Crescent Hill Rd, Seattle, WA 98102",
+    "phone": "+1 206-555-0891",
+    "email": "natasha.ivanova@email.com",
+    "ssn": "***-**-3312",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "NovaTech Analytics Corp.",
+    "jobTitle": "Senior Data Analyst",
+    "yearsEmployed": 5,
+    "employmentStartDate": "2021-04-01",
+    "annualSalary": 97200,
+    "monthlyGross": 8100,
+    "monthlyNet": 5960
+  },
+  "financials": {
+    "creditScore": 756,
+    "creditRating": "Very Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 285,
+        "balance": 9100,
+        "status": "current"
+      },
+      {
+        "type": "Student loan",
+        "monthlyPayment": 200,
+        "balance": 7400,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 120,
+        "balance": 1600,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 605,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 245000,
+    "termYears": 25,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 1503,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "92 Lakeside Crescent, Bellevue, WA 98004",
+    "propertyValue": 296000,
+    "ltv": 82.8
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Washington DOL",
+      "idNumber": "WA-IVANO-044-NI",
+      "fullName": "NATASHA ELENA IVANOVA",
+      "dateOfBirth": "1985-04-02",
+      "address": "19 Crescent Hill Rd, Seattle, WA 98102",
+      "issueDate": "2021-05-20",
+      "expiryDate": "2029-04-02",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "NovaTech Analytics Corp.",
+      "employeeId": "NTAC-0882",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 8100,
+      "deductions": {
+        "federalTax": 1296,
+        "stateTax": 0,
+        "socialSecurity": 502,
+        "medicare": 117,
+        "healthInsurance": 210,
+        "pension401k": 405,
+        "other": 610
+      },
+      "totalDeductions": 3140,
+      "netPay": 4960,
+      "ytdGross": 40500,
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "US Bank",
+      "accountHolder": "Natasha E. Ivanova",
+      "accountNumber": "****7712",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 18200,
+          "totalCredits": 8600,
+          "totalDebits": 7900,
+          "closingBalance": 18900,
+          "salaryDeposit": 4960,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 18900,
+          "totalCredits": 8200,
+          "totalDebits": 7700,
+          "closingBalance": 19400,
+          "salaryDeposit": 4960,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 19400,
+          "totalCredits": 8400,
+          "totalDebits": 7800,
+          "closingBalance": 20000,
+          "salaryDeposit": 4960,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 8400,
+      "averageMonthlyDebit": 7800,
+      "averageClosingBalance": 19433,
+      "aiConfidence": 99,
+      "status": "verified"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "asOfDate": "2026-05-31",
+  "facilities": [
+    {
+      "type": "Equipment loan",
+      "lender": "Wells Fargo",
+      "originalAmount": 1200000,
+      "balance": 720000,
+      "rate": 6.25,
+      "monthlyPayment": 18500,
+      "maturityDate": "2029-08-01",
+      "collateral": "Fleet vehicles"
+    },
+    {
+      "type": "Revolving LOC",
+      "lender": "Chase",
+      "creditLimit": 1500000,
+      "balance": 480000,
+      "rate": 7.5,
+      "monthlyInterestOnly": 3000,
+      "maturityDate": "2027-12-31",
+      "collateral": "AR pledge"
+    },
+    {
+      "type": "Real estate mortgage",
+      "lender": "Bank of America",
+      "originalAmount": 2100000,
+      "balance": 1650000,
+      "rate": 5.75,
+      "monthlyPayment": 12800,
+      "maturityDate": "2038-06-01",
+      "collateral": "Warehouse property"
+    }
+  ],
+  "totalDebt": 2850000,
+  "totalMonthlyDebtService": 34300
+}

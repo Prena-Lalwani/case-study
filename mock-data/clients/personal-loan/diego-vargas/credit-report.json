@@ -1,0 +1,27 @@
+{
+  "bureau": "Experian",
+  "pullDate": "2026-05-15",
+  "creditScore": 712,
+  "range": "Good",
+  "paymentHistory": {
+    "onTimePercent": 98,
+    "latePayments24mo": 1
+  },
+  "utilizationPercent": 22,
+  "accounts": [
+    {
+      "type": "Credit card",
+      "limit": 5000,
+      "balance": 1100,
+      "status": "current"
+    },
+    {
+      "type": "Auto loan",
+      "balance": 8400,
+      "monthlyPayment": 320,
+      "status": "current"
+    }
+  ],
+  "derogatoryMarks": 0,
+  "inquiriesLast6mo": 2
+}

@@ -1,0 +1,151 @@
+{
+  "id": "APP-24806",
+  "status": "auto_rejected",
+  "submittedAt": "2026-05-30T11:22:18Z",
+  "personalInfo": {
+    "fullName": "Yuki Tanaka",
+    "dateOfBirth": "1996-03-08",
+    "address": "91 Sunrise Lane, Apt 2C, Seattle, WA 98101",
+    "phone": "+1 206-555-0347",
+    "email": "yuki.tanaka@email.com",
+    "ssn": "***-**-8812",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Freelance (various clients)",
+    "jobTitle": "Graphic Illustrator",
+    "yearsEmployed": 1.8,
+    "employmentStartDate": "2024-08-01",
+    "annualSalary": 16800,
+    "monthlyGross": 1400,
+    "monthlyNet": 1068,
+    "note": "Highly inconsistent — stated 'ongoing client work' but no contracts submitted"
+  },
+  "financials": {
+    "creditScore": 498,
+    "creditRating": "Poor",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 200,
+        "balance": 11200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card A",
+        "monthlyPayment": 150,
+        "balance": 4100,
+        "status": "default — charged off 8 months ago"
+      },
+      {
+        "type": "Credit card B",
+        "monthlyPayment": 140,
+        "balance": 2200,
+        "status": "30 days past due"
+      }
+    ],
+    "totalMonthlyDebtPayments": 490,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 8,
+    "chargeOffHistory": true,
+    "chargeOffDate": "2025-09-01",
+    "chargeOffAmount": 4100
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 12000,
+    "termYears": 3,
+    "interestRate": 18,
+    "estimatedMonthlyPayment": 434,
+    "purpose": "General expenses and debt consolidation"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Washington DOL",
+      "idNumber": "WA-TANAK-019-YK",
+      "fullName": "YUKI TANAKA",
+      "dateOfBirth": "1996-03-08",
+      "address": "91 Sunrise Lane, Apt 2C, Seattle, WA 98101",
+      "issueDate": "2019-04-10",
+      "expiryDate": "2027-03-08",
+      "aiConfidence": 95,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Self — Freelance",
+      "employeeId": "N/A",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 1400,
+      "deductions": {
+        "selfEmploymentTax": 198,
+        "federalTax": 56,
+        "stateTax": 78,
+        "other": 0
+      },
+      "totalDeductions": 332,
+      "netPay": 1068,
+      "ytdGross": 4200,
+      "note": "Income represented by 3 PayPal invoices submitted — not formal payslip",
+      "aiConfidence": 55,
+      "status": "unverified",
+      "flags": [
+        "No formal payslip — PayPal invoices only",
+        "Only 3 clients identified — income concentration risk",
+        "YTD $4,200 over 5 months = $840/mo avg — significantly below stated $1,400/mo",
+        "No signed client contracts submitted"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Chase Bank",
+      "accountHolder": "Yuki Tanaka",
+      "accountNumber": "****0041",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 180,
+          "totalCredits": 1100,
+          "totalDebits": 1220,
+          "closingBalance": 60,
+          "salaryDeposit": 800,
+          "flags": [
+            "Balance near zero entire month",
+            "Overdraft fee charged Mar 28 — $35"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 60,
+          "totalCredits": 1900,
+          "totalDebits": 1880,
+          "closingBalance": 80,
+          "salaryDeposit": 1900,
+          "flags": [
+            "Credits spike — origin unverified (possible one-time project)"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 80,
+          "totalCredits": 1200,
+          "totalDebits": 1150,
+          "closingBalance": 130,
+          "salaryDeposit": 800,
+          "flags": [
+            "Balance below $50 on May 8 and May 21"
+          ]
+        }
+      ],
+      "averageMonthlyCredit": 1400,
+      "averageMonthlyDebit": 1417,
+      "averageClosingBalance": 90,
+      "aiConfidence": 82,
+      "status": "verified"
+    }
+  }
+}

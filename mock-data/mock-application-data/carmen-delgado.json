@@ -1,0 +1,136 @@
+{
+  "id": "APP-24827",
+  "status": "needs_review",
+  "submittedAt": "2026-06-02T10:05:00Z",
+  "personalInfo": {
+    "fullName": "Carmen Delgado",
+    "dateOfBirth": "1979-03-28",
+    "address": "55 Palm Avenue, San Antonio, TX 78201",
+    "phone": "+1 210-555-0112",
+    "email": "carmen.delgado@email.com",
+    "ssn": "***-**-5548",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Alamo Heights ISD",
+    "jobTitle": "Senior Teacher",
+    "yearsEmployed": 10,
+    "employmentStartDate": "2016-08-01",
+    "annualSalary": 72000,
+    "monthlyGross": 6000,
+    "monthlyNet": 4380
+  },
+  "financials": {
+    "creditScore": 741,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 280,
+        "balance": 7200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 90,
+        "balance": 1800,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 370,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 265000,
+    "termYears": 20,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 1823,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "212 Blossom Ridge Ct, Boerne, TX 78006",
+    "propertyValue": 318000,
+    "ltv": 83.3
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Texas DPS",
+      "idNumber": "TX-DELG-055-CD",
+      "fullName": "CARMEN LUCIA DELGADO",
+      "dateOfBirth": "1979-03-28",
+      "address": "55 Palm Avenue, San Antonio, TX 78201",
+      "issueDate": "2020-09-01",
+      "expiryDate": "2028-03-28",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Alamo Heights ISD",
+      "employeeId": "AHISD-1892",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 6000,
+      "deductions": {
+        "federalTax": 600,
+        "stateTax": 0,
+        "socialSecurity": 372,
+        "medicare": 87,
+        "healthInsurance": 195,
+        "pension401k": 240,
+        "other": 126
+      },
+      "totalDeductions": 1620,
+      "netPay": 4380,
+      "ytdGross": 30000,
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": [
+        "Texas — no state income tax"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Frost Bank",
+      "accountHolder": "Carmen L. Delgado",
+      "accountNumber": "****7729",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 14200,
+          "totalCredits": 6800,
+          "totalDebits": 6100,
+          "closingBalance": 14900,
+          "salaryDeposit": 4380,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 14900,
+          "totalCredits": 6700,
+          "totalDebits": 6000,
+          "closingBalance": 15600,
+          "salaryDeposit": 4380,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 15600,
+          "totalCredits": 6900,
+          "totalDebits": 6200,
+          "closingBalance": 16300,
+          "salaryDeposit": 4380,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 6800,
+      "averageMonthlyDebit": 6100,
+      "averageClosingBalance": 15600,
+      "aiConfidence": 98,
+      "status": "verified"
+    }
+  }
+}

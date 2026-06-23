@@ -1,0 +1,96 @@
+{
+  "id": "APP-24804",
+  "status": "ai_reviewing",
+  "submittedAt": "2026-06-02T11:41:09Z",
+  "personalInfo": {
+    "fullName": "Miguel Torres",
+    "dateOfBirth": "1979-12-22",
+    "address": "88 Brickell Terrace, Suite 4, Miami, FL 33130",
+    "phone": "+1 786-555-0614",
+    "email": "miguel.torres@email.com",
+    "ssn": "***-**-5519",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "La Mesa Viva LLC (Restaurant Owner)",
+    "jobTitle": "Owner / Executive Chef",
+    "yearsEmployed": 5,
+    "employmentStartDate": "2021-04-01",
+    "annualSalary": 69600,
+    "monthlyGross": 5800,
+    "monthlyNet": 4200,
+    "note": "Business monthly revenue ~$22,000. Owner personal draw $5,800/mo. Business has been profitable for 3 consecutive years."
+  },
+  "financials": {
+    "creditScore": 698,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Business equipment loan",
+        "monthlyPayment": 1100,
+        "balance": 34000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 280,
+        "balance": 6200,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1380,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Business loan",
+    "amount": 120000,
+    "termYears": 7,
+    "interestRate": 8.5,
+    "estimatedMonthlyPayment": 1871,
+    "purpose": "Open second restaurant location in Coral Gables, FL"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Passport",
+      "issuedBy": "US Department of State",
+      "idNumber": "US-804412991",
+      "fullName": "MIGUEL ANGEL TORRES",
+      "dateOfBirth": "1979-12-22",
+      "address": "88 Brickell Terrace, Miami, FL 33130",
+      "issueDate": "2020-02-14",
+      "expiryDate": "2030-02-14",
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "La Mesa Viva LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 5800,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Bank of America",
+      "accountHolder": "La Mesa Viva LLC",
+      "accountNumber": "****9910",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": null,
+      "averageMonthlyCredit": null,
+      "averageMonthlyDebit": null,
+      "averageClosingBalance": null,
+      "aiConfidence": null,
+      "status": "processing"
+    }
+  }
+}

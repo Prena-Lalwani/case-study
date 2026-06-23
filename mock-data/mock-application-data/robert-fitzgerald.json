@@ -1,0 +1,156 @@
+{
+  "id": "APP-24824",
+  "status": "auto_rejected",
+  "submittedAt": "2026-06-01T15:20:00Z",
+  "personalInfo": {
+    "fullName": "Robert Fitzgerald",
+    "dateOfBirth": "1968-04-11",
+    "address": "420 Highland Ave, Sacramento, CA 95811",
+    "phone": "+1 916-555-0721",
+    "email": "robert.fitzgerald@email.com",
+    "ssn": "***-**-1177",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Golden State Logistics",
+    "jobTitle": "Operations Manager",
+    "yearsEmployed": 3,
+    "employmentStartDate": "2023-02-01",
+    "annualSalary": 84000,
+    "monthlyGross": 7000,
+    "monthlyNet": 4900
+  },
+  "financials": {
+    "creditScore": 582,
+    "creditRating": "Poor",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 490,
+        "balance": 18200,
+        "status": "current"
+      },
+      {
+        "type": "Boat loan",
+        "monthlyPayment": 480,
+        "balance": 22000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 380,
+        "balance": 12400,
+        "status": "2 missed payments 2025"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 220,
+        "balance": 8900,
+        "status": "current"
+      },
+      {
+        "type": "Personal loan",
+        "monthlyPayment": 190,
+        "balance": 6100,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1760,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 4
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 520000,
+    "termYears": 30,
+    "interestRate": 5.75,
+    "estimatedMonthlyPayment": 3038,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "808 Pacific Pines Dr, Roseville, CA 95678",
+    "propertyValue": 635000,
+    "ltv": 81.9
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "California DMV",
+      "idNumber": "CA-FITZ-088-RF",
+      "fullName": "ROBERT JAMES FITZGERALD",
+      "dateOfBirth": "1968-04-11",
+      "address": "420 Highland Ave, Sacramento, CA 95811",
+      "issueDate": "2021-03-22",
+      "expiryDate": "2029-04-11",
+      "aiConfidence": 95,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Golden State Logistics",
+      "employeeId": "GSL-0229",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 7000,
+      "deductions": {
+        "federalTax": 840,
+        "stateTax": 315,
+        "socialSecurity": 434,
+        "medicare": 102,
+        "healthInsurance": 200,
+        "pension401k": 210,
+        "other": 199
+      },
+      "totalDeductions": 2300,
+      "netPay": 4700,
+      "ytdGross": 35000,
+      "aiConfidence": 96,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Bank of America",
+      "accountHolder": "Robert J. Fitzgerald",
+      "accountNumber": "****5540",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 2100,
+          "totalCredits": 7200,
+          "totalDebits": 7400,
+          "closingBalance": 1900,
+          "salaryDeposit": 4900,
+          "flags": [
+            "Negative month — spending exceeds income"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 1900,
+          "totalCredits": 7100,
+          "totalDebits": 7500,
+          "closingBalance": 1500,
+          "salaryDeposit": 4900,
+          "flags": [
+            "Negative month — spending exceeds income"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 1500,
+          "totalCredits": 7300,
+          "totalDebits": 7200,
+          "closingBalance": 1600,
+          "salaryDeposit": 4900,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 7200,
+      "averageMonthlyDebit": 7367,
+      "averageClosingBalance": 1667,
+      "aiConfidence": 92,
+      "status": "verified"
+    }
+  }
+}

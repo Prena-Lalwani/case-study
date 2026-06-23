@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { TbArrowLeft, TbArrowRight, TbShield, TbUsers, TbAccessible, TbLoader, TbClock, TbCircleFilled } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
-const BottomBar = ({ backPath = '/signup', continuePath, continueLabel = 'Save & Continue', continueDisabled = false, statusMessage, centerMessage, centerDotColor = 'text-success' }) => {
+const BottomBar = ({ backPath = '/signup', continuePath, onContinue, continueLabel = 'Save & Continue', continueDisabled = false, statusMessage, centerMessage, centerDotColor = 'text-success' }) => {
   const navigate = useNavigate()
 
   return (
@@ -51,7 +51,7 @@ const BottomBar = ({ backPath = '/signup', continuePath, continueLabel = 'Save &
           <button
             type="button"
             disabled={continueDisabled}
-            onClick={() => !continueDisabled && continuePath && navigate(continuePath)}
+            onClick={() => { if (continueDisabled) return; onContinue ? onContinue() : continuePath && navigate(continuePath) }}
             className={`flex items-center gap-1.5 text-[14px] rounded-lg px-4 sm:px-5 py-2 font-medium transition-colors duration-150 ${
               continueDisabled
                 ? 'bg-gray-100 text-tertiary cursor-not-allowed'
@@ -73,6 +73,7 @@ const BottomBar = ({ backPath = '/signup', continuePath, continueLabel = 'Save &
 BottomBar.propTypes = {
   backPath:         PropTypes.string,
   continuePath:     PropTypes.string,
+  onContinue:       PropTypes.func,
   continueLabel:    PropTypes.string,
   continueDisabled: PropTypes.bool,
   statusMessage:    PropTypes.string,

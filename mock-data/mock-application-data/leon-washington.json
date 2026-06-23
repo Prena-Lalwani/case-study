@@ -1,0 +1,95 @@
+{
+  "id": "APP-24826",
+  "status": "ai_reviewing",
+  "submittedAt": "2026-06-03T14:22:00Z",
+  "personalInfo": {
+    "fullName": "Leon Washington",
+    "dateOfBirth": "1991-12-05",
+    "address": "77 Westbrook Ave, Atlanta, GA 30309",
+    "phone": "+1 404-555-0334",
+    "email": "leon.washington@email.com",
+    "ssn": "***-**-9910",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Delta Freight Corp.",
+    "jobTitle": "Logistics Coordinator",
+    "yearsEmployed": 3,
+    "employmentStartDate": "2023-06-01",
+    "annualSalary": 67200,
+    "monthlyGross": 5600,
+    "monthlyNet": 4050
+  },
+  "financials": {
+    "creditScore": 714,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 380,
+        "balance": 13200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 110,
+        "balance": 2900,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 490,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 55000,
+    "termYears": 6,
+    "interestRate": 7.5,
+    "estimatedMonthlyPayment": 952,
+    "purpose": "Purchase commercial van for weekend delivery side business"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "State ID",
+      "issuedBy": "Georgia DDS",
+      "idNumber": "GA-WASH-099-LW",
+      "fullName": "LEON JAMES WASHINGTON",
+      "dateOfBirth": "1991-12-05",
+      "address": "77 Westbrook Ave, Atlanta, GA 30309",
+      "issueDate": "2023-01-01",
+      "expiryDate": "2031-12-05",
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Delta Freight Corp.",
+      "employeeId": "DFC-3341",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 5600,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": null,
+      "status": "processing",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "SunTrust",
+      "accountHolder": "Leon J. Washington",
+      "accountNumber": "****4412",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": null,
+      "averageMonthlyCredit": null,
+      "averageMonthlyDebit": null,
+      "averageClosingBalance": null,
+      "aiConfidence": null,
+      "status": "processing"
+    }
+  }
+}

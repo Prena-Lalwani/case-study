@@ -1,0 +1,146 @@
+{
+  "id": "APP-24809",
+  "status": "auto_rejected",
+  "submittedAt": "2026-05-31T13:02:44Z",
+  "personalInfo": {
+    "fullName": "Kwame Asante",
+    "dateOfBirth": "1998-02-28",
+    "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
+    "phone": "+1 313-555-0099",
+    "email": "kwame.asante@email.com",
+    "ssn": "***-**-2201",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "part_time",
+    "employer": "GameStop — Michigan Ave",
+    "jobTitle": "Part-Time Sales Associate",
+    "yearsEmployed": 1.2,
+    "employmentStartDate": "2025-03-10",
+    "annualSalary": 25200,
+    "monthlyGross": 2100,
+    "monthlyNet": 1679
+  },
+  "financials": {
+    "creditScore": 542,
+    "creditRating": "Poor",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 340,
+        "balance": 18900,
+        "status": "current — 2 missed payments (Oct 2024, Jan 2025)"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 300,
+        "balance": 7200,
+        "status": "current — 1 late payment (Mar 2025)"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 200,
+        "balance": 3800,
+        "status": "2 missed payments — 30 days overdue"
+      }
+    ],
+    "totalMonthlyDebtPayments": 840,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 5
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 9500,
+    "termYears": 2,
+    "interestRate": 15,
+    "estimatedMonthlyPayment": 462,
+    "purpose": "Pay off credit card debt and cover living expenses"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "State ID",
+      "issuedBy": "Michigan SOS",
+      "idNumber": "MI-D291-009-944",
+      "fullName": "KWAME ASANTE",
+      "dateOfBirth": "1998-02-28",
+      "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
+      "issueDate": "2022-04-01",
+      "expiryDate": "2026-02-28",
+      "aiConfidence": 91,
+      "status": "needs_review",
+      "flags": [
+        "State ID expired February 2026 — less than 3 months ago"
+      ]
+    },
+    "salarySlip": {
+      "employer": "GameStop",
+      "employeeId": "GS-991-44",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 2100,
+      "deductions": {
+        "federalTax": 147,
+        "stateTax": 84,
+        "socialSecurity": 130,
+        "medicare": 30,
+        "healthInsurance": 0,
+        "pension401k": 0,
+        "other": 30
+      },
+      "totalDeductions": 421,
+      "netPay": 1679,
+      "ytdGross": 10500,
+      "aiConfidence": 94,
+      "status": "verified",
+      "flags": [
+        "Part-time income only — hours may vary"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Chime",
+      "accountHolder": "Kwame Asante",
+      "accountNumber": "****1122",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 320,
+          "totalCredits": 2200,
+          "totalDebits": 2180,
+          "closingBalance": 340,
+          "salaryDeposit": 1679,
+          "flags": [
+            "Balance at $0 on Mar 4",
+            "Balance at $12 on Mar 19"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 340,
+          "totalCredits": 2100,
+          "totalDebits": 2190,
+          "closingBalance": 250,
+          "salaryDeposit": 1679,
+          "flags": [
+            "Overdraft attempt Apr 22 — declined"
+          ]
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 250,
+          "totalCredits": 2050,
+          "totalDebits": 2010,
+          "closingBalance": 290,
+          "salaryDeposit": 1679,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 2117,
+      "averageMonthlyDebit": 2127,
+      "averageClosingBalance": 293,
+      "aiConfidence": 93,
+      "status": "verified"
+    }
+  }
+}

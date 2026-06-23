@@ -1,0 +1,35 @@
+{
+  "bank": "Wells Fargo",
+  "accountHolder": "Hana Yamamoto",
+  "accountNumber": "****9102",
+  "statementPeriod": "March 2026 – May 2026",
+  "months": [
+    {
+      "month": "March 2026",
+      "openingBalance": 14200,
+      "totalCredits": 8400,
+      "totalDebits": 6900,
+      "closingBalance": 15700,
+      "salaryDeposit": 7300
+    },
+    {
+      "month": "April 2026",
+      "openingBalance": 15700,
+      "totalCredits": 8500,
+      "totalDebits": 7100,
+      "closingBalance": 17100,
+      "salaryDeposit": 7300
+    },
+    {
+      "month": "May 2026",
+      "openingBalance": 17100,
+      "totalCredits": 8550,
+      "totalDebits": 7250,
+      "closingBalance": 18400,
+      "salaryDeposit": 7300
+    }
+  ],
+  "averageMonthlyCredit": 8483,
+  "averageMonthlyDebit": 7083,
+  "averageClosingBalance": 17067
+}

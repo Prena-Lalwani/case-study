@@ -1,0 +1,131 @@
+{
+  "id": "APP-24831",
+  "status": "approved",
+  "submittedAt": "2026-06-01T08:55:00Z",
+  "personalInfo": {
+    "fullName": "Elena Vasquez",
+    "dateOfBirth": "1993-07-19",
+    "address": "88 Sunset Blvd, Phoenix, AZ 85001",
+    "phone": "+1 602-555-0229",
+    "email": "elena.vasquez@email.com",
+    "ssn": "***-**-4490",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Pinnacle Financial Group",
+    "jobTitle": "Financial Analyst",
+    "yearsEmployed": 4,
+    "employmentStartDate": "2022-04-01",
+    "annualSalary": 72000,
+    "monthlyGross": 6000,
+    "monthlyNet": 4350
+  },
+  "financials": {
+    "creditScore": 762,
+    "creditRating": "Very Good",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 180,
+        "balance": 8200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 60,
+        "balance": 1100,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 240,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 12000,
+    "termYears": 3,
+    "interestRate": 10.5,
+    "estimatedMonthlyPayment": 389,
+    "purpose": "Home office setup and professional development courses"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Arizona MVD",
+      "idNumber": "AZ-VASQ-088-EV",
+      "fullName": "ELENA MARIA VASQUEZ",
+      "dateOfBirth": "1993-07-19",
+      "address": "88 Sunset Blvd, Phoenix, AZ 85001",
+      "issueDate": "2021-08-20",
+      "expiryDate": "2029-07-19",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Pinnacle Financial Group",
+      "employeeId": "PFG-3309",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 6000,
+      "deductions": {
+        "federalTax": 660,
+        "stateTax": 90,
+        "socialSecurity": 372,
+        "medicare": 87,
+        "healthInsurance": 170,
+        "pension401k": 180,
+        "other": 91
+      },
+      "totalDeductions": 1650,
+      "netPay": 4350,
+      "ytdGross": 30000,
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Chase",
+      "accountHolder": "Elena M. Vasquez",
+      "accountNumber": "****1129",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 18400,
+          "totalCredits": 5800,
+          "totalDebits": 5200,
+          "closingBalance": 19000,
+          "salaryDeposit": 4350,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 19000,
+          "totalCredits": 5900,
+          "totalDebits": 5300,
+          "closingBalance": 19600,
+          "salaryDeposit": 4350,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 19600,
+          "totalCredits": 6000,
+          "totalDebits": 5400,
+          "closingBalance": 20200,
+          "salaryDeposit": 4350,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 5900,
+      "averageMonthlyDebit": 5300,
+      "averageClosingBalance": 19600,
+      "aiConfidence": 99,
+      "status": "verified"
+    }
+  }
+}

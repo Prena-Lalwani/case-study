@@ -1,0 +1,42 @@
+{
+  "years": [
+    {
+      "year": 2023,
+      "revenue": 7240000,
+      "cogs": 4900000,
+      "opex": 1580000,
+      "ebitda": 760000,
+      "netIncome": 480000,
+      "totalAssets": 6100000,
+      "totalLiabilities": 3800000,
+      "equity": 2300000,
+      "cashAndEquivalents": 810000
+    },
+    {
+      "year": 2024,
+      "revenue": 8910000,
+      "cogs": 5950000,
+      "opex": 1840000,
+      "ebitda": 1120000,
+      "netIncome": 720000,
+      "totalAssets": 7400000,
+      "totalLiabilities": 4350000,
+      "equity": 3050000,
+      "cashAndEquivalents": 1180000
+    },
+    {
+      "year": 2025,
+      "revenue": 10400000,
+      "cogs": 7020000,
+      "opex": 2010000,
+      "ebitda": 1370000,
+      "netIncome": 910000,
+      "totalAssets": 8900000,
+      "totalLiabilities": 5100000,
+      "equity": 3800000,
+      "cashAndEquivalents": 1540000
+    }
+  ],
+  "auditor": "Greenwich & Partners CPA",
+  "opinion": "Unqualified"
+}

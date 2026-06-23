@@ -1,0 +1,15 @@
+{
+  "goals": [
+    "Consolidate high-interest credit card debt",
+    "Rebuild emergency fund",
+    "Catch-up retirement contributions"
+  ],
+  "timeHorizonYears": 12,
+  "riskTolerance": "Conservative",
+  "currentNetWorth": 28000,
+  "monthlySurplus": -180,
+  "pressingConcerns": [
+    "Two credit cards at 24% APR",
+    "Recent divorce settlement payments"
+  ]
+}

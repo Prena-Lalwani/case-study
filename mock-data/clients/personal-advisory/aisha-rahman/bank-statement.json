@@ -1,0 +1,35 @@
+{
+  "bank": "Bank of America",
+  "accountHolder": "Aisha N. Rahman",
+  "accountNumber": "****2218",
+  "statementPeriod": "March 2026 – May 2026",
+  "months": [
+    {
+      "month": "March 2026",
+      "openingBalance": 18400,
+      "totalCredits": 7100,
+      "totalDebits": 5800,
+      "closingBalance": 19700,
+      "salaryDeposit": 5760
+    },
+    {
+      "month": "April 2026",
+      "openingBalance": 19700,
+      "totalCredits": 7250,
+      "totalDebits": 6100,
+      "closingBalance": 20850,
+      "salaryDeposit": 5760
+    },
+    {
+      "month": "May 2026",
+      "openingBalance": 20850,
+      "totalCredits": 7300,
+      "totalDebits": 6450,
+      "closingBalance": 21700,
+      "salaryDeposit": 5760
+    }
+  ],
+  "averageMonthlyCredit": 7217,
+  "averageMonthlyDebit": 6117,
+  "averageClosingBalance": 20750
+}

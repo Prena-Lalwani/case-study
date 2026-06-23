@@ -1,0 +1,27 @@
+{
+  "asOfDate": "2026-05-31",
+  "facilities": [
+    {
+      "type": "Equipment term loan",
+      "lender": "Frost Bank",
+      "originalAmount": 1800000,
+      "balance": 1050000,
+      "rate": 6,
+      "monthlyPayment": 22400,
+      "maturityDate": "2030-10-01",
+      "collateral": "Mfg equipment"
+    },
+    {
+      "type": "Revolving LOC",
+      "lender": "Frost Bank",
+      "creditLimit": 2500000,
+      "balance": 620000,
+      "rate": 7.25,
+      "monthlyInterestOnly": 3750,
+      "maturityDate": "2028-03-31",
+      "collateral": "AR + Inventory"
+    }
+  ],
+  "totalDebt": 1670000,
+  "totalMonthlyDebtService": 26150
+}

@@ -1,0 +1,11 @@
+{
+  "type": "Commercial property loan",
+  "amount": 2400000,
+  "termYears": 20,
+  "interestRate": 5.85,
+  "estimatedMonthlyPayment": 17010,
+  "purpose": "Acquire adjacent office floor for expansion",
+  "propertyAddress": "350 Fifth Avenue Floor 45, New York, NY 10118",
+  "propertyValue": 3100000,
+  "loanToValue": 77.4
+}

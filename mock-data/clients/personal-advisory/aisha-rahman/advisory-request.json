@@ -1,0 +1,11 @@
+{
+  "goals": [
+    "Retirement at 60",
+    "College fund for two children",
+    "Refinance student loan"
+  ],
+  "timeHorizonYears": 26,
+  "riskTolerance": "Moderate",
+  "currentNetWorth": 145000,
+  "monthlySurplus": 1800
+}

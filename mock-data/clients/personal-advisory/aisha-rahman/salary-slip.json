@@ -1,0 +1,19 @@
+{
+  "employer": "Mass General Brigham",
+  "employeeId": "MGB-44871",
+  "payPeriod": "May 2026",
+  "payDate": "2026-05-31",
+  "grossSalary": 9200,
+  "deductions": {
+    "federalTax": 1380,
+    "stateTax": 460,
+    "socialSecurity": 570,
+    "medicare": 133,
+    "healthInsurance": 285,
+    "pension401k": 552,
+    "other": 60
+  },
+  "totalDeductions": 3440,
+  "netPay": 5760,
+  "ytdGross": 46000
+}

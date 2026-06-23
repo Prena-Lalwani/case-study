@@ -1,0 +1,134 @@
+{
+  "id": "APP-24811",
+  "status": "needs_review",
+  "submittedAt": "2026-06-01T09:28:14Z",
+  "personalInfo": {
+    "fullName": "Grace Adeyemi",
+    "dateOfBirth": "1981-12-04",
+    "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
+    "phone": "+1 215-555-0614",
+    "email": "grace.adeyemi@email.com",
+    "ssn": "***-**-8803",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Penn General Hospital",
+    "jobTitle": "Registered Nurse (RN)",
+    "yearsEmployed": 6,
+    "employmentStartDate": "2020-05-01",
+    "annualSalary": 93600,
+    "monthlyGross": 7800,
+    "monthlyNet": 5650
+  },
+  "financials": {
+    "creditScore": 731,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Credit card",
+        "monthlyPayment": 200,
+        "balance": 2800,
+        "status": "current"
+      },
+      {
+        "type": "Student loan",
+        "monthlyPayment": 200,
+        "balance": 9400,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 400,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 285000,
+    "termYears": 20,
+    "interestRate": 5.75,
+    "estimatedMonthlyPayment": 2014,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "88 Chestnut Grove Ln, Ardmore, PA 19003",
+    "propertyValue": 340000,
+    "ltv": 83.8
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Passport",
+      "issuedBy": "US Department of State",
+      "idNumber": "US-528819042",
+      "fullName": "GRACE ADESOLA ADEYEMI",
+      "dateOfBirth": "1981-12-04",
+      "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
+      "issueDate": "2019-11-10",
+      "expiryDate": "2029-11-10",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Penn General Hospital",
+      "employeeId": "PGH-7812",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 7800,
+      "deductions": {
+        "federalTax": 1092,
+        "stateTax": 249,
+        "socialSecurity": 484,
+        "medicare": 113,
+        "healthInsurance": 0,
+        "pension403b": 390,
+        "other": 622
+      },
+      "totalDeductions": 2950,
+      "netPay": 4850,
+      "ytdGross": 39000,
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "PNC Bank",
+      "accountHolder": "Grace A. Adeyemi",
+      "accountNumber": "****5509",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 9200,
+          "totalCredits": 8100,
+          "totalDebits": 7420,
+          "closingBalance": 9880,
+          "salaryDeposit": 4850,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 9880,
+          "totalCredits": 7900,
+          "totalDebits": 7280,
+          "closingBalance": 10500,
+          "salaryDeposit": 4850,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 10500,
+          "totalCredits": 8200,
+          "totalDebits": 7600,
+          "closingBalance": 11100,
+          "salaryDeposit": 4850,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 8067,
+      "averageMonthlyDebit": 7433,
+      "averageClosingBalance": 10493,
+      "aiConfidence": 98,
+      "status": "verified"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "bank": "Chase",
+  "accountHolder": "Tomas R. Herrera",
+  "accountNumber": "****6614",
+  "statementPeriod": "March 2026 – May 2026",
+  "months": [
+    {
+      "month": "March 2026",
+      "openingBalance": 2100,
+      "totalCredits": 5400,
+      "totalDebits": 5650,
+      "closingBalance": 1850,
+      "salaryDeposit": 4450,
+      "flags": [
+        "low_balance"
+      ]
+    },
+    {
+      "month": "April 2026",
+      "openingBalance": 1850,
+      "totalCredits": 5500,
+      "totalDebits": 5900,
+      "closingBalance": 1450,
+      "salaryDeposit": 4450,
+      "flags": [
+        "low_balance"
+      ]
+    },
+    {
+      "month": "May 2026",
+      "openingBalance": 1450,
+      "totalCredits": 5300,
+      "totalDebits": 5780,
+      "closingBalance": 970,
+      "salaryDeposit": 4450,
+      "flags": [
+        "low_balance",
+        "nsf_warning"
+      ]
+    }
+  ],
+  "averageMonthlyCredit": 5400,
+  "averageMonthlyDebit": 5777,
+  "averageClosingBalance": 1423
+}

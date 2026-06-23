@@ -1,0 +1,42 @@
+{
+  "years": [
+    {
+      "year": 2023,
+      "revenue": 12400000,
+      "cogs": 7900000,
+      "opex": 2400000,
+      "ebitda": 1500000,
+      "netIncome": 980000,
+      "totalAssets": 11200000,
+      "totalLiabilities": 5800000,
+      "equity": 5400000,
+      "cashAndEquivalents": 1350000
+    },
+    {
+      "year": 2024,
+      "revenue": 14600000,
+      "cogs": 9120000,
+      "opex": 2800000,
+      "ebitda": 1880000,
+      "netIncome": 1240000,
+      "totalAssets": 12900000,
+      "totalLiabilities": 6400000,
+      "equity": 6500000,
+      "cashAndEquivalents": 1720000
+    },
+    {
+      "year": 2025,
+      "revenue": 17200000,
+      "cogs": 10700000,
+      "opex": 3200000,
+      "ebitda": 2310000,
+      "netIncome": 1520000,
+      "totalAssets": 15100000,
+      "totalLiabilities": 7300000,
+      "equity": 7800000,
+      "cashAndEquivalents": 2080000
+    }
+  ],
+  "auditor": "Ranch & Berkner LLP",
+  "opinion": "Unqualified"
+}

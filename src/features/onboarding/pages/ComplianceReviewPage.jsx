@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   TbHourglass, TbCircleCheck, TbLoader, TbCircle,
   TbMail, TbPhone, TbChartBar, TbTrendingUp, TbUsers,
@@ -9,6 +9,22 @@ import StepStepper from '../components/StepStepper'
 import SidebarProgress from '../components/SidebarProgress'
 import ReviewTimelinePanel from '../components/ReviewTimelinePanel'
 import BottomBar from '../components/BottomBar'
+import { useOnboarding } from '../hooks/useOnboarding'
+
+/* ─── Date helpers ────────────────────────────────────────────────── */
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
+const fmtFull = (d) => {
+  const h = d.getHours(), m = String(d.getMinutes()).padStart(2,'0')
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} · ${h % 12 || 12}:${m} ${ampm}`
+}
+
+const fmtEst = (d) => {
+  const h = d.getHours(), m = String(d.getMinutes()).padStart(2,'0')
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} · ~${h % 12 || 12}:${m} ${ampm}`
+}
 
 /* ─── What's being reviewed ────────────────────────────────────────── */
 const REVIEW_ITEMS = [
@@ -57,6 +73,12 @@ const ReviewItemRow = ({ item }) => (
 const ComplianceReviewPage = () => {
   const [leftOpen,  setLeftOpen]  = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
+  const { state } = useOnboarding()
+  const { email, phone } = state.personalInfo
+
+  // Compute once on mount so timestamps don't drift on re-renders
+  const submittedAt  = useMemo(() => new Date(), [])
+  const estCompletion = useMemo(() => new Date(submittedAt.getTime() + 18 * 60 * 60 * 1000), [submittedAt])
 
   const sidebar = (onClose) => (
     <SidebarProgress
@@ -112,8 +134,8 @@ const ComplianceReviewPage = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-x-5 gap-y-1 text-[12px] text-amber-600 mb-4">
-                  <span>Submitted: <span className="font-semibold text-amber-800">May 29, 2026 · 9:04 AM</span></span>
-                  <span>Est. completion: <span className="font-semibold text-amber-800">May 30, 2026 · ~3:00 AM</span></span>
+                  <span>Submitted: <span className="font-semibold text-amber-800">{fmtFull(submittedAt)}</span></span>
+                  <span>Est. completion: <span className="font-semibold text-amber-800">{fmtEst(estCompletion)}</span></span>
                 </div>
                 {/* Progress */}
                 <div>
@@ -157,7 +179,7 @@ const ComplianceReviewPage = () => {
                     </div>
                     <div>
                       <p className="text-[13px] font-medium text-gray-800">Email</p>
-                      <p className="text-[11px] text-secondary">j.doe@email.com</p>
+                      <p className="text-[11px] text-secondary">{email || '—'}</p>
                     </div>
                   </div>
                   <TbCircleCheck className="text-success shrink-0" style={{ fontSize: 18 }} />
@@ -169,7 +191,7 @@ const ComplianceReviewPage = () => {
                     </div>
                     <div>
                       <p className="text-[13px] font-medium text-gray-800">SMS</p>
-                      <p className="text-[11px] text-secondary">+1 (555) 000-0000</p>
+                      <p className="text-[11px] text-secondary">{phone || '—'}</p>
                     </div>
                   </div>
                   <TbCircleCheck className="text-success shrink-0" style={{ fontSize: 18 }} />
@@ -207,7 +229,7 @@ const ComplianceReviewPage = () => {
 
         {/* Right panel */}
         <div className="hidden lg:flex shrink-0">
-          <ReviewTimelinePanel />
+          <ReviewTimelinePanel submittedAt={submittedAt} />
         </div>
       </div>
 
@@ -228,7 +250,7 @@ const ComplianceReviewPage = () => {
       <div className={`fixed inset-0 z-50 lg:hidden flex justify-end transition-opacity duration-300 ${rightOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setRightOpen(false)} />
         <div className={`relative flex flex-col bg-white shadow-2xl transition-transform duration-300 ${rightOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: 280 }}>
-          <ReviewTimelinePanel onClose={() => setRightOpen(false)} />
+          <ReviewTimelinePanel submittedAt={submittedAt} onClose={() => setRightOpen(false)} />
         </div>
       </div>
     </div>

@@ -1,0 +1,140 @@
+{
+  "id": "APP-24832",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T07:30:00Z",
+  "personalInfo": {
+    "fullName": "Sam Mitchell",
+    "dateOfBirth": "1975-01-15",
+    "address": "99 Heritage Oak Dr, Nashville, TN 37201",
+    "phone": "+1 615-555-0991",
+    "email": "sam.mitchell@email.com",
+    "ssn": "***-**-3312",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Tennessee Valley Bank",
+    "jobTitle": "VP of Commercial Lending",
+    "yearsEmployed": 12,
+    "employmentStartDate": "2014-03-01",
+    "annualSalary": 156000,
+    "monthlyGross": 13000,
+    "monthlyNet": 8800
+  },
+  "financials": {
+    "creditScore": 758,
+    "creditRating": "Very Good",
+    "existingDebts": [
+      {
+        "type": "Investment property mortgage",
+        "monthlyPayment": 2100,
+        "balance": 312000,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 480,
+        "balance": 16400,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 200,
+        "balance": 5100,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 2780,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 445000,
+    "termYears": 30,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 2527,
+    "purpose": "Purchase primary residence upgrade",
+    "propertyAddress": "18 Grandview Estates, Brentwood, TN 37027",
+    "propertyValue": 548000,
+    "ltv": 81.2
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Tennessee DDS",
+      "idNumber": "TN-MITC-099-SM",
+      "fullName": "SAMUEL JAMES MITCHELL",
+      "dateOfBirth": "1975-01-15",
+      "address": "99 Heritage Oak Dr, Nashville, TN 37201",
+      "issueDate": "2022-01-20",
+      "expiryDate": "2030-01-15",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Tennessee Valley Bank",
+      "employeeId": "TVB-0081",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 13000,
+      "deductions": {
+        "federalTax": 2000,
+        "stateTax": 500,
+        "socialSecurity": 806,
+        "medicare": 189,
+        "healthInsurance": 240,
+        "pension401k": 390,
+        "other": 75
+      },
+      "totalDeductions": 4200,
+      "netPay": 8800,
+      "ytdGross": 65000,
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "SunTrust",
+      "accountHolder": "Samuel J. Mitchell",
+      "accountNumber": "****7744",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 52100,
+          "totalCredits": 14200,
+          "totalDebits": 12800,
+          "closingBalance": 53500,
+          "salaryDeposit": 8800,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 53500,
+          "totalCredits": 13800,
+          "totalDebits": 12400,
+          "closingBalance": 54900,
+          "salaryDeposit": 8800,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 54900,
+          "totalCredits": 14400,
+          "totalDebits": 13100,
+          "closingBalance": 56200,
+          "salaryDeposit": 8800,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 14133,
+      "averageMonthlyDebit": 12767,
+      "averageClosingBalance": 54867,
+      "aiConfidence": 99,
+      "status": "verified"
+    }
+  }
+}

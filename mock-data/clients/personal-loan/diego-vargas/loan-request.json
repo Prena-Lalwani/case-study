@@ -1,0 +1,15 @@
+{
+  "type": "Auto loan",
+  "amount": 32000,
+  "termYears": 5,
+  "interestRate": 7.25,
+  "estimatedMonthlyPayment": 638,
+  "purpose": "Replace 12-yr-old vehicle",
+  "vehicle": {
+    "make": "Toyota",
+    "model": "RAV4 Hybrid",
+    "year": 2025,
+    "dealerQuote": 34500
+  },
+  "downPayment": 2500
+}

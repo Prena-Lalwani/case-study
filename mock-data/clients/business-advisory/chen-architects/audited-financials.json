@@ -1,0 +1,43 @@
+{
+  "years": [
+    {
+      "year": 2023,
+      "revenue": 3200000,
+      "cogs": 1840000,
+      "opex": 980000,
+      "ebitda": 380000,
+      "netIncome": 245000,
+      "totalAssets": 2400000,
+      "totalLiabilities": 700000,
+      "equity": 1700000,
+      "cashAndEquivalents": 420000
+    },
+    {
+      "year": 2024,
+      "revenue": 3580000,
+      "cogs": 2010000,
+      "opex": 1080000,
+      "ebitda": 490000,
+      "netIncome": 320000,
+      "totalAssets": 2710000,
+      "totalLiabilities": 760000,
+      "equity": 1950000,
+      "cashAndEquivalents": 560000
+    },
+    {
+      "year": 2025,
+      "revenue": 3410000,
+      "cogs": 1980000,
+      "opex": 1120000,
+      "ebitda": 310000,
+      "netIncome": 195000,
+      "totalAssets": 2840000,
+      "totalLiabilities": 740000,
+      "equity": 2100000,
+      "cashAndEquivalents": 640000
+    }
+  ],
+  "auditor": "Bracewell CPA",
+  "opinion": "Unqualified",
+  "notes": "2025 revenue dip driven by two delayed public-sector projects"
+}

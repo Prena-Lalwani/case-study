@@ -1,0 +1,59 @@
+{
+  "bank": "East West Bank",
+  "accountHolder": "Chen Architects LLC",
+  "accountNumber": "****0297",
+  "statementPeriod": "October 2025 – May 2026",
+  "months": [
+    {
+      "month": "Oct 2025",
+      "totalCredits": 295000,
+      "totalDebits": 280000,
+      "closingBalance": 580000
+    },
+    {
+      "month": "Nov 2025",
+      "totalCredits": 310000,
+      "totalDebits": 270000,
+      "closingBalance": 620000
+    },
+    {
+      "month": "Dec 2025",
+      "totalCredits": 340000,
+      "totalDebits": 300000,
+      "closingBalance": 660000
+    },
+    {
+      "month": "Jan 2026",
+      "totalCredits": 250000,
+      "totalDebits": 270000,
+      "closingBalance": 640000
+    },
+    {
+      "month": "Feb 2026",
+      "totalCredits": 280000,
+      "totalDebits": 260000,
+      "closingBalance": 660000
+    },
+    {
+      "month": "Mar 2026",
+      "totalCredits": 300000,
+      "totalDebits": 270000,
+      "closingBalance": 690000
+    },
+    {
+      "month": "Apr 2026",
+      "totalCredits": 310000,
+      "totalDebits": 280000,
+      "closingBalance": 720000
+    },
+    {
+      "month": "May 2026",
+      "totalCredits": 320000,
+      "totalDebits": 290000,
+      "closingBalance": 750000
+    }
+  ],
+  "averageMonthlyCredit": 300625,
+  "averageMonthlyDebit": 277500,
+  "averageClosingBalance": 665000
+}

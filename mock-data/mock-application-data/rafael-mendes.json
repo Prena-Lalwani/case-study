@@ -1,0 +1,144 @@
+{
+  "id": "APP-24810",
+  "status": "needs_review",
+  "submittedAt": "2026-06-01T16:09:55Z",
+  "personalInfo": {
+    "fullName": "Rafael Mendes",
+    "dateOfBirth": "1992-04-17",
+    "address": "23 Crestwood Circle, Miami, FL 33101",
+    "phone": "+1 305-555-0241",
+    "email": "rafael.mendes@email.com",
+    "ssn": "***-**-4418",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Rafael Mendes Photography",
+    "jobTitle": "Freelance Photographer",
+    "yearsEmployed": 3.5,
+    "employmentStartDate": "2022-11-01",
+    "annualSalary": 66000,
+    "monthlyGross": 5500,
+    "monthlyNet": 4010,
+    "incomeVariance": "Moderate — event-driven income, peaks in wedding season (Apr–Oct)"
+  },
+  "financials": {
+    "creditScore": 661,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Mortgage",
+        "monthlyPayment": 1000,
+        "balance": 118000,
+        "status": "current"
+      },
+      {
+        "type": "Student loan",
+        "monthlyPayment": 280,
+        "balance": 12800,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 150,
+        "balance": 2900,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1430,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 44000,
+    "termYears": 6,
+    "interestRate": 8,
+    "estimatedMonthlyPayment": 771,
+    "purpose": "Purchase cargo van for photography equipment transport",
+    "vehicleMake": "Ford",
+    "vehicleModel": "Transit Custom 2026",
+    "vehicleYear": 2026
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Florida DHSMV",
+      "idNumber": "FL-M112-449-88-019",
+      "fullName": "RAFAEL ANDRE MENDES",
+      "dateOfBirth": "1992-04-17",
+      "address": "23 Crestwood Circle, Miami, FL 33101",
+      "issueDate": "2020-05-02",
+      "expiryDate": "2028-04-17",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Rafael Mendes Photography (Self-employed)",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 6800,
+      "deductions": {
+        "selfEmploymentTax": 960,
+        "federalTax": 680,
+        "stateTax": 0,
+        "healthInsurance": 380,
+        "businessExpenses": 750,
+        "other": 0
+      },
+      "totalDeductions": 2770,
+      "netPay": 4030,
+      "ytdGross": 24400,
+      "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 — peak season April–September",
+      "aiConfidence": 80,
+      "status": "needs_review",
+      "flags": [
+        "Self-employed — income is seasonal",
+        "YTD avg $4,880/mo vs stated $5,500/mo avg — gap in low season"
+      ]
+    },
+    "bankStatement": {
+      "bank": "SunTrust Bank",
+      "accountHolder": "Rafael A. Mendes",
+      "accountNumber": "****8841",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 3400,
+          "totalCredits": 5600,
+          "totalDebits": 5200,
+          "closingBalance": 3800,
+          "salaryDeposit": 4900,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 3800,
+          "totalCredits": 8100,
+          "totalDebits": 7400,
+          "closingBalance": 4500,
+          "salaryDeposit": 7200,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 4500,
+          "totalCredits": 7600,
+          "totalDebits": 7100,
+          "closingBalance": 5000,
+          "salaryDeposit": 6800,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 7100,
+      "averageMonthlyDebit": 6567,
+      "averageClosingBalance": 4433,
+      "aiConfidence": 88,
+      "status": "verified"
+    }
+  }
+}

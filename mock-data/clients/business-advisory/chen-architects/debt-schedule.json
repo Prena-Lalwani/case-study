@@ -1,0 +1,25 @@
+{
+  "asOfDate": "2026-05-31",
+  "facilities": [
+    {
+      "type": "Office build-out loan",
+      "lender": "East West Bank",
+      "originalAmount": 600000,
+      "balance": 280000,
+      "rate": 5.5,
+      "monthlyPayment": 6200,
+      "maturityDate": "2030-03-01"
+    },
+    {
+      "type": "Equipment LOC",
+      "lender": "East West Bank",
+      "creditLimit": 250000,
+      "balance": 85000,
+      "rate": 7,
+      "monthlyInterestOnly": 500,
+      "maturityDate": "2027-06-30"
+    }
+  ],
+  "totalDebt": 365000,
+  "totalMonthlyDebtService": 6700
+}

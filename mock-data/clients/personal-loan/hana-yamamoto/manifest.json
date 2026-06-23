@@ -1,0 +1,12 @@
+{
+  "slug": "hana-yamamoto",
+  "flow": "personal-loan",
+  "documents": [
+    "national-id",
+    "salary-slip",
+    "bank-statement",
+    "personal-tax-return",
+    "credit-report",
+    "loan-request"
+  ]
+}

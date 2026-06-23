@@ -1,0 +1,17 @@
+{
+  "asOfDate": "2026-05-31",
+  "facilities": [
+    {
+      "type": "Office mortgage",
+      "lender": "JPMorgan Chase",
+      "originalAmount": 1800000,
+      "balance": 1100000,
+      "rate": 4.75,
+      "monthlyPayment": 11800,
+      "maturityDate": "2032-04-01",
+      "collateral": "Office condo"
+    }
+  ],
+  "totalDebt": 1100000,
+  "totalMonthlyDebtService": 11800
+}

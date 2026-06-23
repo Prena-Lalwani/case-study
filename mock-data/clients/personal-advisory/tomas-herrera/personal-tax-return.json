@@ -1,0 +1,15 @@
+{
+  "taxYear": 2025,
+  "filingStatus": "Single",
+  "totalIncome": 76800,
+  "adjustments": 3840,
+  "adjustedGross": 72960,
+  "itemizedDeductions": 13850,
+  "taxableIncome": 59110,
+  "totalTax": 7980,
+  "withholdings": 8600,
+  "refund": 620,
+  "schedules": [
+    "Schedule A"
+  ]
+}

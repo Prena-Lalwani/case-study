@@ -1,0 +1,59 @@
+{
+  "bank": "JPMorgan Chase",
+  "accountHolder": "Nair Logistics Inc.",
+  "accountNumber": "****8401",
+  "statementPeriod": "October 2025 – May 2026",
+  "months": [
+    {
+      "month": "Oct 2025",
+      "totalCredits": 870000,
+      "totalDebits": 740000,
+      "closingBalance": 1280000
+    },
+    {
+      "month": "Nov 2025",
+      "totalCredits": 920000,
+      "totalDebits": 810000,
+      "closingBalance": 1390000
+    },
+    {
+      "month": "Dec 2025",
+      "totalCredits": 1080000,
+      "totalDebits": 990000,
+      "closingBalance": 1480000
+    },
+    {
+      "month": "Jan 2026",
+      "totalCredits": 850000,
+      "totalDebits": 800000,
+      "closingBalance": 1530000
+    },
+    {
+      "month": "Feb 2026",
+      "totalCredits": 890000,
+      "totalDebits": 830000,
+      "closingBalance": 1590000
+    },
+    {
+      "month": "Mar 2026",
+      "totalCredits": 940000,
+      "totalDebits": 860000,
+      "closingBalance": 1670000
+    },
+    {
+      "month": "Apr 2026",
+      "totalCredits": 960000,
+      "totalDebits": 880000,
+      "closingBalance": 1750000
+    },
+    {
+      "month": "May 2026",
+      "totalCredits": 990000,
+      "totalDebits": 920000,
+      "closingBalance": 1820000
+    }
+  ],
+  "averageMonthlyCredit": 937500,
+  "averageMonthlyDebit": 853750,
+  "averageClosingBalance": 1564000
+}

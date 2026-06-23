@@ -1,0 +1,19 @@
+{
+  "employer": "Phoenix Solar Co.",
+  "employeeId": "PSC-1188",
+  "payPeriod": "May 2026",
+  "payDate": "2026-05-31",
+  "grossSalary": 6800,
+  "deductions": {
+    "federalTax": 1020,
+    "stateTax": 180,
+    "socialSecurity": 422,
+    "medicare": 99,
+    "healthInsurance": 240,
+    "pension401k": 340,
+    "other": 49
+  },
+  "totalDeductions": 2350,
+  "netPay": 4450,
+  "ytdGross": 34000
+}

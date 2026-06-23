@@ -1,0 +1,8 @@
+{
+  "type": "Personal loan",
+  "amount": 45000,
+  "termYears": 5,
+  "interestRate": 8.5,
+  "estimatedMonthlyPayment": 922,
+  "purpose": "Condo renovation (kitchen + bathroom)"
+}

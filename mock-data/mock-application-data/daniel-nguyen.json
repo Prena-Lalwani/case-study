@@ -1,0 +1,129 @@
+{
+  "id": "APP-24822",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T11:05:00Z",
+  "personalInfo": {
+    "fullName": "Daniel Nguyen",
+    "dateOfBirth": "1984-06-30",
+    "address": "301 Oak Park Ave, Denver, CO 80203",
+    "phone": "+1 720-555-0441",
+    "email": "daniel.nguyen@email.com",
+    "ssn": "***-**-5501",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "DN Consulting LLC",
+    "jobTitle": "IT Consultant",
+    "yearsEmployed": 4,
+    "employmentStartDate": "2022-03-01",
+    "annualSalary": 90000,
+    "monthlyGross": 7500,
+    "monthlyNet": 5200,
+    "note": "Contract-based income — 3 active clients. Revenue varies month to month $5,800–$10,200."
+  },
+  "financials": {
+    "creditScore": 694,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Home mortgage",
+        "monthlyPayment": 1850,
+        "balance": 214000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 180,
+        "balance": 4400,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 2030,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 1
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 42000,
+    "termYears": 5,
+    "interestRate": 7,
+    "estimatedMonthlyPayment": 832,
+    "purpose": "Purchase work vehicle (van for client visits)"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Colorado DMV",
+      "idNumber": "CO-NGUY-055-DN",
+      "fullName": "DANIEL MINH NGUYEN",
+      "dateOfBirth": "1984-06-30",
+      "address": "301 Oak Park Ave, Denver, CO 80203",
+      "issueDate": "2021-09-15",
+      "expiryDate": "2029-06-30",
+      "aiConfidence": 96,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "DN Consulting LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 7500,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": 90,
+      "status": "verified",
+      "flags": [
+        "Self-employed — income varies by contract cycle",
+        "May revenue higher than 3-month average — one-time project completion"
+      ]
+    },
+    "bankStatement": {
+      "bank": "US Bank",
+      "accountHolder": "Daniel M. Nguyen",
+      "accountNumber": "****6614",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 9800,
+          "totalCredits": 5900,
+          "totalDebits": 5400,
+          "closingBalance": 10300,
+          "salaryDeposit": 5200,
+          "flags": [
+            "Low-income month — single client delayed payment"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 10300,
+          "totalCredits": 9100,
+          "totalDebits": 8200,
+          "closingBalance": 11200,
+          "salaryDeposit": 5200,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 11200,
+          "totalCredits": 10200,
+          "totalDebits": 9100,
+          "closingBalance": 12300,
+          "salaryDeposit": 5200,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 8400,
+      "averageMonthlyDebit": 7567,
+      "averageClosingBalance": 11267,
+      "aiConfidence": 92,
+      "status": "verified"
+    }
+  }
+}

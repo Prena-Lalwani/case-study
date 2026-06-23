@@ -1,0 +1,11 @@
+{
+  "taxYear": 2025,
+  "grossReceipts": 12900000,
+  "deductions": 10100000,
+  "taxableIncome": 2800000,
+  "federalTax": 588000,
+  "stateTax": 224000,
+  "totalTax": 812000,
+  "effectiveRate": 29,
+  "passThrough": true
+}

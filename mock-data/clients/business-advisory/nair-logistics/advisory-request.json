@@ -1,0 +1,18 @@
+{
+  "goals": [
+    "Expand fleet by 40%",
+    "Open second warehouse in Pennsylvania",
+    "Diversify customer base beyond top-3 concentration"
+  ],
+  "currentChallenges": [
+    "Customer concentration: top 3 = 62% of revenue",
+    "Driver shortage limiting capacity"
+  ],
+  "timeHorizonYears": 3,
+  "contact": {
+    "name": "Priya Nair",
+    "title": "CEO",
+    "email": "priya@nairlogistics.com",
+    "phone": "+1 212-555-8814"
+  }
+}

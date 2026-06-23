@@ -1,0 +1,35 @@
+{
+  "bank": "Wells Fargo",
+  "accountHolder": "Diego A. Vargas",
+  "accountNumber": "****4477",
+  "statementPeriod": "March 2026 – May 2026",
+  "months": [
+    {
+      "month": "March 2026",
+      "openingBalance": 6200,
+      "totalCredits": 5300,
+      "totalDebits": 4900,
+      "closingBalance": 6600,
+      "salaryDeposit": 4450
+    },
+    {
+      "month": "April 2026",
+      "openingBalance": 6600,
+      "totalCredits": 5400,
+      "totalDebits": 4750,
+      "closingBalance": 7250,
+      "salaryDeposit": 4450
+    },
+    {
+      "month": "May 2026",
+      "openingBalance": 7250,
+      "totalCredits": 5350,
+      "totalDebits": 4820,
+      "closingBalance": 7780,
+      "salaryDeposit": 4450
+    }
+  ],
+  "averageMonthlyCredit": 5350,
+  "averageMonthlyDebit": 4823,
+  "averageClosingBalance": 7210
+}

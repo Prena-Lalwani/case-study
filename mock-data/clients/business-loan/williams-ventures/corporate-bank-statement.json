@@ -1,0 +1,59 @@
+{
+  "bank": "Frost Bank",
+  "accountHolder": "Williams Ventures, Inc.",
+  "accountNumber": "****1730",
+  "statementPeriod": "October 2025 – May 2026",
+  "months": [
+    {
+      "month": "Oct 2025",
+      "totalCredits": 1480000,
+      "totalDebits": 1310000,
+      "closingBalance": 1950000
+    },
+    {
+      "month": "Nov 2025",
+      "totalCredits": 1510000,
+      "totalDebits": 1350000,
+      "closingBalance": 2110000
+    },
+    {
+      "month": "Dec 2025",
+      "totalCredits": 1620000,
+      "totalDebits": 1410000,
+      "closingBalance": 2320000
+    },
+    {
+      "month": "Jan 2026",
+      "totalCredits": 1350000,
+      "totalDebits": 1280000,
+      "closingBalance": 2390000
+    },
+    {
+      "month": "Feb 2026",
+      "totalCredits": 1420000,
+      "totalDebits": 1330000,
+      "closingBalance": 2480000
+    },
+    {
+      "month": "Mar 2026",
+      "totalCredits": 1550000,
+      "totalDebits": 1380000,
+      "closingBalance": 2650000
+    },
+    {
+      "month": "Apr 2026",
+      "totalCredits": 1590000,
+      "totalDebits": 1420000,
+      "closingBalance": 2820000
+    },
+    {
+      "month": "May 2026",
+      "totalCredits": 1640000,
+      "totalDebits": 1460000,
+      "closingBalance": 3000000
+    }
+  ],
+  "averageMonthlyCredit": 1520000,
+  "averageMonthlyDebit": 1367500,
+  "averageClosingBalance": 2465000
+}

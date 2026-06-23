@@ -1,0 +1,59 @@
+{
+  "bank": "JPMorgan Chase Private Bank",
+  "accountHolder": "Goldman & Co., LLC",
+  "accountNumber": "****7799",
+  "statementPeriod": "October 2025 – May 2026",
+  "months": [
+    {
+      "month": "Oct 2025",
+      "totalCredits": 1080000,
+      "totalDebits": 850000,
+      "closingBalance": 3200000
+    },
+    {
+      "month": "Nov 2025",
+      "totalCredits": 1110000,
+      "totalDebits": 870000,
+      "closingBalance": 3440000
+    },
+    {
+      "month": "Dec 2025",
+      "totalCredits": 1140000,
+      "totalDebits": 910000,
+      "closingBalance": 3670000
+    },
+    {
+      "month": "Jan 2026",
+      "totalCredits": 1020000,
+      "totalDebits": 860000,
+      "closingBalance": 3830000
+    },
+    {
+      "month": "Feb 2026",
+      "totalCredits": 1060000,
+      "totalDebits": 880000,
+      "closingBalance": 4010000
+    },
+    {
+      "month": "Mar 2026",
+      "totalCredits": 1100000,
+      "totalDebits": 910000,
+      "closingBalance": 4200000
+    },
+    {
+      "month": "Apr 2026",
+      "totalCredits": 1130000,
+      "totalDebits": 930000,
+      "closingBalance": 4400000
+    },
+    {
+      "month": "May 2026",
+      "totalCredits": 1180000,
+      "totalDebits": 960000,
+      "closingBalance": 4620000
+    }
+  ],
+  "averageMonthlyCredit": 1102500,
+  "averageMonthlyDebit": 896250,
+  "averageClosingBalance": 3921000
+}

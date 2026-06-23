@@ -1,0 +1,134 @@
+{
+  "id": "APP-24829",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T09:48:00Z",
+  "personalInfo": {
+    "fullName": "Nina Kowalski",
+    "dateOfBirth": "1986-11-30",
+    "address": "102 Elm Street, Madison, WI 53703",
+    "phone": "+1 608-555-0551",
+    "email": "nina.kowalski@email.com",
+    "ssn": "***-**-8841",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "contractor",
+    "employer": "TechBridge Solutions LLC (via staffing agency)",
+    "jobTitle": "Senior UX Designer",
+    "yearsEmployed": 2.5,
+    "employmentStartDate": "2023-12-01",
+    "annualSalary": 74400,
+    "monthlyGross": 6200,
+    "monthlyNet": 4500
+  },
+  "financials": {
+    "creditScore": 687,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Home mortgage",
+        "monthlyPayment": 1580,
+        "balance": 148000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 180,
+        "balance": 4100,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1760,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 38000,
+    "termYears": 5,
+    "interestRate": 8,
+    "estimatedMonthlyPayment": 771,
+    "purpose": "Replace aging vehicle — personal use"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Wisconsin DOT",
+      "idNumber": "WI-KOWA-030-NK",
+      "fullName": "NINA ANNA KOWALSKI",
+      "dateOfBirth": "1986-11-30",
+      "address": "102 Elm Street, Madison, WI 53703",
+      "issueDate": "2022-11-01",
+      "expiryDate": "2030-11-30",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "TechBridge Solutions LLC",
+      "employeeId": "TBS-2241",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 6200,
+      "deductions": {
+        "federalTax": 744,
+        "stateTax": 310,
+        "socialSecurity": 384,
+        "medicare": 90,
+        "healthInsurance": 0,
+        "pension401k": 0,
+        "other": 172
+      },
+      "totalDeductions": 1700,
+      "netPay": 4500,
+      "ytdGross": 31000,
+      "aiConfidence": 94,
+      "status": "verified",
+      "flags": [
+        "Contractor — no employer-sponsored benefits",
+        "Contract end date December 2026 — renewal pending"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Wintrust Bank",
+      "accountHolder": "Nina A. Kowalski",
+      "accountNumber": "****6612",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 8400,
+          "totalCredits": 7100,
+          "totalDebits": 6800,
+          "closingBalance": 8700,
+          "salaryDeposit": 4500,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 8700,
+          "totalCredits": 6900,
+          "totalDebits": 6600,
+          "closingBalance": 9000,
+          "salaryDeposit": 4500,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 9000,
+          "totalCredits": 7200,
+          "totalDebits": 6700,
+          "closingBalance": 9500,
+          "salaryDeposit": 4500,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 7067,
+      "averageMonthlyDebit": 6700,
+      "averageClosingBalance": 9067,
+      "aiConfidence": 95,
+      "status": "verified"
+    }
+  }
+}

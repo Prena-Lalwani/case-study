@@ -1,0 +1,18 @@
+{
+  "goals": [
+    "Plan ownership succession (David retires in 5 years)",
+    "Buy out a junior partner",
+    "Smooth out revenue volatility"
+  ],
+  "currentChallenges": [
+    "Founder bus-factor risk",
+    "Long collection cycles (avg 87 days)"
+  ],
+  "timeHorizonYears": 5,
+  "contact": {
+    "name": "David Chen",
+    "title": "Founder & Managing Principal",
+    "email": "d.chen@chenarchitects.com",
+    "phone": "+1 310-555-7733"
+  }
+}

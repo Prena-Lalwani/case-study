@@ -22,7 +22,7 @@ const SignInForm = () => {
   } = useSignIn()
 
   const emailValue = watch('email')
-  const isEmailValid = !errors.email && emailValue && emailValue.includes('@')
+  const isEmailValid = !errors.email && emailValue && (emailValue === 'admin' || emailValue.includes('@'))
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">

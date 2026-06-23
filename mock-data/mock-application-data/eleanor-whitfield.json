@@ -1,0 +1,134 @@
+{
+  "id": "APP-24817",
+  "status": "needs_review",
+  "submittedAt": "2026-06-02T09:14:22Z",
+  "personalInfo": {
+    "fullName": "Eleanor Whitfield",
+    "dateOfBirth": "1983-05-14",
+    "address": "218 Maple Grove Ave, Boston, MA 02134",
+    "phone": "+1 617-555-0142",
+    "email": "eleanor.whitfield@email.com",
+    "ssn": "***-**-4821",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Beacon Health Group",
+    "jobTitle": "Senior Marketing Director",
+    "yearsEmployed": 8,
+    "employmentStartDate": "2018-03-01",
+    "annualSalary": 114000,
+    "monthlyGross": 9500,
+    "monthlyNet": 6846
+  },
+  "financials": {
+    "creditScore": 748,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Car loan",
+        "monthlyPayment": 220,
+        "balance": 6800,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 50,
+        "balance": 1400,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 270,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Home loan",
+    "amount": 420000,
+    "termYears": 30,
+    "interestRate": 5.5,
+    "estimatedMonthlyPayment": 2384,
+    "purpose": "Purchase primary residence",
+    "propertyAddress": "84 Birchwood Lane, Newton, MA 02458",
+    "propertyValue": 510000,
+    "ltv": 82.4
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Massachusetts RMV",
+      "idNumber": "S12-345-678",
+      "fullName": "ELEANOR DIANE WHITFIELD",
+      "dateOfBirth": "1983-05-14",
+      "address": "218 Maple Grove Ave, Boston, MA 02134",
+      "issueDate": "2021-07-19",
+      "expiryDate": "2029-05-14",
+      "aiConfidence": 99,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Beacon Health Group",
+      "employeeId": "BHG-00419",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 9500,
+      "deductions": {
+        "federalTax": 1615,
+        "stateTax": 475,
+        "socialSecurity": 589,
+        "medicare": 138,
+        "healthInsurance": 200,
+        "pension401k": 285,
+        "other": 352
+      },
+      "totalDeductions": 3654,
+      "netPay": 5846,
+      "ytdGross": 47500,
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Citizens Bank",
+      "accountHolder": "Eleanor D. Whitfield",
+      "accountNumber": "****8821",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 12440,
+          "totalCredits": 9820,
+          "totalDebits": 8350,
+          "closingBalance": 13910,
+          "salaryDeposit": 5846,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 13910,
+          "totalCredits": 9640,
+          "totalDebits": 8580,
+          "closingBalance": 14970,
+          "salaryDeposit": 5846,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 14970,
+          "totalCredits": 9500,
+          "totalDebits": 8240,
+          "closingBalance": 16230,
+          "salaryDeposit": 5846,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 9653,
+      "averageMonthlyDebit": 8390,
+      "averageClosingBalance": 15037,
+      "aiConfidence": 96,
+      "status": "verified"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "bureau": "Equifax",
+  "pullDate": "2026-05-15",
+  "creditScore": 778,
+  "range": "Very Good",
+  "paymentHistory": {
+    "onTimePercent": 100,
+    "latePayments24mo": 0
+  },
+  "utilizationPercent": 8,
+  "accounts": [
+    {
+      "type": "Credit card",
+      "limit": 12000,
+      "balance": 950,
+      "status": "current"
+    },
+    {
+      "type": "Credit card",
+      "limit": 8000,
+      "balance": 0,
+      "status": "current"
+    }
+  ],
+  "derogatoryMarks": 0,
+  "inquiriesLast6mo": 1
+}

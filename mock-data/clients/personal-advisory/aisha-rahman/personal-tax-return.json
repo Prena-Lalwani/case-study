@@ -1,0 +1,16 @@
+{
+  "taxYear": 2025,
+  "filingStatus": "Married Filing Jointly",
+  "totalIncome": 110400,
+  "adjustments": 6624,
+  "adjustedGross": 103776,
+  "itemizedDeductions": 19200,
+  "taxableIncome": 84576,
+  "totalTax": 11420,
+  "withholdings": 12800,
+  "refund": 1380,
+  "schedules": [
+    "Schedule A",
+    "Schedule B"
+  ]
+}

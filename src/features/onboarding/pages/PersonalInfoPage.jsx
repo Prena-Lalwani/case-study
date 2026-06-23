@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import TopNavbar from '../components/TopNavbar'
 import StepStepper from '../components/StepStepper'
 import SidebarProgress from '../components/SidebarProgress'
@@ -6,6 +7,8 @@ import AiActivityPanel from '../components/AiActivityPanel'
 import UploadBanner from '../components/UploadBanner'
 import PersonalDetailsForm from '../components/PersonalDetailsForm'
 import BottomBar from '../components/BottomBar'
+import { useOnboarding } from '../hooks/useOnboarding'
+import { onboardingService } from '../services/onboardingService'
 
 /**
  * Breakpoints:
@@ -14,8 +17,33 @@ import BottomBar from '../components/BottomBar'
  *  desktop lg+  (1024px+) : both sidebars always visible
  */
 const PersonalInfoPage = () => {
-  const [leftOpen, setLeftOpen] = useState(false)
+  const [leftOpen,  setLeftOpen]  = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
+  const [isSaving,  setIsSaving]  = useState(false)
+
+  const navigate = useNavigate()
+  const { state, loadFromDb } = useOnboarding()
+
+  // Restore previously saved personal info from DB (handles page refresh + back-navigation)
+  useEffect(() => {
+    onboardingService.get()
+      .then(data => { if (data) loadFromDb(data) })
+      .catch(() => {})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleContinue = async () => {
+    setIsSaving(true)
+    try {
+      const { fullName, dob, address, phone, ssn } = state.personalInfo
+      await onboardingService.patch({ legalName: fullName, dob, address, phone, ssn, currentStep: 2 })
+    } catch {
+      // non-blocking — still navigate if backend is unreachable
+    } finally {
+      setIsSaving(false)
+      navigate('/onboarding/step-2')
+    }
+  }
 
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden">
@@ -59,7 +87,12 @@ const PersonalInfoPage = () => {
       </div>
 
       {/* ── Bottom bar ── */}
-      <BottomBar backPath="/signup" continuePath="/onboarding/step-2" continueLabel="Save & Continue" />
+      <BottomBar
+        backPath="/signup"
+        onContinue={handleContinue}
+        continueDisabled={isSaving}
+        continueLabel={isSaving ? 'Saving…' : 'Save & Continue'}
+      />
 
       {/* ══════════════════════════════════
           Drawers (rendered outside the flex row so they overlay everything)

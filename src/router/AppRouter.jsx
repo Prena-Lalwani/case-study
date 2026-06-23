@@ -1,4 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import UnderwritingPage         from '../features/underwriting/pages/UnderwritingPage'
+import ApplicationReviewPage   from '../features/underwriting/pages/ApplicationReviewPage'
+import ClientsPage             from '../features/underwriting/pages/ClientsPage'
+import AdvisoryQueuePage       from '../features/underwriting/pages/AdvisoryQueuePage'
+import AdvisoryReviewPage      from '../features/underwriting/pages/AdvisoryReviewPage'
+import AdvisorsPage            from '../features/underwriting/pages/AdvisorsPage'
+import AdvisorDetailPage       from '../features/underwriting/pages/AdvisorDetailPage'
+import ClientDetailPage        from '../features/underwriting/pages/ClientDetailPage'
+import ReportsPage             from '../features/underwriting/pages/ReportsPage'
+import ProcessingBootstrap     from '../features/underwriting/components/ProcessingBootstrap'
+import RequireAuth             from '../features/auth/RequireAuth'
 import SignInPage from '../features/auth/pages/SignInPage'
 import SignUpPage from '../features/auth/pages/SignUpPage'
 import PersonalInfoPage from '../features/onboarding/pages/PersonalInfoPage'
@@ -33,6 +44,7 @@ const OnboardingLayout = () => (
 const AppRouter = () => {
   return (
     <BrowserRouter>
+      <ProcessingBootstrap />
       <Routes>
         <Route path="/" element={<Navigate to="/signin" replace />} />
         <Route path="/signin" element={<SignInPage />} />
@@ -51,6 +63,16 @@ const AppRouter = () => {
           <Route path="/onboarding/step-7" element={<AdvisorPage />} />
           <Route path="/onboarding/step-8" element={<ActivatedPage />} />
         </Route>
+
+        <Route path="/underwriting" element={<RequireAuth><UnderwritingPage /></RequireAuth>} />
+        <Route path="/underwriting/review/:appId" element={<RequireAuth><ApplicationReviewPage /></RequireAuth>} />
+        <Route path="/underwriting/team" element={<RequireAuth><ClientsPage /></RequireAuth>} />
+        <Route path="/underwriting/advisory" element={<RequireAuth><AdvisoryQueuePage /></RequireAuth>} />
+        <Route path="/underwriting/advisory/review/:itemId" element={<RequireAuth><AdvisoryReviewPage /></RequireAuth>} />
+        <Route path="/underwriting/advisors" element={<RequireAuth><AdvisorsPage /></RequireAuth>} />
+        <Route path="/underwriting/advisors/:id" element={<RequireAuth><AdvisorDetailPage /></RequireAuth>} />
+        <Route path="/underwriting/team/:id" element={<RequireAuth><ClientDetailPage /></RequireAuth>} />
+        <Route path="/underwriting/reports" element={<RequireAuth><ReportsPage /></RequireAuth>} />
 
         <Route path="*" element={<Navigate to="/signin" replace />} />
       </Routes>

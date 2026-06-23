@@ -1,0 +1,14 @@
+{
+  "type": "Business loan",
+  "amount": 850000,
+  "termYears": 7,
+  "interestRate": 6.5,
+  "estimatedMonthlyPayment": 12640,
+  "purpose": "Equipment financing — automated production line for new product launch",
+  "useOfFunds": {
+    "equipment": 720000,
+    "installation": 90000,
+    "training": 40000
+  },
+  "collateral": "Equipment being purchased"
+}

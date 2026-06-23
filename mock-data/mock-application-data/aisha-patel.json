@@ -1,0 +1,141 @@
+{
+  "id": "APP-24819",
+  "status": "needs_review",
+  "submittedAt": "2026-06-03T09:22:00Z",
+  "personalInfo": {
+    "fullName": "Aisha Patel",
+    "dateOfBirth": "1997-03-18",
+    "address": "23 Redwood Ave, Apt 5B, Austin, TX 78701",
+    "phone": "+1 512-555-0223",
+    "email": "aisha.patel@email.com",
+    "ssn": "***-**-8812",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "CloudSync Corp",
+    "jobTitle": "Junior Data Analyst",
+    "yearsEmployed": 0.7,
+    "employmentStartDate": "2025-10-01",
+    "annualSalary": 45600,
+    "monthlyGross": 3800,
+    "monthlyNet": 2820
+  },
+  "financials": {
+    "creditScore": 682,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 340,
+        "balance": 19200,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 220,
+        "balance": 8100,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 90,
+        "balance": 2200,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 650,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 18000,
+    "termYears": 3,
+    "interestRate": 11,
+    "estimatedMonthlyPayment": 589,
+    "purpose": "Consolidate student debt"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Texas DPS",
+      "idNumber": "TX-PATE-021-AP",
+      "fullName": "AISHA PRIYA PATEL",
+      "dateOfBirth": "1997-03-18",
+      "address": "23 Redwood Ave, Apt 5B, Austin, TX 78701",
+      "issueDate": "2023-01-15",
+      "expiryDate": "2031-03-18",
+      "aiConfidence": 97,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "CloudSync Corp",
+      "employeeId": "CSC-1142",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 3800,
+      "deductions": {
+        "federalTax": 380,
+        "stateTax": 76,
+        "socialSecurity": 236,
+        "medicare": 55,
+        "healthInsurance": 120,
+        "pension401k": 114,
+        "other": 99
+      },
+      "totalDeductions": 980,
+      "netPay": 2820,
+      "ytdGross": 15200,
+      "aiConfidence": 95,
+      "status": "verified",
+      "flags": [
+        "Short tenure — 8 months with current employer"
+      ]
+    },
+    "bankStatement": {
+      "bank": "Wells Fargo",
+      "accountHolder": "Aisha P. Patel",
+      "accountNumber": "****3309",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 1840,
+          "totalCredits": 3200,
+          "totalDebits": 3100,
+          "closingBalance": 1940,
+          "salaryDeposit": 0,
+          "flags": [
+            "No salary deposit — employment gap during job transition"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 1940,
+          "totalCredits": 4100,
+          "totalDebits": 3800,
+          "closingBalance": 2240,
+          "salaryDeposit": 2820,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 2240,
+          "totalCredits": 4200,
+          "totalDebits": 3900,
+          "closingBalance": 2540,
+          "salaryDeposit": 2820,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 3833,
+      "averageMonthlyDebit": 3600,
+      "averageClosingBalance": 2240,
+      "aiConfidence": 93,
+      "status": "verified"
+    }
+  }
+}

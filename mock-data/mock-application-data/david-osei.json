@@ -1,0 +1,134 @@
+{
+  "id": "APP-24816",
+  "status": "needs_review",
+  "submittedAt": "2026-06-02T10:02:11Z",
+  "personalInfo": {
+    "fullName": "David Osei",
+    "dateOfBirth": "1990-11-03",
+    "address": "47 Lakeview Drive, Chicago, IL 60614",
+    "phone": "+1 312-555-0877",
+    "email": "david.osei@email.com",
+    "ssn": "***-**-6634",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "Meridian Software Inc.",
+    "jobTitle": "Software Engineer II",
+    "yearsEmployed": 4,
+    "employmentStartDate": "2022-02-14",
+    "annualSalary": 86400,
+    "monthlyGross": 7200,
+    "monthlyNet": 5310
+  },
+  "financials": {
+    "creditScore": 712,
+    "creditRating": "Good",
+    "existingDebts": [
+      {
+        "type": "Mortgage",
+        "monthlyPayment": 1500,
+        "balance": 188000,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 195,
+        "balance": 3800,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1695,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 0
+  },
+  "loanRequest": {
+    "type": "Auto loan",
+    "amount": 38500,
+    "termYears": 5,
+    "interestRate": 7,
+    "estimatedMonthlyPayment": 761,
+    "purpose": "Purchase new vehicle — Toyota Camry 2026",
+    "vehicleMake": "Toyota",
+    "vehicleModel": "Camry",
+    "vehicleYear": 2026
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Illinois Secretary of State",
+      "idNumber": "IL-D492-8810",
+      "fullName": "DAVID KWAME OSEI",
+      "dateOfBirth": "1990-11-03",
+      "address": "47 Lakeview Drive, Chicago, IL 60614",
+      "issueDate": "2022-09-10",
+      "expiryDate": "2028-11-03",
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Meridian Software Inc.",
+      "employeeId": "MSI-1144",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 7200,
+      "deductions": {
+        "federalTax": 1080,
+        "stateTax": 360,
+        "socialSecurity": 446,
+        "medicare": 104,
+        "healthInsurance": 180,
+        "pension401k": 216,
+        "other": 504
+      },
+      "totalDeductions": 2890,
+      "netPay": 4310,
+      "ytdGross": 36000,
+      "aiConfidence": 96,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Chase Bank",
+      "accountHolder": "David K. Osei",
+      "accountNumber": "****3341",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 6220,
+          "totalCredits": 7420,
+          "totalDebits": 6980,
+          "closingBalance": 6660,
+          "salaryDeposit": 4310,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 6660,
+          "totalCredits": 7200,
+          "totalDebits": 7050,
+          "closingBalance": 6810,
+          "salaryDeposit": 4310,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 6810,
+          "totalCredits": 7310,
+          "totalDebits": 6940,
+          "closingBalance": 7180,
+          "salaryDeposit": 4310,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 7310,
+      "averageMonthlyDebit": 6990,
+      "averageClosingBalance": 6883,
+      "aiConfidence": 95,
+      "status": "verified"
+    }
+  }
+}

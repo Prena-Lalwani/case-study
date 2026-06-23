@@ -1,0 +1,143 @@
+{
+  "id": "APP-24820",
+  "status": "auto_rejected",
+  "submittedAt": "2026-06-02T14:55:00Z",
+  "personalInfo": {
+    "fullName": "Marco Rossi",
+    "dateOfBirth": "1976-07-04",
+    "address": "55 Vine Street, Miami, FL 33132",
+    "phone": "+1 305-555-0198",
+    "email": "marco.rossi@email.com",
+    "ssn": "***-**-4403",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "self_employed",
+    "employer": "Rossi Catering LLC",
+    "jobTitle": "Owner/Chef",
+    "yearsEmployed": 3,
+    "employmentStartDate": "2023-01-01",
+    "annualSalary": 74400,
+    "monthlyGross": 6200,
+    "monthlyNet": 4100,
+    "note": "Business revenue ~$18,000/mo. Owner draw $6,200/mo. Business profitable in 2 of 3 years."
+  },
+  "financials": {
+    "creditScore": 572,
+    "creditRating": "Poor",
+    "existingDebts": [
+      {
+        "type": "Business equipment loan",
+        "monthlyPayment": 1100,
+        "balance": 38000,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 390,
+        "balance": 11200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 280,
+        "balance": 7800,
+        "status": "1 missed payment Nov 2025"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 220,
+        "balance": 5100,
+        "status": "current"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1990,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 3
+  },
+  "loanRequest": {
+    "type": "Business loan",
+    "amount": 95000,
+    "termYears": 7,
+    "interestRate": 9,
+    "estimatedMonthlyPayment": 1498,
+    "purpose": "Purchase catering equipment and expand kitchen"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Passport",
+      "issuedBy": "US Department of State",
+      "idNumber": "US-779901234",
+      "fullName": "MARCO ANTONIO ROSSI",
+      "dateOfBirth": "1976-07-04",
+      "address": "55 Vine Street, Miami, FL 33132",
+      "issueDate": "2019-11-20",
+      "expiryDate": "2029-11-20",
+      "aiConfidence": 94,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "Rossi Catering LLC",
+      "employeeId": "SELF",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 6200,
+      "deductions": null,
+      "totalDeductions": null,
+      "netPay": null,
+      "ytdGross": null,
+      "aiConfidence": 88,
+      "status": "verified",
+      "flags": [
+        "Self-employed owner draw — income volatility risk",
+        "Business loss reported in 2023 tax year"
+      ]
+    },
+    "bankStatement": {
+      "bank": "TD Bank",
+      "accountHolder": "Rossi Catering LLC",
+      "accountNumber": "****7823",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 4200,
+          "totalCredits": 15800,
+          "totalDebits": 16400,
+          "closingBalance": 3600,
+          "salaryDeposit": 6200,
+          "flags": [
+            "Negative month — debits exceed credits"
+          ]
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 3600,
+          "totalCredits": 18200,
+          "totalDebits": 16100,
+          "closingBalance": 5700,
+          "salaryDeposit": 6200,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 5700,
+          "totalCredits": 16900,
+          "totalDebits": 17800,
+          "closingBalance": 4800,
+          "salaryDeposit": 6200,
+          "flags": [
+            "Negative month — debits exceed credits"
+          ]
+        }
+      ],
+      "averageMonthlyCredit": 16967,
+      "averageMonthlyDebit": 16767,
+      "averageClosingBalance": 4700,
+      "aiConfidence": 87,
+      "status": "verified"
+    }
+  }
+}

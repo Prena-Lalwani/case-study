@@ -1,0 +1,137 @@
+{
+  "id": "APP-24812",
+  "status": "needs_review",
+  "submittedAt": "2026-06-01T15:41:02Z",
+  "personalInfo": {
+    "fullName": "James Holloway",
+    "dateOfBirth": "1988-07-06",
+    "address": "77 Pinecrest Ave, Atlanta, GA 30301",
+    "phone": "+1 404-555-0733",
+    "email": "james.holloway@email.com",
+    "ssn": "***-**-9901",
+    "nationality": "US Citizen"
+  },
+  "employment": {
+    "type": "salaried",
+    "employer": "SouthTech Solutions",
+    "jobTitle": "Regional Sales Representative",
+    "yearsEmployed": 2.5,
+    "employmentStartDate": "2023-12-01",
+    "annualSalary": 61200,
+    "monthlyGross": 5100,
+    "monthlyNet": 3820
+  },
+  "financials": {
+    "creditScore": 681,
+    "creditRating": "Fair",
+    "existingDebts": [
+      {
+        "type": "Student loan",
+        "monthlyPayment": 740,
+        "balance": 28400,
+        "status": "current"
+      },
+      {
+        "type": "Car loan",
+        "monthlyPayment": 410,
+        "balance": 11200,
+        "status": "current"
+      },
+      {
+        "type": "Credit card",
+        "monthlyPayment": 300,
+        "balance": 4200,
+        "status": "1 late payment — 18 months ago"
+      }
+    ],
+    "totalMonthlyDebtPayments": 1450,
+    "bankruptcyHistory": false,
+    "foreclosureHistory": false,
+    "latePaymentsLast24Months": 1
+  },
+  "loanRequest": {
+    "type": "Personal loan",
+    "amount": 15000,
+    "termYears": 3,
+    "interestRate": 12,
+    "estimatedMonthlyPayment": 498,
+    "purpose": "Home improvement — kitchen renovation"
+  },
+  "documents": {
+    "nationalId": {
+      "documentType": "Driver's License",
+      "issuedBy": "Georgia DDS",
+      "idNumber": "GA-055-892-003",
+      "fullName": "JAMES ROBERT HOLLOWAY",
+      "dateOfBirth": "1988-07-06",
+      "address": "77 Pinecrest Ave, Atlanta, GA 30301",
+      "issueDate": "2021-08-20",
+      "expiryDate": "2029-07-06",
+      "aiConfidence": 98,
+      "status": "verified",
+      "flags": []
+    },
+    "salarySlip": {
+      "employer": "SouthTech Solutions",
+      "employeeId": "STS-4490",
+      "payPeriod": "May 2026",
+      "payDate": "2026-05-31",
+      "grossSalary": 5100,
+      "deductions": {
+        "federalTax": 561,
+        "stateTax": 306,
+        "socialSecurity": 316,
+        "medicare": 74,
+        "healthInsurance": 145,
+        "pension401k": 153,
+        "other": 325
+      },
+      "totalDeductions": 1880,
+      "netPay": 3220,
+      "ytdGross": 25500,
+      "aiConfidence": 95,
+      "status": "verified",
+      "flags": []
+    },
+    "bankStatement": {
+      "bank": "Truist Bank",
+      "accountHolder": "James R. Holloway",
+      "accountNumber": "****2214",
+      "statementPeriod": "March 2026 – May 2026",
+      "months": [
+        {
+          "month": "March 2026",
+          "openingBalance": 2110,
+          "totalCredits": 5200,
+          "totalDebits": 4980,
+          "closingBalance": 2330,
+          "salaryDeposit": 3220,
+          "flags": []
+        },
+        {
+          "month": "April 2026",
+          "openingBalance": 2330,
+          "totalCredits": 5100,
+          "totalDebits": 5020,
+          "closingBalance": 2410,
+          "salaryDeposit": 3220,
+          "flags": []
+        },
+        {
+          "month": "May 2026",
+          "openingBalance": 2410,
+          "totalCredits": 5300,
+          "totalDebits": 5140,
+          "closingBalance": 2570,
+          "salaryDeposit": 3220,
+          "flags": []
+        }
+      ],
+      "averageMonthlyCredit": 5200,
+      "averageMonthlyDebit": 5047,
+      "averageClosingBalance": 2437,
+      "aiConfidence": 94,
+      "status": "verified"
+    }
+  }
+}
