@@ -234,6 +234,26 @@ const ApplicationCard = ({ app }) => {
         </div>
       )}
 
+      {/* Assigned case officer (advisor handling this loan) */}
+      {app.assignedAdvisor ? (
+        <div className="flex items-center gap-2 px-2.5 py-2 bg-gray-50 border border-gray-100 rounded-lg">
+          <div className="w-7 h-7 rounded-full bg-navy text-white flex items-center justify-center text-[10.5px] font-semibold shrink-0">
+            {app.assignedAdvisor.initials}
+          </div>
+          <div className="min-w-0">
+            <p className="text-[11px] text-tertiary leading-none">CASE OFFICER</p>
+            <p className="text-[12.5px] font-medium text-gray-900 mt-0.5 truncate">{app.assignedAdvisor.name}</p>
+          </div>
+        </div>
+      ) : (
+        !isProcessing && (
+          <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-50 border border-dashed border-gray-200 rounded-lg text-[11.5px] text-tertiary">
+            <TbUser style={{ fontSize: 12 }} />
+            No case officer assigned yet
+          </div>
+        )
+      )}
+
       {/* Row 4 — footer */}
       <div className="flex items-center justify-between pt-2 border-t border-gray-100">
         <div className="flex items-center gap-1.5">

@@ -3,6 +3,14 @@ import { prisma } from '../db.js'
 
 const router = Router()
 
+const serializeAdvisor = a => a && ({
+  id:        a.legacyId ?? a.id,
+  name:      a.name,
+  initials:  a.initials,
+  title:     a.title,
+  specialty: a.specialty,
+})
+
 const serialize = (a) => ({
   id: a.legacyId ?? a.id,
   name: a.client?.name,
@@ -16,6 +24,7 @@ const serialize = (a) => ({
   summary: a.aiSummary,
   analysedInSeconds: a.analysedInSeconds,
   clientLegacyId: a.client?.legacyId,
+  assignedAdvisor: serializeAdvisor(a.assignedAdvisor),
 })
 
 // GET /api/loan-applications
@@ -24,7 +33,7 @@ router.get('/', async (req, res) => {
   const where = status ? { status: String(status) } : {}
   const apps = await prisma.loanApplication.findMany({
     where,
-    include: { client: true, aiAnalysis: true },
+    include: { client: true, aiAnalysis: true, assignedAdvisor: true },
     orderBy: { submittedAt: 'desc' },
   })
   res.json(apps.map(serialize))
@@ -40,6 +49,7 @@ router.get('/:id', async (req, res) => {
     include: {
       client: { include: { documents: true } },
       aiAnalysis: true,
+      assignedAdvisor: true,
     },
   })
   if (!app) return res.status(404).json({ error: 'Application not found' })

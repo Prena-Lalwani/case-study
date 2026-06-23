@@ -55,7 +55,8 @@ model Advisor {
   credentials     String[] @default([])
   focus           String[] @default([])        // 'personal-advisory' | 'business-advisory' | …
 
-  assignments     AdvisorAssignment[]
+  assignments         AdvisorAssignment[]
+  assignedLoanApplications LoanApplication[]   @relation("LoanCaseOfficer")
 
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -141,6 +142,10 @@ model LoanApplication {
   decisionType    String?                              // 'approved' | 'rejected' | 'override' | 'escalated'
   decisionReason  String?
 
+  // Case officer — the advisor handling this loan
+  assignedAdvisorId String?
+  assignedAdvisor   Advisor? @relation("LoanCaseOfficer", fields: [assignedAdvisorId], references: [id])
+
   aiAnalysis      AiAnalysis?
   queueItem       QueueItem?
 
@@ -148,6 +153,7 @@ model LoanApplication {
 
   @@index([clientId])
   @@index([status])
+  @@index([assignedAdvisorId])
 }
 
 model AdvisoryEngagement {

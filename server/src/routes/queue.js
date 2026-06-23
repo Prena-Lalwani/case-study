@@ -221,10 +221,36 @@ router.post('/:id/result', async (req, res) => {
       r.recommendation === 'APPROVE' ? 'approved' :
       r.recommendation === 'REJECT'  ? 'auto_rejected' :
       'needs_review'
+
+    /* Pick a case officer — advisor with the matching flow focus + lowest caseload.
+       Fall back to any advisor if none have loan focus. */
+    const flowFocused = await prisma.advisor.findMany({
+      where: { focus: { has: item.flowKey } },
+      orderBy: { clientLoad: 'asc' },
+      take: 1,
+    })
+    const fallback = flowFocused.length === 0
+      ? await prisma.advisor.findFirst({ orderBy: { clientLoad: 'asc' } })
+      : null
+    const officer = flowFocused[0] ?? fallback
+
     await prisma.loanApplication.update({
       where: { id: item.loanApplicationId },
-      data:  { status: newStatus, aiSummary: r.explanation ?? r.summary, analysedInSeconds: r.analysedInSeconds ?? null },
+      data: {
+        status: newStatus,
+        aiSummary: r.explanation ?? r.summary,
+        analysedInSeconds: r.analysedInSeconds ?? null,
+        ...(officer && { assignedAdvisorId: officer.id }),
+      },
     })
+
+    /* Bump that advisor's caseload — they now own this loan */
+    if (officer) {
+      await prisma.advisor.update({
+        where: { id: officer.id },
+        data:  { clientLoad: { increment: 1 } },
+      })
+    }
   } else if (item.advisoryEngagementId) {
     await prisma.aiAnalysis.upsert({
       where:  { advisoryEngagementId: item.advisoryEngagementId },
