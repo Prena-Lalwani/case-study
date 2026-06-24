@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useUrlState } from '../../../hooks/useNavState'
 import {
   TbAlertCircle,
   TbAlertTriangle,
@@ -39,7 +40,7 @@ const initialsOf = name => (name ?? '?').split(' ').map(w => w[0]).join('').slic
 
 const AdvisoryQueuePage = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [tab, setTab]               = useState('personal-advisory')
+  const [tab, setTab]               = useUrlState('tab', 'personal-advisory')
   const queues                      = useClientQueues()
 
   const items = queues[tab] ?? []

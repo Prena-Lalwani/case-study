@@ -19,6 +19,7 @@ import {
   TbWallet,
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useGoBack } from '../../../hooks/useNavState'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
 import { api } from '../services/api'
@@ -334,6 +335,7 @@ const normalize = (d) => ({
 
 /* ── Body ────────────────────────────────────────────────────────────── */
 const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave, onUploaded }) => {
+  const goBack = useGoBack('/underwriting/team')
   const isBusiness = client.type === 'business'
   const st = STATUS_STYLE[client.status] ?? STATUS_STYLE.pending
 
@@ -366,7 +368,7 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
     <div className="px-4 sm:px-8 py-5 sm:py-6 max-w-[1400px] mx-auto">
       {/* Back + Edit */}
       <div className="flex items-center justify-between mb-4">
-        <button onClick={() => navigate('/underwriting/team')}
+        <button onClick={goBack}
           className="flex items-center gap-1.5 text-[12.5px] text-secondary hover:text-gray-800">
           <TbArrowLeft style={{ fontSize: 14 }} /> 
         </button>

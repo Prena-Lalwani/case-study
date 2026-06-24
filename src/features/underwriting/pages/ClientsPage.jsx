@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUrlState } from '../../../hooks/useNavState'
 import {
   TbAdjustments,
   TbBuilding,
@@ -90,10 +91,10 @@ const SORT_OPTIONS = [
 const ClientsPage = () => {
   const [mobileOpen, setMobileOpen]   = useState(false)
   const [modalOpen, setModalOpen]     = useState(false)
-  const [query, setQuery]             = useState('')
-  const [statusTab, setStatusTab]     = useState('all')
+  const [query, setQuery]             = useUrlState('q', '')
+  const [statusTab, setStatusTab]     = useUrlState('tab', 'all')
   const clients                       = useClients()
-  const [sortKey, setSortKey]         = useState('joined_desc')
+  const [sortKey, setSortKey]         = useUrlState('sort', 'joined_desc')
   const [sortOpen, setSortOpen]       = useState(false)
   const sortRef                       = useRef(null)
 

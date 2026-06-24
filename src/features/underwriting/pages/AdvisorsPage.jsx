@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUrlState } from '../../../hooks/useNavState'
 import {
   TbAward,
   TbBriefcase,
@@ -40,8 +41,8 @@ const FILTERS = [
 
 const AdvisorsPage = () => {
   const [mobileOpen, setMobileOpen]   = useState(false)
-  const [filter, setFilter]           = useState('all')
-  const [query, setQuery]             = useState('')
+  const [filter, setFilter]           = useUrlState('filter', 'all')
+  const [query, setQuery]             = useUrlState('q', '')
   const [modalOpen, setModalOpen]     = useState(false)
   const [editTarget, setEditTarget]   = useState(null)
   const [deleteTarget, setDeleteTarget] = useState(null)   // full advisor detail for the handoff modal

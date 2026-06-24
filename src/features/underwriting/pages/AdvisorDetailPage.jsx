@@ -19,6 +19,7 @@ import {
   TbUserStar
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useGoBack } from '../../../hooks/useNavState'
 import AdvisorHandoffDeleteModal from '../components/AdvisorHandoffDeleteModal'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import { api } from '../services/api'
@@ -170,6 +171,7 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
   const loans = advisor.assignedLoanApplications ?? []
   const advAssignments = advisor.assignments ?? []
   const totalCases = loans.length + advAssignments.length
+  const goBack = useGoBack('/underwriting/advisors')
   const set = (k, v) => setDraft(d => ({ ...d, [k]: v }))
   const toggleFocus = (k) => setDraft(d => ({
     ...d, focus: d.focus.includes(k) ? d.focus.filter(x => x !== k) : [...d.focus, k]
@@ -184,7 +186,7 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
     <div className="px-4 sm:px-8 py-5 sm:py-6 max-w-[1400px] mx-auto">
       {/* Back + Edit toggle */}
       <div className="flex items-center justify-between mb-4 gap-2">
-        <button onClick={() => navigate('/underwriting/advisors')}
+        <button onClick={goBack}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12.5px] font-medium text-secondary bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors shrink-0">
           <TbArrowLeft style={{ fontSize: 14 }} />
         </button>

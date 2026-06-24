@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useUrlState } from '../../../hooks/useNavState'
 import {
   TbCalendar,
   TbCash,
@@ -27,7 +28,7 @@ const TABS = [
 
 const ReportsPage = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [tab, setTab] = useState('overview')
+  const [tab, setTab] = useUrlState('tab', 'overview')
 
   /* Each tab has its own period state — switching tabs preserves last selection */
   const [periods, setPeriods] = useState({

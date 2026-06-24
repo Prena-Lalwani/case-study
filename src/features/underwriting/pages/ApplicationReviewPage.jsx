@@ -10,6 +10,7 @@ import {
   TbX,
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useGoBack } from '../../../hooks/useNavState'
 import loanData from '../../../../mock-data/loan-applications.json'
 import ContextChat from '../chat/ContextChat'
 import { LOAN_REVIEW_PROMPT } from '../chat/chatPrompts'
@@ -573,6 +574,7 @@ const AI_PLACEHOLDER = { dti: null, aiScore: null, recommendation: 'PENDING', ex
 const ApplicationReviewPage = () => {
   const { appId }  = useParams()
   const navigate   = useNavigate()
+  const goBack     = useGoBack('/underwriting')
   const [mobileOpen,   setMobileOpen]   = useState(false)
   const [decision,     setDecision]     = useState(null)   // pending decision-modal config
   const [signedOff,    setSignedOff]    = useState(false)
@@ -771,9 +773,9 @@ const ApplicationReviewPage = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
-              <button onClick={() => navigate('/underwriting')}
+              <button onClick={goBack}
                 style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: C.muted, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
-                <TbArrowLeft style={{ fontSize: 15 }} /> 
+                <TbArrowLeft style={{ fontSize: 15 }} />
               </button>
 
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: C.primary, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>

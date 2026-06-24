@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useUrlState } from '../../../hooks/useNavState'
 import {
   TbHome,
   TbCar,
@@ -299,8 +300,8 @@ const SORT_OPTIONS = [
 
 /* ─── Main view ──────────────────────────────────────────────────────────── */
 const ApplicationQueueView = ({ apps }) => {
-  const [activeTab, setActiveTab] = useState('all')
-  const [sortKey, setSortKey]     = useState('ai_desc')
+  const [activeTab, setActiveTab] = useUrlState('tab', 'all')
+  const [sortKey, setSortKey]     = useUrlState('sort', 'ai_desc')
   const [sortOpen, setSortOpen]   = useState(false)
   const [sortPos, setSortPos]     = useState(null)   // { top, right } for the fixed menu
   const sortRef = useRef(null)

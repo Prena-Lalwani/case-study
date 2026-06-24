@@ -20,6 +20,7 @@ import {
   TbWallet,
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useGoBack } from '../../../hooks/useNavState'
 import ContextChat from '../chat/ContextChat'
 import { ADVISORY_REVIEW_PROMPT } from '../chat/chatPrompts'
 import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
@@ -253,6 +254,7 @@ const Legend = ({ color, dash, label }) => (
 const AdvisoryReviewPage = () => {
   const { itemId } = useParams()
   const navigate = useNavigate()
+  const goBack = useGoBack('/underwriting/advisory')
   const [mobileOpen, setMobileOpen] = useState(false)
   const queues = useClientQueues()
 
@@ -389,7 +391,7 @@ const AdvisoryReviewPage = () => {
         <div style={{ background: '#fff', borderBottom: `1px solid ${C.border}`, padding: '14px 24px', flexShrink: 0 }}>
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 min-w-0">
-              <button onClick={() => navigate('/underwriting/advisory')} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: C.muted, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
+              <button onClick={goBack} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: C.muted, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
                 <TbArrowLeft style={{ fontSize: 15 }} />
               </button>
               <div className="w-9 h-9 rounded-full bg-blue-action text-white flex items-center justify-center text-[13px] font-bold shrink-0">
