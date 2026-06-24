@@ -26,10 +26,10 @@ import { api } from '../services/api'
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
 const FOCUS_OPTIONS = [
-  { key: 'personal-advisory', label: 'Personal Advisory' },
-  { key: 'business-advisory', label: 'Business Advisory' },
-  { key: 'personal-loan',     label: 'Personal Loan' },
-  { key: 'business-loan',     label: 'Business Loan' },
+  { key: 'personal-advisory', label: 'Personal advisory' },
+  { key: 'business-advisory', label: 'Business advisory' },
+  { key: 'personal-loan',     label: 'Personal loan' },
+  { key: 'business-loan',     label: 'Business loan' },
 ]
 
 const C = {
@@ -165,6 +165,11 @@ const normalize = (d) => ({
 /* ── Body ────────────────────────────────────────────────────────────── */
 const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave, onDelete }) => {
   const p = advisor.performance ?? {}
+  /* A case = a loan this advisor is case officer on, OR an advisory engagement
+   * the AI matched to them. Caseload (hero) counts both, so this page must show both. */
+  const loans = advisor.assignedLoanApplications ?? []
+  const advAssignments = advisor.assignments ?? []
+  const totalCases = loans.length + advAssignments.length
   const set = (k, v) => setDraft(d => ({ ...d, [k]: v }))
   const toggleFocus = (k) => setDraft(d => ({
     ...d, focus: d.focus.includes(k) ? d.focus.filter(x => x !== k) : [...d.focus, k]
@@ -278,12 +283,12 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
         </div>
       </div>
 
-      {/* KPI summary strip */}
+      {/* KPI summary strip — caseload split into its parts so it agrees with the hero CASELOAD */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
-        <KpiCard label="TOTAL ASSIGNMENTS" value={p.totalAssignments ?? 0} sub="all AI matches" accent={C.primary} icon={TbUsers} />
-        <KpiCard label="CONFIRMED" value={p.confirmed ?? 0} sub="active engagements" accent={C.success} icon={TbCircleCheck} />
-        <KpiCard label="PROPOSED" value={p.proposed ?? 0} sub="awaiting officer" accent={C.warning} icon={TbSparkles} />
-        <KpiCard label="DECLINED" value={p.declined ?? 0} sub="closed engagements" accent={C.critical} icon={TbCircleX} />
+        <KpiCard label="TOTAL CASES" value={totalCases} sub="loans + advisory" accent={C.primary} icon={TbUsers} />
+        <KpiCard label="LOAN APPLICATIONS" value={loans.length} sub="as case officer" accent={C.warning} icon={TbBriefcase} />
+        <KpiCard label="ADVISORY MATCHES" value={advAssignments.length} sub="AI matched" accent={C.success} icon={TbSparkles} />
+        <KpiCard label="CONFIRMED" value={p.confirmed ?? 0} sub="advisory confirmed" accent={C.success} icon={TbCircleCheck} />
       </div>
 
       {/* Caseload utilisation */}
@@ -385,31 +390,67 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
         </div>
       </div>
 
-      {/* Assigned clients */}
-      <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Assigned clients</p>
-      {advisor.assignments.length === 0 ? (
+      {/* Assigned cases — both loan applications (case officer) and advisory engagements */}
+      <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Assigned cases</p>
+      {totalCases === 0 ? (
         <div className="bg-white border border-dashed border-gray-300 rounded-xl py-12 text-center">
           <TbUsers className="mx-auto text-tertiary" style={{ fontSize: 32 }} />
-          <p className="text-[13px] text-gray-700 font-medium mt-2">No clients assigned yet</p>
-          <p className="text-[11.5px] text-tertiary mt-1">The AI hasn't matched any clients to this advisor yet.</p>
+          <p className="text-[13px] text-gray-700 font-medium mt-2">No cases assigned yet</p>
+          <p className="text-[11.5px] text-tertiary mt-1">No loan applications or advisory engagements are assigned to this advisor.</p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
-          <table className="w-full text-left text-[12.5px] min-w-[640px]">
-            <thead className="bg-gray-50 text-secondary">
-              <tr>
-                <Th>Client</Th>
-                <Th>Flow</Th>
-                <Th>Status</Th>
-                <Th className="text-right">Score</Th>
-                <Th>Assigned</Th>
-                <Th className="w-12" />
-              </tr>
-            </thead>
-            <tbody>
-              {advisor.assignments.map(a => <AssignmentRow key={a.id} assignment={a} />)}
-            </tbody>
-          </table>
+        <div className="space-y-5">
+          {loans.length > 0 && (
+            <div>
+              <p className="text-[12px] font-semibold text-gray-700 mb-2 flex items-center gap-1.5">
+                <TbBriefcase style={{ fontSize: 13, color: C.warning }} /> Loan applications
+                <span className="font-normal text-tertiary">· {loans.length} as case officer</span>
+              </p>
+              <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+                <table className="w-full text-left text-[12.5px] min-w-[640px]">
+                  <thead className="bg-gray-50 text-secondary">
+                    <tr>
+                      <Th>Client</Th>
+                      <Th>Loan type</Th>
+                      <Th>Status</Th>
+                      <Th className="text-right">Amount</Th>
+                      <Th>Submitted</Th>
+                      <Th className="w-12" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loans.map(l => <LoanRow key={l.id} loan={l} />)}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {advAssignments.length > 0 && (
+            <div>
+              <p className="text-[12px] font-semibold text-gray-700 mb-2 flex items-center gap-1.5">
+                <TbSparkles style={{ fontSize: 13, color: C.success }} /> Advisory engagements
+                <span className="font-normal text-tertiary">· {advAssignments.length} AI matched</span>
+              </p>
+              <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+                <table className="w-full text-left text-[12.5px] min-w-[640px]">
+                  <thead className="bg-gray-50 text-secondary">
+                    <tr>
+                      <Th>Client</Th>
+                      <Th>Flow</Th>
+                      <Th>Status</Th>
+                      <Th className="text-right">Score</Th>
+                      <Th>Assigned</Th>
+                      <Th className="w-12" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {advAssignments.map(a => <AssignmentRow key={a.id} assignment={a} />)}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -528,6 +569,45 @@ const AssignmentRow = ({ assignment }) => {
         {e.completenessScore != null ? <ScorePill score={e.completenessScore} /> : '—'}
       </Td>
       <Td className="text-secondary tabular-nums whitespace-nowrap">{fmtDate(assignment.assignedAt)}</Td>
+      <Td className="text-right"><TbArrowRight className="text-tertiary inline" style={{ fontSize: 14 }} /></Td>
+    </tr>
+  )
+}
+
+const fmtUsd = (n) => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 })
+
+const LOAN_STATUS = {
+  approved:      { label: 'Approved',     bg: 'bg-green-50',  text: 'text-success' },
+  needs_review:  { label: 'Needs review', bg: 'bg-orange-50', text: 'text-warning' },
+  auto_rejected: { label: 'Rejected',     bg: 'bg-red-50',    text: 'text-error'   },
+  ai_reviewing:  { label: 'AI reviewing', bg: 'bg-blue-50',   text: 'text-blue-action' },
+}
+
+const LoanRow = ({ loan }) => {
+  const navigate = useNavigate()
+  const st = LOAN_STATUS[loan.status] ?? { label: loan.status, bg: 'bg-gray-100', text: 'text-tertiary' }
+  return (
+    <tr className="border-t border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors"
+        onClick={() => navigate(`/underwriting/review/${loan.id}`)}>
+      <Td>
+        <div className="flex items-center gap-2 min-w-0">
+          <div className={`w-7 h-7 rounded-full ${loan.client?.type === 'business' ? 'bg-purple-100 text-purple-700' : 'bg-blue-50 text-blue-action'} flex items-center justify-center shrink-0`}>
+            {loan.client?.type === 'business' ? <TbBuilding style={{ fontSize: 13 }} /> : <TbUser style={{ fontSize: 13 }} />}
+          </div>
+          <div className="min-w-0">
+            <p className="font-medium text-gray-900 truncate">{loan.client?.name ?? '—'}</p>
+            <p className="text-[10.5px] text-tertiary truncate font-mono">{loan.id}</p>
+          </div>
+        </div>
+      </Td>
+      <Td className="text-secondary">{loan.loanType}</Td>
+      <Td>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-semibold ${st.bg} ${st.text}`}>
+          {st.label}
+        </span>
+      </Td>
+      <Td className="text-right font-medium text-gray-900 tabular-nums">{fmtUsd(loan.amount)}</Td>
+      <Td className="text-secondary tabular-nums whitespace-nowrap">{fmtDate(loan.submittedAt)}</Td>
       <Td className="text-right"><TbArrowRight className="text-tertiary inline" style={{ fontSize: 14 }} /></Td>
     </tr>
   )

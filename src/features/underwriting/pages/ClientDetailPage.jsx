@@ -630,12 +630,12 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
 const DOC_TYPE_OPTIONS = [
   { value: 'national-id',         label: 'National ID' },
   { value: 'passport',            label: 'Passport' },
-  { value: 'salary-slip',         label: 'Salary Slip' },
-  { value: 'bank-statement',      label: 'Bank Statement' },
-  { value: 'employment-letter',   label: 'Employment Letter' },
-  { value: 'tax-return',          label: 'Tax Return' },
-  { value: 'business-license',    label: 'Business License' },
-  { value: 'financial-statement', label: 'Financial Statement' },
+  { value: 'salary-slip',         label: 'Salary slip' },
+  { value: 'bank-statement',      label: 'Bank statement' },
+  { value: 'employment-letter',   label: 'Employment letter' },
+  { value: 'tax-return',          label: 'Tax return' },
+  { value: 'business-license',    label: 'Business license' },
+  { value: 'financial-statement', label: 'Financial statement' },
 ]
 
 const fileToDataUrl = (file) => new Promise((resolve, reject) => {
@@ -844,8 +844,8 @@ const Th = ({ children, className = '' }) => (<th className={`px-3 py-2.5 font-s
 const Td = ({ children, className = '' }) => (<td className={`px-3 py-2.5 ${className}`}>{children}</td>)
 
 const FLOW_LABEL = {
-  'personal-advisory': 'Personal Advisory',
-  'business-advisory': 'Business Advisory',
+  'personal-advisory': 'Personal advisory',
+  'business-advisory': 'Business advisory',
 }
 const EngagementRow = ({ engagement, navigate }) => {
   const advisor = engagement.assignment?.advisor

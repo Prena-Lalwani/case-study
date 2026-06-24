@@ -24,18 +24,18 @@ import { api } from '../services/api'
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
 const FOCUS_LABEL = {
-  'personal-advisory': 'Personal Advisory',
-  'business-advisory': 'Business Advisory',
-  'personal-loan':     'Personal Loan',
-  'business-loan':     'Business Loan',
+  'personal-advisory': 'Personal advisory',
+  'business-advisory': 'Business advisory',
+  'personal-loan':     'Personal loan',
+  'business-loan':     'Business loan',
 }
 
 const FILTERS = [
   { key: 'all',                label: 'All advisors' },
-  { key: 'personal-advisory',  label: 'Personal Advisory' },
-  { key: 'business-advisory',  label: 'Business Advisory' },
-  { key: 'personal-loan',      label: 'Personal Loan' },
-  { key: 'business-loan',      label: 'Business Loan' },
+  { key: 'personal-advisory',  label: 'Personal advisory' },
+  { key: 'business-advisory',  label: 'Business advisory' },
+  { key: 'personal-loan',      label: 'Personal loan' },
+  { key: 'business-loan',      label: 'Business loan' },
 ]
 
 const AdvisorsPage = () => {

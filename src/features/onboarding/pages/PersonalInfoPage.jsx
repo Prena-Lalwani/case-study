@@ -91,7 +91,7 @@ const PersonalInfoPage = () => {
         backPath="/signup"
         onContinue={handleContinue}
         continueDisabled={isSaving}
-        continueLabel={isSaving ? 'Saving…' : 'Save & Continue'}
+        continueLabel={isSaving ? 'Saving…' : 'Save & continue'}
       />
 
       {/* ══════════════════════════════════

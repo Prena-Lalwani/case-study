@@ -122,7 +122,7 @@ const OverviewTab = ({ period }) => {
 
       {/* Two donuts side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <ReportSection title="Loan vs Advisory" subtitle="Where new intake landed">
+        <ReportSection title="Loan vs advisory" subtitle="Where new intake landed">
           <DonutChart
             size={170}
             stroke={26}
@@ -134,7 +134,7 @@ const OverviewTab = ({ period }) => {
             ]}
           />
         </ReportSection>
-        <ReportSection title="Personal vs Business" subtitle="Client-type composition">
+        <ReportSection title="Personal vs business" subtitle="Client-type composition">
           <DonutChart
             size={170}
             stroke={26}
@@ -151,10 +151,10 @@ const OverviewTab = ({ period }) => {
       {/* Flow breakdown */}
       <ReportSection title="Flow-by-flow breakdown" subtitle="New clients per intake type">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <FlowCard label="Personal Advisory" value={agg.newClients['personal-advisory']} color={C.success} icon={TbUser} />
-          <FlowCard label="Business Advisory" value={agg.newClients['business-advisory']} color={C.success} icon={TbBuilding} />
-          <FlowCard label="Personal Loan"     value={agg.newClients['personal-loan']}     color={C.primary} icon={TbUser} />
-          <FlowCard label="Business Loan"     value={agg.newClients['business-loan']}     color={C.primary} icon={TbBuilding} />
+          <FlowCard label="Personal advisory" value={agg.newClients['personal-advisory']} color={C.success} icon={TbUser} />
+          <FlowCard label="Business advisory" value={agg.newClients['business-advisory']} color={C.success} icon={TbBuilding} />
+          <FlowCard label="Personal loan"     value={agg.newClients['personal-loan']}     color={C.primary} icon={TbUser} />
+          <FlowCard label="Business loan"     value={agg.newClients['business-loan']}     color={C.primary} icon={TbBuilding} />
         </div>
       </ReportSection>
     </div>

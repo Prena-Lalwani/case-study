@@ -20,8 +20,8 @@ import { useClientQueues } from '../hooks/useClientQueues'
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
 const TABS = [
-  { key: 'personal-advisory', label: 'Personal Advisory', icon: TbUser },
-  { key: 'business-advisory', label: 'Business Advisory', icon: TbBuilding },
+  { key: 'personal-advisory', label: 'Personal advisory', icon: TbUser },
+  { key: 'business-advisory', label: 'Business advisory', icon: TbBuilding },
 ]
 
 const STATUS = {
@@ -348,7 +348,7 @@ const EmptyState = () => (
     <TbReportMoney className="mx-auto text-tertiary" style={{ fontSize: 32 }} />
     <p className="text-[14px] text-gray-700 font-medium mt-3">No advisory clients in this queue yet</p>
     <p className="text-[12.5px] text-tertiary mt-1">
-      Add a client via <span className="font-semibold">Loan Applications → Add Client</span> and select an Advisory flow.
+      Add a client via <span className="font-semibold">Loan applications → Add client</span> and select an advisory flow.
     </p>
   </div>
 )

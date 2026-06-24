@@ -181,7 +181,7 @@ const ActivatedPage = () => (
         <div className="rounded-xl px-5 py-5 mb-4" style={{ backgroundColor: '#1D3557' }}>
           <div className="flex items-center gap-1.5 mb-3">
             <TbBolt className="text-amber-400 shrink-0" style={{ fontSize: 14 }} />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">AI Saved You</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">AI saved you</span>
           </div>
           <div className="flex flex-wrap items-end gap-y-3 gap-x-8">
             <div>
@@ -193,15 +193,15 @@ const ActivatedPage = () => (
             </div>
             <div className="flex flex-wrap gap-x-8 gap-y-2">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Fields Auto-Filled</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Fields auto-filled</p>
                 <p className="text-[20px] font-bold text-white">3</p>
               </div>
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Documents Verified</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Documents verified</p>
                 <p className="text-[20px] font-bold text-white">3 <span className="text-[14px] font-medium text-blue-300">/ 3</span></p>
               </div>
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Matched From</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-blue-300 mb-0.5">Matched from</p>
                 <p className="text-[20px] font-bold text-white">47 <span className="text-[14px] font-medium text-blue-300">advisors</span></p>
               </div>
               <div>

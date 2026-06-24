@@ -37,15 +37,15 @@ import {
 const DOC_META = {
   'national-id':         { label: 'National ID',          Icon: TbId,              tone: 'text-blue-700 bg-blue-50 border-blue-200' },
   'passport':            { label: 'Passport',             Icon: TbId,              tone: 'text-blue-700 bg-blue-50 border-blue-200' },
-  'salary-slip':         { label: 'Salary Slip',          Icon: TbReceipt,         tone: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
-  'bank-statement':      { label: 'Bank Statement',       Icon: TbWallet,          tone: 'text-violet-700 bg-violet-50 border-violet-200' },
-  'employment-letter':   { label: 'Employment Letter',    Icon: TbFileDescription, tone: 'text-amber-700 bg-amber-50 border-amber-200' },
-  'tax-return':          { label: 'Tax Return',           Icon: TbReportMoney,     tone: 'text-rose-700 bg-rose-50 border-rose-200' },
-  'business-license':    { label: 'Business License',     Icon: TbLicense,         tone: 'text-indigo-700 bg-indigo-50 border-indigo-200' },
-  'financial-statement': { label: 'Financial Statement',  Icon: TbReportMoney,     tone: 'text-rose-700 bg-rose-50 border-rose-200' },
-  'corporate-bank-statement': { label: 'Corporate Bank Statement', Icon: TbWallet, tone: 'text-violet-700 bg-violet-50 border-violet-200' },
-  'partnership-agreement': { label: 'Partnership Agreement', Icon: TbBriefcase,    tone: 'text-slate-700 bg-slate-50 border-slate-200' },
-  'cosigner-docs':       { label: 'Co-signer Docs',       Icon: TbBuilding,        tone: 'text-slate-700 bg-slate-50 border-slate-200' },
+  'salary-slip':         { label: 'Salary slip',          Icon: TbReceipt,         tone: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+  'bank-statement':      { label: 'Bank statement',       Icon: TbWallet,          tone: 'text-violet-700 bg-violet-50 border-violet-200' },
+  'employment-letter':   { label: 'Employment letter',    Icon: TbFileDescription, tone: 'text-amber-700 bg-amber-50 border-amber-200' },
+  'tax-return':          { label: 'Tax return',           Icon: TbReportMoney,     tone: 'text-rose-700 bg-rose-50 border-rose-200' },
+  'business-license':    { label: 'Business license',     Icon: TbLicense,         tone: 'text-indigo-700 bg-indigo-50 border-indigo-200' },
+  'financial-statement': { label: 'Financial statement',  Icon: TbReportMoney,     tone: 'text-rose-700 bg-rose-50 border-rose-200' },
+  'corporate-bank-statement': { label: 'Corporate bank statement', Icon: TbWallet, tone: 'text-violet-700 bg-violet-50 border-violet-200' },
+  'partnership-agreement': { label: 'Partnership agreement', Icon: TbBriefcase,    tone: 'text-slate-700 bg-slate-50 border-slate-200' },
+  'cosigner-docs':       { label: 'Co-signer docs',       Icon: TbBuilding,        tone: 'text-slate-700 bg-slate-50 border-slate-200' },
 }
 const humanize = (s) => String(s ?? '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 const docMetaOf = (type) =>

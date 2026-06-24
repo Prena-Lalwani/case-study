@@ -26,9 +26,9 @@ const LOAN_ICONS = {
 /* ─── Tab definitions ────────────────────────────────────────────────────── */
 const TABS = [
   { key: 'all',           label: 'All applications' },
-  { key: 'ai_reviewing',  label: 'AI Reviewing'     },
-  { key: 'needs_review',  label: 'Needs Review'     },
-  { key: 'auto_rejected', label: 'Auto-Rejected'    },
+  { key: 'ai_reviewing',  label: 'AI reviewing'     },
+  { key: 'needs_review',  label: 'Needs review'     },
+  { key: 'auto_rejected', label: 'Auto-rejected'    },
   { key: 'approved',      label: 'Approved'         },
 ]
 
@@ -97,7 +97,7 @@ const OverrideModal = ({ app, onClose, onConfirm }) => {
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-[16px] font-semibold text-gray-900">
-              Override Auto-Rejection
+              Override auto-rejection
             </h3>
             <p className="text-[12px] text-secondary mt-0.5">
               {app.id} · {app.name}
@@ -143,7 +143,7 @@ const OverrideModal = ({ app, onClose, onConfirm }) => {
             onClick={() => onConfirm(reason)}
             className="px-4 py-2 text-[13px] font-medium text-white bg-navy rounded-lg hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Confirm Override
+            Confirm override
           </button>
         </div>
       </div>

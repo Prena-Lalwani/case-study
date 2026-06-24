@@ -47,10 +47,10 @@ const fmtDate = iso => new Date(iso).toLocaleDateString('en-US', {
 })
 
 const SERVICE_META = {
-  'personal-loan':     { label: 'Personal Loan',     Icon: TbCoin,      tone: 'text-violet-700 bg-violet-50 border-violet-200' },
-  'business-loan':     { label: 'Business Loan',     Icon: TbBuilding,  tone: 'text-blue-700 bg-blue-50 border-blue-200' },
-  'personal-advisory': { label: 'Personal Advisory', Icon: TbUser,      tone: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
-  'business-advisory': { label: 'Business Advisory', Icon: TbBriefcase, tone: 'text-amber-700 bg-amber-50 border-amber-200' },
+  'personal-loan':     { label: 'Personal loan',     Icon: TbCoin,      tone: 'text-violet-700 bg-violet-50 border-violet-200' },
+  'business-loan':     { label: 'Business loan',     Icon: TbBuilding,  tone: 'text-blue-700 bg-blue-50 border-blue-200' },
+  'personal-advisory': { label: 'Personal advisory', Icon: TbUser,      tone: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+  'business-advisory': { label: 'Business advisory', Icon: TbBriefcase, tone: 'text-amber-700 bg-amber-50 border-amber-200' },
 }
 
 const serviceFor = c => {

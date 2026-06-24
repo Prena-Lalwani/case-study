@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { TbArrowLeft, TbArrowRight, TbShield, TbUsers, TbAccessible, TbLoader, TbClock, TbCircleFilled } from 'react-icons/tb'
 import { useNavigate } from 'react-router-dom'
 
-const BottomBar = ({ backPath = '/signup', continuePath, onContinue, continueLabel = 'Save & Continue', continueDisabled = false, statusMessage, centerMessage, centerDotColor = 'text-success' }) => {
+const BottomBar = ({ backPath = '/signup', continuePath, onContinue, continueLabel = 'Save & continue', continueDisabled = false, statusMessage, centerMessage, centerDotColor = 'text-success' }) => {
   const navigate = useNavigate()
 
   return (

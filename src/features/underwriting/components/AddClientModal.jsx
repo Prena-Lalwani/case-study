@@ -97,7 +97,7 @@ const SCH = {
 /* ── Flow definitions ────────────────────────────────────────────────── */
 const FLOWS = {
   'personal-advisory': {
-    label: 'Personal Advisory',
+    label: 'Personal advisory',
     desc:  'Financial guidance for an individual client',
     icon:  TbCompass,
     accent: { bg: 'bg-blue-50', text: 'text-blue-action', border: 'border-blue-action' },
@@ -124,7 +124,7 @@ const FLOWS = {
   },
 
   'business-advisory': {
-    label: 'Business Advisory',
+    label: 'Business advisory',
     desc:  'Strategic financial guidance for a company',
     icon:  TbReportMoney,
     accent: { bg: 'bg-green-50', text: 'text-success', border: 'border-success' },
@@ -153,7 +153,7 @@ const FLOWS = {
   },
 
   'personal-loan': {
-    label: 'Personal Loan',
+    label: 'Personal loan',
     desc:  'Loan application for an individual',
     icon:  TbCash,
     accent: { bg: 'bg-orange-50', text: 'text-warning', border: 'border-warning' },
@@ -180,7 +180,7 @@ const FLOWS = {
   },
 
   'business-loan': {
-    label: 'Business Loan',
+    label: 'Business loan',
     desc:  'Loan application for a company',
     icon:  TbBuildingBank,
     accent: { bg: 'bg-purple-50', text: 'text-violet-700', border: 'border-violet-500' },

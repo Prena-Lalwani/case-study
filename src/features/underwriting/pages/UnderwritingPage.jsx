@@ -58,7 +58,7 @@ const UnderwritingPage = () => {
           >
             <TbMenu2 style={{ fontSize: 20 }} />
           </button>
-          <span className="text-[14px] font-semibold text-navy">Loan Underwriting</span>
+          <span className="text-[14px] font-semibold text-navy">Loan underwriting</span>
         </div>
 
         {/* ── Page header + stats ── */}

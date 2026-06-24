@@ -25,33 +25,33 @@ const buildMockResult = (state) => {
 
   const checks = [
     {
-      label:  'Identity Verified',
+      label:  'Identity verified',
       status: identityOk ? 'pass' : 'fail',
       note:   identityOk
         ? `${id.method === 'biometric' ? 'Biometric scan' : 'Government ID'} confirmed successfully.`
         : 'No identity verification completed.',
     },
     {
-      label:  'Documents Complete',
+      label:  'Documents complete',
       status: allDocsReceived ? 'pass' : 'fail',
       note:   allDocsReceived
         ? 'All three required documents received and queued for review.'
         : 'One or more required documents are missing.',
     },
     {
-      label:  'Address Consistency',
+      label:  'Address consistency',
       status: hasAddress ? 'pass' : 'warning',
       note:   hasAddress
         ? 'Residential address present and consistent with submitted documents.'
         : 'No address on file — cross-check not possible.',
     },
     {
-      label:  'AML Risk Check',
+      label:  'AML risk check',
       status: 'pass',
       note:   'No anti-money laundering flags detected in submitted data.',
     },
     {
-      label:  'Profile Completeness',
+      label:  'Profile completeness',
       status: profileComplete ? 'pass' : 'warning',
       note:   profileComplete
         ? 'All required personal information fields are present.'

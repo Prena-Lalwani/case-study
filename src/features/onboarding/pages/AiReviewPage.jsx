@@ -13,11 +13,11 @@ import { useKycReview } from '../hooks/useKycReview'
 
 /* ─── Placeholder checks while Gemini is running ────────────────── */
 const LOADING_CHECKS = [
-  { label: 'Identity Verified',    status: 'in_progress', note: 'Verifying…'           },
-  { label: 'Documents Complete',   status: 'pending',     note: 'Waiting…'              },
-  { label: 'Address Consistency',  status: 'pending',     note: 'Waiting…'              },
-  { label: 'AML Risk Check',       status: 'pending',     note: 'Waiting…'              },
-  { label: 'Profile Completeness', status: 'pending',     note: 'Waiting…'              },
+  { label: 'Identity verified',    status: 'in_progress', note: 'Verifying…'           },
+  { label: 'Documents complete',   status: 'pending',     note: 'Waiting…'              },
+  { label: 'Address consistency',  status: 'pending',     note: 'Waiting…'              },
+  { label: 'AML risk check',       status: 'pending',     note: 'Waiting…'              },
+  { label: 'Profile completeness', status: 'pending',     note: 'Waiting…'              },
 ]
 
 /* ─── What the AI checks (static info section) ───────────────────── */

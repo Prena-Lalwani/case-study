@@ -21,7 +21,7 @@ const StepStepper = ({ activeStep = 1, lockedFrom, allComplete = false }) => {
         <div className="flex items-center justify-center h-10">
           <div className="flex items-center gap-1.5 bg-navy text-white rounded-full px-4 py-1">
             <TbCheck style={{ fontSize: 12 }} />
-            <span className="text-[11px] font-bold tracking-widest uppercase">All 8 Steps Complete</span>
+            <span className="text-[11px] font-bold tracking-widest uppercase">All 8 steps complete</span>
           </div>
         </div>
       </div>

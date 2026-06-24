@@ -181,9 +181,9 @@ const ScoreRing = ({ score, loading }) => {
     : score >= 60 ? C.warning
     : C.critical
   const band = score == null ? 'Pending'
-    : score >= 80 ? 'Low Risk'
-    : score >= 60 ? 'Moderate Risk'
-    : 'High Risk'
+    : score >= 80 ? 'Low risk'
+    : score >= 60 ? 'Moderate risk'
+    : 'High risk'
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
       <RingChart pct={score != null ? score / 100 : 0} color={loading ? C.track : color} size={144} stroke={13}>
@@ -388,7 +388,7 @@ const ComplianceSummaryCard = ({ title, items }) => {
   const fail = items.filter(c => c.status === 'fail').length
   const warn = items.filter(c => c.status === 'warn').length
   const color = fail > 0 ? C.critical : warn > 0 ? C.warning : C.success
-  const summary = fail > 0 ? `${fail} Failed` : warn > 0 ? `${warn} Warnings` : `${pass}/${items.length} Passed`
+  const summary = fail > 0 ? `${fail} failed` : warn > 0 ? `${warn} warnings` : `${pass}/${items.length} passed`
 
   const iconFor = s => ({ pass: TbCheck, fail: TbX, warn: TbAlertTriangle, pending: TbClock, na: TbX })[s] ?? TbX
   const colFor  = s => ({ pass: C.success, fail: C.critical, warn: C.warning, pending: C.muted, na: C.muted })[s] ?? C.muted
@@ -437,7 +437,7 @@ const ReconRow = ({ row }) => {
         <div style={{ flex: 1, minWidth: 0 }}>
           <p style={{ fontSize: 11, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 8 }}>{row.field}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 24px' }}>
-            {[['Declared', row.declared, C.muted], ['Verified', row.verified, C.text], row.extracted !== '—' && ['AI Extracted', row.extracted, C.primary]].filter(Boolean).map(([lbl, val, col]) => (
+            {[['Declared', row.declared, C.muted], ['Verified', row.verified, C.text], row.extracted !== '—' && ['AI extracted', row.extracted, C.primary]].filter(Boolean).map(([lbl, val, col]) => (
               <div key={lbl}>
                 <span style={{ fontSize: 10, color: C.muted, fontWeight: 500 }}>{lbl} </span>
                 <span style={{ fontSize: 14, fontWeight: 700, color: col }}>{val}</span>
@@ -498,25 +498,25 @@ const buildCompliance = ({ personalInfo, employment, financials, documents: docs
 
   return {
     kyc: [
-      { label: 'Identity Verified',      status: docs.nationalId.status === 'verified' ? 'pass' : docs.nationalId.status === 'processing' ? 'pending' : 'fail' },
-      { label: 'Name Match (App vs. ID)', status: nameMatch(personalInfo.fullName, docs.nationalId.fullName) ? 'pass' : 'warn' },
-      { label: 'Date of Birth Match',    status: docs.nationalId.dateOfBirth === personalInfo.dateOfBirth ? 'pass' : 'fail' },
+      { label: 'Identity verified',      status: docs.nationalId.status === 'verified' ? 'pass' : docs.nationalId.status === 'processing' ? 'pending' : 'fail' },
+      { label: 'Name match (app vs. ID)', status: nameMatch(personalInfo.fullName, docs.nationalId.fullName) ? 'pass' : 'warn' },
+      { label: 'Date of birth match',    status: docs.nationalId.dateOfBirth === personalInfo.dateOfBirth ? 'pass' : 'fail' },
       { label: 'Address on ID',          status: docs.nationalId.address ? 'pass' : 'pending' },
-      { label: 'ID Not Expired',         status: !docs.nationalId.expiryDate ? 'pending' : expired ? 'fail' : 'pass' },
+      { label: 'ID not expired',         status: !docs.nationalId.expiryDate ? 'pending' : expired ? 'fail' : 'pass' },
     ],
     aml: [
-      { label: 'OFAC / UN Sanctions',   status: 'pass' },
-      { label: 'PEP Check',             status: 'pass' },
-      { label: 'Transaction Pattern',    status: txnFlagged ? 'warn' : 'pass' },
-      { label: 'Source of Income',       status: docs.salarySlip.status === 'verified' ? 'pass' : docs.salarySlip.status === 'processing' ? 'pending' : 'warn' },
+      { label: 'OFAC / UN sanctions',   status: 'pass' },
+      { label: 'PEP check',             status: 'pass' },
+      { label: 'Transaction pattern',    status: txnFlagged ? 'warn' : 'pass' },
+      { label: 'Source of income',       status: docs.salarySlip.status === 'verified' ? 'pass' : docs.salarySlip.status === 'processing' ? 'pending' : 'warn' },
     ],
     policy: [
       { label: `DTI ≤ ${dtiLim}%`,      status: ai.dti == null ? 'pending' : ai.dti <= dtiLim ? 'pass' : 'fail' },
-      { label: 'Credit Score ≥ 600',    status: financials.creditScore >= 600 ? 'pass' : 'fail' },
+      { label: 'Credit score ≥ 600',    status: financials.creditScore >= 600 ? 'pass' : 'fail' },
       { label: 'LTV ≤ 85%',             status: loanRequest.ltv == null ? 'na' : loanRequest.ltv <= 85 ? 'pass' : 'fail' },
       { label: 'Employment ≥ 1 yr',     status: employment.yearsEmployed >= 1 ? 'pass' : 'warn' },
-      { label: 'Late Payments ≤ 2',     status: financials.latePaymentsLast24Months <= 1 ? 'pass' : financials.latePaymentsLast24Months <= 2 ? 'warn' : 'fail' },
-      { label: 'Doc Confidence ≥ 85%',  status: confs.length === 0 ? 'pending' : confs.every(c => c >= 85) ? 'pass' : 'warn' },
+      { label: 'Late payments ≤ 2',     status: financials.latePaymentsLast24Months <= 1 ? 'pass' : financials.latePaymentsLast24Months <= 2 ? 'warn' : 'fail' },
+      { label: 'Doc confidence ≥ 85%',  status: confs.length === 0 ? 'pending' : confs.every(c => c >= 85) ? 'pass' : 'warn' },
     ],
   }
 }
@@ -546,12 +546,12 @@ const buildReconciliation = ({ personalInfo, employment, documents: docs, aiAnal
     : null
 
   return [
-    { field: 'Full Name',            declared: personalInfo.fullName,                                  extracted: ed?.verifiedName ?? '—',                                    verified: docs.nationalId.fullName ?? '—',                     source: 'National ID',    status: nameSt(personalInfo.fullName, docs.nationalId.fullName) },
-    { field: 'Monthly Gross Income', declared: fmt$(employment.monthlyGross) + '/mo',                  extracted: ed?.verifiedMonthlyIncome ? fmt$(ed.verifiedMonthlyIncome) + '/mo' : '—', verified: docs.salarySlip.grossSalary ? fmt$(docs.salarySlip.grossSalary) + '/mo' : '—', source: 'Salary Slip',    status: numSt(employment.monthlyGross, docs.salarySlip.grossSalary) },
-    { field: 'Monthly Net Pay',      declared: fmt$(employment.monthlyNet) + '/mo',                    extracted: docs.salarySlip.netPay ? fmt$(docs.salarySlip.netPay) + '/mo' : '—',       verified: bankSalary ? fmt$(bankSalary) + '/mo' : '—',         source: 'Bank Deposit',   status: numSt(employment.monthlyNet, bankSalary, 0.03) },
-    { field: 'Avg Credits vs Income',declared: fmt$(employment.monthlyGross) + '/mo',                  extracted: ed?.averageBankCredit3Months ? fmt$(ed.averageBankCredit3Months) + '/mo' : '—', verified: docs.bankStatement.averageMonthlyCredit ? fmt$(docs.bankStatement.averageMonthlyCredit) + '/mo' : '—', source: 'Bank Statement', status: numSt(employment.monthlyGross, docs.bankStatement.averageMonthlyCredit, 0.10) },
-    { field: 'Employer',             declared: employment.employer,                                    extracted: ed?.verifiedEmployer ?? '—',                                verified: docs.salarySlip.employer ?? '—',                    source: 'Salary Slip',    status: strSt(employment.employer, docs.salarySlip.employer) },
-    { field: 'Residential Address',  declared: personalInfo.address,                                   extracted: '—',                                                        verified: docs.nationalId.address ?? '—',                     source: 'National ID',    status: strSt(personalInfo.address?.split(',')[0], docs.nationalId.address?.split(',')[0]) },
+    { field: 'Full name',            declared: personalInfo.fullName,                                  extracted: ed?.verifiedName ?? '—',                                    verified: docs.nationalId.fullName ?? '—',                     source: 'National ID',    status: nameSt(personalInfo.fullName, docs.nationalId.fullName) },
+    { field: 'Monthly gross income', declared: fmt$(employment.monthlyGross) + '/mo',                  extracted: ed?.verifiedMonthlyIncome ? fmt$(ed.verifiedMonthlyIncome) + '/mo' : '—', verified: docs.salarySlip.grossSalary ? fmt$(docs.salarySlip.grossSalary) + '/mo' : '—', source: 'Salary slip',    status: numSt(employment.monthlyGross, docs.salarySlip.grossSalary) },
+    { field: 'Monthly net pay',      declared: fmt$(employment.monthlyNet) + '/mo',                    extracted: docs.salarySlip.netPay ? fmt$(docs.salarySlip.netPay) + '/mo' : '—',       verified: bankSalary ? fmt$(bankSalary) + '/mo' : '—',         source: 'Bank deposit',   status: numSt(employment.monthlyNet, bankSalary, 0.03) },
+    { field: 'Avg credits vs income',declared: fmt$(employment.monthlyGross) + '/mo',                  extracted: ed?.averageBankCredit3Months ? fmt$(ed.averageBankCredit3Months) + '/mo' : '—', verified: docs.bankStatement.averageMonthlyCredit ? fmt$(docs.bankStatement.averageMonthlyCredit) + '/mo' : '—', source: 'Bank statement', status: numSt(employment.monthlyGross, docs.bankStatement.averageMonthlyCredit, 0.10) },
+    { field: 'Employer',             declared: employment.employer,                                    extracted: ed?.verifiedEmployer ?? '—',                                verified: docs.salarySlip.employer ?? '—',                    source: 'Salary slip',    status: strSt(employment.employer, docs.salarySlip.employer) },
+    { field: 'Residential address',  declared: personalInfo.address,                                   extracted: '—',                                                        verified: docs.nationalId.address ?? '—',                     source: 'National ID',    status: strSt(personalInfo.address?.split(',')[0], docs.nationalId.address?.split(',')[0]) },
   ]
 }
 
@@ -559,9 +559,9 @@ const buildRiskFlags = ({ documents: docs, aiAnalysis: ai }) => {
   const CRIT_KW = ['dti', 'overdraft', 'missed', 'delinquency', 'negative', 'expired', 'sanctions', 'fraud', 'below minimum', 'default', 'nsf', 'below 600']
   const sev = t => CRIT_KW.some(kw => t.toLowerCase().includes(kw)) ? 'critical' : 'warning'
   const flags = []
-  ai.issues?.forEach(m => flags.push({ severity: sev(m), source: 'AI Analysis', message: m }))
+  ai.issues?.forEach(m => flags.push({ severity: sev(m), source: 'AI analysis', message: m }))
   docs.nationalId.flags?.forEach(m => flags.push({ severity: sev(m), source: 'Identity (KYC)', message: m }))
-  docs.salarySlip.flags?.forEach(m => flags.push({ severity: 'warning', source: 'Income Verification', message: m }))
+  docs.salarySlip.flags?.forEach(m => flags.push({ severity: 'warning', source: 'Income verification', message: m }))
   docs.bankStatement.months?.forEach(mo => mo.flags?.forEach(m => flags.push({ severity: sev(m), source: `Banking · ${mo.month}`, message: m })))
   return flags.sort((a, b) => (a.severity === 'critical' ? -1 : b.severity === 'critical' ? 1 : 0))
 }
@@ -744,9 +744,9 @@ const ApplicationReviewPage = () => {
   const confSub  = avgConf != null ? (avgConf < 85 ? 'Below 85% threshold' : 'Sufficient') : 'Min: 85%'
 
   const recCfg = {
-    APPROVE: { label: 'Approve Recommended', color: C.success,  bg: '#F0FDF4', border: '#86EFAC' },
-    REJECT:  { label: 'Reject Recommended',  color: C.critical, bg: '#FEF2F2', border: '#FCA5A5' },
-    REVIEW:  { label: 'Review Required',     color: C.warning,  bg: '#FFFBEB', border: '#FCD34D' },
+    APPROVE: { label: 'Approve recommended', color: C.success,  bg: '#F0FDF4', border: '#86EFAC' },
+    REJECT:  { label: 'Reject recommended',  color: C.critical, bg: '#FEF2F2', border: '#FCA5A5' },
+    REVIEW:  { label: 'Review required',     color: C.warning,  bg: '#FFFBEB', border: '#FCD34D' },
     PENDING: { label: 'Analysing…',          color: C.muted,    bg: '#F9FAFB', border: C.border   },
   }[ai.recommendation] ?? { label: '—', color: C.muted, bg: '#F9FAFB', border: C.border }
 
@@ -763,7 +763,7 @@ const ApplicationReviewPage = () => {
           <button onClick={() => setMobileOpen(true)} className="p-1.5 rounded-lg text-gray-600 hover:bg-gray-100">
             <TbMenu2 style={{ fontSize: 20 }} />
           </button>
-          <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>Application Review</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>Application review</span>
         </div>
 
         {/* ── Header ── */}
@@ -786,7 +786,7 @@ const ApplicationReviewPage = () => {
                   <span style={{ fontSize: 12, color: C.muted }}>{summary.id} · {summary.loanType} · Applied {fmtApplied(detail.submittedAt)}</span>
                 </div>
                 <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap' }}>
-                  {[['National ID', docs.nationalId.status], ['Salary Slip', docs.salarySlip.status], ['Bank Statement', docs.bankStatement.status]].map(([lbl, st]) => (
+                  {[['National ID', docs.nationalId.status], ['Salary slip', docs.salarySlip.status], ['Bank statement', docs.bankStatement.status]].map(([lbl, st]) => (
                     <span key={lbl} style={{
                       display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 500,
                       padding: '2px 8px', borderRadius: 20, border: '1px solid',
@@ -803,7 +803,7 @@ const ApplicationReviewPage = () => {
             </div>
 
             <div style={{ textAlign: 'right', flexShrink: 0 }}>
-              <p style={{ fontSize: 10, color: C.muted, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Loan Amount</p>
+              <p style={{ fontSize: 10, color: C.muted, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.07em' }}>Loan amount</p>
               <p style={{ fontSize: 26, fontWeight: 800, color: C.text, lineHeight: 1.1, marginTop: 2 }}>{fmt$(loanRequest.amount)}</p>
               <p style={{ fontSize: 11, color: C.muted, marginTop: 2 }}>{loanRequest.termYears} yr · {loanRequest.type}</p>
             </div>
@@ -848,7 +848,7 @@ const ApplicationReviewPage = () => {
               </div>
 
               <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 14 }}>AI Assessment</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 14 }}>AI assessment</p>
                 {aiLoading ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: C.muted, padding: '16px 0' }}>
                     <TbLoader2 className="animate-spin" style={{ fontSize: 15 }} />
@@ -858,7 +858,7 @@ const ApplicationReviewPage = () => {
                   <>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 14 }}>
                       <div>
-                        <p style={{ fontSize: 10, fontWeight: 600, color: C.success, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>Positive Factors</p>
+                        <p style={{ fontSize: 10, fontWeight: 600, color: C.success, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>Positive factors</p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                           {(ai.strengths ?? []).length === 0
                             ? <span style={{ fontSize: 12, color: C.muted }}>None identified</span>
@@ -872,7 +872,7 @@ const ApplicationReviewPage = () => {
                         </div>
                       </div>
                       <div>
-                        <p style={{ fontSize: 10, fontWeight: 600, color: C.warning, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>Risk Factors</p>
+                        <p style={{ fontSize: 10, fontWeight: 600, color: C.warning, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>Risk factors</p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                           {(ai.issues ?? []).length === 0
                             ? <span style={{ fontSize: 12, color: C.muted }}>None identified</span>
@@ -896,10 +896,10 @@ const ApplicationReviewPage = () => {
 
             {/* Metrics: 4 donut cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <MetricCard label="DTI Ratio"        displayValue={ai.dti != null ? `${ai.dti}%` : '—'} pct={ai.dti != null ? ai.dti / 80 : 0}  color={dtiCol} sub={dtiSub}  loading={aiLoading} />
-              <MetricCard label="Credit Score"     displayValue={cs}                                   pct={(cs - 300) / 550}                     color={csCol}  sub={csSub}  loading={false}    />
-              <MetricCard label="LTV Ratio"        displayValue={ltv != null ? `${ltv}%` : 'N/A'}     pct={ltv != null ? ltv / 100 : 0}          color={ltvCol} sub={ltvSub} loading={false}    />
-              <MetricCard label="Doc Confidence"   displayValue={avgConf != null ? `${avgConf}%` : '—'} pct={avgConf != null ? avgConf / 100 : 0} color={confCol} sub={confSub} loading={aiLoading} />
+              <MetricCard label="DTI ratio"        displayValue={ai.dti != null ? `${ai.dti}%` : '—'} pct={ai.dti != null ? ai.dti / 80 : 0}  color={dtiCol} sub={dtiSub}  loading={aiLoading} />
+              <MetricCard label="Credit score"     displayValue={cs}                                   pct={(cs - 300) / 550}                     color={csCol}  sub={csSub}  loading={false}    />
+              <MetricCard label="LTV ratio"        displayValue={ltv != null ? `${ltv}%` : 'N/A'}     pct={ltv != null ? ltv / 100 : 0}          color={ltvCol} sub={ltvSub} loading={false}    />
+              <MetricCard label="Doc confidence"   displayValue={avgConf != null ? `${avgConf}%` : '—'} pct={avgConf != null ? avgConf / 100 : 0} color={confCol} sub={confSub} loading={aiLoading} />
             </div>
 
             {/* Banking Analytics — full width on mobile, centered ~75% on desktop */}
@@ -916,7 +916,7 @@ const ApplicationReviewPage = () => {
 
             {/* Compliance: 3 compact cards */}
             <div>
-              <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 10 }}>Compliance Checks</p>
+              <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 10 }}>Compliance checks</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <ComplianceSummaryCard title="KYC" items={compliance.kyc} />
                 <ComplianceSummaryCard title="AML" items={compliance.aml} />
@@ -928,7 +928,7 @@ const ApplicationReviewPage = () => {
             <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
                 <div>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Data Reconciliation</p>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Data reconciliation</p>
                   <p style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>
                     {aiLoading ? 'Waiting for AI…' : exceptions.length === 0 ? 'All data points verified — no exceptions' : `${exceptions.length} exception${exceptions.length > 1 ? 's' : ''} detected`}
                   </p>
@@ -961,7 +961,7 @@ const ApplicationReviewPage = () => {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                   <TbNotes style={{ fontSize: 15, color: C.primary }} />
-                  <p style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Officer Notes</p>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: C.text }}>Officer notes</p>
                 </div>
                 <span style={{ fontSize: 11, color: C.muted }}>{officerNotes.length}/500</span>
               </div>
@@ -982,7 +982,7 @@ const ApplicationReviewPage = () => {
 
             {/* Recommendation */}
             <div style={{ padding: 20, borderBottom: `1px solid ${C.border}` }}>
-              <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>AI Recommendation</p>
+              <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>AI recommendation</p>
               <div style={{ borderRadius: 10, padding: 16, background: recCfg.bg, border: `1px solid ${recCfg.border}` }}>
                 <p style={{ fontSize: 17, fontWeight: 700, color: recCfg.color, lineHeight: 1.2 }}>{recCfg.label}</p>
                 {!aiLoading && (ai.issues ?? []).length > 0 && (
@@ -1000,16 +1000,16 @@ const ApplicationReviewPage = () => {
 
             {/* Quick Stats */}
             <div style={{ padding: '16px 20px', borderBottom: `1px solid ${C.border}` }}>
-              <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Quick Stats</p>
+              <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Quick stats</p>
               {[
-                ['Credit Score',     cs,                                                           csCol ],
-                ['DTI Ratio',        ai.dti != null ? `${ai.dti}%` : '—',                         dtiCol],
-                ['Monthly Income',   fmt$(employment.monthlyGross),                                null  ],
-                ['Monthly Net',      fmt$(employment.monthlyNet),                                  null  ],
+                ['Credit score',     cs,                                                           csCol ],
+                ['DTI ratio',        ai.dti != null ? `${ai.dti}%` : '—',                         dtiCol],
+                ['Monthly income',   fmt$(employment.monthlyGross),                                null  ],
+                ['Monthly net',      fmt$(employment.monthlyNet),                                  null  ],
                 ['Employment',       `${employment.yearsEmployed} yr${employment.yearsEmployed !== 1 ? 's' : ''}`, null],
                 ['Employer',         (employment.employer ?? '—').split(' ').slice(0, 3).join(' '), null ],
-                ['Loan to Value',    ltv != null ? `${ltv}%` : 'N/A',                             ltvCol],
-                ['Late Payments',    financials.latePaymentsLast24Months ?? 0,                     financials.latePaymentsLast24Months > 0 ? C.warning : null],
+                ['Loan to value',    ltv != null ? `${ltv}%` : 'N/A',                             ltvCol],
+                ['Late payments',    financials.latePaymentsLast24Months ?? 0,                     financials.latePaymentsLast24Months > 0 ? C.warning : null],
               ].map(([lbl, val, col]) => (
                 <div key={lbl} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: `1px solid ${C.border}` }}>
                   <span style={{ fontSize: 12, color: C.muted, fontWeight: 500 }}>{lbl}</span>
@@ -1021,7 +1021,7 @@ const ApplicationReviewPage = () => {
             {/* Risk Flags */}
             <div style={{ padding: 20, flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Risk Flags</p>
+                <p style={{ fontSize: 10, fontWeight: 600, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Risk flags</p>
                 {riskFlags.length > 0 && (
                   <span style={{ fontSize: 11, fontWeight: 700, color: C.critical }}>
                     {riskFlags.filter(f => f.severity === 'critical').length}C · {riskFlags.filter(f => f.severity === 'warning').length}W

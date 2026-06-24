@@ -15,7 +15,7 @@ import { signOut } from '../../auth/auth'
 const NAV_ITEMS = [
   { key: 'advisors',  label: 'Advisors',          icon: TbUserStar,        path: '/underwriting/advisors' },
   { key: 'team',      label: 'Clients',           icon: TbUsers,           path: '/underwriting/team' },
-  { key: 'dashboard', label: 'Loan Applications', icon: TbLayoutDashboard, path: '/underwriting' },
+  { key: 'dashboard', label: 'Loan applications', icon: TbLayoutDashboard, path: '/underwriting' },
   { key: 'advisory',  label: 'Advisory',          icon: TbFileDescription, path: '/underwriting/advisory' },
   { key: 'reports',   label: 'Analytics',         icon: TbChartBar,        path: '/underwriting/reports' },
 ]

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { TbCheck, TbUserStar, TbX } from 'react-icons/tb'
 
 const FOCUS_OPTIONS = [
-  { key: 'personal-advisory', label: 'Personal Advisory' },
-  { key: 'business-advisory', label: 'Business Advisory' },
-  { key: 'personal-loan',     label: 'Personal Loan'     },
-  { key: 'business-loan',     label: 'Business Loan'     },
+  { key: 'personal-advisory', label: 'Personal advisory' },
+  { key: 'business-advisory', label: 'Business advisory' },
+  { key: 'personal-loan',     label: 'Personal loan'     },
+  { key: 'business-loan',     label: 'Business loan'     },
 ]
 
 const EMPTY = {

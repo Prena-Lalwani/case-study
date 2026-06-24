@@ -13,7 +13,7 @@ const EmailField = ({ register, error, isValid }) => {
 
   return (
     <InputField
-      label="Username or Email"
+      label="Username or email"
       type="text"
       placeholder="you@email.com"
       autoComplete="username"
