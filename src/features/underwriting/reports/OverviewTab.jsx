@@ -38,7 +38,7 @@ const OverviewTab = ({ period }) => {
     <div className="space-y-4">
 
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <KpiCard
           label="Total new clients"
           value={agg.totalNew}
@@ -89,7 +89,7 @@ const OverviewTab = ({ period }) => {
       </ReportSection>
 
       {/* Two donuts side by side */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <ReportSection title="Loan vs Advisory" subtitle="Where new intake landed">
           <DonutChart
             size={170}
@@ -118,7 +118,7 @@ const OverviewTab = ({ period }) => {
 
       {/* Flow breakdown */}
       <ReportSection title="Flow-by-flow breakdown" subtitle="New clients per intake type">
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <FlowCard label="Personal Advisory" value={agg.newClients['personal-advisory']} color={C.success} icon={TbUser} />
           <FlowCard label="Business Advisory" value={agg.newClients['business-advisory']} color={C.success} icon={TbBuilding} />
           <FlowCard label="Personal Loan"     value={agg.newClients['personal-loan']}     color={C.primary} icon={TbUser} />

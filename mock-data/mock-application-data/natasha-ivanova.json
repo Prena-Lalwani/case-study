@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24803",
   "status": "approved",
   "submittedAt": "2026-06-02T08:30:00Z",
@@ -8,7 +8,7 @@
     "address": "19 Crescent Hill Rd, Seattle, WA 98102",
     "phone": "+1 206-555-0891",
     "email": "natasha.ivanova@email.com",
-    "ssn": "***-**-3312",
+    "ssn": "555-12-3312",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -99,8 +99,8 @@
     "bankStatement": {
       "bank": "US Bank",
       "accountHolder": "Natasha E. Ivanova",
-      "accountNumber": "****7712",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127712",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

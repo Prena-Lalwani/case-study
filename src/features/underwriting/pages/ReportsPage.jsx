@@ -121,23 +121,23 @@ const ReportsPage = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shrink-0">
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-5 sm:py-6 shrink-0">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-[22px] font-semibold text-gray-900 leading-tight">Reports</h1>
+              <h1 className="text-[20px] sm:text-[22px] font-semibold text-gray-900 leading-tight">Reports</h1>
               <p className="text-[13px] text-secondary mt-1">{todayLabel} · firm-wide performance & advisor activity</p>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="flex items-center border-b border-gray-200 mt-5 -mb-6">
+          <div className="flex items-center border-b border-gray-200 mt-5 -mb-5 sm:-mb-6 overflow-x-auto">
             {TABS.map(({ key, label, icon: Icon }) => {
               const isActive = tab === key
               return (
                 <button
                   key={key}
                   onClick={() => setTab(key)}
-                  className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors ${
+                  className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap shrink-0 ${
                     isActive
                       ? 'border-blue-action text-blue-action'
                       : 'border-transparent text-secondary hover:text-gray-800'
@@ -152,7 +152,7 @@ const ReportsPage = () => {
         </div>
 
         {/* Period + Export bar */}
-        <div className="bg-white border-b border-gray-200 px-8 py-3 shrink-0 flex items-center justify-between flex-wrap gap-3">
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 shrink-0 flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <TbCalendar className="text-tertiary" style={{ fontSize: 15 }} />
             <span className="text-[12px] font-medium text-secondary">Period:</span>
@@ -189,7 +189,7 @@ const ReportsPage = () => {
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-8 py-5">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-5">
           {tab === 'overview' && <OverviewTab period={period} />}
           {tab === 'loans'    && <LoansTab    period={period} />}
           {tab === 'advisory' && <AdvisoryTab period={period} />}

@@ -337,12 +337,12 @@ const ApplicationQueueView = ({ apps }) => {
   return (
     <>
       {/* ── Tab bar ── */}
-      <div className="flex items-center border-b border-gray-200 mb-5">
+      <div className="flex items-center border-b border-gray-200 mb-5 overflow-x-auto">
         {TABS.map(({ key, label }) => (
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors ${
+            className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap shrink-0 ${
               activeTab === key
                 ? 'border-blue-action text-blue-action'
                 : 'border-transparent text-secondary hover:text-gray-800'
@@ -395,8 +395,8 @@ const ApplicationQueueView = ({ apps }) => {
         </div>
       </div>
 
-      {/* ── 2-column card grid ── */}
-      <div className="grid grid-cols-2 gap-4">
+      {/* ── card grid — single column on mobile, two on larger screens ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {filtered.map(app => (
           <ApplicationCard key={app.id} app={app} />
         ))}

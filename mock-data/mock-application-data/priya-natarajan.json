@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24815",
   "status": "needs_review",
   "submittedAt": "2026-06-02T11:33:47Z",
@@ -8,7 +8,7 @@
     "address": "310 Westbrook Ct, Austin, TX 78701",
     "phone": "+1 512-555-0294",
     "email": "priya.natarajan@email.com",
-    "ssn": "***-**-7712",
+    "ssn": "555-12-7712",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -92,14 +92,14 @@
       "aiConfidence": 94,
       "status": "verified",
       "flags": [
-        "Employment start date Oct 2025 — less than 12 months tenure"
+        "Employment start date Oct 2025 â€” less than 12 months tenure"
       ]
     },
     "bankStatement": {
       "bank": "Bank of America",
       "accountHolder": "Priya Natarajan",
-      "accountNumber": "****4490",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40124490",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

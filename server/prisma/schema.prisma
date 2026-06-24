@@ -142,9 +142,10 @@ model LoanApplication {
   decisionType    String?                              // 'approved' | 'rejected' | 'override' | 'escalated'
   decisionReason  String?
 
-  // Case officer — the advisor handling this loan
+  // Case officer — the advisor handling this loan.
+  // If the advisor is deleted, the loan stays but becomes unassigned (NULL).
   assignedAdvisorId String?
-  assignedAdvisor   Advisor? @relation("LoanCaseOfficer", fields: [assignedAdvisorId], references: [id])
+  assignedAdvisor   Advisor? @relation("LoanCaseOfficer", fields: [assignedAdvisorId], references: [id], onDelete: SetNull)
 
   aiAnalysis      AiAnalysis?
   queueItem       QueueItem?
@@ -265,6 +266,10 @@ model Document {
   uploadSource    String?                                 // 'image' | 'json'
   aiConfidence    Int?
   status          String?                                 // 'verified' | 'pending' | 'flagged'
+  // Original uploaded file persisted as a base64 data URL.
+  // Kept inline (no blob store) — fine for a PoC; rotate to S3/GCS for prod.
+  fileDataUrl     String?  @db.Text
+  mimeType        String?
   uploadedAt      DateTime @default(now())
 
   @@index([clientId])

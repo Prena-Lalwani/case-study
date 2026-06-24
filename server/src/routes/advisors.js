@@ -43,6 +43,12 @@ router.get('/:id', async (req, res) => {
         },
         orderBy: { assignedAt: 'desc' },
       },
+      assignedLoanApplications: {
+        include: {
+          client: { select: { id: true, legacyId: true, name: true, type: true, company: true } },
+        },
+        orderBy: { submittedAt: 'desc' },
+      },
     },
   })
   if (!advisor) return res.status(404).json({ error: 'Advisor not found' })
@@ -95,7 +101,87 @@ router.get('/:id', async (req, res) => {
         },
       },
     })),
+    assignedLoanApplications: (advisor.assignedLoanApplications ?? []).map(l => ({
+      id: l.legacyId ?? l.id,
+      uuid: l.id,
+      loanType: l.loanType,
+      amount: l.amount,
+      status: l.status,
+      submittedAt: l.submittedAt,
+      client: l.client && { ...l.client, id: l.client.legacyId ?? l.client.id },
+    })),
   })
+})
+
+// POST /api/advisors/:id/handoff-delete
+// Officer chose a replacement for each open assignment, optionally left a reason.
+// Body: { reason?, loanReassignments?: { [loanUuid]: newAdvisorLegacyId | null },
+//                  engagementReassignments?: { [engagementId]: newAdvisorLegacyId | null } }
+router.post('/:id/handoff-delete', async (req, res) => {
+  const advisor = await prisma.advisor.findUnique({ where: { legacyId: req.params.id } })
+  if (!advisor) return res.status(404).json({ error: 'Advisor not found' })
+
+  const { reason, loanReassignments = {}, engagementReassignments = {} } = req.body ?? {}
+
+  /* Resolve every replacement legacyId → UUID */
+  const replacementIds = [
+    ...Object.values(loanReassignments).filter(Boolean),
+    ...Object.values(engagementReassignments).filter(Boolean),
+  ]
+  const replacements = replacementIds.length === 0 ? [] : await prisma.advisor.findMany({
+    where: { legacyId: { in: replacementIds } },
+  })
+  const idMap = Object.fromEntries(replacements.map(a => [a.legacyId, a.id]))
+
+  try {
+    /* 1. Loans — reassign to replacement OR set null */
+    for (const [loanUuid, newAdvisorLegacy] of Object.entries(loanReassignments)) {
+      const newId = newAdvisorLegacy ? idMap[newAdvisorLegacy] ?? null : null
+      await prisma.loanApplication.update({
+        where: { id: loanUuid },
+        data:  { assignedAdvisorId: newId },
+      })
+      if (newId) {
+        await prisma.advisor.update({
+          where: { id: newId },
+          data:  { clientLoad: { increment: 1 } },
+        })
+      }
+    }
+    /* Any loans NOT in the map — leave them null via the existing FK */
+
+    /* 2. Engagements — point assignment to the replacement OR delete it */
+    for (const [engagementId, newAdvisorLegacy] of Object.entries(engagementReassignments)) {
+      const newId = newAdvisorLegacy ? idMap[newAdvisorLegacy] ?? null : null
+      if (newId) {
+        await prisma.advisorAssignment.update({
+          where: { advisoryEngagementId: engagementId },
+          data:  { advisorId: newId, status: 'proposed', confirmedAt: null, confirmedBy: null, confirmedByOfficer: false },
+        })
+        await prisma.advisoryEngagement.update({
+          where: { id: engagementId },
+          data:  { status: 'proposed' },
+        })
+      }
+    }
+
+    /* 3. For loans/engagements not in the maps, the existing DELETE logic handles them
+       (unassigns loans, drops un-reassigned advisory assignments via cascade). */
+    await prisma.loanApplication.updateMany({
+      where: { assignedAdvisorId: advisor.id },
+      data:  { assignedAdvisorId: null },
+    })
+    await prisma.advisorAssignment.deleteMany({ where: { advisorId: advisor.id } })
+
+    /* 4. Delete the advisor */
+    await prisma.advisor.delete({ where: { id: advisor.id } })
+
+    console.log(`[advisor-handoff-delete] ${advisor.name} (${advisor.legacyId}) removed by officer — reason: ${reason ?? '(none)'}`)
+    res.status(204).end()
+  } catch (err) {
+    console.error('Handoff-delete failed:', err.message)
+    res.status(500).json({ error: 'Could not delete advisor: ' + err.message })
+  }
 })
 
 // POST /api/advisors — create
@@ -146,17 +232,31 @@ router.patch('/:id', async (req, res) => {
   res.json({ ...updated, id: updated.legacyId })
 })
 
-// DELETE /api/advisors/:id — hard delete (also drops any assignments via cascade)
+// DELETE /api/advisors/:id — hard delete.
+// Side effects:
+//   • Any LoanApplication where they were the case officer is marked unassigned
+//     (assignedAdvisorId → null). The loan history stays intact.
+//   • Any open advisory AdvisorAssignment is dropped (cascade — engagement still
+//     exists, just no advisor attached).
 router.delete('/:id', async (req, res) => {
   const advisor = await prisma.advisor.findUnique({ where: { legacyId: req.params.id } })
   if (!advisor) return res.status(404).json({ error: 'Advisor not found' })
   try {
-    /* Best-effort: drop assignments first in case the DB doesn't have ON DELETE CASCADE.
-       Existing queue/aiAnalysis records that referenced this advisor will keep their
-       textual recommendedAdvisorId snapshot but lose the live FK link. */
-    await prisma.advisorAssignment.deleteMany({ where: { advisorId: advisor.id } })
+    /* 1. Unlink any loan applications they were handling (case officer) */
+    const unlinkedLoans = await prisma.loanApplication.updateMany({
+      where: { assignedAdvisorId: advisor.id },
+      data:  { assignedAdvisorId: null },
+    })
+    /* 2. Drop their advisory assignments (the engagements keep existing) */
+    const droppedAssignments = await prisma.advisorAssignment.deleteMany({
+      where: { advisorId: advisor.id },
+    })
+    /* 3. Finally remove the advisor */
     await prisma.advisor.delete({ where: { id: advisor.id } })
-    res.status(204).end()
+    res.status(204)
+      .header('X-Unlinked-Loans',     String(unlinkedLoans.count))
+      .header('X-Dropped-Assignments', String(droppedAssignments.count))
+      .end()
   } catch (err) {
     console.error('Hard delete failed:', err.message)
     res.status(500).json({ error: 'Could not delete advisor: ' + err.message })

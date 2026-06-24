@@ -22,6 +22,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import ContextChat from '../chat/ContextChat'
 import { ADVISORY_REVIEW_PROMPT } from '../chat/chatPrompts'
+import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
 import ReassignAdvisorModal from '../components/ReassignAdvisorModal'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import { useClientQueues } from '../hooks/useClientQueues'
@@ -248,6 +249,7 @@ const AdvisoryReviewPage = () => {
 
   /* All hooks must run unconditionally — early return comes AFTER. */
   const client     = item?.client ?? {}
+  const documents  = item?.documents ?? []
   const result     = item?.result
   const advisor    = result?.assignedAdvisor
   const isBusiness = item?.flowKey === 'business-advisory'
@@ -282,7 +284,6 @@ const AdvisoryReviewPage = () => {
           <div className="text-center">
             <p className="text-[14px] text-gray-700">Advisory item not found.</p>
             <button onClick={() => navigate('/underwriting/advisory')} className="mt-3 px-4 py-2 text-[13px] font-medium text-white bg-navy rounded-lg">
-              Back to advisory queue
             </button>
           </div>
         </div>
@@ -361,7 +362,7 @@ const AdvisoryReviewPage = () => {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 min-w-0">
               <button onClick={() => navigate('/underwriting/advisory')} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: C.muted, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
-                <TbArrowLeft style={{ fontSize: 15 }} /> Queue
+                <TbArrowLeft style={{ fontSize: 15 }} />
               </button>
               <div className="w-9 h-9 rounded-full bg-blue-action text-white flex items-center justify-center text-[13px] font-bold shrink-0">
                 {initialsOf(client.name)}
@@ -370,7 +371,7 @@ const AdvisoryReviewPage = () => {
                 <div className="flex items-baseline gap-2 flex-wrap">
                   <h1 style={{ fontSize: 18, fontWeight: 700, color: C.text, lineHeight: 1 }}>{client.name ?? '—'}</h1>
                   <span style={{ fontSize: 12, color: C.muted }}>
-                    {isBusiness ? 'Business' : 'Personal'} advisory · {item.id}
+                    {isBusiness ? 'Business' : 'Personal'} advisory
                   </span>
                 </div>
                 <p style={{ fontSize: 11, color: C.muted, marginTop: 4 }}>
@@ -397,14 +398,14 @@ const AdvisoryReviewPage = () => {
           </div>
         </div>
 
-        {/* Body — split 70/30 */}
-        <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+        {/* Body — stacks on mobile, 70/30 split on desktop */}
+        <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden lg:pr-6">
 
           {/* Main column */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: 20, display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className="flex-1 lg:overflow-y-auto p-4 sm:p-5 flex flex-col gap-4">
 
             {/* HERO — Score + Summary */}
-            <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 24, display: 'grid', gridTemplateColumns: '180px 1fr', gap: 24, alignItems: 'center' }}>
+            <div className="bg-white rounded-xl border border-gray-200 p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-5 sm:gap-6 items-center">
               {/* Score ring */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                 <RingChart
@@ -475,7 +476,7 @@ const AdvisoryReviewPage = () => {
             </div>
 
             {/* METRIC TILES — 4 donut cards */}
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               <MetricCard
                 label={isBusiness ? 'Monthly revenue' : 'Monthly income'}
                 value={fmtK(gross)}
@@ -516,14 +517,19 @@ const AdvisoryReviewPage = () => {
               )}
             </div>
 
-            {/* BANKING CHART — fixed 22vh × 60% to match loan review.
-                Outer wrapper constrains width; inner card fills it. This pattern
-                survives any flex-column stretching that an inline `width: 60%` alone misses. */}
-            <div style={{ width: '60%', alignSelf: 'flex-start', flexShrink: 0 }}>
+            {/* BANKING CHART — centered to match the loan review page. */}
+            <div style={{ width: '75%', alignSelf: 'center', flexShrink: 0 }}>
               <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: '22vh', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
                 <BankingChart months={months} />
               </div>
             </div>
+
+            {/* SUBMITTED DOCUMENTS — client's actual uploads (view originals + parsed data) */}
+            {documents.length > 0 && (
+              <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20 }}>
+                <ClientDocumentsViewer documents={documents} title="Documents submitted by client" />
+              </div>
+            )}
 
             {/* DOCUMENT CHECKLIST — visual grid */}
             {result?.documentChecklist?.length > 0 && (
@@ -539,7 +545,7 @@ const AdvisoryReviewPage = () => {
                     {docStats.missing > 0 && <span className="flex items-center gap-1.5 text-error"><span className="w-2 h-2 rounded-full bg-error" />{docStats.missing} missing</span>}
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {result.documentChecklist.map((d, i) => <DocTile key={i} doc={d} />)}
                 </div>
               </div>
@@ -547,7 +553,7 @@ const AdvisoryReviewPage = () => {
 
             {/* STRENGTHS / ISSUES side-by-side */}
             {result && (result.strengths?.length > 0 || result.issues?.length > 0) && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <FactorPanel
                   title="Strengths"
                   count={result.strengths?.length ?? 0}
@@ -603,7 +609,7 @@ const AdvisoryReviewPage = () => {
             )}
 
             {/* CLIENT DATA — compact rows with visual emphasis */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               <DataCard title="Identity" icon={TbId}>
                 <DataRow label="Full name"    value={client.name} />
                 {isBusiness && <DataRow label="Company" value={client.company} />}
@@ -625,7 +631,7 @@ const AdvisoryReviewPage = () => {
             </div>
 
             <DataCard title="Banking" icon={TbWallet}>
-              <div className="grid grid-cols-3 gap-x-6 gap-y-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2">
                 <DataRow label="Bank"              value={client.bankName} />
                 <DataRow label="Account holder"    value={client.accountHolder} />
                 <DataRow label="Account number"    value={client.accountNumber} mono />
@@ -642,8 +648,8 @@ const AdvisoryReviewPage = () => {
             )}
           </div>
 
-          {/* Right panel — Advisor + Actions */}
-          <div className="hidden lg:flex" style={{ width: '30%', maxWidth: 450, flexDirection: 'column', background: '#fff', borderLeft: `1px solid ${C.border}`, overflowY: 'auto' }}>
+          {/* Right panel — Advisor + Actions — stacked below on mobile, sidebar on desktop */}
+          <div className="flex flex-col w-full lg:w-[30%] lg:max-w-[450px] shrink-0 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 lg:overflow-y-auto">
             <div className="p-5 border-b border-gray-200">
               <p style={{ fontSize: 11, fontWeight: 700, color: C.muted, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Assigned advisor</p>
 

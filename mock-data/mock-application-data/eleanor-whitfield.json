@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24817",
   "status": "needs_review",
   "submittedAt": "2026-06-02T09:14:22Z",
@@ -8,7 +8,7 @@
     "address": "218 Maple Grove Ave, Boston, MA 02134",
     "phone": "+1 617-555-0142",
     "email": "eleanor.whitfield@email.com",
-    "ssn": "***-**-4821",
+    "ssn": "555-12-4821",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -93,8 +93,8 @@
     "bankStatement": {
       "bank": "Citizens Bank",
       "accountHolder": "Eleanor D. Whitfield",
-      "accountNumber": "****8821",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40128821",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

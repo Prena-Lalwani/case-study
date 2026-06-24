@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24828",
   "status": "auto_rejected",
   "submittedAt": "2026-05-30T17:44:00Z",
@@ -8,7 +8,7 @@
     "address": "9 Railroad Ave, Unit 2, Cleveland, OH 44103",
     "phone": "+1 216-555-0028",
     "email": "alex.thompson@email.com",
-    "ssn": "***-**-4412",
+    "ssn": "555-12-4412",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -92,15 +92,15 @@
       "aiConfidence": 88,
       "status": "verified",
       "flags": [
-        "Gig income — highly variable and unguaranteed",
-        "No single employer — income from multiple platforms"
+        "Gig income â€” highly variable and unguaranteed",
+        "No single employer â€” income from multiple platforms"
       ]
     },
     "bankStatement": {
       "bank": "Chime",
       "accountHolder": "Alex J. Thompson",
-      "accountNumber": "****0812",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40120812",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -110,7 +110,7 @@
           "closingBalance": -20,
           "salaryDeposit": 1680,
           "flags": [
-            "Overdraft — account went negative",
+            "Overdraft â€” account went negative",
             "NSF fee charged"
           ]
         },

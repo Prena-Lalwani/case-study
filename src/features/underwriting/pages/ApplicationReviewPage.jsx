@@ -11,13 +11,14 @@ import {
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
 import loanData from '../../../../mock-data/loan-applications.json'
-import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
-import applicationDetails from '../data/applicationDetails'
 import ContextChat from '../chat/ContextChat'
 import { LOAN_REVIEW_PROMPT } from '../chat/chatPrompts'
+import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
+import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
+import applicationDetails from '../data/applicationDetails'
+import { refreshLoanApplications } from '../hooks/useLoanApplications'
 import { useUnderwritingAnalysis } from '../hooks/useUnderwritingAnalysis'
 import { api } from '../services/api'
-import { refreshLoanApplications } from '../hooks/useLoanApplications'
 
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
@@ -80,6 +81,8 @@ const deriveDetail = (appRecord) => {
     id: appRecord.id,
     status: appRecord.status,
     submittedAt: appRecord.date,
+    // Raw uploaded documents (originals + parsed) for the submitted-docs viewer.
+    rawDocuments: docs,
     personalInfo: {
       fullName:    c.name,
       dateOfBirth: c.dateOfBirth,
@@ -87,7 +90,7 @@ const deriveDetail = (appRecord) => {
       phone:       c.phone,
       email:       c.email,
       nationality: c.nationality,
-      ssn:         '***-**-****',
+      ssn:         '555-12-0000',
     },
     employment: {
       type:          'salaried',
@@ -668,6 +671,7 @@ const ApplicationReviewPage = () => {
   }
 
   const { personalInfo, employment, financials, documents: docs, loanRequest } = detail
+  const rawDocuments = detail.rawDocuments ?? []
   const ai         = aiResult ?? AI_PLACEHOLDER
   const workDetail = { ...detail, aiAnalysis: ai }
   const compliance = buildCompliance(workDetail)
@@ -722,7 +726,7 @@ const ApplicationReviewPage = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
               <button onClick={() => navigate('/underwriting')}
                 style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 13, color: C.muted, background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
-                <TbArrowLeft style={{ fontSize: 15 }} /> Queue
+                <TbArrowLeft style={{ fontSize: 15 }} /> 
               </button>
 
               <div style={{ width: 36, height: 36, borderRadius: '50%', background: C.primary, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, flexShrink: 0 }}>
@@ -759,14 +763,14 @@ const ApplicationReviewPage = () => {
           </div>
         </div>
 
-        {/* ── Body: 70 / 30 ── */}
-        <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+        {/* ── Body: stacks on mobile, 70 / 30 split on desktop ── */}
+        <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden lg:pr-6">
 
           {/* ── Main scroll area ── */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="flex-1 lg:overflow-y-auto p-4 sm:p-6 flex flex-col gap-5">
 
             {/* Hero: Score + Assessment */}
-            <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 20 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-5">
 
               <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14 }}>
                 <ScoreRing score={ai.aiScore} loading={aiLoading} />
@@ -826,22 +830,29 @@ const ApplicationReviewPage = () => {
             </div>
 
             {/* Metrics: 4 donut cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <MetricCard label="DTI Ratio"        displayValue={ai.dti != null ? `${ai.dti}%` : '—'} pct={ai.dti != null ? ai.dti / 80 : 0}  color={dtiCol} sub={dtiSub}  loading={aiLoading} />
               <MetricCard label="Credit Score"     displayValue={cs}                                   pct={(cs - 300) / 550}                     color={csCol}  sub={csSub}  loading={false}    />
               <MetricCard label="LTV Ratio"        displayValue={ltv != null ? `${ltv}%` : 'N/A'}     pct={ltv != null ? ltv / 100 : 0}          color={ltvCol} sub={ltvSub} loading={false}    />
               <MetricCard label="Doc Confidence"   displayValue={avgConf != null ? `${avgConf}%` : '—'} pct={avgConf != null ? avgConf / 100 : 0} color={confCol} sub={confSub} loading={aiLoading} />
             </div>
 
-            {/* Banking Analytics — fixed at 22% viewport height × 60% container width */}
-            <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: '22vh', width: '60%', flexShrink: 0, boxSizing: 'border-box', overflow: 'hidden' }}>
+            {/* Banking Analytics — full width on mobile, centered ~75% on desktop */}
+            <div className="w-full lg:w-[75%] lg:self-center shrink-0" style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: '22vh', minHeight: 180, boxSizing: 'border-box', overflow: 'hidden' }}>
               <BankingChart months={docs.bankStatement.months} />
             </div>
+
+            {/* Submitted documents — client's actual uploads (view originals + parsed) */}
+            {rawDocuments.length > 0 && (
+              <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20 }}>
+                <ClientDocumentsViewer documents={rawDocuments} title="Documents submitted by client" />
+              </div>
+            )}
 
             {/* Compliance: 3 compact cards */}
             <div>
               <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 10 }}>Compliance Checks</p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <ComplianceSummaryCard title="KYC" items={compliance.kyc} />
                 <ComplianceSummaryCard title="AML" items={compliance.aml} />
                 <ComplianceSummaryCard title="Policy" items={compliance.policy} />
@@ -901,8 +912,8 @@ const ApplicationReviewPage = () => {
             </div>
           </div>
 
-          {/* ── Right Analysis Panel (30%) ── */}
-          <div className="hidden lg:flex" style={{ width: '30%', maxWidth: 450, flexDirection: 'column', background: '#fff', borderLeft: `1px solid ${C.border}`, overflowY: 'auto' }}>
+          {/* ── Right Analysis Panel — stacked below on mobile, sidebar on desktop ── */}
+          <div className="flex flex-col w-full lg:w-[30%] lg:max-w-[450px] shrink-0 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 lg:overflow-y-auto">
 
             {/* Recommendation */}
             <div style={{ padding: 20, borderBottom: `1px solid ${C.border}` }}>

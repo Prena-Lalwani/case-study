@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24812",
   "status": "needs_review",
   "submittedAt": "2026-06-01T15:41:02Z",
@@ -8,7 +8,7 @@
     "address": "77 Pinecrest Ave, Atlanta, GA 30301",
     "phone": "+1 404-555-0733",
     "email": "james.holloway@email.com",
-    "ssn": "***-**-9901",
+    "ssn": "555-12-9901",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -41,7 +41,7 @@
         "type": "Credit card",
         "monthlyPayment": 300,
         "balance": 4200,
-        "status": "1 late payment — 18 months ago"
+        "status": "1 late payment â€” 18 months ago"
       }
     ],
     "totalMonthlyDebtPayments": 1450,
@@ -55,7 +55,7 @@
     "termYears": 3,
     "interestRate": 12,
     "estimatedMonthlyPayment": 498,
-    "purpose": "Home improvement — kitchen renovation"
+    "purpose": "Home improvement â€” kitchen renovation"
   },
   "documents": {
     "nationalId": {
@@ -96,8 +96,8 @@
     "bankStatement": {
       "bank": "Truist Bank",
       "accountHolder": "James R. Holloway",
-      "accountNumber": "****2214",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40122214",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

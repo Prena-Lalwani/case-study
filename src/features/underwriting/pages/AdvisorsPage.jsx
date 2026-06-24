@@ -14,10 +14,12 @@ import {
 } from 'react-icons/tb'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import AdvisorFormModal from '../components/AdvisorFormModal'
+import AdvisorHandoffDeleteModal from '../components/AdvisorHandoffDeleteModal'
 import ContextChat from '../chat/ContextChat'
 import { ADVISORS_PROMPT } from '../chat/chatPrompts'
-import { createAdvisor, deleteAdvisor, updateAdvisor } from '../data/advisorStore'
+import { createAdvisor, updateAdvisor } from '../data/advisorStore'
 import { useAdvisors } from '../hooks/useAdvisors'
+import { api } from '../services/api'
 
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
@@ -42,6 +44,7 @@ const AdvisorsPage = () => {
   const [query, setQuery]             = useState('')
   const [modalOpen, setModalOpen]     = useState(false)
   const [editTarget, setEditTarget]   = useState(null)
+  const [deleteTarget, setDeleteTarget] = useState(null)   // full advisor detail for the handoff modal
 
   const advisors = useAdvisors()
 
@@ -69,9 +72,17 @@ const AdvisorsPage = () => {
     closeModal()
   }
 
-  const handleDelete = (advisor) => {
-    if (!confirm(`Remove ${advisor.name} from the advisor pool?\n\nThis cannot be undone — existing assignments stay intact, but the AI won't pick this advisor for new clients.`)) return
-    deleteAdvisor(advisor.id)
+  /* Open the hand-off modal — fetches the advisor's full detail (with loans + engagements)
+     so the modal can render the per-item reassignment dropdowns. */
+  const handleDelete = async (advisor) => {
+    try {
+      const full = await api.get(`/advisors/${advisor.id}`)
+      setDeleteTarget(full)
+    } catch (err) {
+      console.error('Could not load advisor detail for deletion:', err)
+      /* Fall back to opening the modal with whatever we have on the card */
+      setDeleteTarget(advisor)
+    }
   }
 
   const filtered = useMemo(() => {
@@ -102,25 +113,26 @@ const AdvisorsPage = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shrink-0">
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-[22px] font-semibold text-gray-900 leading-tight">Advisors</h1>
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-5 sm:py-6 shrink-0">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="text-[20px] sm:text-[22px] font-semibold text-gray-900 leading-tight">Advisors</h1>
               <p className="text-[13px] text-secondary mt-1">
                 {stats.total} advisors across personal & business engagements — AI assigns the best fit at intake.
               </p>
             </div>
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-white bg-navy rounded-lg hover:opacity-90 transition-opacity"
+              className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-white bg-navy rounded-lg hover:opacity-90 transition-opacity shrink-0"
             >
               <TbPlus style={{ fontSize: 15 }} />
-              Add advisor
+              <span className="hidden sm:inline">Add advisor</span>
+              <span className="sm:hidden">Add</span>
             </button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 sm:mt-6">
             <StatCard label="TOTAL ADVISORS" value={stats.total}     sub="active on the bench" bar="bg-navy" />
             <StatCard label="AVG CASELOAD"   value={stats.avgLoad}   sub="clients per advisor" bar="bg-blue-action" />
             <StatCard label="AVG EXPERIENCE" value={`${stats.avgYears} yr`} sub="years in practice" bar="bg-success" />
@@ -129,11 +141,11 @@ const AdvisorsPage = () => {
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-8 py-5">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-5">
 
           {/* Filter + search */}
-          <div className="flex items-center justify-between mb-5 gap-4 flex-wrap">
-            <div className="flex items-center border-b border-gray-200 -mb-px">
+          <div className="flex items-center justify-between mb-5 gap-3 flex-wrap">
+            <div className="flex items-center border-b border-gray-200 -mb-px overflow-x-auto max-w-full">
               {FILTERS.map(({ key, label }) => {
                 const isActive = filter === key
                 const count = key === 'all' ? advisors.length : advisors.filter(a => (a.focus ?? []).includes(key)).length
@@ -141,7 +153,7 @@ const AdvisorsPage = () => {
                   <button
                     key={key}
                     onClick={() => setFilter(key)}
-                    className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 transition-colors ${
+                    className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 transition-colors whitespace-nowrap shrink-0 ${
                       isActive
                         ? 'border-blue-action text-blue-action'
                         : 'border-transparent text-secondary hover:text-gray-800'
@@ -158,13 +170,13 @@ const AdvisorsPage = () => {
               })}
             </div>
 
-            <div className="relative">
+            <div className="relative w-full sm:w-auto">
               <TbSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tertiary" style={{ fontSize: 15 }} />
               <input
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Search by name, specialty, credential…"
-                className="w-[320px] text-[13px] text-gray-800 placeholder:text-tertiary border border-gray-200 rounded-lg pl-9 pr-3 py-2 outline-none focus:border-blue-action transition-colors"
+                className="w-full sm:w-[320px] text-[13px] text-gray-800 placeholder:text-tertiary border border-gray-200 rounded-lg pl-9 pr-3 py-2 outline-none focus:border-blue-action transition-colors"
               />
             </div>
           </div>
@@ -173,7 +185,7 @@ const AdvisorsPage = () => {
           {filtered.length === 0 ? (
             <EmptyState />
           ) : (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {filtered.map(a => (
                 <AdvisorCard
                   key={a.id}
@@ -206,6 +218,13 @@ const AdvisorsPage = () => {
         advisor={editTarget}
         onClose={closeModal}
         onSave={handleSave}
+      />
+
+      <AdvisorHandoffDeleteModal
+        open={!!deleteTarget}
+        advisor={deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        onDone={() => setDeleteTarget(null)}
       />
     </div>
   )

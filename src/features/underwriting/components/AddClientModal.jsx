@@ -251,11 +251,13 @@ const AddClientModal = ({ open, onClose, onSave }) => {
   const [touched, setTouched]           = useState(false)
   const [isExtracting, setIsExtracting] = useState(false)
   const [uploaded, setUploaded]         = useState({})
+  // keyed by doc.key — each value is { filename, mimeType, fileDataUrl, source }
+  const [uploadedFiles, setUploadedFiles] = useState({})
 
   useEffect(() => {
     if (open) {
       setStepIdx(0); setForm(EMPTY); setTouched(false)
-      setIsExtracting(false); setUploaded({})
+      setIsExtracting(false); setUploaded({}); setUploadedFiles({})
     }
   }, [open])
 
@@ -287,6 +289,7 @@ const AddClientModal = ({ open, onClose, onSave }) => {
     return next
   })
   const markUploaded = key => setUploaded(u => ({ ...u, [key]: true }))
+  const markFile     = (key, meta) => setUploadedFiles(f => ({ ...f, [key]: meta }))
 
   const currentKey = STEPS[stepIdx]?.key
   const stepDocs   =
@@ -328,6 +331,24 @@ const AddClientModal = ({ open, onClose, onSave }) => {
 
   const handleSave = () => {
     const num = v => v === '' || v == null ? 0 : Number(v)
+
+    // Assemble the documents array from the captured files.
+    // doc.key is the form field key; we surface a docType label as kebab-case.
+    const allDocs = [...flow.identity, ...flow.financials, ...flow.additional]
+    const documents = Object.entries(uploadedFiles)
+      .filter(([, meta]) => meta && (meta.fileDataUrl || meta.filename))
+      .map(([key, meta]) => {
+        const docMeta = allDocs.find(d => d.key === key)
+        return {
+          docType:      docMeta?.key ?? key,
+          filename:     meta.filename ?? null,
+          mimeType:     meta.mimeType ?? null,
+          fileDataUrl:  meta.fileDataUrl ?? null,
+          uploadSource: meta.source ?? 'image',
+          status:       'pending',
+        }
+      })
+
     onSave({
       name:    form.fullName.trim(),
       email:   form.email.trim(),
@@ -363,6 +384,7 @@ const AddClientModal = ({ open, onClose, onSave }) => {
         propertyValue:   num(form.propertyValue),
       } : null,
       uploadedDocuments: Object.keys(uploaded).filter(k => uploaded[k]),
+      documents,
       notes: form.notes.trim(),
     })
   }
@@ -419,6 +441,7 @@ const AddClientModal = ({ open, onClose, onSave }) => {
               missing={missingRequiredDocs}
               setMany={setMany}
               markUploaded={markUploaded}
+              markFile={markFile}
               onLoadingChange={setIsExtracting}
               isExtracting={isExtracting}
             >
@@ -437,6 +460,7 @@ const AddClientModal = ({ open, onClose, onSave }) => {
               missing={missingRequiredDocs}
               setMany={setMany}
               markUploaded={markUploaded}
+              markFile={markFile}
               onLoadingChange={setIsExtracting}
               isExtracting={isExtracting}
             >
@@ -456,6 +480,7 @@ const AddClientModal = ({ open, onClose, onSave }) => {
               missing={[]}
               setMany={setMany}
               markUploaded={markUploaded}
+              markFile={markFile}
               onLoadingChange={setIsExtracting}
               isExtracting={isExtracting}
             />
@@ -629,7 +654,7 @@ const Pill = ({ icon: Icon, count, label }) => (
 /* ── Reusable doc step body ──────────────────────────────────────────── */
 const StepDocs = ({
   title, hint, docs, uploaded, touched, missing,
-  setMany, markUploaded, onLoadingChange, isExtracting, children,
+  setMany, markUploaded, markFile, onLoadingChange, isExtracting, children,
 }) => (
   <div className="space-y-5">
     <SectionHeader title={title} hint={hint} />
@@ -649,6 +674,7 @@ const StepDocs = ({
             parseJson={parser}
             onExtracted={parser ? setMany : (() => {})}
             onSuccess={() => markUploaded(doc.key)}
+            onFile={(meta) => markFile?.(doc.key, meta)}
             onLoadingChange={onLoadingChange}
           />
         )

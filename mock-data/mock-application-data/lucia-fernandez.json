@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24808",
   "status": "auto_rejected",
   "submittedAt": "2026-05-31T10:17:33Z",
@@ -8,7 +8,7 @@
     "address": "38 Garden View Apt 1F, Houston, TX 77001",
     "phone": "+1 713-555-0812",
     "email": "lucia.fernandez@email.com",
-    "ssn": "***-**-3341",
+    "ssn": "555-12-3341",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -20,7 +20,7 @@
     "annualSalary": 33600,
     "monthlyGross": 2800,
     "monthlyNet": 2380,
-    "note": "Income includes variable tips — base hourly $9.50"
+    "note": "Income includes variable tips â€” base hourly $9.50"
   },
   "financials": {
     "creditScore": 598,
@@ -36,7 +36,7 @@
         "type": "Credit card",
         "monthlyPayment": 355,
         "balance": 5600,
-        "status": "current — balance at 90% of limit"
+        "status": "current â€” balance at 90% of limit"
       }
     ],
     "totalMonthlyDebtPayments": 855,
@@ -50,7 +50,7 @@
     "termYears": 5,
     "interestRate": 8.5,
     "estimatedMonthlyPayment": 575,
-    "purpose": "Purchase used vehicle — Honda Civic 2023",
+    "purpose": "Purchase used vehicle â€” Honda Civic 2023",
     "vehicleMake": "Honda",
     "vehicleModel": "Civic",
     "vehicleYear": 2023
@@ -86,19 +86,19 @@
       "totalDeductions": 400,
       "netPay": 2400,
       "ytdGross": 8400,
-      "note": "Tips included — actual take-home varies week to week",
+      "note": "Tips included â€” actual take-home varies week to week",
       "aiConfidence": 88,
       "status": "needs_review",
       "flags": [
-        "Tip income included — not reliably verifiable",
+        "Tip income included â€” not reliably verifiable",
         "Less than 12 months tenure at employer"
       ]
     },
     "bankStatement": {
       "bank": "Chime",
       "accountHolder": "Lucia Fernandez",
-      "accountNumber": "****7790",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127790",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -117,7 +117,7 @@
           "closingBalance": 620,
           "salaryDeposit": 2400,
           "flags": [
-            "Balance below $100 on Apr 14–17"
+            "Balance below $100 on Apr 14â€“17"
           ]
         },
         {

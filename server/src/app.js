@@ -35,7 +35,8 @@ app.use(cors({
   credentials: true,
 }))
 
-app.use(express.json({ limit: '4mb' }))
+// Upload payloads embed base64 data URLs — bump the limit so document uploads fit.
+app.use(express.json({ limit: '15mb' }))
 
 app.use('/api/auth', authRouter)
 app.use('/api/onboarding', onboardingRouter)

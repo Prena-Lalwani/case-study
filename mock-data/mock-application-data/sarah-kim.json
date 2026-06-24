@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24821",
   "status": "approved",
   "submittedAt": "2026-06-01T10:30:00Z",
@@ -8,7 +8,7 @@
     "address": "14 Magnolia Court, Portland, OR 97201",
     "phone": "+1 503-555-0312",
     "email": "sarah.kim@email.com",
-    "ssn": "***-**-6634",
+    "ssn": "555-12-6634",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -93,8 +93,8 @@
     "bankStatement": {
       "bank": "Bank of the West",
       "accountHolder": "Sarah J. Kim",
-      "accountNumber": "****8802",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40128802",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

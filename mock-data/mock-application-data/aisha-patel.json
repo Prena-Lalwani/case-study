@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24819",
   "status": "needs_review",
   "submittedAt": "2026-06-03T09:22:00Z",
@@ -8,7 +8,7 @@
     "address": "23 Redwood Ave, Apt 5B, Austin, TX 78701",
     "phone": "+1 512-555-0223",
     "email": "aisha.patel@email.com",
-    "ssn": "***-**-8812",
+    "ssn": "555-12-8812",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -92,14 +92,14 @@
       "aiConfidence": 95,
       "status": "verified",
       "flags": [
-        "Short tenure — 8 months with current employer"
+        "Short tenure â€” 8 months with current employer"
       ]
     },
     "bankStatement": {
       "bank": "Wells Fargo",
       "accountHolder": "Aisha P. Patel",
-      "accountNumber": "****3309",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40123309",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -109,7 +109,7 @@
           "closingBalance": 1940,
           "salaryDeposit": 0,
           "flags": [
-            "No salary deposit — employment gap during job transition"
+            "No salary deposit â€” employment gap during job transition"
           ]
         },
         {

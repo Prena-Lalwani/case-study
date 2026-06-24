@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24830",
   "status": "ai_reviewing",
   "submittedAt": "2026-06-03T15:02:00Z",
@@ -8,7 +8,7 @@
     "address": "34 Commerce Blvd, Houston, TX 77002",
     "phone": "+1 713-555-0774",
     "email": "henry.okafor@email.com",
-    "ssn": "***-**-6622",
+    "ssn": "555-12-6622",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -89,8 +89,8 @@
     "bankStatement": {
       "bank": "Comerica Bank",
       "accountHolder": "Okafor Construction Group LLC",
-      "accountNumber": "****8833",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40128833",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": null,
       "averageMonthlyCredit": null,
       "averageMonthlyDebit": null,

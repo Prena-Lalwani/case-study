@@ -11,6 +11,40 @@ const totalsFromLoans = (loans = []) => {
   }
 }
 
+const serializeAdvisor = (a) => a && {
+  id:       a.legacyId ?? a.id,
+  name:     a.name,
+  initials: a.initials,
+  specialty: a.specialty,
+}
+
+/* Pick the client's most recent service flow + the advisor handling it.
+   A client may have multiple loans / engagements; we surface the latest one. */
+const deriveServiceAndAdvisor = (c) => {
+  const loans       = c.loanApplications        ?? []
+  const engagements = c.advisoryEngagements     ?? []
+  const candidates  = [
+    ...loans.map(l => ({
+      kind: 'loan',
+      flowKey: l.client?.type === 'business' || c.type === 'business' ? 'business-loan' : 'personal-loan',
+      submittedAt: l.submittedAt,
+      advisor: l.assignedAdvisor,
+    })),
+    ...engagements.map(e => ({
+      kind: 'advisory',
+      flowKey: e.flowKey,
+      submittedAt: e.submittedAt,
+      advisor: e.assignment?.advisor,
+    })),
+  ].sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt))
+
+  const latest = candidates[0]
+  return {
+    serviceFlow: latest?.flowKey ?? null,           // 'personal-loan' | 'business-loan' | 'personal-advisory' | 'business-advisory' | null
+    assignedAdvisor: serializeAdvisor(latest?.advisor),
+  }
+}
+
 const serializeClient = (c) => ({
   id: c.legacyId ?? c.id,
   name: c.name,
@@ -40,12 +74,16 @@ const serializeClient = (c) => ({
   averageMonthlyDebit: c.averageMonthlyDebit,
   averageClosingBalance: c.averageClosingBalance,
   ...totalsFromLoans(c.loanApplications),
+  ...deriveServiceAndAdvisor(c),
 })
 
 // GET /api/clients
 router.get('/', async (_req, res) => {
   const clients = await prisma.client.findMany({
-    include: { loanApplications: true },
+    include: {
+      loanApplications:   { include: { assignedAdvisor: true } },
+      advisoryEngagements: { include: { assignment: { include: { advisor: true } } } },
+    },
     orderBy: { createdAt: 'desc' },
   })
   res.json(clients.map(serializeClient))
@@ -58,10 +96,26 @@ router.get('/:id', async (req, res) => {
     : { id: req.params.id }
   const c = await prisma.client.findFirst({
     where,
-    include: { loanApplications: true, advisoryEngagements: true, documents: true },
+    include: {
+      loanApplications:    { include: { assignedAdvisor: true } },
+      advisoryEngagements: {
+        include: {
+          assignment: { include: { advisor: true } },
+          aiAnalysis: true,
+          queueItem:  true,
+        },
+        orderBy: { submittedAt: 'desc' },
+      },
+      documents: true,
+    },
   })
   if (!c) return res.status(404).json({ error: 'Client not found' })
-  res.json({ ...serializeClient(c), documents: c.documents, advisoryEngagements: c.advisoryEngagements, loanApplications: c.loanApplications })
+  res.json({
+    ...serializeClient(c),
+    documents: c.documents,
+    advisoryEngagements: c.advisoryEngagements,
+    loanApplications:    c.loanApplications,
+  })
 })
 
 // POST /api/clients — create from the Add Client modal payload
@@ -128,6 +182,36 @@ router.patch('/:id', async (req, res) => {
     include: { loanApplications: true },
   })
   res.json(serializeClient(updated))
+})
+
+// POST /api/clients/:id/documents — persist an uploaded document
+// body: { docType, filename, mimeType, fileDataUrl, parsedJson?, uploadSource?, aiConfidence?, status? }
+router.post('/:id/documents', async (req, res) => {
+  const where = req.params.id.startsWith('CL-')
+    ? { legacyId: req.params.id }
+    : { id: req.params.id }
+  const client = await prisma.client.findFirst({ where, select: { id: true } })
+  if (!client) return res.status(404).json({ error: 'Client not found' })
+
+  const b = req.body ?? {}
+  if (!b.docType?.trim()) {
+    return res.status(400).json({ error: 'docType is required' })
+  }
+
+  const doc = await prisma.document.create({
+    data: {
+      clientId:     client.id,
+      docType:      b.docType.trim(),
+      filename:     b.filename ?? null,
+      mimeType:     b.mimeType ?? null,
+      fileDataUrl:  b.fileDataUrl ?? null,
+      parsedJson:   b.parsedJson ?? null,
+      uploadSource: b.uploadSource ?? (b.fileDataUrl ? 'image' : 'json'),
+      aiConfidence: b.aiConfidence ?? null,
+      status:       b.status ?? null,
+    },
+  })
+  res.status(201).json(doc)
 })
 
 export default router

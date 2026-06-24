@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { TbDownload } from 'react-icons/tb'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import ApplicationQueueView from '../components/ApplicationQueueView'
 import ContextChat from '../chat/ContextChat'
@@ -63,26 +62,20 @@ const UnderwritingPage = () => {
         </div>
 
         {/* ── Page header + stats ── */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shrink-0">
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-5 sm:py-6 shrink-0">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-[22px] font-semibold text-gray-900 leading-tight">
-                Application queue
+              <h1 className="text-[20px] sm:text-[22px] font-semibold text-gray-900 leading-tight">
+                Applications
               </h1>
               <p className="text-[13px] text-secondary mt-1">
                 {todayLabel} · {pendingCount} applications awaiting decision
               </p>
             </div>
-            <div className="flex items-center gap-2.5">
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                <TbDownload style={{ fontSize: 15 }} />
-                Export report
-              </button>
-            </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-5 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-5 sm:mt-6">
             {STAT_CONFIG.map(({ key, label, sub, bar }) => {
               const pct = stats.incoming > 0
                 ? Math.round((stats[key] / stats.incoming) * 100)
@@ -107,7 +100,7 @@ const UnderwritingPage = () => {
         </div>
 
         {/* ── Application queue ── */}
-        <div className="flex-1 overflow-y-auto px-8 py-5">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-5">
           <ApplicationQueueView apps={apps} />
         </div>
       </div>

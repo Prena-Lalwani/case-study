@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24811",
   "status": "needs_review",
   "submittedAt": "2026-06-01T09:28:14Z",
@@ -8,7 +8,7 @@
     "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
     "phone": "+1 215-555-0614",
     "email": "grace.adeyemi@email.com",
-    "ssn": "***-**-8803",
+    "ssn": "555-12-8803",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -93,8 +93,8 @@
     "bankStatement": {
       "bank": "PNC Bank",
       "accountHolder": "Grace A. Adeyemi",
-      "accountNumber": "****5509",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40125509",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

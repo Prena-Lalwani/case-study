@@ -22,9 +22,16 @@ const isJsonFile = file =>
  * onLoadingChange(bool) — bubbled to parent so it can dim the form fields
  * while extraction is in progress.
  */
+const fileToDataUrl = (file) => new Promise((resolve, reject) => {
+  const r = new FileReader()
+  r.onload  = () => resolve(r.result)
+  r.onerror = () => reject(r.error)
+  r.readAsDataURL(file)
+})
+
 const DocumentUpload = ({
   title, hint, prompt, schema,
-  onExtracted, parseJson, onLoadingChange, onSuccess,
+  onExtracted, parseJson, onLoadingChange, onSuccess, onFile,
   required, accept,
 }) => {
   const fileInputRef = useRef(null)
@@ -55,6 +62,7 @@ const DocumentUpload = ({
         /* tiny delay so users see the progress bar */
         await new Promise(r => setTimeout(r, 350))
         onExtracted(flat)
+        onFile?.({ filename: file.name, mimeType: file.type || 'application/json', fileDataUrl: null, source: 'json' })
         onSuccess?.()
         setStatus('success')
       } catch (err) {
@@ -65,9 +73,14 @@ const DocumentUpload = ({
     }
 
     setSource('ai')
-    const result = await extractFromImage(file, prompt, schema)
+    // Capture the file as a data URL in parallel with AI extraction so we can persist it.
+    const [result, dataUrl] = await Promise.all([
+      extractFromImage(file, prompt, schema),
+      fileToDataUrl(file).catch(() => null),
+    ])
     if (result) {
       onExtracted(result)
+      onFile?.({ filename: file.name, mimeType: file.type || 'application/octet-stream', fileDataUrl: dataUrl, source: 'image' })
       onSuccess?.()
       setStatus('success')
     } else {

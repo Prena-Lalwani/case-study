@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24818",
   "status": "needs_review",
   "submittedAt": "2026-06-03T08:15:00Z",
@@ -8,7 +8,7 @@
     "address": "44 Birchwood Dr, Chicago, IL 60614",
     "phone": "+1 312-555-0174",
     "email": "james.carter@email.com",
-    "ssn": "***-**-7741",
+    "ssn": "555-12-7741",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -93,8 +93,8 @@
     "bankStatement": {
       "bank": "Chase",
       "accountHolder": "James E. Carter",
-      "accountNumber": "****4421",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40124421",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

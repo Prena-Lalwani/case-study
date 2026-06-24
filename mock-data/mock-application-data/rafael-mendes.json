@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24810",
   "status": "needs_review",
   "submittedAt": "2026-06-01T16:09:55Z",
@@ -8,7 +8,7 @@
     "address": "23 Crestwood Circle, Miami, FL 33101",
     "phone": "+1 305-555-0241",
     "email": "rafael.mendes@email.com",
-    "ssn": "***-**-4418",
+    "ssn": "555-12-4418",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -20,7 +20,7 @@
     "annualSalary": 66000,
     "monthlyGross": 5500,
     "monthlyNet": 4010,
-    "incomeVariance": "Moderate — event-driven income, peaks in wedding season (Apr–Oct)"
+    "incomeVariance": "Moderate â€” event-driven income, peaks in wedding season (Aprâ€“Oct)"
   },
   "financials": {
     "creditScore": 661,
@@ -92,19 +92,19 @@
       "totalDeductions": 2770,
       "netPay": 4030,
       "ytdGross": 24400,
-      "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 — peak season April–September",
+      "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 â€” peak season Aprilâ€“September",
       "aiConfidence": 80,
       "status": "needs_review",
       "flags": [
-        "Self-employed — income is seasonal",
-        "YTD avg $4,880/mo vs stated $5,500/mo avg — gap in low season"
+        "Self-employed â€” income is seasonal",
+        "YTD avg $4,880/mo vs stated $5,500/mo avg â€” gap in low season"
       ]
     },
     "bankStatement": {
       "bank": "SunTrust Bank",
       "accountHolder": "Rafael A. Mendes",
-      "accountNumber": "****8841",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40128841",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

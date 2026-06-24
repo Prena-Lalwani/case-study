@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import {
   TbArrowLeft,
   TbArrowRight,
@@ -14,11 +13,13 @@ import {
   TbLoader2,
   TbSparkles,
   TbStar,
+  TbTrash,
   TbUser,
   TbUsers,
-  TbUserStar,
-  TbX,
+  TbUserStar
 } from 'react-icons/tb'
+import { useNavigate, useParams } from 'react-router-dom'
+import AdvisorHandoffDeleteModal from '../components/AdvisorHandoffDeleteModal'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import { api } from '../services/api'
 
@@ -77,6 +78,7 @@ const AdvisorDetailPage = () => {
   const [editing, setEditing] = useState(false)
   const [draft, setDraft]     = useState({})
   const [saving, setSaving]   = useState(false)
+  const [deleteOpen, setDeleteOpen] = useState(false)
 
   const load = () => api.get(`/advisors/${id}`).then(a => { setAdvisor(a); setDraft(toDraft(a)) }).catch(e => setError(e.message))
   useEffect(() => { load() }, [id])
@@ -117,10 +119,21 @@ const AdvisorDetailPage = () => {
                 } catch (e) { setError(e.message) }
                 finally { setSaving(false) }
               }}
+              onDelete={() => setDeleteOpen(true)}
             />
           )}
         </div>
       </div>
+
+      <AdvisorHandoffDeleteModal
+        open={deleteOpen}
+        advisor={advisor}
+        onClose={() => setDeleteOpen(false)}
+        onDone={() => {
+          setDeleteOpen(false)
+          navigate('/underwriting/advisors')
+        }}
+      />
     </div>
   )
 }
@@ -150,7 +163,7 @@ const normalize = (d) => ({
 })
 
 /* ── Body ────────────────────────────────────────────────────────────── */
-const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave }) => {
+const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave, onDelete }) => {
   const p = advisor.performance ?? {}
   const set = (k, v) => setDraft(d => ({ ...d, [k]: v }))
   const toggleFocus = (k) => setDraft(d => ({
@@ -163,18 +176,24 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
                   :                            C.success
 
   return (
-    <div className="px-8 py-6 max-w-[1400px] mx-auto">
+    <div className="px-4 sm:px-8 py-5 sm:py-6 max-w-[1400px] mx-auto">
       {/* Back + Edit toggle */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 gap-2">
         <button onClick={() => navigate('/underwriting/advisors')}
-          className="flex items-center gap-1.5 text-[12.5px] text-secondary hover:text-gray-800">
-          <TbArrowLeft style={{ fontSize: 14 }} /> All advisors
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12.5px] font-medium text-secondary bg-white border border-gray-200 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors shrink-0">
+          <TbArrowLeft style={{ fontSize: 14 }} />
         </button>
         {!editing ? (
-          <button onClick={onEdit}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-[12.5px] font-medium text-blue-action bg-white border border-gray-200 rounded-lg hover:bg-blue-50 transition-colors">
-            <TbEdit style={{ fontSize: 14 }} /> Edit profile
-          </button>
+          <div className="flex items-center gap-2">
+            <button onClick={onDelete}
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 text-[12.5px] font-medium text-error bg-white border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors">
+              <TbTrash style={{ fontSize: 14 }} /> <span className="hidden sm:inline">Delete advisor</span><span className="sm:hidden">Delete</span>
+            </button>
+            <button onClick={onEdit}
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 text-[12.5px] font-medium text-blue-action bg-white border border-gray-200 rounded-lg hover:bg-blue-50 transition-colors">
+              <TbEdit style={{ fontSize: 14 }} /> <span className="hidden sm:inline">Edit profile</span><span className="sm:hidden">Edit</span>
+            </button>
+          </div>
         ) : (
           <div className="flex items-center gap-2">
             <button onClick={onCancel} disabled={saving}
@@ -191,9 +210,9 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
 
       {/* Hero card with gradient */}
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-5">
-        <div className="px-7 py-7 bg-gradient-to-r from-[#1D3557] via-[#1f3d63] to-[#2a4a7a] text-white relative">
-          <div className="flex items-start gap-5">
-            <div className="w-20 h-20 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[22px] font-semibold shrink-0">
+        <div className="px-4 sm:px-7 py-5 sm:py-7 bg-gradient-to-r from-[#1D3557] via-[#1f3d63] to-[#2a4a7a] text-white relative">
+          <div className="flex items-start gap-4 sm:gap-5">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[18px] sm:text-[22px] font-semibold shrink-0">
               {advisor.initials}
             </div>
             <div className="min-w-0 flex-1">
@@ -212,7 +231,7 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
                 </>
               ) : (
                 <>
-                  <h1 className="text-[26px] font-semibold leading-tight">{advisor.name}</h1>
+                  <h1 className="text-[20px] sm:text-[26px] font-semibold leading-tight break-words">{advisor.name}</h1>
                   <p className="text-[13.5px] text-white/80 mt-1">{advisor.title}</p>
                 </>
               )}
@@ -239,82 +258,64 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
               </div>
             </div>
 
-            {/* Hero right — 3 mini rings */}
-            <div className="flex items-center gap-4 shrink-0">
-              <HeroRing
-                pct={Math.min(advisor.clientLoad / caseloadCapacity, 1)}
-                color={loadColor === C.critical ? '#FCA5A5' : loadColor === C.warning ? '#FCD34D' : '#86EFAC'}
-                value={advisor.clientLoad}
-                sub="Caseload"
-              />
-              <HeroRing
-                pct={p.confirmationRate ?? 0}
-                color="#FCD34D"
-                value={p.confirmationRate != null ? `${Math.round(p.confirmationRate * 100)}%` : '—'}
-                sub="Confirm rate"
-              />
-              <HeroRing
-                pct={(p.avgCompletenessScore ?? 0) / 100}
-                color="#86EFAC"
-                value={p.avgCompletenessScore ?? '—'}
-                sub="Avg score"
-              />
-            </div>
+            {/* Hero right — clean stat tiles (no awkward empty rings) */}
+            {!editing && (
+              <div className="hidden md:flex items-stretch gap-0 shrink-0 rounded-xl overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm">
+                <HeroStat value={advisor.clientLoad} label="CASELOAD" />
+                <HeroStat
+                  value={p.confirmationRate != null ? `${Math.round(p.confirmationRate * 100)}%` : '—'}
+                  label="CONFIRM RATE"
+                  divider
+                />
+                <HeroStat
+                  value={p.avgCompletenessScore != null ? p.avgCompletenessScore : '—'}
+                  label="AVG SCORE"
+                  divider
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* KPI summary strip */}
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
         <KpiCard label="TOTAL ASSIGNMENTS" value={p.totalAssignments ?? 0} sub="all AI matches" accent={C.primary} icon={TbUsers} />
         <KpiCard label="CONFIRMED" value={p.confirmed ?? 0} sub="active engagements" accent={C.success} icon={TbCircleCheck} />
         <KpiCard label="PROPOSED" value={p.proposed ?? 0} sub="awaiting officer" accent={C.warning} icon={TbSparkles} />
         <KpiCard label="DECLINED" value={p.declined ?? 0} sub="closed engagements" accent={C.critical} icon={TbCircleX} />
       </div>
 
-      {/* Caseload visual */}
-      <div className="grid grid-cols-3 gap-4 mb-5">
-        <div className="col-span-2 bg-white border border-gray-200 rounded-xl p-5">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <p className="text-[13px] font-semibold text-gray-900">Caseload utilisation</p>
-              <p className="text-[11.5px] text-tertiary mt-0.5">Active clients vs target capacity ({caseloadCapacity})</p>
-            </div>
-            <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: loadColor }}>
-              {advisor.clientLoad >= 35 ? 'Heavy' : advisor.clientLoad >= 25 ? 'Moderate' : 'Light'}
-            </span>
+      {/* Caseload utilisation */}
+      <div className="bg-white border border-gray-200 rounded-xl p-5 mb-5">
+        <div className="flex items-start justify-between mb-3">
+          <div>
+            <p className="text-[13px] font-semibold text-gray-900">Caseload utilisation</p>
+            <p className="text-[11.5px] text-tertiary mt-0.5">Active clients vs target capacity ({caseloadCapacity})</p>
           </div>
-          <div className="h-7 bg-gray-100 rounded-full overflow-hidden relative">
-            <div className="h-full rounded-full transition-all duration-500"
-                 style={{ width: `${Math.min(advisor.clientLoad / caseloadCapacity * 100, 100)}%`, background: `linear-gradient(90deg, ${loadColor}cc, ${loadColor})` }} />
-            <span className="absolute inset-0 flex items-center justify-center text-[12px] font-semibold text-white mix-blend-difference">
-              {advisor.clientLoad} / {caseloadCapacity}
-            </span>
-          </div>
-          <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-gray-100">
-            <Marker label="Light" value="< 25" color={C.success} active={loadColor === C.success} />
-            <Marker label="Moderate" value="25 – 34" color={C.warning} active={loadColor === C.warning} />
-            <Marker label="Heavy" value="≥ 35" color={C.critical} active={loadColor === C.critical} />
-          </div>
+          <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                style={{ color: loadColor, background: loadColor + '15' }}>
+            {advisor.clientLoad >= 35 ? 'Heavy' : advisor.clientLoad >= 25 ? 'Moderate' : 'Light'}
+          </span>
         </div>
-
-        <div className="bg-white border border-gray-200 rounded-xl p-5 flex flex-col items-center justify-center">
-          <RingChart pct={p.confirmationRate ?? 0} color={C.success} size={130} stroke={12}>
-            <span className="text-[24px] font-bold text-gray-900 leading-none">
-              {p.confirmationRate != null ? `${Math.round(p.confirmationRate * 100)}%` : '—'}
-            </span>
-            <span className="text-[9.5px] font-semibold uppercase tracking-widest text-tertiary mt-1">Confirm rate</span>
-          </RingChart>
-          <p className="text-[11px] text-tertiary mt-3 text-center">
-            of proposed engagements officers kept assigned
-          </p>
+        <div className="h-8 bg-gray-100 rounded-full overflow-hidden relative">
+          <div className="h-full rounded-full transition-all duration-500"
+               style={{ width: `${Math.max(2, Math.min(advisor.clientLoad / caseloadCapacity * 100, 100))}%`, background: `linear-gradient(90deg, ${loadColor}cc, ${loadColor})` }} />
+          <span className="absolute inset-0 flex items-center justify-center text-[12.5px] font-semibold text-gray-700">
+            {advisor.clientLoad} / {caseloadCapacity}
+          </span>
+        </div>
+        <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-gray-100">
+          <Marker label="Light" value="< 25" color={C.success} active={loadColor === C.success} />
+          <Marker label="Moderate" value="25 – 34" color={C.warning} active={loadColor === C.warning} />
+          <Marker label="Heavy" value="≥ 35" color={C.critical} active={loadColor === C.critical} />
         </div>
       </div>
 
       {/* Editable profile */}
       <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Profile</p>
       <div className="bg-white border border-gray-200 rounded-xl p-5 mb-5">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
           <Field label="Years of experience" icon={TbBriefcase}>
             {editing
               ? <NumInput value={draft.yearsExperience} onChange={v => set('yearsExperience', v)} />
@@ -393,8 +394,8 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
           <p className="text-[11.5px] text-tertiary mt-1">The AI hasn't matched any clients to this advisor yet.</p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-          <table className="w-full text-left text-[12.5px]">
+        <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+          <table className="w-full text-left text-[12.5px] min-w-[640px]">
             <thead className="bg-gray-50 text-secondary">
               <tr>
                 <Th>Client</Th>
@@ -417,6 +418,15 @@ const Body = ({ advisor, navigate, editing, draft, setDraft, saving, onEdit, onC
 
 /* ── Atoms ───────────────────────────────────────────────────────────── */
 
+/* Clean stat tile for the hero strip — no ring, no awkward empty state.
+   Just a value + label, with optional left divider when stacked. */
+const HeroStat = ({ value, label, divider }) => (
+  <div className={`px-5 py-3 text-center ${divider ? 'border-l border-white/15' : ''}`}>
+    <p className="text-[22px] font-bold text-white leading-none">{value}</p>
+    <p className="text-[9.5px] font-semibold uppercase tracking-widest text-white/65 mt-2">{label}</p>
+  </div>
+)
+
 const HeroRing = ({ pct, color, value, sub }) => (
   <div style={{ width: 76, height: 76, position: 'relative' }}>
     <svg width="76" height="76">
@@ -433,14 +443,18 @@ const HeroRing = ({ pct, color, value, sub }) => (
 )
 
 const KpiCard = ({ label, value, sub, accent, icon: Icon }) => (
-  <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
-    <div className="absolute -top-3 -right-3 w-16 h-16 rounded-full opacity-10" style={{ background: accent }} />
-    <div className="relative flex items-start justify-between">
+  <div className="bg-white border border-gray-200 rounded-xl p-4 hover:border-gray-300 transition-colors">
+    <div className="flex items-center gap-2 mb-3">
+      <div
+        className="w-7 h-7 rounded-lg flex items-center justify-center"
+        style={{ background: accent + '15' }}
+      >
+        <Icon style={{ fontSize: 14, color: accent }} />
+      </div>
       <p className="text-[10.5px] font-semibold text-secondary uppercase tracking-widest">{label}</p>
-      <Icon style={{ fontSize: 14, color: accent }} />
     </div>
-    <p className="text-[26px] font-bold text-gray-900 leading-none mt-2 relative">{value}</p>
-    <p className="text-[11px] text-tertiary mt-2 relative">{sub}</p>
+    <p className="text-[28px] font-bold text-gray-900 leading-none">{value}</p>
+    <p className="text-[11px] text-tertiary mt-2">{sub}</p>
   </div>
 )
 

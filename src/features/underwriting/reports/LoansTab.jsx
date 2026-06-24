@@ -38,7 +38,7 @@ const LoansTab = ({ period }) => {
     <div className="space-y-4">
 
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <KpiCard
           label="Approval rate"
           value={`${Math.round(agg.loans.approveRate * 100)}%`}
@@ -80,7 +80,7 @@ const LoansTab = ({ period }) => {
       </ReportSection>
 
       {/* Approval rate trend + score distribution */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <ReportSection title="Approval rate trend" subtitle="% of decisions approved per day">
           <LineChart
             data={approvalSeries}

@@ -31,7 +31,7 @@ const AdvisorsTab = ({ period: _period }) => {
     <div className="space-y-4">
 
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <KpiCard label="Total advisors"      value={total}         sub="active on the bench"  icon={TbUserStar} accent={C.primary} />
         <KpiCard label="Clients assigned"    value={totalAssigned} sub="over 90 days"          icon={TbUsers}    accent={C.success} />
         <KpiCard label="Avg completeness"    value={avgComplete}   sub="across all advisors"  icon={TbStar}     accent={C.warning} />

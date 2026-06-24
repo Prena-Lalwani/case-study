@@ -3,12 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import {
   TbAdjustments,
   TbBuilding,
+  TbBriefcase,
   TbCheck,
+  TbCoin,
+  TbCopy,
   TbDotsVertical,
-  TbDownload,
+  TbEye,
+  TbId,
+  TbMail,
+  TbPlayerPause,
+  TbPlayerPlay,
   TbPlus,
   TbSearch,
   TbUser,
+  TbUserCircle,
 } from 'react-icons/tb'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import AddClientModal from '../components/AddClientModal'
@@ -16,6 +24,7 @@ import ContextChat from '../chat/ContextChat'
 import { CLIENTS_PROMPT } from '../chat/chatPrompts'
 import { enqueue } from '../services/clientQueueStore'
 import { refreshClients, useClients } from '../hooks/useClients'
+import { api } from '../services/api.js'
 
 const CURRENT_USER = {
   name:     'Marcus Webb',
@@ -36,6 +45,20 @@ const fmtMoney = n => {
 const fmtDate = iso => new Date(iso).toLocaleDateString('en-US', {
   day: 'numeric', month: 'short', year: 'numeric',
 })
+
+const SERVICE_META = {
+  'personal-loan':     { label: 'Personal Loan',     Icon: TbCoin,      tone: 'text-violet-700 bg-violet-50 border-violet-200' },
+  'business-loan':     { label: 'Business Loan',     Icon: TbBuilding,  tone: 'text-blue-700 bg-blue-50 border-blue-200' },
+  'personal-advisory': { label: 'Personal Advisory', Icon: TbUser,      tone: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+  'business-advisory': { label: 'Business Advisory', Icon: TbBriefcase, tone: 'text-amber-700 bg-amber-50 border-amber-200' },
+}
+
+const serviceFor = c => {
+  if (c.serviceFlow && SERVICE_META[c.serviceFlow]) return SERVICE_META[c.serviceFlow]
+  return c.type === 'business'
+    ? { label: 'Business',   Icon: TbBuilding, tone: 'text-gray-700 bg-gray-50 border-gray-200' }
+    : { label: 'Individual', Icon: TbUser,     tone: 'text-gray-700 bg-gray-50 border-gray-200' }
+}
 
 const STATUS_STYLES = {
   active:   { label: 'Active',   dot: 'bg-success', text: 'text-success', bg: 'bg-green-50',  border: 'border-green-200' },
@@ -143,31 +166,28 @@ const ClientsPage = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shrink-0">
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-[22px] font-semibold text-gray-900 leading-tight">Clients</h1>
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-5 sm:py-6 shrink-0">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="text-[20px] sm:text-[22px] font-semibold text-gray-900 leading-tight">Clients</h1>
               <p className="text-[13px] text-secondary mt-1">
                 {stats.total} total · {stats.active} active · {stats.pending} pending
               </p>
             </div>
-            <div className="flex items-center gap-2.5">
-              <button className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                <TbDownload style={{ fontSize: 15 }} />
-                Export
-              </button>
+            <div className="flex items-center gap-2.5 shrink-0">
               <button
                 onClick={() => setModalOpen(true)}
                 className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-white bg-navy rounded-lg hover:opacity-90 transition-opacity"
               >
                 <TbPlus style={{ fontSize: 15 }} />
-                Add client
+                <span className="hidden sm:inline">Add client</span>
+                <span className="sm:hidden">Add</span>
               </button>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 sm:mt-6">
             <StatCard label="TOTAL CLIENTS" value={stats.total} sub="across all statuses"   bar="bg-navy" />
             <StatCard label="ACTIVE"        value={stats.active}  sub="currently engaged"    bar="bg-success" pct={stats.active / stats.total} />
             <StatCard label="PENDING"       value={stats.pending} sub="awaiting onboarding"  bar="bg-warning" pct={stats.pending / stats.total} />
@@ -176,11 +196,11 @@ const ClientsPage = () => {
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-8 py-5">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-5">
 
           {/* Toolbar — tabs + search */}
-          <div className="flex items-center justify-between mb-4 gap-4 flex-wrap">
-            <div className="flex items-center border-b border-gray-200 -mb-px">
+          <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
+            <div className="flex items-center border-b border-gray-200 -mb-px overflow-x-auto max-w-full">
               {FILTERS.map(({ key, label }) => {
                 const isActive = statusTab === key
                 const count = key === 'all'
@@ -207,9 +227,9 @@ const ClientsPage = () => {
               })}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               {/* Sort dropdown */}
-              <div className="relative" ref={sortRef}>
+              <div className="relative shrink-0" ref={sortRef}>
                 <button
                   onClick={() => setSortOpen(v => !v)}
                   className={`flex items-center gap-1.5 px-3 py-2 text-[12.5px] font-medium border border-gray-200 rounded-lg transition-colors ${
@@ -241,36 +261,47 @@ const ClientsPage = () => {
                 )}
               </div>
 
-              <div className="relative">
+              <div className="relative flex-1 sm:flex-none">
                 <TbSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-tertiary" style={{ fontSize: 15 }} />
                 <input
                   value={query}
                   onChange={e => setQuery(e.target.value)}
                   placeholder="Search by name, email, ID, company…"
-                  className="w-[320px] text-[13px] text-gray-800 placeholder:text-tertiary border border-gray-200 rounded-lg pl-9 pr-3 py-2 outline-none focus:border-blue-action transition-colors"
+                  className="w-full sm:w-[320px] text-[13px] text-gray-800 placeholder:text-tertiary border border-gray-200 rounded-lg pl-9 pr-3 py-2 outline-none focus:border-blue-action transition-colors"
                 />
               </div>
             </div>
           </div>
 
-          {/* Table */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <table className="w-full text-left">
+          {/* Table — scrolls horizontally on small screens instead of squishing */}
+          <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+            <table className="w-full text-left min-w-[820px]" style={{ tableLayout: 'fixed' }}>
+              <colgroup>
+                <col style={{ width: '22%' }} />{/* Client */}
+                <col style={{ width: '15%' }} />{/* Service */}
+                <col style={{ width: '18%' }} />{/* Assigned advisor */}
+                <col style={{ width: '10%' }} />{/* Status */}
+                <col style={{ width: '11%' }} />{/* Applications */}
+                <col style={{ width: '12%' }} />{/* Total approved */}
+                <col style={{ width: '9%'  }} />{/* Joined */}
+                <col style={{ width: '3%'  }} />{/* Actions */}
+              </colgroup>
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
                   <Th>Client</Th>
-                  <Th>Type</Th>
+                  <Th>Service</Th>
+                  <Th>Assigned advisor</Th>
                   <Th>Status</Th>
-                  <Th className="text-right">Applications</Th>
-                  <Th className="text-right">Total approved</Th>
+                  <Th className="text-center">Applications</Th>
+                  <Th className="text-center">Total approved</Th>
                   <Th>Joined</Th>
-                  <Th className="w-10" />
+                  <Th />
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="px-5 py-16 text-center text-[13px] text-tertiary">
+                    <td colSpan={8} className="px-5 py-16 text-center text-[13px] text-tertiary">
                       No clients match your search.
                     </td>
                   </tr>
@@ -330,9 +361,43 @@ const StatCard = ({ label, value, sub, bar, pct }) => {
 
 /* ── Single row ──────────────────────────────────────────────────────── */
 const ClientRow = ({ client }) => {
-  const navigate = useNavigate()
-  const st = STATUS_STYLES[client.status] ?? STATUS_STYLES.inactive
-  const Icon = client.type === 'business' ? TbBuilding : TbUser
+  const navigate     = useNavigate()
+  const st           = STATUS_STYLES[client.status] ?? STATUS_STYLES.inactive
+  const service      = serviceFor(client)
+  const advisor      = client.assignedAdvisor
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef      = useRef(null)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onClick = e => { if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false) }
+    const onKey   = e => { if (e.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('mousedown', onClick)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('mousedown', onClick)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [menuOpen])
+
+  const stop = e => { e.stopPropagation(); e.preventDefault() }
+
+  const copy = async (text, e) => {
+    stop(e)
+    try { await navigator.clipboard.writeText(text) } catch { /* clipboard blocked */ }
+    setMenuOpen(false)
+  }
+
+  const setStatus = async (next, e) => {
+    stop(e)
+    setMenuOpen(false)
+    try {
+      await api.patch(`/clients/${client.id}`, { status: next })
+      refreshClients()
+    } catch (err) {
+      console.error('Failed to update client status:', err.message)
+    }
+  }
 
   return (
     <tr
@@ -354,12 +419,34 @@ const ClientRow = ({ client }) => {
         </div>
       </td>
 
-      {/* Type */}
+      {/* Service */}
       <td className="px-5 py-3.5">
-        <div className="inline-flex items-center gap-1.5 text-[12px] text-secondary">
-          <Icon style={{ fontSize: 13 }} />
-          {client.type === 'business' ? 'Business' : 'Individual'}
-        </div>
+        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium border ${service.tone}`}>
+          <service.Icon style={{ fontSize: 12 }} />
+          <span className="truncate">{service.label}</span>
+        </span>
+      </td>
+
+      {/* Assigned advisor */}
+      <td className="px-5 py-3.5">
+        {advisor ? (
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10.5px] font-semibold shrink-0">
+              {advisor.initials ?? initialsOf(advisor.name)}
+            </div>
+            <div className="min-w-0">
+              <p className="text-[12.5px] font-medium text-gray-900 leading-tight truncate">{advisor.name}</p>
+              {advisor.specialty && (
+                <p className="text-[11px] text-tertiary leading-tight mt-0.5 truncate">{advisor.specialty}</p>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-1.5 text-[12px] text-tertiary">
+            <TbUserCircle style={{ fontSize: 14 }} />
+            Unassigned
+          </div>
+        )}
       </td>
 
       {/* Status */}
@@ -371,12 +458,12 @@ const ClientRow = ({ client }) => {
       </td>
 
       {/* Applications */}
-      <td className="px-5 py-3.5 text-right text-[13px] text-gray-800 font-medium tabular-nums">
+      <td className="px-5 py-3.5 text-center text-[13px] text-gray-800 font-medium tabular-nums">
         {client.totalApplications}
       </td>
 
       {/* Total approved */}
-      <td className="px-5 py-3.5 text-right text-[13px] text-gray-800 font-semibold tabular-nums">
+      <td className="px-5 py-3.5 text-center text-[13px] text-gray-800 font-semibold tabular-nums">
         {fmtMoney(client.totalApproved)}
       </td>
 
@@ -387,16 +474,98 @@ const ClientRow = ({ client }) => {
 
       {/* Actions */}
       <td className="px-3 py-3.5">
-        <button
-          onClick={(e) => e.stopPropagation()}
-          className="p-1.5 rounded-lg text-tertiary hover:bg-gray-100 hover:text-gray-700 transition-colors"
-        >
-          <TbDotsVertical style={{ fontSize: 16 }} />
-        </button>
+        <div className="relative" ref={menuRef}>
+          <button
+            onClick={(e) => { stop(e); setMenuOpen(o => !o) }}
+            className={`p-1.5 rounded-lg transition-colors ${
+              menuOpen ? 'bg-gray-100 text-gray-700' : 'text-tertiary hover:bg-gray-100 hover:text-gray-700'
+            }`}
+            aria-label="Row actions"
+            aria-haspopup="menu"
+            aria-expanded={menuOpen}
+          >
+            <TbDotsVertical style={{ fontSize: 16 }} />
+          </button>
+
+          {menuOpen && (
+            <div
+              role="menu"
+              className="absolute top-full right-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1"
+            >
+              <MenuItem
+                icon={TbEye}
+                label="View profile"
+                onClick={(e) => { stop(e); setMenuOpen(false); navigate(`/underwriting/team/${client.id}`) }}
+              />
+              <MenuItem
+                icon={TbMail}
+                label="Copy email"
+                onClick={(e) => copy(client.email, e)}
+                disabled={!client.email}
+              />
+              <MenuItem
+                icon={TbId}
+                label="Copy client ID"
+                onClick={(e) => copy(client.id, e)}
+              />
+              <MenuDivider />
+              <MenuLabel>Status</MenuLabel>
+              {client.status !== 'active' && (
+                <MenuItem
+                  icon={TbPlayerPlay}
+                  label="Mark active"
+                  tone="success"
+                  onClick={(e) => setStatus('active', e)}
+                />
+              )}
+              {client.status !== 'pending' && (
+                <MenuItem
+                  icon={TbCopy}
+                  label="Mark pending"
+                  tone="warning"
+                  onClick={(e) => setStatus('pending', e)}
+                />
+              )}
+              {client.status !== 'inactive' && (
+                <MenuItem
+                  icon={TbPlayerPause}
+                  label="Mark inactive"
+                  onClick={(e) => setStatus('inactive', e)}
+                />
+              )}
+            </div>
+          )}
+        </div>
       </td>
     </tr>
   )
 }
+
+/* ── Row-menu primitives ──────────────────────────────────────────────── */
+const MENU_TONES = {
+  default: 'text-gray-700 hover:bg-gray-50',
+  success: 'text-emerald-700 hover:bg-emerald-50',
+  warning: 'text-amber-700  hover:bg-amber-50',
+  danger:  'text-red-600    hover:bg-red-50',
+}
+const MenuItem = ({ icon: Icon, label, onClick, disabled = false, tone = 'default' }) => (
+  <button
+    type="button"
+    role="menuitem"
+    disabled={disabled}
+    onClick={onClick}
+    className={`w-full flex items-center gap-2.5 px-3 py-2 text-[12.5px] text-left transition-colors ${
+      disabled ? 'text-gray-300 cursor-not-allowed' : MENU_TONES[tone]
+    }`}
+  >
+    <Icon style={{ fontSize: 14 }} />
+    {label}
+  </button>
+)
+const MenuDivider = () => <div className="my-1 border-t border-gray-100" />
+const MenuLabel   = ({ children }) => (
+  <p className="px-3 pt-1 pb-0.5 text-[10px] font-semibold uppercase tracking-widest text-tertiary">{children}</p>
+)
 
 /* ── Table header cell ───────────────────────────────────────────────── */
 const Th = ({ children, className = '' }) => (

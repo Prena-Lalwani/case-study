@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24825",
   "status": "needs_review",
   "submittedAt": "2026-06-03T13:10:00Z",
@@ -8,7 +8,7 @@
     "address": "19 Lakeview Terrace, Austin, TX 78746",
     "phone": "+1 512-555-0889",
     "email": "priya.sharma@email.com",
-    "ssn": "***-**-7724",
+    "ssn": "555-12-7724",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -85,15 +85,15 @@
       "aiConfidence": 92,
       "status": "verified",
       "flags": [
-        "Self-employed — income based on client contracts",
-        "Revenue concentration risk — 2 primary clients represent 70% of income"
+        "Self-employed â€” income based on client contracts",
+        "Revenue concentration risk â€” 2 primary clients represent 70% of income"
       ]
     },
     "bankStatement": {
       "bank": "Chase",
       "accountHolder": "Sharma Analytics Consulting",
-      "accountNumber": "****3317",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40123317",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24804",
   "status": "ai_reviewing",
   "submittedAt": "2026-06-02T11:41:09Z",
@@ -8,7 +8,7 @@
     "address": "88 Brickell Terrace, Suite 4, Miami, FL 33130",
     "phone": "+1 786-555-0614",
     "email": "miguel.torres@email.com",
-    "ssn": "***-**-5519",
+    "ssn": "555-12-5519",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -83,8 +83,8 @@
     "bankStatement": {
       "bank": "Bank of America",
       "accountHolder": "La Mesa Viva LLC",
-      "accountNumber": "****9910",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40129910",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": null,
       "averageMonthlyCredit": null,
       "averageMonthlyDebit": null,

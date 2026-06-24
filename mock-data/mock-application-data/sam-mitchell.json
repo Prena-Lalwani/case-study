@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24832",
   "status": "needs_review",
   "submittedAt": "2026-06-03T07:30:00Z",
@@ -8,7 +8,7 @@
     "address": "99 Heritage Oak Dr, Nashville, TN 37201",
     "phone": "+1 615-555-0991",
     "email": "sam.mitchell@email.com",
-    "ssn": "***-**-3312",
+    "ssn": "555-12-3312",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -99,8 +99,8 @@
     "bankStatement": {
       "bank": "SunTrust",
       "accountHolder": "Samuel J. Mitchell",
-      "accountNumber": "****7744",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127744",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24814",
   "status": "needs_review",
   "submittedAt": "2026-06-01T14:22:09Z",
@@ -8,7 +8,7 @@
     "address": "92 Ridgecrest Rd, Denver, CO 80203",
     "phone": "+1 720-555-0561",
     "email": "thomas.brennan@email.com",
-    "ssn": "***-**-3309",
+    "ssn": "555-12-3309",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -20,7 +20,7 @@
     "annualSalary": 74400,
     "monthlyGross": 6200,
     "monthlyNet": 4650,
-    "incomeVariance": "High — seasonal construction work, 3 months with income below $4,000"
+    "incomeVariance": "High â€” seasonal construction work, 3 months with income below $4,000"
   },
   "financials": {
     "creditScore": 634,
@@ -36,7 +36,7 @@
         "type": "Credit card",
         "monthlyPayment": 400,
         "balance": 8900,
-        "status": "current — 1 late payment 14 months ago"
+        "status": "current â€” 1 late payment 14 months ago"
       }
     ],
     "totalMonthlyDebtPayments": 920,
@@ -68,7 +68,7 @@
       "aiConfidence": 88,
       "status": "needs_review",
       "flags": [
-        "License expired March 2026 — applicant must provide renewal or alternative ID"
+        "License expired March 2026 â€” applicant must provide renewal or alternative ID"
       ]
     },
     "salarySlip": {
@@ -88,19 +88,19 @@
       "totalDeductions": 2672,
       "netPay": 5128,
       "ytdGross": 28600,
-      "note": "Self-employed — income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
+      "note": "Self-employed â€” income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
       "aiConfidence": 79,
       "status": "needs_review",
       "flags": [
-        "Self-employed income — high month-to-month variance",
+        "Self-employed income â€” high month-to-month variance",
         "YTD avg $5,720/mo vs stated $6,200/mo"
       ]
     },
     "bankStatement": {
       "bank": "Wells Fargo",
       "accountHolder": "Thomas J. Brennan",
-      "accountNumber": "****7703",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127703",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -110,7 +110,7 @@
           "closingBalance": 3590,
           "salaryDeposit": 8100,
           "flags": [
-            "Large one-time project payment $8,100 — not recurring"
+            "Large one-time project payment $8,100 â€” not recurring"
           ]
         },
         {

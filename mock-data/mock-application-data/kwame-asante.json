@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24809",
   "status": "auto_rejected",
   "submittedAt": "2026-05-31T13:02:44Z",
@@ -8,12 +8,12 @@
     "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
     "phone": "+1 313-555-0099",
     "email": "kwame.asante@email.com",
-    "ssn": "***-**-2201",
+    "ssn": "555-12-2201",
     "nationality": "US Citizen"
   },
   "employment": {
     "type": "part_time",
-    "employer": "GameStop — Michigan Ave",
+    "employer": "GameStop â€” Michigan Ave",
     "jobTitle": "Part-Time Sales Associate",
     "yearsEmployed": 1.2,
     "employmentStartDate": "2025-03-10",
@@ -29,19 +29,19 @@
         "type": "Student loan",
         "monthlyPayment": 340,
         "balance": 18900,
-        "status": "current — 2 missed payments (Oct 2024, Jan 2025)"
+        "status": "current â€” 2 missed payments (Oct 2024, Jan 2025)"
       },
       {
         "type": "Car loan",
         "monthlyPayment": 300,
         "balance": 7200,
-        "status": "current — 1 late payment (Mar 2025)"
+        "status": "current â€” 1 late payment (Mar 2025)"
       },
       {
         "type": "Credit card",
         "monthlyPayment": 200,
         "balance": 3800,
-        "status": "2 missed payments — 30 days overdue"
+        "status": "2 missed payments â€” 30 days overdue"
       }
     ],
     "totalMonthlyDebtPayments": 840,
@@ -70,7 +70,7 @@
       "aiConfidence": 91,
       "status": "needs_review",
       "flags": [
-        "State ID expired February 2026 — less than 3 months ago"
+        "State ID expired February 2026 â€” less than 3 months ago"
       ]
     },
     "salarySlip": {
@@ -94,14 +94,14 @@
       "aiConfidence": 94,
       "status": "verified",
       "flags": [
-        "Part-time income only — hours may vary"
+        "Part-time income only â€” hours may vary"
       ]
     },
     "bankStatement": {
       "bank": "Chime",
       "accountHolder": "Kwame Asante",
-      "accountNumber": "****1122",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40121122",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -123,7 +123,7 @@
           "closingBalance": 250,
           "salaryDeposit": 1679,
           "flags": [
-            "Overdraft attempt Apr 22 — declined"
+            "Overdraft attempt Apr 22 â€” declined"
           ]
         },
         {

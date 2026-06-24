@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24831",
   "status": "approved",
   "submittedAt": "2026-06-01T08:55:00Z",
@@ -8,7 +8,7 @@
     "address": "88 Sunset Blvd, Phoenix, AZ 85001",
     "phone": "+1 602-555-0229",
     "email": "elena.vasquez@email.com",
-    "ssn": "***-**-4490",
+    "ssn": "555-12-4490",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -90,8 +90,8 @@
     "bankStatement": {
       "bank": "Chase",
       "accountHolder": "Elena M. Vasquez",
-      "accountNumber": "****1129",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40121129",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

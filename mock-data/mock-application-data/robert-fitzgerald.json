@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24824",
   "status": "auto_rejected",
   "submittedAt": "2026-06-01T15:20:00Z",
@@ -8,7 +8,7 @@
     "address": "420 Highland Ave, Sacramento, CA 95811",
     "phone": "+1 916-555-0721",
     "email": "robert.fitzgerald@email.com",
-    "ssn": "***-**-1177",
+    "ssn": "555-12-1177",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -111,8 +111,8 @@
     "bankStatement": {
       "bank": "Bank of America",
       "accountHolder": "Robert J. Fitzgerald",
-      "accountNumber": "****5540",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40125540",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -122,7 +122,7 @@
           "closingBalance": 1900,
           "salaryDeposit": 4900,
           "flags": [
-            "Negative month — spending exceeds income"
+            "Negative month â€” spending exceeds income"
           ]
         },
         {
@@ -133,7 +133,7 @@
           "closingBalance": 1500,
           "salaryDeposit": 4900,
           "flags": [
-            "Negative month — spending exceeds income"
+            "Negative month â€” spending exceeds income"
           ]
         },
         {

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24822",
   "status": "needs_review",
   "submittedAt": "2026-06-03T11:05:00Z",
@@ -8,7 +8,7 @@
     "address": "301 Oak Park Ave, Denver, CO 80203",
     "phone": "+1 720-555-0441",
     "email": "daniel.nguyen@email.com",
-    "ssn": "***-**-5501",
+    "ssn": "555-12-5501",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -20,7 +20,7 @@
     "annualSalary": 90000,
     "monthlyGross": 7500,
     "monthlyNet": 5200,
-    "note": "Contract-based income — 3 active clients. Revenue varies month to month $5,800–$10,200."
+    "note": "Contract-based income â€” 3 active clients. Revenue varies month to month $5,800â€“$10,200."
   },
   "financials": {
     "creditScore": 694,
@@ -79,15 +79,15 @@
       "aiConfidence": 90,
       "status": "verified",
       "flags": [
-        "Self-employed — income varies by contract cycle",
-        "May revenue higher than 3-month average — one-time project completion"
+        "Self-employed â€” income varies by contract cycle",
+        "May revenue higher than 3-month average â€” one-time project completion"
       ]
     },
     "bankStatement": {
       "bank": "US Bank",
       "accountHolder": "Daniel M. Nguyen",
-      "accountNumber": "****6614",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40126614",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -97,7 +97,7 @@
           "closingBalance": 10300,
           "salaryDeposit": 5200,
           "flags": [
-            "Low-income month — single client delayed payment"
+            "Low-income month â€” single client delayed payment"
           ]
         },
         {

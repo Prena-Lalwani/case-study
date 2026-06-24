@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24805",
   "status": "ai_reviewing",
   "submittedAt": "2026-06-02T12:04:30Z",
@@ -8,7 +8,7 @@
     "address": "312 Willow Creek Dr, Charlotte, NC 28201",
     "phone": "+1 704-555-0118",
     "email": "amara.okonkwo@email.com",
-    "ssn": "***-**-7744",
+    "ssn": "555-12-7744",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -85,8 +85,8 @@
     "bankStatement": {
       "bank": "Wells Fargo",
       "accountHolder": "Amara C. Okonkwo",
-      "accountNumber": "****2290",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40122290",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": null,
       "averageMonthlyCredit": null,
       "averageMonthlyDebit": null,

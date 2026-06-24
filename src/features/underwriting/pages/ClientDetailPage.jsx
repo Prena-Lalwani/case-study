@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
 import {
+  TbAlertCircle,
   TbArrowLeft,
   TbArrowRight,
   TbBuilding,
@@ -16,7 +16,9 @@ import {
   TbUser,
   TbWallet,
 } from 'react-icons/tb'
+import { useNavigate, useParams } from 'react-router-dom'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
+import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
 import { api } from '../services/api'
 
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
@@ -41,6 +43,61 @@ const STATUS_STYLE = {
   active:   { label: 'Active',   color: 'text-success',  bg: 'bg-green-50',  border: 'border-green-200' },
   pending:  { label: 'Pending',  color: 'text-warning',  bg: 'bg-orange-50', border: 'border-orange-200' },
   inactive: { label: 'Inactive', color: 'text-tertiary', bg: 'bg-gray-100',  border: 'border-gray-200' },
+}
+
+/* ── Field rules ──────────────────────────────────────────────────────────
+   Each rule defines: input filtering (sanitize), constraints (maxLength,
+   inputMode, type), and a validate() function returning an error string or
+   '' when the value is acceptable. Empty string ⇒ field unset ⇒ valid.    */
+const digitsOnly = (s) => String(s ?? '').replace(/\D/g, '')
+
+const FIELD_RULES = {
+  name:        { type: 'text',  maxLength: 80,
+                 validate: v => !v?.trim() ? 'Name is required' : v.trim().length < 2 ? 'Too short' : '' },
+  email:       { type: 'email', maxLength: 120,
+                 validate: v => !v?.trim() ? 'Email is required'
+                              : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? 'Enter a valid email' : '' },
+  phone:       { type: 'tel',   maxLength: 11, inputMode: 'numeric', sanitize: digitsOnly,
+                 validate: v => !v ? '' : v.length < 7 ? 'Phone is too short' : v.length > 11 ? 'Phone is too long' : '' },
+  dateOfBirth: { type: 'date',
+                 validate: v => !v ? '' : new Date(v) > new Date() ? 'Date cannot be in the future'
+                              : new Date(v).getFullYear() < 1900 ? 'Year is too far in the past' : '' },
+  idNumber:    { type: 'text',  maxLength: 20, sanitize: s => String(s ?? '').replace(/[^A-Za-z0-9-]/g, '').toUpperCase(),
+                 validate: v => !v ? '' : v.length < 4 ? 'ID is too short' : '' },
+  nationality: { type: 'text',  maxLength: 40, sanitize: s => String(s ?? '').replace(/[^A-Za-z\s-]/g, '') },
+  location:    { type: 'text',  maxLength: 80 },
+  address:     { type: 'text',  maxLength: 200 },
+  company:     { type: 'text',  maxLength: 80 },
+  employer:    { type: 'text',  maxLength: 80 },
+  jobTitle:    { type: 'text',  maxLength: 60 },
+  monthlyGross: { type: 'text', inputMode: 'numeric', maxLength: 10, sanitize: digitsOnly,
+                  validate: v => !v ? '' : Number(v) > 9_999_999_999 ? 'Value too large' : '' },
+  monthlyNet:   { type: 'text', inputMode: 'numeric', maxLength: 10, sanitize: digitsOnly,
+                  validate: v => !v ? '' : Number(v) > 9_999_999_999 ? 'Value too large' : '' },
+  yearsEmployed:{ type: 'text', inputMode: 'numeric', maxLength: 2, sanitize: digitsOnly,
+                  validate: v => !v ? '' : Number(v) > 60 ? 'Must be 0–60' : '' },
+  creditScore:  { type: 'text', inputMode: 'numeric', maxLength: 3, sanitize: digitsOnly,
+                  validate: v => !v ? '' : Number(v) < 300 ? 'Below 300' : Number(v) > 850 ? 'Above 850' : '' },
+  bankName:     { type: 'text', maxLength: 60 },
+  accountHolder:{ type: 'text', maxLength: 80 },
+  accountNumber:{ type: 'text', maxLength: 20, inputMode: 'numeric', sanitize: digitsOnly,
+                  validate: v => !v ? '' : v.length < 6 ? 'Account too short' : '' },
+  statementPeriod: { type: 'text', maxLength: 40 },
+  averageMonthlyCredit:  { type: 'text', inputMode: 'numeric', maxLength: 12, sanitize: digitsOnly },
+  averageMonthlyDebit:   { type: 'text', inputMode: 'numeric', maxLength: 12, sanitize: digitsOnly },
+  averageClosingBalance: { type: 'text', inputMode: 'numeric', maxLength: 12, sanitize: digitsOnly },
+  notes:        { type: 'text', maxLength: 1000 },
+}
+
+/** Validate the whole draft. Returns { [field]: errorString } only for fields with errors. */
+const validateDraft = (draft) => {
+  const errs = {}
+  for (const [name, rule] of Object.entries(FIELD_RULES)) {
+    if (!rule.validate) continue
+    const msg = rule.validate(draft?.[name])
+    if (msg) errs[name] = msg
+  }
+  return errs
 }
 
 /* ── Ring chart ───────────────────────────────────────────────────────── */
@@ -212,7 +269,8 @@ const ClientDetailPage = () => {
               saving={saving}
               onEdit={() => { setDraft(toDraft(client)); setEditing(true) }}
               onCancel={() => { setDraft(toDraft(client)); setEditing(false) }}
-              onSave={async () => {
+              onSave={async (errors) => {
+                if (Object.keys(errors).length > 0) return
                 setSaving(true)
                 try {
                   await api.patch(`/clients/${client.id}`, normalize(draft))
@@ -264,7 +322,19 @@ const normalize = (d) => ({
 const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave }) => {
   const isBusiness = client.type === 'business'
   const st = STATUS_STYLE[client.status] ?? STATUS_STYLE.pending
-  const set = (k, v) => setDraft(d => ({ ...d, [k]: v }))
+
+  /* Field setter applies the rule's sanitizer + maxLength before writing. */
+  const set = (k, v) => {
+    const rule = FIELD_RULES[k]
+    let next = v
+    if (rule?.sanitize) next = rule.sanitize(next)
+    if (rule?.maxLength != null) next = String(next ?? '').slice(0, rule.maxLength)
+    setDraft(d => ({ ...d, [k]: next }))
+  }
+
+  const errors      = useMemo(() => editing ? validateDraft(draft) : {}, [draft, editing])
+  const errorCount  = Object.keys(errors).length
+  const canSave     = !saving && errorCount === 0
 
   const apps          = client.loanApplications ?? []
   const engagements   = client.advisoryEngagements ?? []
@@ -279,12 +349,12 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
   const months = useMemo(() => synthMonths(client), [client])
 
   return (
-    <div className="px-8 py-6 max-w-[1400px] mx-auto">
+    <div className="px-4 sm:px-8 py-5 sm:py-6 max-w-[1400px] mx-auto">
       {/* Back + Edit */}
       <div className="flex items-center justify-between mb-4">
         <button onClick={() => navigate('/underwriting/team')}
           className="flex items-center gap-1.5 text-[12.5px] text-secondary hover:text-gray-800">
-          <TbArrowLeft style={{ fontSize: 14 }} /> All clients
+          <TbArrowLeft style={{ fontSize: 14 }} /> 
         </button>
         {!editing ? (
           <button onClick={onEdit}
@@ -293,11 +363,17 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
           </button>
         ) : (
           <div className="flex items-center gap-2">
+            {errorCount > 0 && (
+              <span className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-error">
+                <TbAlertCircle style={{ fontSize: 13 }} />
+                {errorCount} field{errorCount === 1 ? '' : 's'} need attention
+              </span>
+            )}
             <button onClick={onCancel} disabled={saving}
               className="px-3.5 py-1.5 text-[12.5px] font-medium text-secondary border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-40">
               Cancel
             </button>
-            <button onClick={onSave} disabled={saving}
+            <button onClick={() => onSave(errors)} disabled={!canSave}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-[12.5px] font-semibold text-white bg-navy rounded-lg hover:opacity-90 disabled:opacity-40">
               {saving ? <><TbLoader2 className="animate-spin" style={{ fontSize: 13 }} /> Saving…</> : <><TbCheck style={{ fontSize: 13 }} /> Save changes</>}
             </button>
@@ -307,17 +383,19 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
 
       {/* Hero with gradient */}
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-5">
-        <div className="px-7 py-7 bg-gradient-to-r from-[#1D3557] via-[#1f3d63] to-[#2a4a7a] text-white">
-          <div className="flex items-start gap-5">
-            <div className="w-20 h-20 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[20px] font-semibold shrink-0">
+        <div className="px-4 sm:px-7 py-5 sm:py-7 bg-gradient-to-r from-[#1D3557] via-[#1f3d63] to-[#2a4a7a] text-white relative">
+          <div className="flex items-start gap-4 sm:gap-5">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[18px] sm:text-[22px] font-semibold shrink-0">
               {initialsOf(client.name)}
             </div>
             <div className="min-w-0 flex-1">
               {editing ? (
-                <input value={draft.name} onChange={e => set('name', e.target.value)}
-                  className="block w-full max-w-[420px] text-[24px] font-semibold bg-white/15 text-white border border-white/30 rounded-md px-2 py-0.5 outline-none focus:border-white/70" />
+                <input value={draft.name}
+                  maxLength={FIELD_RULES.name.maxLength}
+                  onChange={e => set('name', e.target.value)}
+                  className={`block w-full max-w-[420px] text-[20px] sm:text-[24px] font-semibold bg-white/15 text-white border rounded-md px-2 py-0.5 outline-none focus:border-white/70 ${errors.name ? 'border-red-300' : 'border-white/30'}`} />
               ) : (
-                <h1 className="text-[26px] font-semibold leading-tight">{client.name}</h1>
+                <h1 className="text-[20px] sm:text-[26px] font-semibold leading-tight break-words">{client.name}</h1>
               )}
               <div className="flex items-center gap-1.5 mt-1.5 text-[13px] text-white/80">
                 {isBusiness ? <TbBuilding style={{ fontSize: 14 }} /> : <TbUser style={{ fontSize: 14 }} />}
@@ -326,7 +404,9 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
                   <>
                     <span className="text-white/40">·</span>
                     {editing ? (
-                      <input value={draft.company} onChange={e => set('company', e.target.value)} placeholder="Company"
+                      <input value={draft.company}
+                        maxLength={FIELD_RULES.company.maxLength}
+                        onChange={e => set('company', e.target.value)} placeholder="Company"
                         className="bg-white/10 text-white placeholder-white/40 border border-white/20 rounded px-2 py-0 text-[13px] outline-none focus:border-white/60" />
                     ) : (
                       client.company
@@ -353,35 +433,20 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
               </div>
             </div>
 
-            {/* Hero right — 3 financial rings */}
-            <div className="flex items-center gap-4 shrink-0">
-              <HeroRing
-                pct={gross > 0 ? Math.min(gross / (isBusiness ? 500_000 : 20_000), 1) : 0}
-                color="#86EFAC"
-                value={'$' + fmtK(gross)}
-                sub={isBusiness ? 'Revenue/mo' : 'Income/mo'}
-              />
-              <HeroRing
-                pct={balance > 0 ? Math.min(balance / (isBusiness ? 1_000_000 : 50_000), 1) : 0}
-                color="#FCD34D"
-                value={'$' + fmtK(balance)}
-                sub="Balance"
-              />
-              {credit > 0 && (
-                <HeroRing
-                  pct={(credit - 300) / 550}
-                  color={credit >= 740 ? '#86EFAC' : credit >= 670 ? '#FCD34D' : '#FCA5A5'}
-                  value={credit}
-                  sub="Credit"
-                />
-              )}
-            </div>
+            {/* Hero right — clean stat tiles (no awkward empty rings) */}
+            {!editing && (
+              <div className="hidden md:flex items-stretch gap-0 shrink-0 rounded-xl overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm">
+                <HeroStat value={'$' + fmtK(gross)} label={isBusiness ? 'REVENUE / MO' : 'INCOME / MO'} />
+                <HeroStat value={'$' + fmtK(balance)} label="BALANCE" divider />
+                {credit > 0 && <HeroStat value={credit} label="CREDIT" divider />}
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* 4 KPI cards */}
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
         <KpiCard label="LOAN APPS" value={apps.length} sub={`${apps.filter(a => a.status === 'approved').length} approved`} accent={C.primary} icon={TbCash} />
         <KpiCard label="ADVISORY" value={engagements.length} sub={`${engagements.filter(e => e.status === 'confirmed').length} confirmed`} accent={C.success} icon={TbReportMoney} />
         <KpiCard label="APPROVED" value={fmt$(totalApproved)} sub="loan history" accent="#8B5CF6" icon={TbCash} />
@@ -390,8 +455,8 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
 
       {/* Banking chart + savings donut */}
       {months.length > 0 && (
-        <div className="grid grid-cols-3 gap-4 mb-5">
-          <div className="col-span-2 bg-white border border-gray-200 rounded-xl p-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
+          <div className="lg:col-span-2 bg-white border border-gray-200 rounded-xl p-5">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <p className="text-[13px] font-semibold text-gray-900">Banking activity</p>
@@ -419,37 +484,37 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
       )}
 
       {/* Editable identity + employment */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Section title="Identity" icon={TbId}>
-          <FieldRow label="Email"        value={client.email}        editing={editing} draft={draft.email}        onChange={v => set('email', v)} />
-          <FieldRow label="Phone"        value={client.phone}        editing={editing} draft={draft.phone}        onChange={v => set('phone', v)} />
-          <FieldRow label="Date of birth" value={client.dateOfBirth} editing={editing} draft={draft.dateOfBirth} onChange={v => set('dateOfBirth', v)} type="date" />
-          <FieldRow label="ID number"    value={client.idNumber}     editing={editing} draft={draft.idNumber}     onChange={v => set('idNumber', v)} mono />
-          <FieldRow label="Nationality"  value={client.nationality}  editing={editing} draft={draft.nationality}  onChange={v => set('nationality', v)} />
-          <FieldRow label="Location"     value={client.location}     editing={editing} draft={draft.location}     onChange={v => set('location', v)} />
-          <FieldRow label="Address"      value={client.address}      editing={editing} draft={draft.address}      onChange={v => set('address', v)} wide />
+          <FieldRow name="email"       label="Email"         value={client.email}        editing={editing} draft={draft.email}        error={errors.email}        onChange={v => set('email', v)} />
+          <FieldRow name="phone"       label="Phone"         value={client.phone}        editing={editing} draft={draft.phone}        error={errors.phone}        onChange={v => set('phone', v)} />
+          <FieldRow name="dateOfBirth" label="Date of birth" value={client.dateOfBirth}  editing={editing} draft={draft.dateOfBirth}  error={errors.dateOfBirth}  onChange={v => set('dateOfBirth', v)} />
+          <FieldRow name="idNumber"    label="ID number"     value={client.idNumber}     editing={editing} draft={draft.idNumber}     error={errors.idNumber}     onChange={v => set('idNumber', v)} mono />
+          <FieldRow name="nationality" label="Nationality"   value={client.nationality}  editing={editing} draft={draft.nationality}  error={errors.nationality}  onChange={v => set('nationality', v)} />
+          <FieldRow name="location"    label="Location"      value={client.location}     editing={editing} draft={draft.location}     error={errors.location}     onChange={v => set('location', v)} />
+          <FieldRow name="address"     label="Address"       value={client.address}      editing={editing} draft={draft.address}      error={errors.address}      onChange={v => set('address', v)} wide />
         </Section>
 
         <Section title={isBusiness ? 'Business operations' : 'Employment & finances'} icon={TbReportMoney}>
-          <FieldRow label={isBusiness ? 'Operating entity' : 'Employer'} value={client.employer} editing={editing} draft={draft.employer} onChange={v => set('employer', v)} />
-          <FieldRow label={isBusiness ? 'Sector' : 'Job title'}          value={client.jobTitle} editing={editing} draft={draft.jobTitle} onChange={v => set('jobTitle', v)} />
-          <FieldRow label={isBusiness ? 'Monthly revenue' : 'Monthly gross'} value={fmt$(client.monthlyGross)} editing={editing} draft={draft.monthlyGross} onChange={v => set('monthlyGross', v)} type="number" />
-          <FieldRow label="Monthly net"   value={fmt$(client.monthlyNet)} editing={editing} draft={draft.monthlyNet} onChange={v => set('monthlyNet', v)} type="number" />
-          <FieldRow label={isBusiness ? 'Years in business' : 'Years employed'} value={client.yearsEmployed} editing={editing} draft={draft.yearsEmployed} onChange={v => set('yearsEmployed', v)} type="number" />
-          <FieldRow label="Credit score"  value={client.creditScore || '—'} editing={editing} draft={draft.creditScore} onChange={v => set('creditScore', v)} type="number" />
+          <FieldRow name="employer"      label={isBusiness ? 'Operating entity' : 'Employer'} value={client.employer} editing={editing} draft={draft.employer} error={errors.employer} onChange={v => set('employer', v)} />
+          <FieldRow name="jobTitle"      label={isBusiness ? 'Sector' : 'Job title'}          value={client.jobTitle} editing={editing} draft={draft.jobTitle} error={errors.jobTitle} onChange={v => set('jobTitle', v)} />
+          <FieldRow name="monthlyGross"  label={isBusiness ? 'Monthly revenue' : 'Monthly gross'} value={fmt$(client.monthlyGross)} editing={editing} draft={draft.monthlyGross} error={errors.monthlyGross} onChange={v => set('monthlyGross', v)} />
+          <FieldRow name="monthlyNet"    label="Monthly net"   value={fmt$(client.monthlyNet)} editing={editing} draft={draft.monthlyNet} error={errors.monthlyNet} onChange={v => set('monthlyNet', v)} />
+          <FieldRow name="yearsEmployed" label={isBusiness ? 'Years in business' : 'Years employed'} value={client.yearsEmployed} editing={editing} draft={draft.yearsEmployed} error={errors.yearsEmployed} onChange={v => set('yearsEmployed', v)} />
+          <FieldRow name="creditScore"   label="Credit score"  value={client.creditScore || '—'} editing={editing} draft={draft.creditScore} error={errors.creditScore} onChange={v => set('creditScore', v)} />
         </Section>
       </div>
 
       {/* Banking details */}
       <div className="mt-4">
         <Section title="Banking details" icon={TbWallet}>
-          <FieldRow label="Bank"             value={client.bankName}        editing={editing} draft={draft.bankName}        onChange={v => set('bankName', v)} />
-          <FieldRow label="Account holder"   value={client.accountHolder}   editing={editing} draft={draft.accountHolder}   onChange={v => set('accountHolder', v)} />
-          <FieldRow label="Account number"   value={client.accountNumber}   editing={editing} draft={draft.accountNumber}   onChange={v => set('accountNumber', v)} mono />
-          <FieldRow label="Statement period" value={client.statementPeriod} editing={editing} draft={draft.statementPeriod} onChange={v => set('statementPeriod', v)} />
-          <FieldRow label="Avg credit / mo"   value={fmt$(client.averageMonthlyCredit)}  editing={editing} draft={draft.averageMonthlyCredit}  onChange={v => set('averageMonthlyCredit', v)} type="number" />
-          <FieldRow label="Avg debit / mo"    value={fmt$(client.averageMonthlyDebit)}   editing={editing} draft={draft.averageMonthlyDebit}   onChange={v => set('averageMonthlyDebit', v)} type="number" />
-          <FieldRow label="Avg balance"       value={fmt$(client.averageClosingBalance)} editing={editing} draft={draft.averageClosingBalance} onChange={v => set('averageClosingBalance', v)} type="number" highlight />
+          <FieldRow name="bankName"        label="Bank"             value={client.bankName}        editing={editing} draft={draft.bankName}        error={errors.bankName}        onChange={v => set('bankName', v)} />
+          <FieldRow name="accountHolder"   label="Account holder"   value={client.accountHolder}   editing={editing} draft={draft.accountHolder}   error={errors.accountHolder}   onChange={v => set('accountHolder', v)} />
+          <FieldRow name="accountNumber"   label="Account number"   value={client.accountNumber}   editing={editing} draft={draft.accountNumber}   error={errors.accountNumber}   onChange={v => set('accountNumber', v)} mono />
+          <FieldRow name="statementPeriod" label="Statement period" value={client.statementPeriod} editing={editing} draft={draft.statementPeriod} error={errors.statementPeriod} onChange={v => set('statementPeriod', v)} />
+          <FieldRow name="averageMonthlyCredit"  label="Avg credit / mo"  value={fmt$(client.averageMonthlyCredit)}  editing={editing} draft={draft.averageMonthlyCredit}  error={errors.averageMonthlyCredit}  onChange={v => set('averageMonthlyCredit', v)} />
+          <FieldRow name="averageMonthlyDebit"   label="Avg debit / mo"   value={fmt$(client.averageMonthlyDebit)}   editing={editing} draft={draft.averageMonthlyDebit}   error={errors.averageMonthlyDebit}   onChange={v => set('averageMonthlyDebit', v)} />
+          <FieldRow name="averageClosingBalance" label="Avg balance"      value={fmt$(client.averageClosingBalance)} editing={editing} draft={draft.averageClosingBalance} error={errors.averageClosingBalance} onChange={v => set('averageClosingBalance', v)} highlight />
         </Section>
       </div>
 
@@ -457,8 +522,8 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
       {apps.length > 0 && (
         <div className="mt-5">
           <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Loan applications</p>
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <table className="w-full text-left text-[12.5px]">
+          <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+            <table className="w-full text-left text-[12.5px] min-w-[640px]">
               <thead className="bg-gray-50 text-secondary">
                 <tr>
                   <Th>App ID</Th><Th>Loan type</Th><Th className="text-right">Amount</Th>
@@ -485,19 +550,36 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
         </div>
       )}
 
+      {/* Advisory engagements */}
+      {engagements.length > 0 && (
+        <div className="mt-5">
+          <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Advisory engagements</p>
+          <div className="bg-white border border-gray-200 rounded-xl overflow-x-auto">
+            <table className="w-full text-left text-[12.5px] min-w-[640px]">
+              <thead className="bg-gray-50 text-secondary">
+                <tr>
+                  <Th>Engagement ID</Th>
+                  <Th>Type</Th>
+                  <Th>Advisor</Th>
+                  <Th>Status</Th>
+                  <Th>Submitted</Th>
+                  <Th className="w-12" />
+                </tr>
+              </thead>
+              <tbody>
+                {engagements.map(e => (
+                  <EngagementRow key={e.id} engagement={e} navigate={navigate} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
       {/* Documents */}
       {documents.length > 0 && (
         <div className="mt-5">
-          <p className="text-[11px] font-semibold text-secondary uppercase tracking-widest mb-2">Documents on file</p>
-          <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-wrap gap-2">
-            {documents.map(d => (
-              <span key={d.id} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-gray-50 border border-gray-200 text-[12px] text-gray-700">
-                <TbFileText style={{ fontSize: 13 }} className="text-tertiary" />
-                <span className="font-medium">{d.docType}</span>
-                {d.aiConfidence && <span className="text-tertiary">· {d.aiConfidence}%</span>}
-              </span>
-            ))}
-          </div>
+          <ClientDocumentsViewer documents={documents} title="Documents on file" />
         </div>
       )}
     </div>
@@ -506,30 +588,26 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
 
 /* ── Atoms ───────────────────────────────────────────────────────────── */
 
-const HeroRing = ({ pct, color, value, sub }) => (
-  <div style={{ width: 76, height: 76, position: 'relative' }}>
-    <svg width="76" height="76">
-      <circle cx="38" cy="38" r="32" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="6" />
-      <circle cx="38" cy="38" r="32" fill="none" stroke={color} strokeWidth="6"
-        strokeDasharray={`${Math.min(Math.max(pct, 0), 1) * 2 * Math.PI * 32} ${2 * Math.PI * 32}`}
-        strokeLinecap="round" transform="rotate(-90 38 38)" />
-    </svg>
-    <div className="absolute inset-0 flex flex-col items-center justify-center">
-      <span className="text-[13px] font-bold leading-none">{value}</span>
-      <span className="text-[8.5px] uppercase tracking-widest text-white/70 mt-1">{sub}</span>
-    </div>
+const HeroStat = ({ value, label, divider }) => (
+  <div className={`px-5 py-3 text-center ${divider ? 'border-l border-white/15' : ''}`}>
+    <p className="text-[22px] font-bold text-white leading-none">{value}</p>
+    <p className="text-[9.5px] font-semibold uppercase tracking-widest text-white/65 mt-2">{label}</p>
   </div>
 )
 
 const KpiCard = ({ label, value, sub, accent, icon: Icon }) => (
-  <div className="bg-white border border-gray-200 rounded-xl p-4 relative overflow-hidden">
-    <div className="absolute -top-3 -right-3 w-16 h-16 rounded-full opacity-10" style={{ background: accent }} />
-    <div className="relative flex items-start justify-between">
+  <div className="bg-white border border-gray-200 rounded-xl p-4 hover:border-gray-300 transition-colors">
+    <div className="flex items-center gap-2 mb-3">
+      <div
+        className="w-7 h-7 rounded-lg flex items-center justify-center"
+        style={{ background: accent + '15' }}
+      >
+        <Icon style={{ fontSize: 14, color: accent }} />
+      </div>
       <p className="text-[10.5px] font-semibold text-secondary uppercase tracking-widest">{label}</p>
-      <Icon style={{ fontSize: 14, color: accent }} />
     </div>
-    <p className="text-[26px] font-bold text-gray-900 leading-none mt-2 relative">{value}</p>
-    <p className="text-[11px] text-tertiary mt-2 relative">{sub}</p>
+    <p className="text-[28px] font-bold text-gray-900 leading-none">{value}</p>
+    <p className="text-[11px] text-tertiary mt-2">{sub}</p>
   </div>
 )
 
@@ -545,23 +623,55 @@ const Section = ({ title, icon: Icon, children }) => (
   </div>
 )
 
-const FieldRow = ({ label, value, editing, draft, onChange, type = 'text', mono, highlight, wide }) => (
-  <div className={wide ? 'col-span-2' : ''}>
-    <p className="text-[10.5px] text-tertiary uppercase tracking-wider mb-1">{label}</p>
-    {editing ? (
-      <input
-        type={type}
-        value={draft ?? ''}
-        onChange={e => onChange(e.target.value)}
-        className={`w-full text-[13px] text-gray-800 border border-gray-200 rounded-lg px-3 py-1.5 outline-none focus:border-blue-action ${mono ? 'font-mono' : ''}`}
-      />
-    ) : (
-      <p className={`text-[13.5px] break-words ${highlight ? 'font-bold text-blue-action' : 'font-medium text-gray-900'} ${mono ? 'font-mono' : ''}`}>
-        {value ?? '—'}
+const FieldRow = ({ name, label, value, editing, draft, onChange, mono, highlight, wide, error }) => {
+  const rule = name ? FIELD_RULES[name] : null
+  const type = rule?.type ?? 'text'
+  const inputMode = rule?.inputMode
+  const maxLength = rule?.maxLength
+  const hasError  = editing && !!error
+
+  /* Show the count for numeric/limited-length fields (phone, account #, etc). */
+  const showCounter = editing && maxLength != null && (inputMode === 'numeric' || maxLength <= 30)
+  const length = String(draft ?? '').length
+
+  return (
+    <div className={wide ? 'col-span-2' : ''}>
+      <p className="text-[10.5px] text-tertiary uppercase tracking-wider mb-1 flex items-center justify-between">
+        <span>{label}</span>
+        {showCounter && (
+          <span className={`text-[10px] tabular-nums ${length === maxLength ? 'text-warning' : 'text-tertiary'}`}>
+            {length}/{maxLength}
+          </span>
+        )}
       </p>
-    )}
-  </div>
-)
+      {editing ? (
+        <>
+          <input
+            type={type}
+            inputMode={inputMode}
+            maxLength={maxLength}
+            value={draft ?? ''}
+            onChange={e => onChange(e.target.value)}
+            className={`w-full text-[13px] text-gray-800 border rounded-lg px-3 py-1.5 outline-none transition-colors ${mono ? 'font-mono' : ''} ${
+              hasError
+                ? 'border-red-300 bg-red-50/40 focus:border-red-400'
+                : 'border-gray-200 focus:border-blue-action'
+            }`}
+          />
+          {hasError && (
+            <p className="mt-1 text-[11px] text-error flex items-center gap-1">
+              <TbAlertCircle style={{ fontSize: 11 }} /> {error}
+            </p>
+          )}
+        </>
+      ) : (
+        <p className={`text-[13.5px] break-words ${highlight ? 'font-bold text-blue-action' : 'font-medium text-gray-900'} ${mono ? 'font-mono' : ''}`}>
+          {value ?? '—'}
+        </p>
+      )}
+    </div>
+  )
+}
 
 const Legend = ({ color, dash, label }) => (
   <div className="flex items-center gap-1.5">
@@ -572,6 +682,56 @@ const Legend = ({ color, dash, label }) => (
 
 const Th = ({ children, className = '' }) => (<th className={`px-3 py-2.5 font-semibold text-[11px] uppercase tracking-wider ${className}`}>{children}</th>)
 const Td = ({ children, className = '' }) => (<td className={`px-3 py-2.5 ${className}`}>{children}</td>)
+
+const FLOW_LABEL = {
+  'personal-advisory': 'Personal Advisory',
+  'business-advisory': 'Business Advisory',
+}
+const EngagementRow = ({ engagement, navigate }) => {
+  const advisor = engagement.assignment?.advisor
+  const queueId = engagement.queueItem?.id
+  const clickable = !!queueId
+  return (
+    <tr
+      onClick={() => clickable && navigate(`/underwriting/advisory/review/${queueId}`)}
+      className={`border-t border-gray-100 transition-colors ${clickable ? 'hover:bg-gray-50 cursor-pointer' : ''}`}
+    >
+      <Td className="font-mono text-[11.5px] text-tertiary">{engagement.id.slice(0, 8)}…</Td>
+      <Td className="text-gray-900 font-medium">
+        <TbReportMoney className="inline mr-1 text-secondary" style={{ fontSize: 13 }} /> {FLOW_LABEL[engagement.flowKey] ?? engagement.flowKey}
+      </Td>
+      <Td>
+        {advisor ? (
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[9.5px] font-semibold shrink-0">
+              {advisor.initials ?? '?'}
+            </div>
+            <span className="text-gray-900 font-medium truncate">{advisor.name}</span>
+          </div>
+        ) : (
+          <span className="text-tertiary">Unassigned</span>
+        )}
+      </Td>
+      <Td><EngagementStatusPill status={engagement.status} /></Td>
+      <Td className="text-secondary tabular-nums whitespace-nowrap">{fmtDate(engagement.submittedAt)}</Td>
+      <Td className="text-right">{clickable && <TbArrowRight className="text-tertiary inline" style={{ fontSize: 14 }} />}</Td>
+    </tr>
+  )
+}
+
+const EngagementStatusPill = ({ status }) => {
+  const cfg = {
+    confirmed: { label: 'Confirmed', color: 'text-success',     bg: 'bg-green-50',  border: 'border-green-200' },
+    proposed:  { label: 'Proposed',  color: 'text-warning',     bg: 'bg-orange-50', border: 'border-orange-200' },
+    declined:  { label: 'Declined',  color: 'text-error',       bg: 'bg-red-50',    border: 'border-red-200' },
+    pending:   { label: 'Pending',   color: 'text-blue-action', bg: 'bg-blue-50',   border: 'border-blue-200' },
+  }[status] ?? { label: status, color: 'text-tertiary', bg: 'bg-gray-100', border: 'border-gray-200' }
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-semibold ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
+      {cfg.label}
+    </span>
+  )
+}
 
 const LoanStatusPill = ({ status }) => {
   const cfg = {

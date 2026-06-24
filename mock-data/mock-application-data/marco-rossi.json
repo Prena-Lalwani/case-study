@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24820",
   "status": "auto_rejected",
   "submittedAt": "2026-06-02T14:55:00Z",
@@ -8,7 +8,7 @@
     "address": "55 Vine Street, Miami, FL 33132",
     "phone": "+1 305-555-0198",
     "email": "marco.rossi@email.com",
-    "ssn": "***-**-4403",
+    "ssn": "555-12-4403",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -91,15 +91,15 @@
       "aiConfidence": 88,
       "status": "verified",
       "flags": [
-        "Self-employed owner draw — income volatility risk",
+        "Self-employed owner draw â€” income volatility risk",
         "Business loss reported in 2023 tax year"
       ]
     },
     "bankStatement": {
       "bank": "TD Bank",
       "accountHolder": "Rossi Catering LLC",
-      "accountNumber": "****7823",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127823",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",
@@ -109,7 +109,7 @@
           "closingBalance": 3600,
           "salaryDeposit": 6200,
           "flags": [
-            "Negative month — debits exceed credits"
+            "Negative month â€” debits exceed credits"
           ]
         },
         {
@@ -129,7 +129,7 @@
           "closingBalance": 4800,
           "salaryDeposit": 6200,
           "flags": [
-            "Negative month — debits exceed credits"
+            "Negative month â€” debits exceed credits"
           ]
         }
       ],

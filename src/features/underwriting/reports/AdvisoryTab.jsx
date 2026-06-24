@@ -25,7 +25,7 @@ const AdvisoryTab = ({ period }) => {
     <div className="space-y-4">
 
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <KpiCard
           label="New advisory clients"
           value={advisoryNew}
@@ -69,7 +69,7 @@ const AdvisoryTab = ({ period }) => {
       </ReportSection>
 
       {/* Two-column: missing docs + doc quality */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <ReportSection title="Most common missing docs" subtitle="What we keep having to chase">
           <HBarChart
             data={history.missingDocs.slice(0, 8)}

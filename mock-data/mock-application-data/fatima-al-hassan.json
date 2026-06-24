@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24823",
   "status": "needs_review",
   "submittedAt": "2026-06-02T16:40:00Z",
@@ -8,7 +8,7 @@
     "address": "88 Crescent Moon Dr, Dearborn, MI 48126",
     "phone": "+1 313-555-0567",
     "email": "fatima.alhassan@email.com",
-    "ssn": "***-**-3390",
+    "ssn": "555-12-3390",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -55,7 +55,7 @@
     "termYears": 4,
     "interestRate": 12,
     "estimatedMonthlyPayment": 658,
-    "purpose": "Home renovation — kitchen and bathroom"
+    "purpose": "Home renovation â€” kitchen and bathroom"
   },
   "documents": {
     "nationalId": {
@@ -92,14 +92,14 @@
       "aiConfidence": 96,
       "status": "verified",
       "flags": [
-        "Includes shift differential pay — base salary $4,200/mo"
+        "Includes shift differential pay â€” base salary $4,200/mo"
       ]
     },
     "bankStatement": {
       "bank": "Fifth Third Bank",
       "accountHolder": "Fatima Z. Al-Hassan",
-      "accountNumber": "****2281",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40122281",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

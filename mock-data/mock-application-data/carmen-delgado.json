@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24827",
   "status": "needs_review",
   "submittedAt": "2026-06-02T10:05:00Z",
@@ -8,7 +8,7 @@
     "address": "55 Palm Avenue, San Antonio, TX 78201",
     "phone": "+1 210-555-0112",
     "email": "carmen.delgado@email.com",
-    "ssn": "***-**-5548",
+    "ssn": "555-12-5548",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -89,14 +89,14 @@
       "aiConfidence": 98,
       "status": "verified",
       "flags": [
-        "Texas — no state income tax"
+        "Texas â€” no state income tax"
       ]
     },
     "bankStatement": {
       "bank": "Frost Bank",
       "accountHolder": "Carmen L. Delgado",
-      "accountNumber": "****7729",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40127729",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

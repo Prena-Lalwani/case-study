@@ -1,4 +1,4 @@
-{
+﻿{
   "applications": [
     {
       "id": "APP-24817",
@@ -10,7 +10,7 @@
         "address": "218 Maple Grove Ave, Boston, MA 02134",
         "phone": "+1 617-555-0142",
         "email": "eleanor.whitfield@email.com",
-        "ssn": "***-**-4821",
+        "ssn": "555-12-4821",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -85,8 +85,8 @@
         "bankStatement": {
           "bank": "Citizens Bank",
           "accountHolder": "Eleanor D. Whitfield",
-          "accountNumber": "****8821",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40128821",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             {
               "month": "March 2026",
@@ -139,9 +139,9 @@
           "effectiveDTI": 27.9
         },
         "strengths": [
-          "Credit score 748 — above 680 threshold",
-          "DTI 28% — well within 43% policy limit",
-          "8 years continuous employment — same employer",
+          "Credit score 748 â€” above 680 threshold",
+          "DTI 28% â€” well within 43% policy limit",
+          "8 years continuous employment â€” same employer",
           "All 3 documents verified with high AI confidence",
           "Bank balance growing month-over-month",
           "Zero late payments in last 24 months"
@@ -162,7 +162,7 @@
         "address": "47 Lakeview Drive, Chicago, IL 60614",
         "phone": "+1 312-555-0877",
         "email": "david.osei@email.com",
-        "ssn": "***-**-6634",
+        "ssn": "555-12-6634",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -193,7 +193,7 @@
         "termYears": 5,
         "interestRate": 7.0,
         "estimatedMonthlyPayment": 761,
-        "purpose": "Purchase new vehicle — Toyota Camry 2026",
+        "purpose": "Purchase new vehicle â€” Toyota Camry 2026",
         "vehicleMake": "Toyota",
         "vehicleModel": "Camry",
         "vehicleYear": 2026
@@ -237,8 +237,8 @@
         "bankStatement": {
           "bank": "Chase Bank",
           "accountHolder": "David K. Osei",
-          "accountNumber": "****3341",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40123341",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 6220, "totalCredits": 7420, "totalDebits": 6980, "closingBalance": 6660, "salaryDeposit": 4310, "flags": [] },
             { "month": "April 2026", "openingBalance": 6660, "totalCredits": 7200, "totalDebits": 7050, "closingBalance": 6810, "salaryDeposit": 4310, "flags": [] },
@@ -267,14 +267,14 @@
           "effectiveDTI": 34.1
         },
         "strengths": [
-          "Credit score 712 — above threshold",
-          "DTI 34% — within 43% limit",
+          "Credit score 712 â€” above threshold",
+          "DTI 34% â€” within 43% limit",
           "4 years stable employment at same company",
           "Consistent salary deposits confirmed across 3 months",
           "Zero late payments in 24 months"
         ],
         "issues": [
-          "Existing mortgage reduces available capacity — monitor carefully"
+          "Existing mortgage reduces available capacity â€” monitor carefully"
         ],
         "explanation": "David Osei is a solid borrower. His credit score of 712 and stable 4-year employment record at Meridian Software support approval. DTI of 34% is within policy. Bank statements confirm consistent income. The existing mortgage accounts for the bulk of his debt load, but the proposed auto loan remains serviceable. Recommend approval.",
         "confidenceScores": { "identityVerification": 98, "incomeVerification": 96, "documentAuthenticity": 96 }
@@ -291,7 +291,7 @@
         "address": "310 Westbrook Ct, Austin, TX 78701",
         "phone": "+1 512-555-0294",
         "email": "priya.natarajan@email.com",
-        "ssn": "***-**-7712",
+        "ssn": "555-12-7712",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -359,13 +359,13 @@
           "ytdGross": 14400,
           "aiConfidence": 94,
           "status": "verified",
-          "flags": ["Employment start date Oct 2025 — less than 12 months tenure"]
+          "flags": ["Employment start date Oct 2025 â€” less than 12 months tenure"]
         },
         "bankStatement": {
           "bank": "Bank of America",
           "accountHolder": "Priya Natarajan",
-          "accountNumber": "****4490",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40124490",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 1840, "totalCredits": 4900, "totalDebits": 4780, "closingBalance": 1960, "salaryDeposit": 3640, "flags": [] },
             { "month": "April 2026", "openingBalance": 1960, "totalCredits": 4640, "totalDebits": 4820, "closingBalance": 1780, "salaryDeposit": 3640, "flags": ["Balance dipped below $500 on Apr 18"] },
@@ -394,16 +394,16 @@
           "effectiveDTI": 43.1
         },
         "strengths": [
-          "All documents verified — identity confirmed",
+          "All documents verified â€” identity confirmed",
           "Salary deposits consistent with stated income"
         ],
         "issues": [
-          "Employment tenure only 8 months — below 12-month policy preference",
-          "DTI 43% — at the upper limit of acceptable range",
-          "Low average bank balance ($1,870) — limited savings buffer",
+          "Employment tenure only 8 months â€” below 12-month policy preference",
+          "DTI 43% â€” at the upper limit of acceptable range",
+          "Low average bank balance ($1,870) â€” limited savings buffer",
           "1 late payment in last 24 months",
-          "Credit score 668 — below 680 preferred threshold",
-          "Balance fell below $500 in April — cash flow concern"
+          "Credit score 668 â€” below 680 preferred threshold",
+          "Balance fell below $500 in April â€” cash flow concern"
         ],
         "explanation": "Priya Natarajan is a borderline case. Her DTI of 43% sits exactly at the policy ceiling, leaving no buffer for unexpected expenses. The recent job change (8 months ago) introduces employment stability risk. Her bank balance is thin, with one instance of near-overdraft in April. Credit score of 668 is below the preferred 680 threshold. However, income is verified, salary deposits are consistent, and documents are clean. A human officer should assess repayment capacity and may request a co-signer.",
         "confidenceScores": { "identityVerification": 97, "incomeVerification": 94, "documentAuthenticity": 93 }
@@ -420,7 +420,7 @@
         "address": "92 Ridgecrest Rd, Denver, CO 80203",
         "phone": "+1 720-555-0561",
         "email": "thomas.brennan@email.com",
-        "ssn": "***-**-3309",
+        "ssn": "555-12-3309",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -432,14 +432,14 @@
         "annualSalary": 74400,
         "monthlyGross": 6200,
         "monthlyNet": 4650,
-        "incomeVariance": "High — seasonal construction work, 3 months with income below $4,000"
+        "incomeVariance": "High â€” seasonal construction work, 3 months with income below $4,000"
       },
       "financials": {
         "creditScore": 634,
         "creditRating": "Borderline",
         "existingDebts": [
           { "type": "Car loan", "monthlyPayment": 520, "balance": 18600, "status": "current" },
-          { "type": "Credit card", "monthlyPayment": 400, "balance": 8900, "status": "current — 1 late payment 14 months ago" }
+          { "type": "Credit card", "monthlyPayment": 400, "balance": 8900, "status": "current â€” 1 late payment 14 months ago" }
         ],
         "totalMonthlyDebtPayments": 920,
         "bankruptcyHistory": false,
@@ -469,7 +469,7 @@
           "expiryDate": "2026-03-30",
           "aiConfidence": 88,
           "status": "needs_review",
-          "flags": ["License expired March 2026 — applicant must provide renewal or alternative ID"]
+          "flags": ["License expired March 2026 â€” applicant must provide renewal or alternative ID"]
         },
         "salarySlip": {
           "employer": "Brennan Contracting LLC",
@@ -488,18 +488,18 @@
           "totalDeductions": 2672,
           "netPay": 5128,
           "ytdGross": 28600,
-          "note": "Self-employed — income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
+          "note": "Self-employed â€” income drawn from LLC. Monthly income fluctuates: Jan $3,200, Feb $3,800, Mar $8,100, Apr $6,400, May $7,100",
           "aiConfidence": 79,
           "status": "needs_review",
-          "flags": ["Self-employed income — high month-to-month variance", "YTD avg $5,720/mo vs stated $6,200/mo"]
+          "flags": ["Self-employed income â€” high month-to-month variance", "YTD avg $5,720/mo vs stated $6,200/mo"]
         },
         "bankStatement": {
           "bank": "Wells Fargo",
           "accountHolder": "Thomas J. Brennan",
-          "accountNumber": "****7703",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40127703",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
-            { "month": "March 2026", "openingBalance": 3110, "totalCredits": 8900, "totalDebits": 8420, "closingBalance": 3590, "salaryDeposit": 8100, "flags": ["Large one-time project payment $8,100 — not recurring"] },
+            { "month": "March 2026", "openingBalance": 3110, "totalCredits": 8900, "totalDebits": 8420, "closingBalance": 3590, "salaryDeposit": 8100, "flags": ["Large one-time project payment $8,100 â€” not recurring"] },
             { "month": "April 2026", "openingBalance": 3590, "totalCredits": 7200, "totalDebits": 6980, "closingBalance": 3810, "salaryDeposit": 6400, "flags": [] },
             { "month": "May 2026", "openingBalance": 3810, "totalCredits": 7800, "totalDebits": 7500, "closingBalance": 4110, "salaryDeposit": 7100, "flags": [] }
           ],
@@ -531,12 +531,12 @@
           "Owns and operates established contracting business"
         ],
         "issues": [
-          "DTI 47% — exceeds 43% standard policy limit",
-          "Credit score 634 — below 650 minimum threshold",
-          "Driver's license expired March 2026 — ID not currently valid",
+          "DTI 47% â€” exceeds 43% standard policy limit",
+          "Credit score 634 â€” below 650 minimum threshold",
+          "Driver's license expired March 2026 â€” ID not currently valid",
           "Self-employed income is highly seasonal and variable",
           "1 late credit card payment 14 months ago",
-          "Only 2 years of self-employment history — insufficient for some lenders"
+          "Only 2 years of self-employment history â€” insufficient for some lenders"
         ],
         "explanation": "Thomas Brennan presents a mixed profile. While his contracting business shows growing revenue, the high income variance typical of seasonal construction work makes income reliability difficult to confirm. His DTI of 47% exceeds standard policy limits, and his credit score of 634 falls below the 650 threshold. The expired driver's license is a compliance blocker that must be resolved before any approval. A senior officer should review with 2 years of tax returns to verify self-employment income.",
         "confidenceScores": { "identityVerification": 88, "incomeVerification": 79, "documentAuthenticity": 82 }
@@ -553,7 +553,7 @@
         "address": "501 Harborview Blvd, San Diego, CA 92101",
         "phone": "+1 619-555-0388",
         "email": "sofia.marchetti@email.com",
-        "ssn": "***-**-5514",
+        "ssn": "555-12-5514",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -583,7 +583,7 @@
         "termYears": 6,
         "interestRate": 6.5,
         "estimatedMonthlyPayment": 886,
-        "purpose": "Purchase new vehicle — Mercedes GLC 2026",
+        "purpose": "Purchase new vehicle â€” Mercedes GLC 2026",
         "vehicleMake": "Mercedes-Benz",
         "vehicleModel": "GLC 300",
         "vehicleYear": 2026
@@ -627,8 +627,8 @@
         "bankStatement": {
           "bank": "Wells Fargo",
           "accountHolder": "Sofia E. Marchetti",
-          "accountNumber": "****6612",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40126612",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 28400, "totalCredits": 11200, "totalDebits": 9800, "closingBalance": 29800, "salaryDeposit": 7480, "flags": [] },
             { "month": "April 2026", "openingBalance": 29800, "totalCredits": 10800, "totalDebits": 9600, "closingBalance": 31000, "salaryDeposit": 7480, "flags": [] },
@@ -657,11 +657,11 @@
           "effectiveDTI": 18.9
         },
         "strengths": [
-          "Credit score 789 — excellent",
-          "DTI 19% — very low, strong capacity",
-          "11 years with same employer — exceptional stability",
+          "Credit score 789 â€” excellent",
+          "DTI 19% â€” very low, strong capacity",
+          "11 years with same employer â€” exceptional stability",
           "All documents verified with highest confidence (99%)",
-          "Average bank balance $30,967 — robust savings",
+          "Average bank balance $30,967 â€” robust savings",
           "Zero late payments on record",
           "Income increasing year-over-year"
         ],
@@ -681,7 +681,7 @@
         "address": "77 Pinecrest Ave, Atlanta, GA 30301",
         "phone": "+1 404-555-0733",
         "email": "james.holloway@email.com",
-        "ssn": "***-**-9901",
+        "ssn": "555-12-9901",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -700,7 +700,7 @@
         "existingDebts": [
           { "type": "Student loan", "monthlyPayment": 740, "balance": 28400, "status": "current" },
           { "type": "Car loan", "monthlyPayment": 410, "balance": 11200, "status": "current" },
-          { "type": "Credit card", "monthlyPayment": 300, "balance": 4200, "status": "1 late payment — 18 months ago" }
+          { "type": "Credit card", "monthlyPayment": 300, "balance": 4200, "status": "1 late payment â€” 18 months ago" }
         ],
         "totalMonthlyDebtPayments": 1450,
         "bankruptcyHistory": false,
@@ -713,7 +713,7 @@
         "termYears": 3,
         "interestRate": 12.0,
         "estimatedMonthlyPayment": 498,
-        "purpose": "Home improvement — kitchen renovation"
+        "purpose": "Home improvement â€” kitchen renovation"
       },
       "documents": {
         "nationalId": {
@@ -754,8 +754,8 @@
         "bankStatement": {
           "bank": "Truist Bank",
           "accountHolder": "James R. Holloway",
-          "accountNumber": "****2214",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40122214",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 2110, "totalCredits": 5200, "totalDebits": 4980, "closingBalance": 2330, "salaryDeposit": 3220, "flags": [] },
             { "month": "April 2026", "openingBalance": 2330, "totalCredits": 5100, "totalDebits": 5020, "closingBalance": 2410, "salaryDeposit": 3220, "flags": [] },
@@ -785,14 +785,14 @@
         },
         "strengths": [
           "Income consistently verified across all 3 months",
-          "DTI 38% — within acceptable range",
+          "DTI 38% â€” within acceptable range",
           "No bankruptcy or foreclosure",
           "All documents verified and authentic"
         ],
         "issues": [
-          "1 late payment 18 months ago — credit card",
-          "Credit score 681 — just above 680 threshold, marginal",
-          "Low savings buffer — average balance $2,437",
+          "1 late payment 18 months ago â€” credit card",
+          "Credit score 681 â€” just above 680 threshold, marginal",
+          "Low savings buffer â€” average balance $2,437",
           "High existing student and auto debt load"
         ],
         "explanation": "James Holloway is a borderline approval. His DTI of 38% is manageable and income is verified. However, the single late payment 18 months ago, marginal credit score of 681, and thin savings buffer introduce moderate risk. The loan purpose (home improvement) is legitimate. Officer should review the credit incident and confirm it was isolated before approving.",
@@ -810,7 +810,7 @@
         "address": "140 Elmwood Terrace, Philadelphia, PA 19103",
         "phone": "+1 215-555-0614",
         "email": "grace.adeyemi@email.com",
-        "ssn": "***-**-8803",
+        "ssn": "555-12-8803",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -885,8 +885,8 @@
         "bankStatement": {
           "bank": "PNC Bank",
           "accountHolder": "Grace A. Adeyemi",
-          "accountNumber": "****5509",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40125509",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 9200, "totalCredits": 8100, "totalDebits": 7420, "closingBalance": 9880, "salaryDeposit": 4850, "flags": [] },
             { "month": "April 2026", "openingBalance": 9880, "totalCredits": 7900, "totalDebits": 7280, "closingBalance": 10500, "salaryDeposit": 4850, "flags": [] },
@@ -915,9 +915,9 @@
           "effectiveDTI": 30.9
         },
         "strengths": [
-          "Credit score 731 — above threshold",
-          "DTI 31% — comfortably within limits",
-          "6 years continuous nursing employment — stable sector",
+          "Credit score 731 â€” above threshold",
+          "DTI 31% â€” comfortably within limits",
+          "6 years continuous nursing employment â€” stable sector",
           "All documents verified at highest confidence",
           "Bank balance growing consistently month-over-month",
           "Zero late payments in 24 months",
@@ -939,7 +939,7 @@
         "address": "23 Crestwood Circle, Miami, FL 33101",
         "phone": "+1 305-555-0241",
         "email": "rafael.mendes@email.com",
-        "ssn": "***-**-4418",
+        "ssn": "555-12-4418",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -951,7 +951,7 @@
         "annualSalary": 66000,
         "monthlyGross": 5500,
         "monthlyNet": 4010,
-        "incomeVariance": "Moderate — event-driven income, peaks in wedding season (Apr–Oct)"
+        "incomeVariance": "Moderate â€” event-driven income, peaks in wedding season (Aprâ€“Oct)"
       },
       "financials": {
         "creditScore": 661,
@@ -1008,16 +1008,16 @@
           "totalDeductions": 2770,
           "netPay": 4030,
           "ytdGross": 24400,
-          "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 — peak season April–September",
+          "note": "Monthly income varies: Jan $2,800, Feb $3,100, Mar $4,900, Apr $7,200, May $6,800 â€” peak season Aprilâ€“September",
           "aiConfidence": 80,
           "status": "needs_review",
-          "flags": ["Self-employed — income is seasonal", "YTD avg $4,880/mo vs stated $5,500/mo avg — gap in low season"]
+          "flags": ["Self-employed â€” income is seasonal", "YTD avg $4,880/mo vs stated $5,500/mo avg â€” gap in low season"]
         },
         "bankStatement": {
           "bank": "SunTrust Bank",
           "accountHolder": "Rafael A. Mendes",
-          "accountNumber": "****8841",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40128841",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 3400, "totalCredits": 5600, "totalDebits": 5200, "closingBalance": 3800, "salaryDeposit": 4900, "flags": [] },
             { "month": "April 2026", "openingBalance": 3800, "totalCredits": 8100, "totalDebits": 7400, "closingBalance": 4500, "salaryDeposit": 7200, "flags": [] },
@@ -1046,15 +1046,15 @@
           "effectiveDTI": 40.0
         },
         "strengths": [
-          "Bank credits strong during peak season (Apr–May)",
+          "Bank credits strong during peak season (Aprâ€“May)",
           "No late payments in 24 months",
           "Existing mortgage being serviced without issues",
-          "Loan purpose is business-related — vehicle increases earning capacity"
+          "Loan purpose is business-related â€” vehicle increases earning capacity"
         ],
         "issues": [
-          "Self-employed with seasonal income — low-season months below $3,500",
-          "Credit score 661 — below 680 threshold",
-          "DTI 40% — elevated, limited buffer if income drops in off-season",
+          "Self-employed with seasonal income â€” low-season months below $3,500",
+          "Credit score 661 â€” below 680 threshold",
+          "DTI 40% â€” elevated, limited buffer if income drops in off-season",
           "YTD income ($4,880/mo avg) lower than stated $5,500/mo"
         ],
         "explanation": "Rafael Mendes has a serviceable profile during peak photography season but presents elevated risk in low-season months when income can drop below $3,500. The DTI of 40% based on average income leaves limited margin. Credit score of 661 is below the preferred 680. Officer should review full 12-month income data and assess off-season cash flow before approving.",
@@ -1072,12 +1072,12 @@
         "address": "612 Hollister St, Apt 3B, Detroit, MI 48201",
         "phone": "+1 313-555-0099",
         "email": "kwame.asante@email.com",
-        "ssn": "***-**-2201",
+        "ssn": "555-12-2201",
         "nationality": "US Citizen"
       },
       "employment": {
         "type": "part_time",
-        "employer": "GameStop — Michigan Ave",
+        "employer": "GameStop â€” Michigan Ave",
         "jobTitle": "Part-Time Sales Associate",
         "yearsEmployed": 1.2,
         "employmentStartDate": "2025-03-10",
@@ -1089,9 +1089,9 @@
         "creditScore": 542,
         "creditRating": "Poor",
         "existingDebts": [
-          { "type": "Student loan", "monthlyPayment": 340, "balance": 18900, "status": "current — 2 missed payments (Oct 2024, Jan 2025)" },
-          { "type": "Car loan", "monthlyPayment": 300, "balance": 7200, "status": "current — 1 late payment (Mar 2025)" },
-          { "type": "Credit card", "monthlyPayment": 200, "balance": 3800, "status": "2 missed payments — 30 days overdue" }
+          { "type": "Student loan", "monthlyPayment": 340, "balance": 18900, "status": "current â€” 2 missed payments (Oct 2024, Jan 2025)" },
+          { "type": "Car loan", "monthlyPayment": 300, "balance": 7200, "status": "current â€” 1 late payment (Mar 2025)" },
+          { "type": "Credit card", "monthlyPayment": 200, "balance": 3800, "status": "2 missed payments â€” 30 days overdue" }
         ],
         "totalMonthlyDebtPayments": 840,
         "bankruptcyHistory": false,
@@ -1118,7 +1118,7 @@
           "expiryDate": "2026-02-28",
           "aiConfidence": 91,
           "status": "needs_review",
-          "flags": ["State ID expired February 2026 — less than 3 months ago"]
+          "flags": ["State ID expired February 2026 â€” less than 3 months ago"]
         },
         "salarySlip": {
           "employer": "GameStop",
@@ -1140,16 +1140,16 @@
           "ytdGross": 10500,
           "aiConfidence": 94,
           "status": "verified",
-          "flags": ["Part-time income only — hours may vary"]
+          "flags": ["Part-time income only â€” hours may vary"]
         },
         "bankStatement": {
           "bank": "Chime",
           "accountHolder": "Kwame Asante",
-          "accountNumber": "****1122",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40121122",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 320, "totalCredits": 2200, "totalDebits": 2180, "closingBalance": 340, "salaryDeposit": 1679, "flags": ["Balance at $0 on Mar 4", "Balance at $12 on Mar 19"] },
-            { "month": "April 2026", "openingBalance": 340, "totalCredits": 2100, "totalDebits": 2190, "closingBalance": 250, "salaryDeposit": 1679, "flags": ["Overdraft attempt Apr 22 — declined"] },
+            { "month": "April 2026", "openingBalance": 340, "totalCredits": 2100, "totalDebits": 2190, "closingBalance": 250, "salaryDeposit": 1679, "flags": ["Overdraft attempt Apr 22 â€” declined"] },
             { "month": "May 2026", "openingBalance": 250, "totalCredits": 2050, "totalDebits": 2010, "closingBalance": 290, "salaryDeposit": 1679, "flags": [] }
           ],
           "averageMonthlyCredit": 2117,
@@ -1175,17 +1175,17 @@
           "effectiveDTI": 62.0
         },
         "strengths": [
-          "Income verified — salary deposits confirmed"
+          "Income verified â€” salary deposits confirmed"
         ],
         "issues": [
-          "DTI 62% — far exceeds 43% maximum threshold",
-          "Credit score 542 — well below 600 minimum",
+          "DTI 62% â€” far exceeds 43% maximum threshold",
+          "Credit score 542 â€” well below 600 minimum",
           "5 late payments in last 24 months across 3 accounts",
-          "Average bank balance $293 — insufficient for any financial emergency",
-          "Overdraft attempt in April 2026 — critical cash flow signal",
-          "State ID expired — compliance issue",
-          "Part-time employment only — income unstable",
-          "Loan purpose includes living expenses — not productive debt"
+          "Average bank balance $293 â€” insufficient for any financial emergency",
+          "Overdraft attempt in April 2026 â€” critical cash flow signal",
+          "State ID expired â€” compliance issue",
+          "Part-time employment only â€” income unstable",
+          "Loan purpose includes living expenses â€” not productive debt"
         ],
         "explanation": "Kwame Asante does not meet minimum lending criteria on multiple grounds. A DTI of 62% is nearly 50% above the policy ceiling. Five late payments across three accounts in the past 24 months indicate serious difficulty managing existing debt. The bank account shows near-zero balances with an overdraft attempt, confirming severe cash flow strain. The credit score of 542 is below the 600 floor. Auto-rejection is warranted. Financial counselling recommended before reapplying.",
         "confidenceScores": { "identityVerification": 91, "incomeVerification": 94, "documentAuthenticity": 92 }
@@ -1202,7 +1202,7 @@
         "address": "38 Garden View Apt 1F, Houston, TX 77001",
         "phone": "+1 713-555-0812",
         "email": "lucia.fernandez@email.com",
-        "ssn": "***-**-3341",
+        "ssn": "555-12-3341",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1214,14 +1214,14 @@
         "annualSalary": 33600,
         "monthlyGross": 2800,
         "monthlyNet": 2380,
-        "note": "Income includes variable tips — base hourly $9.50"
+        "note": "Income includes variable tips â€” base hourly $9.50"
       },
       "financials": {
         "creditScore": 598,
         "creditRating": "Poor",
         "existingDebts": [
           { "type": "Student loan", "monthlyPayment": 500, "balance": 22400, "status": "current" },
-          { "type": "Credit card", "monthlyPayment": 355, "balance": 5600, "status": "current — balance at 90% of limit" }
+          { "type": "Credit card", "monthlyPayment": 355, "balance": 5600, "status": "current â€” balance at 90% of limit" }
         ],
         "totalMonthlyDebtPayments": 855,
         "bankruptcyHistory": false,
@@ -1234,7 +1234,7 @@
         "termYears": 5,
         "interestRate": 8.5,
         "estimatedMonthlyPayment": 575,
-        "purpose": "Purchase used vehicle — Honda Civic 2023",
+        "purpose": "Purchase used vehicle â€” Honda Civic 2023",
         "vehicleMake": "Honda",
         "vehicleModel": "Civic",
         "vehicleYear": 2023
@@ -1270,19 +1270,19 @@
           "totalDeductions": 400,
           "netPay": 2400,
           "ytdGross": 8400,
-          "note": "Tips included — actual take-home varies week to week",
+          "note": "Tips included â€” actual take-home varies week to week",
           "aiConfidence": 88,
           "status": "needs_review",
-          "flags": ["Tip income included — not reliably verifiable", "Less than 12 months tenure at employer"]
+          "flags": ["Tip income included â€” not reliably verifiable", "Less than 12 months tenure at employer"]
         },
         "bankStatement": {
           "bank": "Chime",
           "accountHolder": "Lucia Fernandez",
-          "accountNumber": "****7790",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40127790",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 680, "totalCredits": 2940, "totalDebits": 2890, "closingBalance": 730, "salaryDeposit": 2400, "flags": [] },
-            { "month": "April 2026", "openingBalance": 730, "totalCredits": 2600, "totalDebits": 2710, "closingBalance": 620, "salaryDeposit": 2400, "flags": ["Balance below $100 on Apr 14–17"] },
+            { "month": "April 2026", "openingBalance": 730, "totalCredits": 2600, "totalDebits": 2710, "closingBalance": 620, "salaryDeposit": 2400, "flags": ["Balance below $100 on Apr 14â€“17"] },
             { "month": "May 2026", "openingBalance": 620, "totalCredits": 2820, "totalDebits": 2750, "closingBalance": 690, "salaryDeposit": 2400, "flags": [] }
           ],
           "averageMonthlyCredit": 2787,
@@ -1312,16 +1312,16 @@
           "No bankruptcy history"
         ],
         "issues": [
-          "DTI 51% — exceeds 43% policy maximum",
-          "Credit score 598 — below 600 floor",
+          "DTI 51% â€” exceeds 43% policy maximum",
+          "Credit score 598 â€” below 600 floor",
           "Income includes unverifiable tip earnings",
           "Employment tenure less than 12 months",
           "2 late payments in last 24 months",
-          "Credit card utilization at 90% — financial stress indicator",
-          "Average bank balance $680 — insufficient reserves",
+          "Credit card utilization at 90% â€” financial stress indicator",
+          "Average bank balance $680 â€” insufficient reserves",
           "Near-zero balance event in April 2026"
         ],
-        "explanation": "Lucia Fernandez does not qualify under current policy. Her DTI of 51% exceeds the 43% maximum when the proposed loan payment is included. A credit score of 598 falls just below the 600 minimum. The income source — hospitality tips — is inherently variable and cannot be reliably projected. Combined with thin savings, high credit utilization, and two recent late payments, the risk profile is too high for approval at this time.",
+        "explanation": "Lucia Fernandez does not qualify under current policy. Her DTI of 51% exceeds the 43% maximum when the proposed loan payment is included. A credit score of 598 falls just below the 600 minimum. The income source â€” hospitality tips â€” is inherently variable and cannot be reliably projected. Combined with thin savings, high credit utilization, and two recent late payments, the risk profile is too high for approval at this time.",
         "confidenceScores": { "identityVerification": 96, "incomeVerification": 88, "documentAuthenticity": 90 }
       }
     },
@@ -1336,7 +1336,7 @@
         "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
         "phone": "+1 615-555-0445",
         "email": "brandon.cole@email.com",
-        "ssn": "***-**-6612",
+        "ssn": "555-12-6612",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1355,7 +1355,7 @@
         "creditRating": "Borderline",
         "existingDebts": [
           { "type": "Car loan", "monthlyPayment": 300, "balance": 12400, "status": "current" },
-          { "type": "Credit card", "monthlyPayment": 360, "balance": 7200, "status": "current — utilization 72%" }
+          { "type": "Credit card", "monthlyPayment": 360, "balance": 7200, "status": "current â€” utilization 72%" }
         ],
         "totalMonthlyDebtPayments": 660,
         "bankruptcyHistory": false,
@@ -1405,16 +1405,16 @@
           "aiConfidence": 74,
           "status": "needs_review",
           "flags": [
-            "Owner draw ($3,900) exceeds business net income ($1,100) — drawing from reserves",
-            "Business operating only 14 months — insufficient trading history",
-            "No audited financials submitted — only bank statements"
+            "Owner draw ($3,900) exceeds business net income ($1,100) â€” drawing from reserves",
+            "Business operating only 14 months â€” insufficient trading history",
+            "No audited financials submitted â€” only bank statements"
           ]
         },
         "bankStatement": {
           "bank": "Regions Bank",
           "accountHolder": "Cole's Artisan Bakery LLC",
-          "accountNumber": "****3301",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40123301",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 8100, "totalCredits": 6400, "totalDebits": 6800, "closingBalance": 7700, "salaryDeposit": 6400, "flags": ["Expenses exceed revenue this month"] },
             { "month": "April 2026", "openingBalance": 7700, "totalCredits": 6200, "totalDebits": 6600, "closingBalance": 7300, "salaryDeposit": 6200, "flags": ["Expenses exceed revenue this month"] },
@@ -1447,16 +1447,16 @@
           "Clean personal payment history (0 late payments)"
         ],
         "issues": [
-          "DTI 57% — well above 43% policy maximum",
-          "Business operating for only 14 months — below 2-year minimum for business loans",
+          "DTI 57% â€” well above 43% policy maximum",
+          "Business operating for only 14 months â€” below 2-year minimum for business loans",
           "Business bank account showing net cash outflow in 2 of 3 months",
-          "Owner draw ($3,900) far exceeds business net income ($1,100) — unsustainable",
-          "Credit score 611 — below 650 business loan threshold",
+          "Owner draw ($3,900) far exceeds business net income ($1,100) â€” unsustainable",
+          "Credit score 611 â€” below 650 business loan threshold",
           "High credit card utilization (72%)",
           "No audited financials or tax returns submitted",
           "Loan repayment ($1,557/mo) would consume 141% of business net income"
         ],
-        "explanation": "Brandon Cole's bakery business does not yet generate sufficient income to service the proposed loan. The business has only been operating for 14 months — below the 24-month minimum typically required for business lending. Net business income of $1,100/month cannot support a $1,557 monthly repayment. The owner is currently drawing personal salary from reserves, which will deplete quickly. DTI of 57% and a credit score of 611 both fall below policy floors. Rejection recommended.",
+        "explanation": "Brandon Cole's bakery business does not yet generate sufficient income to service the proposed loan. The business has only been operating for 14 months â€” below the 24-month minimum typically required for business lending. Net business income of $1,100/month cannot support a $1,557 monthly repayment. The owner is currently drawing personal salary from reserves, which will deplete quickly. DTI of 57% and a credit score of 611 both fall below policy floors. Rejection recommended.",
         "confidenceScores": { "identityVerification": 97, "incomeVerification": 74, "documentAuthenticity": 85 }
       }
     },
@@ -1471,7 +1471,7 @@
         "address": "91 Sunrise Lane, Apt 2C, Seattle, WA 98101",
         "phone": "+1 206-555-0347",
         "email": "yuki.tanaka@email.com",
-        "ssn": "***-**-8812",
+        "ssn": "555-12-8812",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1483,14 +1483,14 @@
         "annualSalary": 16800,
         "monthlyGross": 1400,
         "monthlyNet": 1140,
-        "note": "Highly inconsistent — stated 'ongoing client work' but no contracts submitted"
+        "note": "Highly inconsistent â€” stated 'ongoing client work' but no contracts submitted"
       },
       "financials": {
         "creditScore": 498,
         "creditRating": "Poor",
         "existingDebts": [
           { "type": "Student loan", "monthlyPayment": 200, "balance": 11200, "status": "current" },
-          { "type": "Credit card A", "monthlyPayment": 150, "balance": 4100, "status": "default — charged off 8 months ago" },
+          { "type": "Credit card A", "monthlyPayment": 150, "balance": 4100, "status": "default â€” charged off 8 months ago" },
           { "type": "Credit card B", "monthlyPayment": 140, "balance": 2200, "status": "30 days past due" }
         ],
         "totalMonthlyDebtPayments": 490,
@@ -1524,7 +1524,7 @@
           "flags": []
         },
         "salarySlip": {
-          "employer": "Self — Freelance",
+          "employer": "Self â€” Freelance",
           "employeeId": "N/A",
           "payPeriod": "May 2026",
           "payDate": "2026-05-31",
@@ -1538,24 +1538,24 @@
           "totalDeductions": 332,
           "netPay": 1068,
           "ytdGross": 4200,
-          "note": "Income represented by 3 PayPal invoices submitted — not formal payslip",
+          "note": "Income represented by 3 PayPal invoices submitted â€” not formal payslip",
           "aiConfidence": 55,
           "status": "unverified",
           "flags": [
-            "No formal payslip — PayPal invoices only",
-            "Only 3 clients identified — income concentration risk",
-            "YTD $4,200 over 5 months = $840/mo avg — significantly below stated $1,400/mo",
+            "No formal payslip â€” PayPal invoices only",
+            "Only 3 clients identified â€” income concentration risk",
+            "YTD $4,200 over 5 months = $840/mo avg â€” significantly below stated $1,400/mo",
             "No signed client contracts submitted"
           ]
         },
         "bankStatement": {
           "bank": "Chase Bank",
           "accountHolder": "Yuki Tanaka",
-          "accountNumber": "****0041",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40120041",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
-            { "month": "March 2026", "openingBalance": 180, "totalCredits": 1100, "totalDebits": 1220, "closingBalance": 60, "salaryDeposit": 800, "flags": ["Balance near zero entire month", "Overdraft fee charged Mar 28 — $35"] },
-            { "month": "April 2026", "openingBalance": 60, "totalCredits": 1900, "totalDebits": 1880, "closingBalance": 80, "salaryDeposit": 1900, "flags": ["Credits spike — origin unverified (possible one-time project)"] },
+            { "month": "March 2026", "openingBalance": 180, "totalCredits": 1100, "totalDebits": 1220, "closingBalance": 60, "salaryDeposit": 800, "flags": ["Balance near zero entire month", "Overdraft fee charged Mar 28 â€” $35"] },
+            { "month": "April 2026", "openingBalance": 60, "totalCredits": 1900, "totalDebits": 1880, "closingBalance": 80, "salaryDeposit": 1900, "flags": ["Credits spike â€” origin unverified (possible one-time project)"] },
             { "month": "May 2026", "openingBalance": 80, "totalCredits": 1200, "totalDebits": 1150, "closingBalance": 130, "salaryDeposit": 800, "flags": ["Balance below $50 on May 8 and May 21"] }
           ],
           "averageMonthlyCredit": 1400,
@@ -1573,7 +1573,7 @@
         "extractedData": {
           "verifiedName": "Yuki Tanaka",
           "verifiedMonthlyIncome": 1400,
-          "verifiedEmployer": "Freelance — unverified",
+          "verifiedEmployer": "Freelance â€” unverified",
           "averageBankCredit3Months": 1400,
           "proposedMonthlyPayment": 434,
           "existingMonthlyObligations": 490,
@@ -1582,18 +1582,18 @@
         },
         "strengths": [],
         "issues": [
-          "DTI 66% — more than 50% above maximum threshold",
-          "Credit score 498 — severely below 600 floor",
-          "Charged-off credit card ($4,100) — active default on record",
+          "DTI 66% â€” more than 50% above maximum threshold",
+          "Credit score 498 â€” severely below 600 floor",
+          "Charged-off credit card ($4,100) â€” active default on record",
           "8 late payments in last 24 months",
-          "Second credit card 30 days past due — current delinquency",
-          "Income entirely unverifiable — no formal payslip, no contracts",
+          "Second credit card 30 days past due â€” current delinquency",
+          "Income entirely unverifiable â€” no formal payslip, no contracts",
           "YTD bank income ($840/mo) far below stated $1,400/mo",
-          "Average bank balance $90 — functionally zero",
-          "Overdraft fee detected — no financial buffer",
-          "Loan purpose includes 'general expenses' — no productive use"
+          "Average bank balance $90 â€” functionally zero",
+          "Overdraft fee detected â€” no financial buffer",
+          "Loan purpose includes 'general expenses' â€” no productive use"
         ],
-        "explanation": "Yuki Tanaka presents the highest-risk profile in this queue. A credit score of 498, a charged-off account from 8 months ago, 8 late payments in 24 months, and a second card currently delinquent together indicate a severe and sustained inability to manage debt. The DTI of 66% is more than 50% above maximum policy. Income cannot be verified — no formal payslip was submitted, and bank deposits average $840/month against a stated $1,400. The account balance averages $90 with an overdraft incident. Approving this application would pose unacceptable credit risk. Hard rejection.",
+        "explanation": "Yuki Tanaka presents the highest-risk profile in this queue. A credit score of 498, a charged-off account from 8 months ago, 8 late payments in 24 months, and a second card currently delinquent together indicate a severe and sustained inability to manage debt. The DTI of 66% is more than 50% above maximum policy. Income cannot be verified â€” no formal payslip was submitted, and bank deposits average $840/month against a stated $1,400. The account balance averages $90 with an overdraft incident. Approving this application would pose unacceptable credit risk. Hard rejection.",
         "confidenceScores": { "identityVerification": 95, "incomeVerification": 55, "documentAuthenticity": 72 }
       }
     },
@@ -1608,7 +1608,7 @@
         "address": "312 Willow Creek Dr, Charlotte, NC 28201",
         "phone": "+1 704-555-0118",
         "email": "amara.okonkwo@email.com",
-        "ssn": "***-**-7744",
+        "ssn": "555-12-7744",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1675,8 +1675,8 @@
         "bankStatement": {
           "bank": "Wells Fargo",
           "accountHolder": "Amara C. Okonkwo",
-          "accountNumber": "****2290",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40122290",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": null,
           "averageMonthlyCredit": null,
           "averageMonthlyDebit": null,
@@ -1693,7 +1693,7 @@
         "extractedData": null,
         "strengths": [],
         "issues": [],
-        "explanation": "Documents uploaded at 12:04. AI extraction and analysis in progress — estimated completion in 45 seconds.",
+        "explanation": "Documents uploaded at 12:04. AI extraction and analysis in progress â€” estimated completion in 45 seconds.",
         "confidenceScores": null
       }
     },
@@ -1708,7 +1708,7 @@
         "address": "88 Brickell Terrace, Suite 4, Miami, FL 33130",
         "phone": "+1 786-555-0614",
         "email": "miguel.torres@email.com",
-        "ssn": "***-**-5519",
+        "ssn": "555-12-5519",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1773,8 +1773,8 @@
         "bankStatement": {
           "bank": "Bank of America",
           "accountHolder": "La Mesa Viva LLC",
-          "accountNumber": "****9910",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40129910",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": null,
           "averageMonthlyCredit": null,
           "averageMonthlyDebit": null,
@@ -1791,7 +1791,7 @@
         "extractedData": null,
         "strengths": [],
         "issues": [],
-        "explanation": "Documents uploaded at 11:41. AI extraction and analysis in progress — estimated completion in 45 seconds.",
+        "explanation": "Documents uploaded at 11:41. AI extraction and analysis in progress â€” estimated completion in 45 seconds.",
         "confidenceScores": null
       }
     },
@@ -1806,7 +1806,7 @@
         "address": "19 Crescent Hill Rd, Seattle, WA 98102",
         "phone": "+1 206-555-0891",
         "email": "natasha.ivanova@email.com",
-        "ssn": "***-**-3312",
+        "ssn": "555-12-3312",
         "nationality": "US Citizen"
       },
       "employment": {
@@ -1882,8 +1882,8 @@
         "bankStatement": {
           "bank": "US Bank",
           "accountHolder": "Natasha E. Ivanova",
-          "accountNumber": "****7712",
-          "statementPeriod": "March 2026 – May 2026",
+          "accountNumber": "40127712",
+          "statementPeriod": "March 2026 â€“ May 2026",
           "months": [
             { "month": "March 2026", "openingBalance": 18200, "totalCredits": 8600, "totalDebits": 7900, "closingBalance": 18900, "salaryDeposit": 4960, "flags": [] },
             { "month": "April 2026", "openingBalance": 18900, "totalCredits": 8200, "totalDebits": 7700, "closingBalance": 19400, "salaryDeposit": 4960, "flags": [] },
@@ -1912,16 +1912,16 @@
           "effectiveDTI": 26.0
         },
         "strengths": [
-          "Credit score 756 — very good",
-          "DTI 26% — strong capacity",
+          "Credit score 756 â€” very good",
+          "DTI 26% â€” strong capacity",
           "5 years continuous employment at same employer",
           "All documents verified at 99% confidence",
-          "Bank balance growing steadily — $18,200 to $20,000 over 3 months",
+          "Bank balance growing steadily â€” $18,200 to $20,000 over 3 months",
           "Zero late payments on record",
           "Low debt-to-balance ratio on all accounts"
         ],
         "issues": [],
-        "explanation": "Natasha Ivanova is a strong, well-qualified borrower. A credit score of 756, 5 years of stable tech-sector employment, and a DTI of 26% all comfortably satisfy approval criteria. Bank statements show a consistently growing balance above $18,000, and all three documents were verified at 99% confidence. Approved — no conditions.",
+        "explanation": "Natasha Ivanova is a strong, well-qualified borrower. A credit score of 756, 5 years of stable tech-sector employment, and a DTI of 26% all comfortably satisfy approval criteria. Bank statements show a consistently growing balance above $18,000, and all three documents were verified at 99% confidence. Approved â€” no conditions.",
         "confidenceScores": { "identityVerification": 99, "incomeVerification": 99, "documentAuthenticity": 99 }
       }
     }

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24826",
   "status": "ai_reviewing",
   "submittedAt": "2026-06-03T14:22:00Z",
@@ -8,7 +8,7 @@
     "address": "77 Westbrook Ave, Atlanta, GA 30309",
     "phone": "+1 404-555-0334",
     "email": "leon.washington@email.com",
-    "ssn": "***-**-9910",
+    "ssn": "555-12-9910",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -82,8 +82,8 @@
     "bankStatement": {
       "bank": "SunTrust",
       "accountHolder": "Leon J. Washington",
-      "accountNumber": "****4412",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40124412",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": null,
       "averageMonthlyCredit": null,
       "averageMonthlyDebit": null,

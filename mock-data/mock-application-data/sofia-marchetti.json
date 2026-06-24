@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24813",
   "status": "needs_review",
   "submittedAt": "2026-06-01T08:55:33Z",
@@ -8,7 +8,7 @@
     "address": "501 Harborview Blvd, San Diego, CA 92101",
     "phone": "+1 619-555-0388",
     "email": "sofia.marchetti@email.com",
-    "ssn": "***-**-5514",
+    "ssn": "555-12-5514",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -43,7 +43,7 @@
     "termYears": 6,
     "interestRate": 6.5,
     "estimatedMonthlyPayment": 886,
-    "purpose": "Purchase new vehicle — Mercedes GLC 2026",
+    "purpose": "Purchase new vehicle â€” Mercedes GLC 2026",
     "vehicleMake": "Mercedes-Benz",
     "vehicleModel": "GLC 300",
     "vehicleYear": 2026
@@ -87,8 +87,8 @@
     "bankStatement": {
       "bank": "Wells Fargo",
       "accountHolder": "Sofia E. Marchetti",
-      "accountNumber": "****6612",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40126612",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24807",
   "status": "auto_rejected",
   "submittedAt": "2026-05-31T09:44:21Z",
@@ -8,7 +8,7 @@
     "address": "204 Oak Ridge Blvd, Nashville, TN 37201",
     "phone": "+1 615-555-0445",
     "email": "brandon.cole@email.com",
-    "ssn": "***-**-6612",
+    "ssn": "555-12-6612",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -36,7 +36,7 @@
         "type": "Credit card",
         "monthlyPayment": 360,
         "balance": 7200,
-        "status": "current — utilization 72%"
+        "status": "current â€” utilization 72%"
       }
     ],
     "totalMonthlyDebtPayments": 660,
@@ -87,16 +87,16 @@
       "aiConfidence": 74,
       "status": "needs_review",
       "flags": [
-        "Owner draw ($3,900) exceeds business net income ($1,100) — drawing from reserves",
-        "Business operating only 14 months — insufficient trading history",
-        "No audited financials submitted — only bank statements"
+        "Owner draw ($3,900) exceeds business net income ($1,100) â€” drawing from reserves",
+        "Business operating only 14 months â€” insufficient trading history",
+        "No audited financials submitted â€” only bank statements"
       ]
     },
     "bankStatement": {
       "bank": "Regions Bank",
       "accountHolder": "Cole's Artisan Bakery LLC",
-      "accountNumber": "****3301",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40123301",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

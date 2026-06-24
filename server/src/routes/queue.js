@@ -3,6 +3,24 @@ import { prisma } from '../db.js'
 
 const router = Router()
 
+/* Identity/banking/financial fields that should always come from the live
+   Client row (so edits + cleanups propagate), not from the frozen payload
+   snapshot. The payload still wins for fields that aren't on Client at all
+   (e.g. uploadedDocuments markers). */
+const LIVE_CLIENT_KEYS = [
+  'name','email','phone','type','company','status','location','dateOfBirth',
+  'address','idNumber','nationality','notes','employer','jobTitle',
+  'monthlyGross','monthlyNet','yearsEmployed','creditScore',
+  'bankName','accountHolder','accountNumber','statementPeriod',
+  'averageMonthlyCredit','averageMonthlyDebit','averageClosingBalance',
+]
+const liveClientFields = (c) => {
+  if (!c) return {}
+  const out = {}
+  for (const k of LIVE_CLIENT_KEYS) if (c[k] != null) out[k] = c[k]
+  return out
+}
+
 const serializeItem = (q) => {
   const advisor = q.advisoryEngagement?.assignment?.advisor
   const engagementStatus = q.advisoryEngagement?.status
@@ -14,8 +32,11 @@ const serializeItem = (q) => {
     createdAt: q.createdAt,
     processedAt: q.processedAt,
     error: q.errorMessage,
-    client: q.payload ?? {},
+    // Merge: payload first (may contain modal-only extras), then the live
+    // Client row overrides so authoritative DB values win.
+    client: { ...(q.payload ?? {}), ...liveClientFields(q.client) },
     clientId: q.client?.legacyId ?? q.clientId,
+    documents: q.client?.documents ?? [],
     loanApplicationId: q.loanApplication?.legacyId ?? null,
     advisoryEngagementId: q.advisoryEngagementId ?? null,
     engagementStatus,                        // 'pending' | 'proposed' | 'confirmed' | 'declined'
@@ -38,7 +59,7 @@ const findItemById = (id) =>
   prisma.queueItem.findUnique({
     where: { id },
     include: {
-      client: true,
+      client: { include: { documents: { orderBy: { uploadedAt: 'desc' } } } },
       loanApplication: { include: { aiAnalysis: true } },
       advisoryEngagement: {
         include: {
@@ -53,7 +74,7 @@ const findItemById = (id) =>
 router.get('/', async (_req, res) => {
   const all = await prisma.queueItem.findMany({
     include: {
-      client: true,
+      client: { include: { documents: { orderBy: { uploadedAt: 'desc' } } } },
       loanApplication: { include: { aiAnalysis: true } },
       advisoryEngagement: {
         include: {
@@ -158,11 +179,34 @@ router.post('/', async (req, res) => {
     linked.advisoryEngagementId = eng.id
   }
 
+  // Persist any uploaded documents alongside the client.
+  // b.documents = [{ docType, filename, mimeType, fileDataUrl, parsedJson?, uploadSource?, aiConfidence?, status? }]
+  if (Array.isArray(b.documents) && b.documents.length > 0) {
+    await prisma.document.createMany({
+      data: b.documents
+        .filter(d => d?.docType)
+        .map(d => ({
+          clientId:     client.id,
+          docType:      d.docType,
+          filename:     d.filename ?? null,
+          mimeType:     d.mimeType ?? null,
+          fileDataUrl:  d.fileDataUrl ?? null,
+          parsedJson:   d.parsedJson ?? null,
+          uploadSource: d.uploadSource ?? (d.fileDataUrl ? 'image' : 'json'),
+          aiConfidence: d.aiConfidence ?? null,
+          status:       d.status ?? null,
+        })),
+      skipDuplicates: true,
+    })
+  }
+
   const item = await prisma.queueItem.create({
     data: {
       clientId: client.id,
       flowKey,
-      payload: { ...b, clientId: legacyId },
+      // Don't persist the (potentially huge) base64 dataUrls into the queue payload —
+      // they're already in the Document rows.
+      payload: { ...b, clientId: legacyId, documents: undefined },
       ...linked,
     },
   })

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "APP-24816",
   "status": "needs_review",
   "submittedAt": "2026-06-02T10:02:11Z",
@@ -8,7 +8,7 @@
     "address": "47 Lakeview Drive, Chicago, IL 60614",
     "phone": "+1 312-555-0877",
     "email": "david.osei@email.com",
-    "ssn": "***-**-6634",
+    "ssn": "555-12-6634",
     "nationality": "US Citizen"
   },
   "employment": {
@@ -49,7 +49,7 @@
     "termYears": 5,
     "interestRate": 7,
     "estimatedMonthlyPayment": 761,
-    "purpose": "Purchase new vehicle — Toyota Camry 2026",
+    "purpose": "Purchase new vehicle â€” Toyota Camry 2026",
     "vehicleMake": "Toyota",
     "vehicleModel": "Camry",
     "vehicleYear": 2026
@@ -93,8 +93,8 @@
     "bankStatement": {
       "bank": "Chase Bank",
       "accountHolder": "David K. Osei",
-      "accountNumber": "****3341",
-      "statementPeriod": "March 2026 – May 2026",
+      "accountNumber": "40123341",
+      "statementPeriod": "March 2026 â€“ May 2026",
       "months": [
         {
           "month": "March 2026",

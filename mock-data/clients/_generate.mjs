@@ -1,5 +1,5 @@
-/* One-shot generator: produces realistic mock client folders under mock-data/clients/.
- * Run with `node mock-data/clients/_generate.mjs` — overwrites any existing files.
+﻿/* One-shot generator: produces realistic mock client folders under mock-data/clients/.
+ * Run with `node mock-data/clients/_generate.mjs` â€” overwrites any existing files.
  * Safe to delete after running; kept for reproducibility.
  */
 import fs from 'node:fs'
@@ -13,7 +13,7 @@ const w = (folder, name, data) => {
   fs.writeFileSync(path.join(folder, name + '.json'), JSON.stringify(data, null, 2))
 }
 
-/* ── PERSONAL ADVISORY ─────────────────────────────────────────────────────── */
+/* â”€â”€ PERSONAL ADVISORY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const personalAdvisory = [
   {
@@ -45,8 +45,8 @@ const personalAdvisory = [
     bankStatement: {
       bank:           'Bank of America',
       accountHolder:  'Aisha N. Rahman',
-      accountNumber:  '****2218',
-      statementPeriod:'March 2026 – May 2026',
+      accountNumber:  '40122218',
+      statementPeriod:'March 2026 â€“ May 2026',
       months: [
         { month: 'March 2026', openingBalance: 18400, totalCredits: 7100, totalDebits: 5800, closingBalance: 19700, salaryDeposit: 5760 },
         { month: 'April 2026', openingBalance: 19700, totalCredits: 7250, totalDebits: 6100, closingBalance: 20850, salaryDeposit: 5760 },
@@ -103,8 +103,8 @@ const personalAdvisory = [
     bankStatement: {
       bank:           'Chase',
       accountHolder:  'Tomas R. Herrera',
-      accountNumber:  '****6614',
-      statementPeriod:'March 2026 – May 2026',
+      accountNumber:  '40126614',
+      statementPeriod:'March 2026 â€“ May 2026',
       months: [
         { month: 'March 2026', openingBalance: 2100, totalCredits: 5400, totalDebits: 5650, closingBalance: 1850, salaryDeposit: 4450, flags: ['low_balance'] },
         { month: 'April 2026', openingBalance: 1850, totalCredits: 5500, totalDebits: 5900, closingBalance: 1450, salaryDeposit: 4450, flags: ['low_balance'] },
@@ -138,7 +138,7 @@ const personalAdvisory = [
   },
 ]
 
-/* ── BUSINESS ADVISORY ─────────────────────────────────────────────────────── */
+/* â”€â”€ BUSINESS ADVISORY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const businessAdvisory = [
   {
@@ -182,8 +182,8 @@ const businessAdvisory = [
     corporateBankStatement: {
       bank: 'JPMorgan Chase',
       accountHolder: 'Nair Logistics Inc.',
-      accountNumber: '****8401',
-      statementPeriod: 'October 2025 – May 2026',
+      accountNumber: '40128401',
+      statementPeriod: 'October 2025 â€“ May 2026',
       months: [
         { month: 'Oct 2025', totalCredits: 870_000, totalDebits: 740_000, closingBalance: 1_280_000 },
         { month: 'Nov 2025', totalCredits: 920_000, totalDebits: 810_000, closingBalance: 1_390_000 },
@@ -258,8 +258,8 @@ const businessAdvisory = [
     corporateBankStatement: {
       bank: 'East West Bank',
       accountHolder: 'Chen Architects LLC',
-      accountNumber: '****0297',
-      statementPeriod: 'October 2025 – May 2026',
+      accountNumber: '40120297',
+      statementPeriod: 'October 2025 â€“ May 2026',
       months: [
         { month: 'Oct 2025', totalCredits: 295_000, totalDebits: 280_000, closingBalance: 580_000 },
         { month: 'Nov 2025', totalCredits: 310_000, totalDebits: 270_000, closingBalance: 620_000 },
@@ -292,7 +292,7 @@ const businessAdvisory = [
   },
 ]
 
-/* ── PERSONAL LOAN (new, separate from existing 30) ──────────────────────────── */
+/* â”€â”€ PERSONAL LOAN (new, separate from existing 30) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const personalLoan = [
   {
@@ -321,8 +321,8 @@ const personalLoan = [
     bankStatement: {
       bank: 'Wells Fargo',
       accountHolder: 'Diego A. Vargas',
-      accountNumber: '****4477',
-      statementPeriod: 'March 2026 – May 2026',
+      accountNumber: '40124477',
+      statementPeriod: 'March 2026 â€“ May 2026',
       months: [
         { month: 'March 2026', openingBalance: 6200, totalCredits: 5300, totalDebits: 4900, closingBalance: 6600, salaryDeposit: 4450 },
         { month: 'April 2026', openingBalance: 6600, totalCredits: 5400, totalDebits: 4750, closingBalance: 7250, salaryDeposit: 4450 },
@@ -380,8 +380,8 @@ const personalLoan = [
     bankStatement: {
       bank: 'Wells Fargo',
       accountHolder: 'Hana Yamamoto',
-      accountNumber: '****9102',
-      statementPeriod: 'March 2026 – May 2026',
+      accountNumber: '40129102',
+      statementPeriod: 'March 2026 â€“ May 2026',
       months: [
         { month: 'March 2026', openingBalance: 14200, totalCredits: 8400, totalDebits: 6900, closingBalance: 15700, salaryDeposit: 7300 },
         { month: 'April 2026', openingBalance: 15700, totalCredits: 8500, totalDebits: 7100, closingBalance: 17100, salaryDeposit: 7300 },
@@ -412,7 +412,7 @@ const personalLoan = [
   },
 ]
 
-/* ── BUSINESS LOAN ───────────────────────────────────────────────────────────── */
+/* â”€â”€ BUSINESS LOAN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const businessLoan = [
   {
@@ -447,8 +447,8 @@ const businessLoan = [
       federalTax: 485_100, stateTax: 0, totalTax: 485_100, effectiveRate: 21.0,
     },
     corporateBankStatement: {
-      bank: 'Frost Bank', accountHolder: 'Williams Ventures, Inc.', accountNumber: '****1730',
-      statementPeriod: 'October 2025 – May 2026',
+      bank: 'Frost Bank', accountHolder: 'Williams Ventures, Inc.', accountNumber: '40121730',
+      statementPeriod: 'October 2025 â€“ May 2026',
       months: [
         { month: 'Oct 2025', totalCredits: 1_480_000, totalDebits: 1_310_000, closingBalance: 1_950_000 },
         { month: 'Nov 2025', totalCredits: 1_510_000, totalDebits: 1_350_000, closingBalance: 2_110_000 },
@@ -480,7 +480,7 @@ const businessLoan = [
     loanRequest: {
       type: 'Business loan', amount: 850_000, termYears: 7, interestRate: 6.5,
       estimatedMonthlyPayment: 12_640,
-      purpose: 'Equipment financing — automated production line for new product launch',
+      purpose: 'Equipment financing â€” automated production line for new product launch',
       useOfFunds: { equipment: 720_000, installation: 90_000, training: 40_000 },
       collateral: 'Equipment being purchased',
     },
@@ -517,8 +517,8 @@ const businessLoan = [
       federalTax: 588_000, stateTax: 224_000, totalTax: 812_000, effectiveRate: 29.0, passThrough: true,
     },
     corporateBankStatement: {
-      bank: 'JPMorgan Chase Private Bank', accountHolder: 'Goldman & Co., LLC', accountNumber: '****7799',
-      statementPeriod: 'October 2025 – May 2026',
+      bank: 'JPMorgan Chase Private Bank', accountHolder: 'Goldman & Co., LLC', accountNumber: '40127799',
+      statementPeriod: 'October 2025 â€“ May 2026',
       months: [
         { month: 'Oct 2025', totalCredits: 1_080_000, totalDebits:   850_000, closingBalance: 3_200_000 },
         { month: 'Nov 2025', totalCredits: 1_110_000, totalDebits:   870_000, closingBalance: 3_440_000 },
@@ -556,7 +556,7 @@ const businessLoan = [
   },
 ]
 
-/* ── Write everything ──────────────────────────────────────────────────────── */
+/* â”€â”€ Write everything â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const root = __dirname
 
@@ -564,7 +564,7 @@ const writePerson = (flow, person) => {
   const folder = path.join(root, flow, person.slug)
   for (const [docKey, docData] of Object.entries(person)) {
     if (docKey === 'slug') continue
-    // camelCase → kebab-case for filenames
+    // camelCase â†’ kebab-case for filenames
     const name = docKey.replace(/[A-Z]/g, m => '-' + m.toLowerCase())
     w(folder, name, docData)
   }

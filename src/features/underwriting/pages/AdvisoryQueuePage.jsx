@@ -65,10 +65,10 @@ const AdvisoryQueuePage = () => {
         </div>
 
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shrink-0">
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-8 py-5 sm:py-6 shrink-0">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-[22px] font-semibold text-gray-900 leading-tight">Advisory queue</h1>
+              <h1 className="text-[20px] sm:text-[22px] font-semibold text-gray-900 leading-tight">Advisory queue</h1>
               <p className="text-[13px] text-secondary mt-1">
                 AI reviews documents, flags gaps, and assigns each client to the best-fit advisor.
               </p>
@@ -76,7 +76,7 @@ const AdvisoryQueuePage = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-5 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-5 sm:mt-6">
             <StatCard label="TOTAL"      value={stats.total}      sub="in this queue"   bar="bg-navy" />
             <StatCard label="QUEUED"     value={stats.queued}     sub="awaiting AI"     bar="bg-gray-400" />
             <StatCard label="PROCESSING" value={stats.processing} sub="AI analysing"    bar="bg-blue-action" />
@@ -86,9 +86,9 @@ const AdvisoryQueuePage = () => {
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-8 py-5">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-5">
           {/* Tabs */}
-          <div className="flex items-center border-b border-gray-200 mb-5">
+          <div className="flex items-center border-b border-gray-200 mb-5 overflow-x-auto">
             {TABS.map(({ key, label, icon: Icon }) => {
               const isActive = tab === key
               const count    = (queues[key] ?? []).length
@@ -96,7 +96,7 @@ const AdvisoryQueuePage = () => {
                 <button
                   key={key}
                   onClick={() => setTab(key)}
-                  className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors ${
+                  className={`flex items-center gap-2 px-4 py-3 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap shrink-0 ${
                     isActive
                       ? 'border-blue-action text-blue-action'
                       : 'border-transparent text-secondary hover:text-gray-800'
@@ -118,7 +118,7 @@ const AdvisoryQueuePage = () => {
           {items.length === 0 ? (
             <EmptyState />
           ) : (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {items.map(item => <AdvisoryCard key={item.id} item={item} />)}
             </div>
           )}
