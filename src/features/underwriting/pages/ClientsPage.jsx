@@ -366,21 +366,45 @@ const ClientRow = ({ client }) => {
   const service      = serviceFor(client)
   const advisor      = client.assignedAdvisor
   const [menuOpen, setMenuOpen] = useState(false)
+  const [menuPos, setMenuPos]   = useState(null)   // { top, right } for the fixed-position menu
   const menuRef      = useRef(null)
+  const btnRef       = useRef(null)
 
   useEffect(() => {
     if (!menuOpen) return
     const onClick = e => { if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false) }
     const onKey   = e => { if (e.key === 'Escape') setMenuOpen(false) }
+    /* The menu is fixed-positioned (to escape the table's scroll clipping), so
+       close it on any scroll/resize rather than trying to keep it glued. */
+    const onScroll = () => setMenuOpen(false)
     window.addEventListener('mousedown', onClick)
     window.addEventListener('keydown', onKey)
+    window.addEventListener('scroll', onScroll, true)
+    window.addEventListener('resize', onScroll)
     return () => {
       window.removeEventListener('mousedown', onClick)
       window.removeEventListener('keydown', onKey)
+      window.removeEventListener('scroll', onScroll, true)
+      window.removeEventListener('resize', onScroll)
     }
   }, [menuOpen])
 
   const stop = e => { e.stopPropagation(); e.preventDefault() }
+
+  /* Anchor the fixed menu to the button; flip upward if it would overflow the bottom. */
+  const toggleMenu = (e) => {
+    stop(e)
+    if (menuOpen) { setMenuOpen(false); return }
+    const r = btnRef.current.getBoundingClientRect()
+    const MENU_H = 290
+    const openUp = r.bottom + MENU_H > window.innerHeight && r.top > MENU_H
+    setMenuPos({
+      top:   openUp ? undefined : r.bottom + 4,
+      bottom: openUp ? window.innerHeight - r.top + 4 : undefined,
+      right: window.innerWidth - r.right,
+    })
+    setMenuOpen(true)
+  }
 
   const copy = async (text, e) => {
     stop(e)
@@ -474,9 +498,10 @@ const ClientRow = ({ client }) => {
 
       {/* Actions */}
       <td className="px-3 py-3.5">
-        <div className="relative" ref={menuRef}>
+        <div ref={menuRef}>
           <button
-            onClick={(e) => { stop(e); setMenuOpen(o => !o) }}
+            ref={btnRef}
+            onClick={toggleMenu}
             className={`p-1.5 rounded-lg transition-colors ${
               menuOpen ? 'bg-gray-100 text-gray-700' : 'text-tertiary hover:bg-gray-100 hover:text-gray-700'
             }`}
@@ -490,7 +515,8 @@ const ClientRow = ({ client }) => {
           {menuOpen && (
             <div
               role="menu"
-              className="absolute top-full right-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-30 py-1"
+              style={{ position: 'fixed', top: menuPos?.top, bottom: menuPos?.bottom, right: menuPos?.right }}
+              className="w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1"
             >
               <MenuItem
                 icon={TbEye}

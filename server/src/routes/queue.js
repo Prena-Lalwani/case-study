@@ -217,7 +217,11 @@ router.post('/', async (req, res) => {
 // PATCH /api/queue/:id — status updates (used by the processor)
 router.patch('/:id', async (req, res) => {
   const { status, errorMessage, processedAt } = req.body ?? {}
-  const updated = await prisma.queueItem.update({
+
+  const existing = await prisma.queueItem.findUnique({ where: { id: req.params.id } })
+  if (!existing) return res.status(404).json({ error: 'Queue item not found' })
+
+  await prisma.queueItem.update({
     where: { id: req.params.id },
     data: {
       ...(status        !== undefined && { status }),
@@ -225,7 +229,26 @@ router.patch('/:id', async (req, res) => {
       ...(processedAt   !== undefined && { processedAt: new Date(processedAt) }),
     },
   })
-  res.json(serializeItem(await findItemById(updated.id)))
+
+  /* When the AI processor reports an error, don't leave the linked application
+     stranded in 'ai_reviewing' — move the loan to 'needs_review' (so an officer
+     can pick it up / re-run) and the engagement to 'pending' so the UI shows a
+     clear, actionable error rather than a perpetual spinner. */
+  if (status === 'error') {
+    if (existing.loanApplicationId) {
+      await prisma.loanApplication.update({
+        where: { id: existing.loanApplicationId },
+        data:  { status: 'needs_review' },
+      })
+    } else if (existing.advisoryEngagementId) {
+      await prisma.advisoryEngagement.update({
+        where: { id: existing.advisoryEngagementId },
+        data:  { status: 'pending' },
+      })
+    }
+  }
+
+  res.json(serializeItem(await findItemById(req.params.id)))
 })
 
 // POST /api/queue/:id/result — processor writes the AI analysis here
@@ -235,12 +258,26 @@ router.post('/:id/result', async (req, res) => {
 
   const r = req.body ?? {}
 
+  /* Coerce numeric AI outputs defensively: the model can return a float/string
+     even though aiScore/completenessScore are Int? columns. Round + clamp so a
+     stray decimal can never 500 the write (which would strand the item). */
+  const toInt = (v, min, max) => {
+    const n = Math.round(Number(v))
+    if (!Number.isFinite(n)) return null
+    return Math.max(min, Math.min(max, n))
+  }
+  const toFloat = (v, min, max) => {
+    const n = Number(v)
+    if (!Number.isFinite(n)) return null
+    return Math.max(min, Math.min(max, n))
+  }
+
   // Common analysis fields
   const baseData = {
-    aiScore: r.aiScore ?? null,
-    dti: r.dti ?? null,
+    aiScore: toInt(r.aiScore, 0, 100),
+    dti: toFloat(r.dti, 0, 1000),
     recommendation: r.recommendation ?? null,
-    completenessScore: r.completenessScore ?? null,
+    completenessScore: toInt(r.completenessScore, 0, 100),
     recommendedAdvisorId: r.recommendedAdvisorId ?? null,
     advisorRationale: r.advisorRationale ?? null,
     strengths: r.strengths ?? null,

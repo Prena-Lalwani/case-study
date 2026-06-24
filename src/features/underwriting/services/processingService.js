@@ -7,7 +7,7 @@
  *
  * Singleton: start() is idempotent and called once via ProcessingBootstrap. */
 
-import { getGeminiModel } from '../../../lib/gemini'
+import { getGeminiModel, parseModelJson } from '../../../lib/gemini'
 import { ADVISORY_REVIEW_PROMPT, ADVISORY_REVIEW_SCHEMA } from '../ai/advisorySchemas'
 import { UNDERWRITING_ANALYSIS_PROMPT, UNDERWRITING_ANALYSIS_SCHEMA } from '../ai/underwritingSchemas'
 import { fetchAdvisors } from '../data/advisorStore'
@@ -44,14 +44,14 @@ const processAdvisory = async (item) => {
   const fullPrompt = `${ADVISORY_REVIEW_PROMPT}\n\nData:\n${JSON.stringify(payload, null, 2)}`
   const model      = getGeminiModel(ADVISORY_REVIEW_SCHEMA)
   const result     = await model.generateContent([{ text: fullPrompt }])
-  return JSON.parse(result.response.text())
+  return parseModelJson(result.response.text())
 }
 
 const processLoan = async (item) => {
   const fullPrompt = `${UNDERWRITING_ANALYSIS_PROMPT}\n\nData:\n${JSON.stringify(item.client, null, 2)}`
   const model      = getGeminiModel(UNDERWRITING_ANALYSIS_SCHEMA)
   const result     = await model.generateContent([{ text: fullPrompt }])
-  return JSON.parse(result.response.text())
+  return parseModelJson(result.response.text())
 }
 
 /* ── Pump loop ───────────────────────────────────────────────────────── */

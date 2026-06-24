@@ -107,9 +107,10 @@ const niceCeil = v => {
 }
 
 /* ── Line chart (single or multi-series) ──────────────────────────────── */
-export const LineChart = ({ data, series, xKey = 'date', height = 220, currency = false, emptyLabel }) => {
+export const LineChart = ({ data, series, xKey = 'date', height = 220, currency = false, emptyLabel, xTitle, yTitle }) => {
   const [ref, { w, h }] = useSize({ w: 600, h: height })
-  const PAD = { t: 12, r: 16, b: 28, l: 52 }
+  /* Reserve extra room for axis titles when present. */
+  const PAD = { t: 12, r: 16, b: xTitle ? 44 : 28, l: yTitle ? 66 : 52 }
   const pw = Math.max(w - PAD.l - PAD.r, 1)
   const ph = Math.max(h - PAD.t - PAD.b, 1)
 
@@ -175,10 +176,136 @@ export const LineChart = ({ data, series, xKey = 'date', height = 220, currency 
 
         {/* x labels */}
         {data.map((d, i) => i % stride === 0 || i === data.length - 1 ? (
-          <text key={i} x={xOf(i)} y={h - 6} textAnchor="middle" fontSize="10" fill={C.muted}>
+          <text key={i} x={xOf(i)} y={PAD.t + ph + 16} textAnchor="middle" fontSize="10" fill={C.muted}>
             {String(d[xKey]).slice(5)}
           </text>
         ) : null)}
+
+        {/* axis titles */}
+        {xTitle && (
+          <text x={PAD.l + pw / 2} y={h - 4} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">
+            {xTitle}
+          </text>
+        )}
+        {yTitle && (
+          <text transform={`translate(14 ${PAD.t + ph / 2}) rotate(-90)`} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">
+            {yTitle}
+          </text>
+        )}
+      </svg>
+    </div>
+  )
+}
+
+/* ── Grouped vertical bar chart ───────────────────────────────────────────
+   Far better than a line chart for sparse / discrete counts (e.g. "N new
+   intakes on a given day"): each bucket renders side-by-side bars per series.
+   Auto-aggregates dense daily data into <= maxBars buckets so it stays readable.
+   Integer Y ticks (counts), gridlines, and X/Y axis titles.                  */
+export const GroupedBarChart = ({
+  data, series, xKey = 'date', height = 240, maxBars = 10,
+  xTitle, yTitle, emptyLabel,
+}) => {
+  const [ref, { w, h }] = useSize({ w: 600, h: height })
+
+  if (!data?.length) {
+    return <EmptyState height={height} label={emptyLabel ?? 'No data yet'} sub="Charts populate as activity accrues." />
+  }
+
+  /* Aggregate consecutive points into buckets when the range is dense. */
+  let buckets
+  if (data.length > maxBars) {
+    const groupSize = Math.ceil(data.length / maxBars)
+    buckets = []
+    for (let i = 0; i < data.length; i += groupSize) {
+      const slice = data.slice(i, i + groupSize)
+      const b = { _label: String(slice[0][xKey]).slice(5) }      // MM-DD of bucket start
+      for (const s of series) b[s.key] = slice.reduce((sum, d) => sum + Number(d[s.key] ?? 0), 0)
+      buckets.push(b)
+    }
+  } else {
+    buckets = data.map(d => {
+      const b = { _label: String(d[xKey]).slice(5) }
+      for (const s of series) b[s.key] = Number(d[s.key] ?? 0)
+      return b
+    })
+  }
+
+  const allVals = buckets.flatMap(b => series.map(s => b[s.key] ?? 0))
+  const rawMax  = Math.max(...allVals, 0)
+  if (rawMax === 0) {
+    return <EmptyState height={height} label={emptyLabel ?? 'No activity yet'} sub="Add clients to see intake volume here." />
+  }
+
+  /* Integer-friendly Y scale for counts. */
+  const yMax = rawMax <= 2 ? 2 : rawMax <= 5 ? 5 : rawMax <= 10 ? 10 : niceCeil(rawMax)
+  const tickStep = yMax <= 5 ? 1 : yMax / 5
+  const yTicks = []
+  for (let v = 0; v <= yMax + 1e-9; v += tickStep) yTicks.push(Math.round(v * 100) / 100)
+
+  const PAD = { t: 12, r: 16, b: xTitle ? 46 : 30, l: yTitle ? 60 : 42 }
+  const pw = Math.max(w - PAD.l - PAD.r, 1)
+  const ph = Math.max(h - PAD.t - PAD.b, 1)
+
+  const yOf = v => PAD.t + (1 - v / yMax) * ph
+  const slotW = pw / buckets.length
+  const groupW = Math.min(slotW * 0.7, 48)          // total width of the bar group in a slot
+  const barW = groupW / series.length
+  const labelStride = Math.max(1, Math.ceil(buckets.length / 8))
+
+  return (
+    <div ref={ref} style={{ width: '100%', height }}>
+      <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" width="100%" height="100%" style={{ display: 'block', overflow: 'visible' }}>
+        {/* gridlines + Y labels */}
+        {yTicks.map((v, i) => {
+          const y = yOf(v)
+          return (
+            <g key={i}>
+              <line x1={PAD.l} y1={y} x2={w - PAD.r} y2={y} stroke="#EFF2F7" strokeWidth="1" />
+              <text x={PAD.l - 8} y={y + 4} textAnchor="end" fontSize="10.5" fill={C.muted}>{fmtK(v)}</text>
+            </g>
+          )
+        })}
+        <line x1={PAD.l} y1={PAD.t + ph} x2={w - PAD.r} y2={PAD.t + ph} stroke="#E2E8F0" strokeWidth="1" />
+
+        {/* grouped bars */}
+        {buckets.map((b, bi) => {
+          const slotCenter = PAD.l + slotW * (bi + 0.5)
+          const groupLeft  = slotCenter - groupW / 2
+          return (
+            <g key={bi}>
+              {series.map((s, si) => {
+                const val = b[s.key] ?? 0
+                const x = groupLeft + si * barW
+                const barH = (val / yMax) * ph
+                const y = PAD.t + ph - barH
+                return (
+                  <rect
+                    key={s.key}
+                    x={x + 1} y={y}
+                    width={Math.max(barW - 2, 1)}
+                    height={Math.max(barH, val > 0 ? 2 : 0)}
+                    rx="2"
+                    fill={s.color}
+                  >
+                    <title>{`${b._label} · ${s.label}: ${val}`}</title>
+                  </rect>
+                )
+              })}
+              {(bi % labelStride === 0 || bi === buckets.length - 1) && (
+                <text x={slotCenter} y={PAD.t + ph + 16} textAnchor="middle" fontSize="10" fill={C.muted}>{b._label}</text>
+              )}
+            </g>
+          )
+        })}
+
+        {/* axis titles */}
+        {xTitle && (
+          <text x={PAD.l + pw / 2} y={h - 4} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">{xTitle}</text>
+        )}
+        {yTitle && (
+          <text transform={`translate(14 ${PAD.t + ph / 2}) rotate(-90)`} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">{yTitle}</text>
+        )}
       </svg>
     </div>
   )
@@ -268,21 +395,42 @@ export const DonutChart = ({ slices, size = 180, stroke = 28, centerLabel, cente
 }
 
 /* ── Histogram (vertical bars) ───────────────────────────────────────── */
-export const Histogram = ({ buckets, color = C.primary, height = 140, emptyLabel }) => {
+export const Histogram = ({ buckets, color = C.primary, height = 140, emptyLabel, xTitle, yTitle }) => {
   if (!buckets?.length) return <EmptyState height={height} label={emptyLabel ?? 'No data yet'} />
-  const max = Math.max(...buckets.map(b => b.count))
-  if (max === 0) return <EmptyState height={height} label={emptyLabel ?? 'No decisions yet'} sub="Approve or reject a loan to see the distribution." />
+  /* NaN-safe: coerce counts and treat non-positive/NaN totals as empty. */
+  const max = Math.max(0, ...buckets.map(b => Number(b.count) || 0))
+  if (!(max > 0)) return <EmptyState height={height} label={emptyLabel ?? 'No decisions yet'} sub="Approve or reject a loan to see the distribution." />
   return (
-    <div className="flex items-end gap-1.5" style={{ height }}>
-      {buckets.map((b, i) => {
-        const pct = (b.count / max) * 100
-        return (
-          <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1.5">
-            <div className="w-full rounded-t" style={{ height: `${pct}%`, background: b.color ?? color, minHeight: b.count > 0 ? 2 : 0 }} title={`${b.label}: ${b.count}`} />
-            <span className="text-[10px] text-tertiary">{b.label}</span>
+    <div>
+      <div className="flex items-stretch" style={{ height }}>
+        {/* Y axis: title + max/0 scale */}
+        <div className="flex items-stretch shrink-0">
+          {yTitle && (
+            <div className="flex items-center">
+              <span className="text-[9.5px] font-semibold uppercase tracking-wider text-tertiary" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>{yTitle}</span>
+            </div>
+          )}
+          <div className="flex flex-col justify-between items-end pr-2 text-[10px] text-tertiary tabular-nums">
+            <span>{max}</span>
+            <span>0</span>
           </div>
-        )
-      })}
+        </div>
+        {/* Bars */}
+        <div className="flex items-end gap-1.5 flex-1 border-l border-b border-gray-200 pl-1 pb-0">
+          {buckets.map((b, i) => {
+            const pct = (b.count / max) * 100
+            return (
+              <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1.5 h-full">
+                <div className="w-full rounded-t" style={{ height: `${pct}%`, background: b.color ?? color, minHeight: b.count > 0 ? 2 : 0 }} title={`${b.label}: ${b.count}`} />
+                <span className="text-[10px] text-tertiary text-center leading-tight">{b.label}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      {xTitle && (
+        <p className="text-center text-[9.5px] font-semibold uppercase tracking-wider text-tertiary mt-1.5">{xTitle}</p>
+      )}
     </div>
   )
 }

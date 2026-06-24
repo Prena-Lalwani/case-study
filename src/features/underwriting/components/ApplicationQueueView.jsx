@@ -302,15 +302,32 @@ const ApplicationQueueView = ({ apps }) => {
   const [activeTab, setActiveTab] = useState('all')
   const [sortKey, setSortKey]     = useState('ai_desc')
   const [sortOpen, setSortOpen]   = useState(false)
+  const [sortPos, setSortPos]     = useState(null)   // { top, right } for the fixed menu
   const sortRef = useRef(null)
+  const sortBtnRef = useRef(null)
 
-  /* Close dropdown on outside click */
+  /* Close dropdown on outside click / scroll (menu is fixed-positioned to
+     escape the tab bar's horizontal-scroll clipping). */
   useEffect(() => {
     if (!sortOpen) return
     const onClick = (e) => { if (sortRef.current && !sortRef.current.contains(e.target)) setSortOpen(false) }
+    const onScroll = () => setSortOpen(false)
     window.addEventListener('mousedown', onClick)
-    return () => window.removeEventListener('mousedown', onClick)
+    window.addEventListener('scroll', onScroll, true)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('mousedown', onClick)
+      window.removeEventListener('scroll', onScroll, true)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [sortOpen])
+
+  const toggleSort = () => {
+    if (sortOpen) { setSortOpen(false); return }
+    const r = sortBtnRef.current.getBoundingClientRect()
+    setSortPos({ top: r.bottom + 4, right: window.innerWidth - r.right })
+    setSortOpen(true)
+  }
 
   const counts = useMemo(() => ({
     all:           apps.filter(a => ALL_STATUSES.includes(a.status)).length,
@@ -362,10 +379,11 @@ const ApplicationQueueView = ({ apps }) => {
         <div className="flex-1" />
 
         {/* Sort dropdown */}
-        <div className="relative pb-3" ref={sortRef}>
+        <div className="relative pb-3 shrink-0" ref={sortRef}>
           <button
-            onClick={() => setSortOpen(v => !v)}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[12px] font-medium transition-colors ${
+            ref={sortBtnRef}
+            onClick={toggleSort}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[12px] font-medium transition-colors whitespace-nowrap ${
               sortOpen ? 'bg-gray-100 text-gray-900' : 'text-secondary hover:text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -374,7 +392,10 @@ const ApplicationQueueView = ({ apps }) => {
           </button>
 
           {sortOpen && (
-            <div className="absolute top-full right-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1">
+            <div
+              style={{ position: 'fixed', top: sortPos?.top, right: sortPos?.right }}
+              className="w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1"
+            >
               {SORT_OPTIONS.map(opt => {
                 const active = opt.key === sortKey
                 return (

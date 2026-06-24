@@ -24,6 +24,7 @@ import ContextChat from '../chat/ContextChat'
 import { ADVISORY_REVIEW_PROMPT } from '../chat/chatPrompts'
 import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
 import ReassignAdvisorModal from '../components/ReassignAdvisorModal'
+import DecisionDialog from '../components/DecisionDialog'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import { useClientQueues } from '../hooks/useClientQueues'
 import { refreshClients } from '../hooks/useClients'
@@ -89,7 +90,10 @@ const niceCeil = v => {
   const exp = Math.floor(Math.log10(v))
   const base = Math.pow(10, exp)
   const f = v / base
-  const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10
+  /* Finer steps so values like 2.7 round to 3 (not 5) — keeps the axis tight
+     and stops the lines from bunching in the lower third of the chart. */
+  const nf = f <= 1 ? 1 : f <= 1.5 ? 1.5 : f <= 2 ? 2 : f <= 2.5 ? 2.5
+           : f <= 3 ? 3 : f <= 4 ? 4 : f <= 5 ? 5 : f <= 7.5 ? 7.5 : 10
   return nf * base
 }
 
@@ -149,7 +153,8 @@ const BankingChart = ({ months }) => {
   }
 
   const { w, h } = sz
-  const PAD = { t: 12, r: 16, b: 32, l: 56 }
+  /* Extra left/bottom room reserved for the rotated Y-axis title + X-axis title. */
+  const PAD = { t: 12, r: 16, b: 46, l: 74 }
   const pw = Math.max(w - PAD.l - PAD.r, 1)
   const ph = Math.max(h - PAD.t - PAD.b, 1)
 
@@ -171,8 +176,8 @@ const BankingChart = ({ months }) => {
   const balPts = pts(bal), credPts = pts(cred), debPts = pts(deb)
   const balPath = crCurve(balPts), credPath = crCurve(credPts), debPath = crCurve(debPts)
   const areaClose = n > 1 ? ` L${xOf(n - 1).toFixed(2)},${(PAD.t + ph).toFixed(2)} L${PAD.l.toFixed(2)},${(PAD.t + ph).toFixed(2)}Z` : ''
-  /* 4 ticks (instead of 5) for tighter charts so labels never collide */
-  const tickCount = h < 200 ? 4 : 5
+  /* Cap ticks by available height so labels never collide (~28px min spacing) */
+  const tickCount = Math.max(3, Math.min(5, Math.floor(ph / 28) + 1))
   const yTicks = Array.from({ length: tickCount }, (_, i) => (i / (tickCount - 1)) * ySpan)
 
   return (
@@ -214,11 +219,23 @@ const BankingChart = ({ months }) => {
           {balPts.map((p, i) => (
             <circle key={i} cx={p.x} cy={p.y} r="4" fill="#fff" stroke={C.primary} strokeWidth="2" />
           ))}
+          {/* X-axis month labels */}
           {months.map((m, i) => (
-            <text key={i} x={xOf(i)} y={h - 6} textAnchor="middle" fontSize="11" fill={C.muted}>
+            <text key={i} x={xOf(i)} y={PAD.t + ph + 18} textAnchor="middle" fontSize="11" fill={C.muted}>
               {m.month?.split(' ')[0]}
             </text>
           ))}
+          {/* X-axis title */}
+          <text x={PAD.l + pw / 2} y={h - 4} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">
+            MONTH
+          </text>
+          {/* Y-axis title (rotated) */}
+          <text
+            transform={`translate(14 ${PAD.t + ph / 2}) rotate(-90)`}
+            textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em"
+          >
+            AMOUNT (USD)
+          </text>
         </svg>
       </div>
     </div>
@@ -264,6 +281,7 @@ const AdvisoryReviewPage = () => {
   const [actionBusy, setActionBusy] = useState(null)   // 'confirm' | 'reassign' | 'decline' | null
   const [actionError, setActionError] = useState(null)
   const [reassignOpen, setReassignOpen] = useState(false)
+  const [decision, setDecision] = useState(null)       // pending confirm/decline dialog config
 
   /* Hydrate full engagement (with timeline) when the page mounts. */
   useEffect(() => {
@@ -305,27 +323,37 @@ const AdvisoryReviewPage = () => {
   const isConfirmed      = engagementStatus === 'confirmed'
   const isDeclined       = engagementStatus === 'declined'
 
-  /* ── Action handlers ── */
-  const onConfirm = async () => {
-    setActionBusy('confirm'); setActionError(null)
-    try { await confirmAssignment(engagementId, CURRENT_USER.name); await refresh() }
-    catch (err) { setActionError(err.message ?? 'Could not confirm') }
-    finally { setActionBusy(null) }
-  }
+  /* ── Action handlers — confirm/decline route through the styled dialog ── */
+  const onConfirm = () => setDecision({
+    tone: 'success', confirmLabel: 'Confirm engagement',
+    title: 'Confirm this advisory engagement?',
+    message: 'The assigned advisor takes ownership and the client becomes active.',
+    requireReason: false, reasonLabel: 'Notes (optional)',
+    run: async (reason) => {
+      setActionBusy('confirm'); setActionError(null)
+      try { await confirmAssignment(engagementId, CURRENT_USER.name, reason || null); await refresh(); setDecision(null) }
+      catch (err) { setActionError(err.message ?? 'Could not confirm') }
+      finally { setActionBusy(null) }
+    },
+  })
   const onReassign = async (newAdvisorId, reason) => {
     setActionBusy('reassign'); setActionError(null)
     try { await reassignAdvisor(engagementId, newAdvisorId, reason, CURRENT_USER.name); await refresh() }
     catch (err) { setActionError(err.message ?? 'Reassign failed'); throw err }
     finally { setActionBusy(null) }
   }
-  const onDecline = async () => {
-    const reason = prompt('Reason for declining this engagement? (optional)') ?? ''
-    if (!confirm('Decline this engagement? This will close it and the client will be marked inactive.')) return
-    setActionBusy('decline'); setActionError(null)
-    try { await declineEngagement(engagementId, reason.trim() || null, CURRENT_USER.name); await refresh() }
-    catch (err) { setActionError(err.message ?? 'Decline failed') }
-    finally { setActionBusy(null) }
-  }
+  const onDecline = () => setDecision({
+    tone: 'danger', confirmLabel: 'Decline engagement',
+    title: 'Decline this engagement?',
+    message: 'This closes the engagement. The client is only marked inactive if they have no other active work.',
+    requireReason: true, reasonLabel: 'Reason for declining',
+    run: async (reason) => {
+      setActionBusy('decline'); setActionError(null)
+      try { await declineEngagement(engagementId, reason || null, CURRENT_USER.name); await refresh(); setDecision(null) }
+      catch (err) { setActionError(err.message ?? 'Decline failed') }
+      finally { setActionBusy(null) }
+    },
+  })
 
   /* derived metrics */
   const gross    = Number(client.monthlyGross ?? 0)
@@ -517,9 +545,9 @@ const AdvisoryReviewPage = () => {
               )}
             </div>
 
-            {/* BANKING CHART — centered to match the loan review page. */}
-            <div style={{ width: '75%', alignSelf: 'center', flexShrink: 0 }}>
-              <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: '22vh', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
+            {/* BANKING CHART — full width on mobile, centered ~75% on desktop */}
+            <div className="w-full lg:w-[75%] lg:self-center shrink-0">
+              <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: 300, width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
                 <BankingChart months={months} />
               </div>
             </div>
@@ -817,6 +845,13 @@ const AdvisoryReviewPage = () => {
         flowKey={item.flowKey}
         currentAdvisorId={advisor?.id}
         aiPickAdvisorId={result?.recommendedAdvisorId}
+      />
+
+      <DecisionDialog
+        decision={decision}
+        busy={actionBusy !== null}
+        error={actionError}
+        onCancel={() => { if (actionBusy === null) { setDecision(null); setActionError(null) } }}
       />
     </div>
   )

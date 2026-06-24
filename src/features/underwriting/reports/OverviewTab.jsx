@@ -9,7 +9,7 @@ import {
 } from 'react-icons/tb'
 import { aggregate, deltaVsPrior, sliceByPeriod } from './syntheticHistory'
 import { useReports } from '../hooks/useReports'
-import { C, DonutChart, KpiCard, LineChart, ReportSection } from './reportCharts'
+import { C, DonutChart, GroupedBarChart, KpiCard, LineChart, ReportSection } from './reportCharts'
 
 const fmt$ = v => v >= 1_000_000 ? `$${(v / 1_000_000).toFixed(2)}M` : v >= 1_000 ? `$${(v / 1_000).toFixed(1)}k` : `$${v}`
 
@@ -28,6 +28,14 @@ const OverviewTab = ({ period }) => {
     loans:    d.newClients['personal-loan']     + d.newClients['business-loan'],
     total:    d.newClientsTotal,
   }))
+
+  /* Running cumulative total — a monotonic "growth trajectory" that reads well
+     even when daily intake is sparse. */
+  let running = 0
+  const cumulativeData = seriesData.map(d => {
+    running += d.total
+    return { date: d.date, cumulative: running }
+  })
 
   const advisoryTotal = agg.newClients['personal-advisory'] + agg.newClients['business-advisory']
   const loansTotal    = agg.newClients['personal-loan']     + agg.newClients['business-loan']
@@ -69,24 +77,48 @@ const OverviewTab = ({ period }) => {
         />
       </div>
 
-      {/* Client growth line chart */}
-      <ReportSection
-        title="Client growth"
-        subtitle={`New intakes per day across the ${period === 'ytd' ? 'year-to-date' : `last ${period.replace('d', ' days')}`}`}
-      >
-        <LineChart
-          data={seriesData}
-          series={[
-            { key: 'advisory', color: C.success, label: 'Advisory' },
-            { key: 'loans',    color: C.primary, label: 'Loans' },
-          ]}
-          height={220}
-        />
-        <div className="flex gap-4 mt-3 text-[12px]">
-          <Legend color={C.success} label="Advisory" />
-          <Legend color={C.primary} label="Loans" />
-        </div>
-      </ReportSection>
+      {/* Client growth — two complementary views: per-period activity + cumulative trajectory */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        {/* Left — new intakes per period (discrete counts read far better as bars) */}
+        <ReportSection
+          title="New intakes"
+          subtitle={`By ${period === 'ytd' || period === '90d' ? 'period' : 'day'}, split by service`}
+        >
+          <GroupedBarChart
+            data={seriesData}
+            series={[
+              { key: 'advisory', color: C.success, label: 'Advisory' },
+              { key: 'loans',    color: C.primary, label: 'Loans' },
+            ]}
+            height={240}
+            xTitle="DATE"
+            yTitle="NEW CLIENTS"
+            emptyLabel="No intakes in this period"
+          />
+          <div className="flex gap-4 mt-3 text-[12px]">
+            <Legend color={C.success} label="Advisory" />
+            <Legend color={C.primary} label="Loans" />
+          </div>
+        </ReportSection>
+
+        {/* Right — cumulative growth trajectory (monotonic, reads well even when sparse) */}
+        <ReportSection
+          title="Cumulative growth"
+          subtitle="Total clients onboarded over the period"
+        >
+          <LineChart
+            data={cumulativeData}
+            series={[{ key: 'cumulative', color: C.primary, label: 'Total clients' }]}
+            height={240}
+            xTitle="DATE"
+            yTitle="TOTAL CLIENTS"
+            emptyLabel="No intakes in this period"
+          />
+          <div className="flex gap-4 mt-3 text-[12px]">
+            <Legend color={C.primary} label="Cumulative clients" />
+          </div>
+        </ReportSection>
+      </div>
 
       {/* Two donuts side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">

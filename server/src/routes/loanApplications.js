@@ -1,7 +1,16 @@
 import { Router } from 'express'
 import { prisma } from '../db.js'
+import { recomputeClientStatus } from '../lib/clientStatus.js'
 
 const router = Router()
+
+/* Fold optional officer notes into the stored decision reason. */
+const composeReason = (reason, notes) => {
+  const r = reason?.trim()
+  const n = notes?.trim()
+  if (r && n) return `${r}\n\nOfficer notes: ${n}`
+  return r || (n ? `Officer notes: ${n}` : null)
+}
 
 const serializeAdvisor = a => a && ({
   id:        a.legacyId ?? a.id,
@@ -79,36 +88,34 @@ const findApp = (idParam) => prisma.loanApplication.findFirst({
 
 /* POST /api/loan-applications/:id/approve — officer approves the loan */
 router.post('/:id/approve', async (req, res) => {
-  const { reason, officer } = req.body ?? {}
+  const { reason, officer, notes } = req.body ?? {}
   const app = await findApp(req.params.id)
   if (!app) return res.status(404).json({ error: 'Application not found' })
 
   const isOverride = app.status === 'auto_rejected'
   const actor = officer ?? 'Marcus Webb'
 
-  await prisma.$transaction([
-    prisma.loanApplication.update({
+  await prisma.$transaction(async (tx) => {
+    await tx.loanApplication.update({
       where: { id: app.id },
       data: {
         status: 'approved',
         decidedBy: actor,
         decidedAt: new Date(),
         decisionType: isOverride ? 'override' : 'approved',
-        decisionReason: reason ?? null,
+        decisionReason: composeReason(reason, notes),
       },
-    }),
-    prisma.client.update({
-      where: { id: app.clientId },
-      data: { status: 'active' },
-    }),
-  ])
+    })
+    /* Derive client status from ALL their applications, not just this one. */
+    await recomputeClientStatus(app.clientId, tx)
+  })
 
   res.json({ ok: true, id: app.legacyId ?? app.id, status: 'approved', decisionType: isOverride ? 'override' : 'approved' })
 })
 
 /* POST /api/loan-applications/:id/reject — officer rejects the loan */
 router.post('/:id/reject', async (req, res) => {
-  const { reason, officer } = req.body ?? {}
+  const { reason, officer, notes } = req.body ?? {}
   if (!reason?.trim()) return res.status(400).json({ error: 'reason is required to reject a loan' })
 
   const app = await findApp(req.params.id)
@@ -116,29 +123,27 @@ router.post('/:id/reject', async (req, res) => {
 
   const actor = officer ?? 'Marcus Webb'
 
-  await prisma.$transaction([
-    prisma.loanApplication.update({
+  await prisma.$transaction(async (tx) => {
+    await tx.loanApplication.update({
       where: { id: app.id },
       data: {
         status: 'auto_rejected',
         decidedBy: actor,
         decidedAt: new Date(),
         decisionType: 'rejected',
-        decisionReason: reason.trim(),
+        decisionReason: composeReason(reason, notes),
       },
-    }),
-    prisma.client.update({
-      where: { id: app.clientId },
-      data: { status: 'inactive' },
-    }),
-  ])
+    })
+    /* Only flips the client inactive if they have no other active/open work. */
+    await recomputeClientStatus(app.clientId, tx)
+  })
 
   res.json({ ok: true, id: app.legacyId ?? app.id, status: 'auto_rejected', decisionType: 'rejected' })
 })
 
 /* POST /api/loan-applications/:id/escalate — flag for senior review */
 router.post('/:id/escalate', async (req, res) => {
-  const { reason, officer } = req.body ?? {}
+  const { reason, officer, notes } = req.body ?? {}
   const app = await findApp(req.params.id)
   if (!app) return res.status(404).json({ error: 'Application not found' })
 
@@ -148,7 +153,7 @@ router.post('/:id/escalate', async (req, res) => {
       decisionType: 'escalated',
       decidedBy:    officer ?? 'Marcus Webb',
       decidedAt:    new Date(),
-      decisionReason: reason ?? null,
+      decisionReason: composeReason(reason, notes),
       /* keep current status — escalation doesn't finalise */
     },
   })

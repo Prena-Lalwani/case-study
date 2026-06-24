@@ -1,8 +1,8 @@
 /* Advisory engagement lifecycle actions. */
 import { api } from './api.js'
 
-export const confirmAssignment = (engagementId, officer) =>
-  api.post(`/advisory-engagements/${engagementId}/confirm`, { officer })
+export const confirmAssignment = (engagementId, officer, notes) =>
+  api.post(`/advisory-engagements/${engagementId}/confirm`, { officer, notes })
 
 export const reassignAdvisor = (engagementId, newAdvisorId, reason, officer) =>
   api.post(`/advisory-engagements/${engagementId}/reassign`, { newAdvisorId, reason, officer })

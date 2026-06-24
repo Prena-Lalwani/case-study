@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { TbCheck, TbFileText, TbReportMoney, TbSparkles } from 'react-icons/tb'
 import { aggregate, sliceByPeriod } from './syntheticHistory'
 import { useReports } from '../hooks/useReports'
-import { C, HBarChart, KpiCard, LineChart, ReportSection, StackedBar } from './reportCharts'
+import { C, GroupedBarChart, HBarChart, KpiCard, LineChart, ReportSection, StackedBar } from './reportCharts'
 
 const AdvisoryTab = ({ period }) => {
   const history = useReports()
@@ -15,6 +15,13 @@ const AdvisoryTab = ({ period }) => {
 
   /* Time-series of avg completeness score */
   const scoreSeries = days.map(d => ({ date: d.date, score: d.advisory.avgCompletenessScore }))
+
+  /* Advisory intake volume by period — personal vs business */
+  const advisoryIntakeSeries = days.map(d => ({
+    date: d.date,
+    personal: d.newClients['personal-advisory'],
+    business: d.newClients['business-advisory'],
+  }))
 
   /* Engagement-ready % overall (rough: avg of daily engagementReadyPct) */
   const engagementReady = days.length
@@ -56,17 +63,43 @@ const AdvisoryTab = ({ period }) => {
         />
       </div>
 
-      {/* Completeness score trend */}
-      <ReportSection
-        title="Completeness score trend"
-        subtitle="Average AI completeness across advisory clients per day"
-      >
-        <LineChart
-          data={scoreSeries}
-          series={[{ key: 'score', color: C.primary }]}
-          height={220}
-        />
-      </ReportSection>
+      {/* Two complementary views: completeness quality trend + intake volume */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <ReportSection
+          title="Completeness score trend"
+          subtitle="Average AI completeness per day"
+        >
+          <LineChart
+            data={scoreSeries}
+            series={[{ key: 'score', color: C.primary, label: 'Avg score' }]}
+            height={240}
+            xTitle="DATE"
+            yTitle="AVG SCORE"
+            emptyLabel="No advisory activity yet"
+          />
+        </ReportSection>
+
+        <ReportSection
+          title="New advisory intakes"
+          subtitle="Personal vs business, by period"
+        >
+          <GroupedBarChart
+            data={advisoryIntakeSeries}
+            series={[
+              { key: 'personal', color: C.success, label: 'Personal' },
+              { key: 'business', color: '#8B5CF6', label: 'Business' },
+            ]}
+            height={240}
+            xTitle="DATE"
+            yTitle="NEW CLIENTS"
+            emptyLabel="No advisory intakes in this period"
+          />
+          <div className="flex gap-4 mt-3 text-[12px]">
+            <Legend color={C.success} label="Personal" />
+            <Legend color="#8B5CF6" label="Business" />
+          </div>
+        </ReportSection>
+      </div>
 
       {/* Two-column: missing docs + doc quality */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -100,19 +133,16 @@ const AdvisoryTab = ({ period }) => {
         </ReportSection>
       </div>
 
-      {/* Personal vs Business advisory comparison */}
-      <ReportSection title="Personal vs Business advisory" subtitle="Intake split across the period">
-        <StackedBar
-          height={20}
-          segments={[
-            { label: 'Personal Advisory', value: agg.newClients['personal-advisory'], color: C.success },
-            { label: 'Business Advisory', value: agg.newClients['business-advisory'], color: '#8B5CF6' },
-          ]}
-        />
-      </ReportSection>
     </div>
   )
 }
+
+const Legend = ({ color, label }) => (
+  <div className="flex items-center gap-1.5">
+    <span className="w-3 h-1.5 rounded-full" style={{ background: color }} />
+    <span className="text-secondary">{label}</span>
+  </div>
+)
 
 const QualityStat = ({ label, value, total, color }) => (
   <div className="flex items-center gap-2">

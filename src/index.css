@@ -28,31 +28,34 @@ body {
   padding: 0;
 }
 
-/* ── Minimum-width floor ──────────────────────────────────────────────────
-   Below this width the app stops collapsing and scrolls horizontally instead
-   of crushing every panel into "1% of the screen". 360px is the smallest the
-   responsive layouts (mobile drawer < 768px) are designed for.
+/* ── Minimum viewport floor (400 × 600) ───────────────────────────────────
+   Below 400px wide or 600px tall the app stops collapsing and scrolls instead
+   of crushing every panel. 400×600 is the smallest the responsive layouts are
+   designed to remain usable at.
 
    The full-screen page shells use `position: fixed; inset: 0`, which is sized
-   to the viewport and therefore ignores a min-width set on body/#root. To make
-   them respect the floor AND scroll, #root becomes the positioned, min-width
-   scroll context and the shells switch to `position: absolute` within it.
+   to the viewport and therefore ignores min-width/height set on body/#root. To
+   make them respect the floor AND scroll, #root becomes the positioned, min-
+   sized scroll context and the shells switch to `position: absolute` within it.
    Modals, the mobile sidebar drawer and the draggable chat use `z-50` and stay
    viewport-fixed (they are intentionally NOT matched by the selector below).  */
 html,
 body {
-  min-width: 360px;
+  min-width: 400px;
+  min-height: 600px;
 }
 
 #root {
   position: relative;
   width: 100%;
-  min-width: 360px;
-  min-height: 100vh;
+  min-width: 400px;
+  /* At least the viewport height, but never below the 600px floor. */
+  min-height: max(100vh, 600px);
 }
 
 /* Page shells only: fixed + inset-0 + overflow-hidden (modals lack overflow-hidden) */
 .fixed.inset-0.overflow-hidden {
   position: absolute;
-  min-width: 360px;
+  min-width: 400px;
+  min-height: 600px;
 }

@@ -30,20 +30,23 @@ const writeCache = (appId, result, fp) => {
 export const useUnderwritingAnalysis = () => {
   const { extractFromData, isLoading, error } = useGeminiExtract()
 
-  const analyseApplication = async (appId, applicationDetail) => {
+  const analyseApplication = async (appId, applicationDetail, { force = false } = {}) => {
     /* aiAnalysis is already removed from mock data, but guard just in case */
     const { aiAnalysis: _stripped, ...dataForAI } = applicationDetail
 
     const fp = fingerprint(dataForAI)
     const cached = readCache(appId)
 
-    /* Return cached result when data hasn't changed */
-    if (cached && cached.fp === fp) {
+    /* Return cached result when data hasn't changed (unless a re-run is forced) */
+    if (!force && cached && cached.fp === fp) {
       return cached.result
     }
 
-    /* Call Gemini and persist result */
+    /* Call Gemini. extractFromData returns null on failure — surface that as an
+       error so the caller can show a retry affordance, and DON'T cache a null
+       (otherwise a transient failure would be remembered forever). */
     const result = await extractFromData(dataForAI, UNDERWRITING_ANALYSIS_PROMPT, UNDERWRITING_ANALYSIS_SCHEMA)
+    if (!result) throw new Error('AI analysis failed — the model did not return a usable result.')
     writeCache(appId, result, fp)
     return result
   }

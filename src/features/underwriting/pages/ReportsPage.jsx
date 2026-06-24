@@ -1,12 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import {
   TbCalendar,
   TbCash,
   TbChartBar,
-  TbDownload,
   TbReportMoney,
   TbUserStar,
-  TbUsers,
 } from 'react-icons/tb'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import ContextChat from '../chat/ContextChat'
@@ -15,9 +13,8 @@ import AdvisorsTab from '../reports/AdvisorsTab'
 import AdvisoryTab from '../reports/AdvisoryTab'
 import LoansTab from '../reports/LoansTab'
 import OverviewTab from '../reports/OverviewTab'
-import { downloadCsv } from '../reports/exportCsv'
 import { aggregate, PERIOD_OPTIONS, sliceByPeriod } from '../reports/syntheticHistory'
-import { getCachedReports, useReports } from '../hooks/useReports'
+import { useReports } from '../hooks/useReports'
 
 const CURRENT_USER = { name: 'Marcus Webb', role: 'Senior Credit Analyst', initials: 'MW' }
 
@@ -41,67 +38,6 @@ const ReportsPage = () => {
   })
   const period = periods[tab]
   const setPeriod = p => setPeriods(s => ({ ...s, [tab]: p }))
-
-  const handleExport = () => {
-    const history = getCachedReports()
-    const days = sliceByPeriod(period, history)
-
-    if (tab === 'overview') {
-      downloadCsv(`overview_${period}.csv`,
-        days.map(d => ({
-          date: d.date,
-          personal_advisory: d.newClients['personal-advisory'],
-          business_advisory: d.newClients['business-advisory'],
-          personal_loan:     d.newClients['personal-loan'],
-          business_loan:     d.newClients['business-loan'],
-          total_new:         d.newClientsTotal,
-          loan_value:        d.loans.valueSubmitted,
-        }))
-      )
-    } else if (tab === 'loans') {
-      downloadCsv(`loans_${period}.csv`,
-        days.map(d => ({
-          date: d.date,
-          submissions:    d.loans.total,
-          approved:       d.loans.approved,
-          needs_review:   d.loans.needsReview,
-          rejected:       d.loans.rejected,
-          approve_rate:   Math.round(d.loans.approveRate * 100) + '%',
-          value:          d.loans.valueSubmitted,
-          home_loan:      d.loans.typeMix['Home loan'],
-          auto_loan:      d.loans.typeMix['Auto loan'],
-          personal_loan:  d.loans.typeMix['Personal loan'],
-          business_loan:  d.loans.typeMix['Business loan'],
-          avg_ai_score:   d.loanAiScore,
-        }))
-      )
-    } else if (tab === 'advisory') {
-      downloadCsv(`advisory_${period}.csv`,
-        days.map(d => ({
-          date: d.date,
-          personal_advisory:   d.newClients['personal-advisory'],
-          business_advisory:   d.newClients['business-advisory'],
-          avg_completeness:    d.advisory.avgCompletenessScore,
-          engagement_ready_pct: Math.round(d.advisory.engagementReadyPct * 100) + '%',
-        }))
-      )
-    } else if (tab === 'advisors') {
-      downloadCsv(`advisors_leaderboard.csv`,
-        history.advisorActivity.map(a => ({
-          id:               a.id,
-          name:             a.name,
-          title:            a.title,
-          specialty:        a.specialty,
-          years_experience: a.yearsExperience,
-          current_caseload: a.clientLoad,
-          total_assigned:   a.totalAssigned,
-          avg_completeness: a.avgCompleteness,
-          completion_rate:  Math.round(a.completionRate * 100) + '%',
-          ai_pick_rate:     Math.round((1 - a.override) * 100) + '%',
-        }))
-      )
-    }
-  }
 
   const todayLabel = new Date().toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
@@ -178,14 +114,6 @@ const ReportsPage = () => {
               <span className="text-[11px] text-tertiary ml-2 italic">Advisor totals are computed over the full 90-day window</span>
             )}
           </div>
-
-          <button
-            onClick={handleExport}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-[12.5px] font-medium text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <TbDownload style={{ fontSize: 14 }} />
-            Export CSV
-          </button>
         </div>
 
         {/* Body */}

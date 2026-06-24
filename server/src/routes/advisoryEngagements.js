@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { prisma } from '../db.js'
+import { recomputeClientStatus } from '../lib/clientStatus.js'
 
 const router = Router()
 
@@ -102,7 +103,7 @@ router.get('/:id', async (req, res) => {
 
 // POST /api/advisory-engagements/:id/confirm — officer confirms the AI's advisor pick
 router.post('/:id/confirm', async (req, res) => {
-  const { officer } = req.body ?? {}
+  const { officer, notes } = req.body ?? {}
   const engagement = await prisma.advisoryEngagement.findUnique({
     where: { id: req.params.id },
     include: { assignment: { include: { advisor: true } }, client: true },
@@ -138,8 +139,9 @@ router.post('/:id/confirm', async (req, res) => {
       data: {
         advisoryEngagementId: engagement.id,
         eventType: 'confirmed',
-        description: `Confirmed ${engagement.assignment.advisor.name} as the assigned advisor`,
+        description: `Confirmed ${engagement.assignment.advisor.name} as the assigned advisor${notes?.trim() ? ` — ${notes.trim()}` : ''}`,
         actor,
+        meta: notes?.trim() ? { notes: notes.trim() } : undefined,
       },
     }),
   ])
@@ -255,9 +257,6 @@ router.post('/:id/decline', async (req, res) => {
   ops.push(prisma.advisoryEngagement.update({
     where: { id: engagement.id }, data: { status: 'declined' },
   }))
-  ops.push(prisma.client.update({
-    where: { id: engagement.clientId }, data: { status: 'inactive' },
-  }))
   if (wasConfirmed && engagement.assignment) {
     ops.push(prisma.advisor.update({
       where: { id: engagement.assignment.advisorId },
@@ -275,6 +274,9 @@ router.post('/:id/decline', async (req, res) => {
   }))
 
   await prisma.$transaction(ops)
+  /* Derive client status from all their work — only goes inactive if nothing
+     else is active/open (not blindly on this one decline). */
+  await recomputeClientStatus(engagement.clientId)
 
   const fresh = await prisma.advisoryEngagement.findUnique({
     where: { id: engagement.id }, include: FULL_INCLUDE,

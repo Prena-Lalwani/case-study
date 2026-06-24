@@ -21,11 +21,15 @@ const LoansTab = ({ period }) => {
     { label: '75–85', count: 0, color: C.success },
     { label: '85+',   count: 0, color: C.success },
   ]
-  /* Approximate: for each day weight by decisions, place around avgLoanScore */
+  /* Approximate: for each day weight by decisions, place around avgLoanScore.
+     Per-day decision count lives on `loans.total` (NOT decisionsTotal, which is
+     only on the aggregate) — reading the wrong field yielded NaN counts. */
   for (const d of days) {
-    const s = d.loanAiScore
-    const ix = s < 40 ? 0 : s < 60 ? 1 : s < 75 ? 2 : s < 85 ? 3 : 4
-    buckets[ix].count += d.loans.decisionsTotal
+    const decisions = Number(d.loans?.total ?? 0)
+    if (decisions <= 0) continue
+    const s = Number(d.loanAiScore)
+    const ix = !Number.isFinite(s) ? 2 : s < 40 ? 0 : s < 60 ? 1 : s < 75 ? 2 : s < 85 ? 3 : 4
+    buckets[ix].count += decisions
   }
 
   /* Time-series for approval rate */
@@ -85,11 +89,13 @@ const LoansTab = ({ period }) => {
           <LineChart
             data={approvalSeries}
             series={[{ key: 'approveRate', color: C.success }]}
-            height={220}
+            height={240}
+            xTitle="DATE"
+            yTitle="APPROVAL %"
           />
         </ReportSection>
         <ReportSection title="AI score distribution" subtitle="Spread across approval bands">
-          <Histogram buckets={buckets} height={220} />
+          <Histogram buckets={buckets} height={220} xTitle="SCORE BAND" yTitle="LOANS" />
         </ReportSection>
       </div>
 

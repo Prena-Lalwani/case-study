@@ -6,6 +6,7 @@ import {
   TbBuilding,
   TbCash,
   TbCheck,
+  TbCircleCheck,
   TbEdit,
   TbFileText,
   TbId,
@@ -13,6 +14,7 @@ import {
   TbMail,
   TbPhone,
   TbReportMoney,
+  TbUpload,
   TbUser,
   TbWallet,
 } from 'react-icons/tb'
@@ -142,7 +144,10 @@ const niceCeil = v => {
   const exp = Math.floor(Math.log10(v))
   const base = Math.pow(10, exp)
   const f = v / base
-  const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10
+  /* Finer steps so values like 2.7 round to 3 (not 5) — keeps the axis tight
+     and stops the lines from bunching in the lower third of the chart. */
+  const nf = f <= 1 ? 1 : f <= 1.5 ? 1.5 : f <= 2 ? 2 : f <= 2.5 ? 2.5
+           : f <= 3 ? 3 : f <= 4 ? 4 : f <= 5 ? 5 : f <= 7.5 ? 7.5 : 10
   return nf * base
 }
 
@@ -178,7 +183,8 @@ const BankingChart = ({ months }) => {
   if (!months?.length) return <div className="text-center py-8 text-tertiary text-[13px]">No banking activity</div>
 
   const { w, h } = sz
-  const PAD = { t: 12, r: 16, b: 28, l: 52 }
+  /* Extra left/bottom room reserved for the rotated Y-axis title + X-axis title. */
+  const PAD = { t: 12, r: 16, b: 44, l: 72 }
   const pw = Math.max(w - PAD.l - PAD.r, 1)
   const ph = Math.max(h - PAD.t - PAD.b, 1)
 
@@ -200,7 +206,7 @@ const BankingChart = ({ months }) => {
   const yTicks = [0, 0.25, 0.5, 0.75, 1].map(p => p * ySpan)
 
   return (
-    <div style={{ height: 220 }} ref={ref}>
+    <div style={{ height: 260 }} ref={ref}>
       <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" width="100%" height="100%" style={{ overflow: 'visible' }}>
         <defs>
           <linearGradient id="cdp_balfill" x1="0" y1="0" x2="0" y2="1">
@@ -219,9 +225,14 @@ const BankingChart = ({ months }) => {
         <path d={credPath} fill="none" stroke={C.success} strokeWidth="2" strokeLinecap="round" />
         <path d={balPath}  fill="none" stroke={C.primary} strokeWidth="2.5" strokeLinecap="round" />
         {pts(bal).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r="4" fill="#fff" stroke={C.primary} strokeWidth="2" />)}
+        {/* X-axis month labels */}
         {months.map((m, i) => (
-          <text key={i} x={xOf(i)} y={h - 6} textAnchor="middle" fontSize="11" fill={C.muted}>{m.month}</text>
+          <text key={i} x={xOf(i)} y={PAD.t + ph + 18} textAnchor="middle" fontSize="11" fill={C.muted}>{m.month}</text>
         ))}
+        {/* X-axis title */}
+        <text x={PAD.l + pw / 2} y={h - 4} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">MONTH</text>
+        {/* Y-axis title (rotated) */}
+        <text transform={`translate(14 ${PAD.t + ph / 2}) rotate(-90)`} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">AMOUNT (USD)</text>
       </svg>
     </div>
   )
@@ -267,6 +278,7 @@ const ClientDetailPage = () => {
               draft={draft}
               setDraft={setDraft}
               saving={saving}
+              onUploaded={load}
               onEdit={() => { setDraft(toDraft(client)); setEditing(true) }}
               onCancel={() => { setDraft(toDraft(client)); setEditing(false) }}
               onSave={async (errors) => {
@@ -288,6 +300,7 @@ const ClientDetailPage = () => {
 }
 
 const toDraft = (c) => ({
+  status: c.status ?? 'pending',
   name: c.name ?? '', email: c.email ?? '', phone: c.phone ?? '',
   company: c.company ?? '', location: c.location ?? '',
   dateOfBirth: c.dateOfBirth ?? '', address: c.address ?? '',
@@ -305,6 +318,7 @@ const toDraft = (c) => ({
 
 const num = v => v === '' || v == null ? null : Number(v)
 const normalize = (d) => ({
+  status: d.status,
   name: d.name.trim(), email: d.email.trim(), phone: d.phone.trim(),
   company: d.company.trim() || null, location: d.location.trim(),
   notes: d.notes,
@@ -319,7 +333,7 @@ const normalize = (d) => ({
 })
 
 /* ── Body ────────────────────────────────────────────────────────────── */
-const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave }) => {
+const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCancel, onSave, onUploaded }) => {
   const isBusiness = client.type === 'business'
   const st = STATUS_STYLE[client.status] ?? STATUS_STYLE.pending
 
@@ -417,9 +431,22 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
               <p className="text-[11px] text-white/60 mt-1 font-mono">{client.id}</p>
 
               <div className="flex flex-wrap items-center gap-2 mt-3">
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 text-[12.5px] font-medium`}>
-                  {st.label}
-                </span>
+                {editing ? (
+                  <select
+                    value={draft.status}
+                    onChange={e => set('status', e.target.value)}
+                    className="text-[12.5px] font-medium bg-white/15 text-white border border-white/30 rounded-full px-3 py-1 outline-none focus:border-white/70 [&>option]:text-gray-900"
+                    title="Client status"
+                  >
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                ) : (
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 text-[12.5px] font-medium`}>
+                    {st.label}
+                  </span>
+                )}
                 {client.email && !editing && (
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[12px] text-white/85">
                     <TbMail style={{ fontSize: 12 }} /> {client.email}
@@ -577,10 +604,143 @@ const Body = ({ client, navigate, editing, draft, setDraft, saving, onEdit, onCa
       )}
 
       {/* Documents */}
-      {documents.length > 0 && (
+      {(documents.length > 0 || editing) && (
         <div className="mt-5">
-          <ClientDocumentsViewer documents={documents} title="Documents on file" />
+          <ClientDocumentsViewer
+            documents={documents}
+            title="Documents on file"
+            emptyHint={editing ? 'No documents yet — add the client’s files below.' : undefined}
+          />
+          {editing && (
+            <AddDocumentPanel
+              clientId={client.id}
+              existingTypes={documents.map(d => d.docType)}
+              onUploaded={onUploaded}
+            />
+          )}
         </div>
+      )}
+    </div>
+  )
+}
+
+/* ── Add-document panel (edit mode) ──────────────────────────────────────
+   Pick a document type + upload a file (image/PDF stored as a data URL, or a
+   JSON file parsed inline) → POST /clients/:id/documents → refresh. */
+const DOC_TYPE_OPTIONS = [
+  { value: 'national-id',         label: 'National ID' },
+  { value: 'passport',            label: 'Passport' },
+  { value: 'salary-slip',         label: 'Salary Slip' },
+  { value: 'bank-statement',      label: 'Bank Statement' },
+  { value: 'employment-letter',   label: 'Employment Letter' },
+  { value: 'tax-return',          label: 'Tax Return' },
+  { value: 'business-license',    label: 'Business License' },
+  { value: 'financial-statement', label: 'Financial Statement' },
+]
+
+const fileToDataUrl = (file) => new Promise((resolve, reject) => {
+  const r = new FileReader()
+  r.onload  = () => resolve(r.result)
+  r.onerror = () => reject(r.error)
+  r.readAsDataURL(file)
+})
+
+const AddDocumentPanel = ({ clientId, existingTypes = [], onUploaded }) => {
+  const [docType, setDocType] = useState('')
+  const [status, setStatus]   = useState('idle')   // idle | uploading | success | error
+  const [errMsg, setErrMsg]   = useState(null)
+  const [fileName, setFileName] = useState(null)
+  const [requeued, setRequeued] = useState(0)
+  const inputRef = useRef(null)
+
+  const handleFile = async (file) => {
+    if (!file) return
+    if (!docType) { setErrMsg('Choose a document type first.'); setStatus('error'); return }
+    setFileName(file.name); setErrMsg(null); setStatus('uploading')
+    try {
+      const isJson = file.type === 'application/json' || file.name.toLowerCase().endsWith('.json')
+      let parsedJson = null, fileDataUrl = null
+      if (isJson) {
+        parsedJson = JSON.parse(await file.text())
+      } else {
+        fileDataUrl = await fileToDataUrl(file)
+      }
+      const res = await api.post(`/clients/${clientId}/documents`, {
+        docType,
+        filename: file.name,
+        mimeType: file.type || (isJson ? 'application/json' : 'application/octet-stream'),
+        fileDataUrl,
+        parsedJson,
+        uploadSource: isJson ? 'json' : 'image',
+        status: 'pending',
+      })
+      setRequeued(res?.requeuedForReview ?? 0)
+      setStatus('success')
+      setDocType('')
+      onUploaded?.()
+    } catch (e) {
+      setStatus('error')
+      setErrMsg(e.message ? `Upload failed: ${e.message}` : 'Upload failed')
+    } finally {
+      if (inputRef.current) inputRef.current.value = ''
+    }
+  }
+
+  const busy = status === 'uploading'
+
+  return (
+    <div className="mt-3 bg-white border border-dashed border-gray-300 rounded-xl p-4">
+      <div className="flex flex-col sm:flex-row sm:items-end gap-3">
+        <div className="flex-1 min-w-0">
+          <label className="block text-[10.5px] font-semibold text-tertiary uppercase tracking-wider mb-1">Add a document</label>
+          <select
+            value={docType}
+            onChange={e => { setDocType(e.target.value); setStatus('idle'); setErrMsg(null) }}
+            className="w-full text-[13px] text-gray-800 border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-blue-action bg-white"
+          >
+            <option value="">Select document type…</option>
+            {DOC_TYPE_OPTIONS.map(o => (
+              <option key={o.value} value={o.value}>
+                {o.label}{existingTypes.includes(o.value) ? ' (replace existing)' : ''}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="shrink-0">
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*,application/pdf,application/json,.json"
+            className="hidden"
+            onChange={e => handleFile(e.target.files?.[0])}
+          />
+          <button
+            type="button"
+            onClick={() => { if (!docType) { setErrMsg('Choose a document type first.'); setStatus('error'); return } inputRef.current?.click() }}
+            disabled={busy}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-white bg-navy rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 w-full sm:w-auto justify-center"
+          >
+            {busy
+              ? <><TbLoader2 className="animate-spin" style={{ fontSize: 14 }} /> Uploading…</>
+              : <><TbUpload style={{ fontSize: 14 }} /> Choose file</>}
+          </button>
+        </div>
+      </div>
+
+      {/* status line */}
+      {status === 'success' && (
+        <p className="text-[12px] text-success mt-2 flex items-center gap-1.5">
+          <TbCircleCheck style={{ fontSize: 13 }} />
+          Uploaded {fileName}.{requeued > 0 ? ` AI is re-reviewing ${requeued} application${requeued === 1 ? '' : 's'}.` : ' It’s now on file.'}
+        </p>
+      )}
+      {status === 'error' && errMsg && (
+        <p className="text-[12px] text-error mt-2 flex items-center gap-1.5">
+          <TbAlertCircle style={{ fontSize: 13 }} /> {errMsg}
+        </p>
+      )}
+      {status === 'idle' && (
+        <p className="text-[11px] text-tertiary mt-2">Images & PDFs are stored as the original file; JSON files are parsed into structured data.</p>
       )}
     </div>
   )

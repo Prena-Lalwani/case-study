@@ -3,6 +3,36 @@ import { prisma } from '../db.js'
 
 const router = Router()
 
+/* Re-queue a client's in-flight applications for AI review (e.g. after their
+   document set changes). Only touches work an officer hasn't finalized:
+   loans without an officer decision, and engagements not confirmed/declined.
+   Returns the number of applications sent back for review. */
+const requeueInFlightApplications = async (clientId) => {
+  const items = await prisma.queueItem.findMany({
+    where: { clientId },
+    include: { loanApplication: true, advisoryEngagement: true },
+  })
+  let requeued = 0
+  for (const qi of items) {
+    const loan = qi.loanApplication
+    const eng  = qi.advisoryEngagement
+    const loanOpen = loan && !loan.decidedAt
+    const engOpen  = eng  && !['confirmed', 'declined'].includes(eng.status)
+    if (!loanOpen && !engOpen) continue
+
+    await prisma.$transaction(async (tx) => {
+      await tx.queueItem.update({
+        where: { id: qi.id },
+        data:  { status: 'queued', errorMessage: null, processedAt: null },
+      })
+      if (loanOpen) await tx.loanApplication.update({ where: { id: loan.id }, data: { status: 'ai_reviewing' } })
+      if (engOpen)  await tx.advisoryEngagement.update({ where: { id: eng.id }, data: { status: 'pending' } })
+    })
+    requeued++
+  }
+  return requeued
+}
+
 const totalsFromLoans = (loans = []) => {
   const approved = loans.filter(l => l.status === 'approved')
   return {
@@ -194,24 +224,37 @@ router.post('/:id/documents', async (req, res) => {
   if (!client) return res.status(404).json({ error: 'Client not found' })
 
   const b = req.body ?? {}
-  if (!b.docType?.trim()) {
+  const docType = b.docType?.trim()
+  if (!docType) {
     return res.status(400).json({ error: 'docType is required' })
   }
 
-  const doc = await prisma.document.create({
-    data: {
-      clientId:     client.id,
-      docType:      b.docType.trim(),
-      filename:     b.filename ?? null,
-      mimeType:     b.mimeType ?? null,
-      fileDataUrl:  b.fileDataUrl ?? null,
-      parsedJson:   b.parsedJson ?? null,
-      uploadSource: b.uploadSource ?? (b.fileDataUrl ? 'image' : 'json'),
-      aiConfidence: b.aiConfidence ?? null,
-      status:       b.status ?? null,
-    },
+  const data = {
+    clientId:     client.id,
+    docType,
+    filename:     b.filename ?? null,
+    mimeType:     b.mimeType ?? null,
+    fileDataUrl:  b.fileDataUrl ?? null,
+    parsedJson:   b.parsedJson ?? null,
+    uploadSource: b.uploadSource ?? (b.fileDataUrl ? 'image' : 'json'),
+    aiConfidence: b.aiConfidence ?? null,
+    status:       b.status ?? null,
+  }
+
+  /* One document per type per client: replace an existing same-type doc rather
+     than piling up duplicates. */
+  const doc = await prisma.$transaction(async (tx) => {
+    await tx.document.deleteMany({ where: { clientId: client.id, docType } })
+    return tx.document.create({ data })
   })
-  res.status(201).json(doc)
+
+  /* A document change invalidates any in-flight AI review — re-queue the
+     client's not-yet-finalized applications so the AI re-runs against the
+     updated document set. Officer-decided loans / confirmed|declined
+     engagements are left untouched. */
+  const requeued = await requeueInFlightApplications(client.id)
+
+  res.status(201).json({ ...doc, requeuedForReview: requeued })
 })
 
 export default router

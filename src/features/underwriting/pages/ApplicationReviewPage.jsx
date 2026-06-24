@@ -6,7 +6,7 @@ import {
   TbArrowUpRight,
   TbCheck,
   TbChevronDown, TbChevronUp, TbCircleCheck, TbCircleX, TbClock, TbInfoCircle,
-  TbLoader2, TbNotes,
+  TbLoader2, TbNotes, TbRefresh,
   TbX,
 } from 'react-icons/tb'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -15,6 +15,7 @@ import ContextChat from '../chat/ContextChat'
 import { LOAN_REVIEW_PROMPT } from '../chat/chatPrompts'
 import UnderwritingSidebar, { TbMenu2 } from '../components/UnderwritingSidebar'
 import ClientDocumentsViewer from '../components/ClientDocumentsViewer'
+import DecisionDialog from '../components/DecisionDialog'
 import applicationDetails from '../data/applicationDetails'
 import { refreshLoanApplications } from '../hooks/useLoanApplications'
 import { useUnderwritingAnalysis } from '../hooks/useUnderwritingAnalysis'
@@ -258,7 +259,8 @@ const BankingChart = ({ months }) => {
   )
 
   const { w, h } = sz
-  const PAD = { t: 12, r: 16, b: 30, l: 52 }
+  /* Extra left/bottom room reserved for the rotated Y-axis title + X-axis title. */
+  const PAD = { t: 12, r: 16, b: 46, l: 74 }
   const pw = Math.max(w - PAD.l - PAD.r, 1)
   const ph = Math.max(h - PAD.t - PAD.b, 1)
 
@@ -358,12 +360,21 @@ const BankingChart = ({ months }) => {
             <circle key={i} cx={p.x} cy={p.y} r="4" fill="#fff" stroke={C.primary} strokeWidth="2" />
           ))}
 
+          {/* X-axis month labels */}
           {months.map((m, i) => (
-            <text key={i} x={xOf(i)} y={h - 4} textAnchor="middle" fontSize="11"
+            <text key={i} x={xOf(i)} y={PAD.t + ph + 18} textAnchor="middle" fontSize="11"
               fill={C.muted} fontFamily="Inter, system-ui, sans-serif">
               {m.month?.slice(0, 3)}
             </text>
           ))}
+          {/* X-axis title */}
+          <text x={PAD.l + pw / 2} y={h - 4} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">
+            MONTH
+          </text>
+          {/* Y-axis title (rotated) */}
+          <text transform={`translate(14 ${PAD.t + ph / 2}) rotate(-90)`} textAnchor="middle" fontSize="10.5" fontWeight="600" fill={C.muted} letterSpacing="0.04em">
+            AMOUNT (USD)
+          </text>
         </svg>
       </div>
     </div>
@@ -563,11 +574,12 @@ const ApplicationReviewPage = () => {
   const { appId }  = useParams()
   const navigate   = useNavigate()
   const [mobileOpen,   setMobileOpen]   = useState(false)
-  const [overrideOpen, setOverrideOpen] = useState(false)
+  const [decision,     setDecision]     = useState(null)   // pending decision-modal config
   const [signedOff,    setSignedOff]    = useState(false)
   const [officerNotes, setOfficerNotes] = useState('')
   const [aiResult,     setAiResult]     = useState(null)
   const [aiLoading,    setAiLoading]    = useState(true)
+  const [aiError,      setAiError]      = useState(null)
 
   /* Live DB-side application record. Used for:
      - decision status + audit fields
@@ -594,17 +606,32 @@ const ApplicationReviewPage = () => {
     if (appRecord?.aiAnalysis) {
       setAiResult(appRecord.aiAnalysis)
       setAiLoading(false)
+      setAiError(null)
       return
     }
-    /* Otherwise (seed apps with rich nested static detail) run client-side AI. */
-    if (!staticDetail) return
+    /* Otherwise run client-side AI — works for both seed apps (rich static
+       detail) and real loans whose server analysis failed/never ran (derived
+       detail). `detail` is undefined until appRecord loads, so we wait. */
+    if (!detail) return
     setAiLoading(true)
     setAiResult(null)
-    analyseApplication(appId, staticDetail)
-      .then(r => { if (!cancelled) { setAiResult(r);    setAiLoading(false) } })
-      .catch(() => { if (!cancelled) { setAiResult(null); setAiLoading(false) } })
+    setAiError(null)
+    analyseApplication(appId, detail)
+      .then(r => { if (!cancelled) { setAiResult(r); setAiLoading(false) } })
+      .catch(e => { if (!cancelled) { setAiError(e.message ?? 'AI analysis failed'); setAiLoading(false) } })
     return () => { cancelled = true }
-  }, [appId, appRecord, staticDetail]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [appId, appRecord, detail]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  /* Manual re-run — bypasses the cache and re-calls the model. */
+  const reRunAnalysis = () => {
+    if (!detail) return
+    setAiLoading(true)
+    setAiResult(null)
+    setAiError(null)
+    analyseApplication(appId, detail, { force: true })
+      .then(r => { setAiResult(r); setAiLoading(false) })
+      .catch(e => { setAiError(e.message ?? 'AI analysis failed'); setAiLoading(false) })
+  }
 
   /* Pull the DB record (drives both decision panel + fallback when not in static seed) */
   useEffect(() => {
@@ -622,37 +649,57 @@ const ApplicationReviewPage = () => {
     refreshLoanApplications()
   }
 
-  const onApprove = async () => {
-    if (!confirm('Approve this loan application?')) return
-    setActionBusy('approve'); setActionError(null)
-    try { await api.post(`/loan-applications/${appId}/approve`, { officer: CURRENT_USER.name }); await refreshApp() }
-    catch (err) { setActionError(err.message ?? 'Could not approve') }
-    finally { setActionBusy(null) }
+  /* All four decisions route through one styled modal (no native confirm/prompt).
+     The officer's notes textarea is always appended to the decision payload. */
+  const runDecision = async (busyKey, doRequest, failMsg) => {
+    setActionBusy(busyKey); setActionError(null)
+    try {
+      await doRequest()
+      await refreshApp()
+      setDecision(null)
+    } catch (err) {
+      setActionError(err.message ?? failMsg)
+    } finally {
+      setActionBusy(null)
+    }
   }
-  const onReject = async () => {
-    const reason = prompt('Reason for rejection (required):')
-    if (!reason?.trim()) return
-    setActionBusy('reject'); setActionError(null)
-    try { await api.post(`/loan-applications/${appId}/reject`, { reason: reason.trim(), officer: CURRENT_USER.name }); await refreshApp() }
-    catch (err) { setActionError(err.message ?? 'Could not reject') }
-    finally { setActionBusy(null) }
-  }
-  const onOverride = async () => {
-    const reason = prompt('Reason for overriding the AI rejection?') ?? ''
-    if (!confirm('Override the AI rejection and approve this loan?')) return
-    setActionBusy('override'); setActionError(null)
-    try { await api.post(`/loan-applications/${appId}/approve`, { reason: reason.trim() || null, officer: CURRENT_USER.name }); await refreshApp() }
-    catch (err) { setActionError(err.message ?? 'Could not override') }
-    finally { setActionBusy(null) }
-  }
-  const onEscalate = async () => {
-    const reason = prompt('Why are you escalating this application?') ?? ''
-    if (!reason.trim()) return
-    setActionBusy('escalate'); setActionError(null)
-    try { await api.post(`/loan-applications/${appId}/escalate`, { reason: reason.trim(), officer: CURRENT_USER.name }); await refreshApp() }
-    catch (err) { setActionError(err.message ?? 'Could not escalate') }
-    finally { setActionBusy(null) }
-  }
+
+  const onApprove = () => setDecision({
+    kind: 'approve', tone: 'success', confirmLabel: 'Approve loan',
+    title: 'Approve this loan application?',
+    message: 'The application will be marked approved and the client notified.',
+    requireReason: false, reasonLabel: 'Notes (optional)',
+    run: (reason) => runDecision('approve',
+      () => api.post(`/loan-applications/${appId}/approve`, { officer: CURRENT_USER.name, reason: reason || null, notes: officerNotes || null }),
+      'Could not approve'),
+  })
+  const onReject = () => setDecision({
+    kind: 'reject', tone: 'danger', confirmLabel: 'Reject loan',
+    title: 'Reject this loan application?',
+    message: 'The client will be informed the application was declined.',
+    requireReason: true, reasonLabel: 'Reason for rejection',
+    run: (reason) => runDecision('reject',
+      () => api.post(`/loan-applications/${appId}/reject`, { reason, officer: CURRENT_USER.name, notes: officerNotes || null }),
+      'Could not reject'),
+  })
+  const onOverride = () => setDecision({
+    kind: 'override', tone: 'warning', confirmLabel: 'Override & approve',
+    title: 'Override the AI rejection?',
+    message: 'This approves a loan the AI recommended rejecting. The justification is logged for compliance.',
+    requireReason: true, reasonLabel: 'Justification for override',
+    run: (reason) => runDecision('override',
+      () => api.post(`/loan-applications/${appId}/approve`, { reason, officer: CURRENT_USER.name, notes: officerNotes || null, override: true }),
+      'Could not override'),
+  })
+  const onEscalate = () => setDecision({
+    kind: 'escalate', tone: 'primary', confirmLabel: 'Escalate',
+    title: 'Escalate this application?',
+    message: 'Send to a senior underwriter for a second review.',
+    requireReason: true, reasonLabel: 'Reason for escalation',
+    run: (reason) => runDecision('escalate',
+      () => api.post(`/loan-applications/${appId}/escalate`, { reason, officer: CURRENT_USER.name, notes: officerNotes || null }),
+      'Could not escalate'),
+  })
 
   if (!summary || !detail) {
     if (appLoading) return (
@@ -773,13 +820,31 @@ const ApplicationReviewPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-[220px_1fr] gap-5">
 
               <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14 }}>
-                <ScoreRing score={ai.aiScore} loading={aiLoading} />
-                <p style={{ fontSize: 11, color: C.muted, display: 'flex', alignItems: 'center', gap: 4 }}>
-                  {aiLoading
-                    ? <><TbLoader2 className="animate-spin" style={{ fontSize: 11 }} /> Running analysis…</>
-                    : ai.analysedInSeconds ? <><TbClock style={{ fontSize: 11 }} /> Analysed in {ai.analysedInSeconds}s</> : null
-                  }
-                </p>
+                {aiError && !aiLoading ? (
+                  <div style={{ textAlign: 'center' }}>
+                    <TbAlertTriangle style={{ fontSize: 26, color: C.warning }} />
+                    <p style={{ fontSize: 12.5, fontWeight: 600, color: C.text, marginTop: 8 }}>AI analysis unavailable</p>
+                    <p style={{ fontSize: 11, color: C.muted, marginTop: 3, maxWidth: 180, lineHeight: 1.45 }}>
+                      The model didn’t return a usable result. You can re-run it or decide manually.
+                    </p>
+                    <button
+                      onClick={reRunAnalysis}
+                      style={{ marginTop: 12, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, fontWeight: 600, color: '#fff', background: C.primary, border: 'none', borderRadius: 8, padding: '7px 14px', cursor: 'pointer' }}
+                    >
+                      <TbRefresh style={{ fontSize: 13 }} /> Re-run analysis
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <ScoreRing score={ai.aiScore} loading={aiLoading} />
+                    <p style={{ fontSize: 11, color: C.muted, display: 'flex', alignItems: 'center', gap: 4 }}>
+                      {aiLoading
+                        ? <><TbLoader2 className="animate-spin" style={{ fontSize: 11 }} /> Running analysis…</>
+                        : ai.analysedInSeconds ? <><TbClock style={{ fontSize: 11 }} /> Analysed in {ai.analysedInSeconds}s</> : null
+                      }
+                    </p>
+                  </>
+                )}
               </div>
 
               <div style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20 }}>
@@ -838,7 +903,7 @@ const ApplicationReviewPage = () => {
             </div>
 
             {/* Banking Analytics — full width on mobile, centered ~75% on desktop */}
-            <div className="w-full lg:w-[75%] lg:self-center shrink-0" style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: '22vh', minHeight: 180, boxSizing: 'border-box', overflow: 'hidden' }}>
+            <div className="w-full lg:w-[75%] lg:self-center shrink-0" style={{ background: '#fff', borderRadius: 12, border: `1px solid ${C.border}`, padding: 20, height: 300, boxSizing: 'border-box', overflow: 'hidden' }}>
               <BankingChart months={docs.bankStatement.months} />
             </div>
 
@@ -998,7 +1063,12 @@ const ApplicationReviewPage = () => {
         </div>
       </div>
 
-      {overrideOpen && <OverrideModal appId={summary.id} name={personalInfo.fullName} onClose={() => setOverrideOpen(false)} />}
+      <DecisionDialog
+        decision={decision}
+        busy={actionBusy !== null}
+        error={actionError}
+        onCancel={() => { if (actionBusy === null) { setDecision(null); setActionError(null) } }}
+      />
 
       <ContextChat
         storageKey={`chat:loan-review:${summary.id}`}
@@ -1152,42 +1222,6 @@ const DecisionBanner = ({ kind, Icon, title, meta, reason }) => {
               <br />{reason}
             </p>
           )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const OverrideModal = ({ appId, name, onClose }) => {
-  const [reason, setReason] = useState('')
-  return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} onClick={onClose} />
-      <div style={{ position: 'relative', background: '#fff', borderRadius: 16, boxShadow: '0 20px 60px rgba(0,0,0,0.15)', width: 440, maxWidth: 'calc(100vw - 32px)', padding: 24 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-          <div>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: C.text }}>Override AI Decision</h3>
-            <p style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>{appId} · {name}</p>
-          </div>
-          <button onClick={onClose} style={{ padding: 6, borderRadius: 8, border: 'none', background: 'none', cursor: 'pointer', color: C.muted }}>
-            <TbX style={{ fontSize: 16 }} />
-          </button>
-        </div>
-        <div style={{ borderRadius: 8, padding: '10px 14px', background: '#FFFBEB', border: '1px solid #FCD34D', marginBottom: 14 }}>
-          <p style={{ fontSize: 12, color: '#92400E', lineHeight: 1.5 }}>This override will be logged against your officer ID and escalated for senior compliance review.</p>
-        </div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: C.text, marginBottom: 6 }}>
-          Reason for override <span style={{ color: C.critical }}>*</span>
-        </label>
-        <textarea value={reason} onChange={e => setReason(e.target.value)} rows={4}
-          placeholder="Describe the compliance or business justification…"
-          style={{ width: '100%', fontSize: 13, color: C.text, border: `1px solid ${C.border}`, borderRadius: 8, padding: '10px 12px', resize: 'none', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 14 }}>
-          <button onClick={onClose} style={{ padding: '8px 16px', fontSize: 13, fontWeight: 500, color: C.muted, background: '#fff', border: `1px solid ${C.border}`, borderRadius: 8, cursor: 'pointer' }}>Cancel</button>
-          <button disabled={!reason.trim()} onClick={() => { console.log('Override:', appId, reason); onClose() }}
-            style={{ padding: '8px 16px', fontSize: 13, fontWeight: 600, color: '#fff', background: reason.trim() ? '#1D3557' : '#9CA3AF', border: 'none', borderRadius: 8, cursor: reason.trim() ? 'pointer' : 'not-allowed' }}>
-            Confirm Override
-          </button>
         </div>
       </div>
     </div>
