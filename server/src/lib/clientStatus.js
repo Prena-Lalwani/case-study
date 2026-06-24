@@ -14,6 +14,11 @@ import { prisma } from '../db.js'
 const OPEN_LOAN     = ['ai_reviewing', 'needs_review', 'submitted']
 const OPEN_ENGAGE   = ['pending', 'proposed']
 
+/* An "active" loan application is anything that isn't closed/rejected. Business
+ * rule: an active application must ALWAYS have a case officer assigned — it can
+ * never be left unassigned. Only 'auto_rejected' (closed) may be unassigned. */
+export const ACTIVE_LOAN_STATUSES = ['submitted', 'ai_reviewing', 'needs_review', 'approved']
+
 export const recomputeClientStatus = async (clientId, tx = prisma) => {
   const [loans, engagements] = await Promise.all([
     tx.loanApplication.findMany({ where: { clientId }, select: { status: true } }),

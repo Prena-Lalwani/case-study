@@ -3,6 +3,18 @@ import { prisma } from '../db.js'
 
 const router = Router()
 
+/* Pick a case officer for a loan: an advisor whose focus matches the flow with
+ * the lowest current caseload, falling back to the least-loaded advisor overall.
+ * Used so every loan has an officer from the moment it's created — an active
+ * application is never left unassigned. */
+const pickOfficer = async (flowKey, tx = prisma) => {
+  const focused = await tx.advisor.findFirst({
+    where: { focus: { has: flowKey } },
+    orderBy: { clientLoad: 'asc' },
+  })
+  return focused ?? await tx.advisor.findFirst({ orderBy: { clientLoad: 'asc' } })
+}
+
 /* Identity/banking/financial fields that should always come from the live
    Client row (so edits + cleanups propagate), not from the frozen payload
    snapshot. The payload still wins for fields that aren't on Client at all
@@ -158,6 +170,9 @@ router.post('/', async (req, res) => {
   const linked = {}
   if (flowKey.endsWith('-loan') && b.loanRequest) {
     const loanLegacy = 'APP-' + String(Date.now()).slice(-6)
+    /* Assign a case officer up front — the loan is active ('ai_reviewing') the
+     * moment it's created, and an active application must never be unassigned. */
+    const officer = await pickOfficer(flowKey)
     const loan = await prisma.loanApplication.create({
       data: {
         legacyId: loanLegacy,
@@ -169,8 +184,12 @@ router.post('/', async (req, res) => {
         propertyAddress: b.loanRequest.propertyAddress,
         propertyValue: b.loanRequest.propertyValue ?? null,
         status: 'ai_reviewing',
+        ...(officer && { assignedAdvisorId: officer.id }),
       },
     })
+    if (officer) {
+      await prisma.advisor.update({ where: { id: officer.id }, data: { clientLoad: { increment: 1 } } })
+    }
     linked.loanApplicationId = loan.id
   } else if (flowKey.endsWith('-advisory')) {
     const eng = await prisma.advisoryEngagement.create({
@@ -303,17 +322,14 @@ router.post('/:id/result', async (req, res) => {
       r.recommendation === 'REJECT'  ? 'auto_rejected' :
       'needs_review'
 
-    /* Pick a case officer — advisor with the matching flow focus + lowest caseload.
-       Fall back to any advisor if none have loan focus. */
-    const flowFocused = await prisma.advisor.findMany({
-      where: { focus: { has: item.flowKey } },
-      orderBy: { clientLoad: 'asc' },
-      take: 1,
+    /* The loan already got a case officer at creation, so we keep it (no
+       reassignment, no double caseload bump). Only assign here as a fallback
+       if it somehow has none — an active application must never be unassigned. */
+    const current = await prisma.loanApplication.findUnique({
+      where:  { id: item.loanApplicationId },
+      select: { assignedAdvisorId: true },
     })
-    const fallback = flowFocused.length === 0
-      ? await prisma.advisor.findFirst({ orderBy: { clientLoad: 'asc' } })
-      : null
-    const officer = flowFocused[0] ?? fallback
+    const officer = current?.assignedAdvisorId ? null : await pickOfficer(item.flowKey)
 
     await prisma.loanApplication.update({
       where: { id: item.loanApplicationId },
@@ -325,7 +341,7 @@ router.post('/:id/result', async (req, res) => {
       },
     })
 
-    /* Bump that advisor's caseload — they now own this loan */
+    /* Bump caseload only if we just assigned a fallback officer here */
     if (officer) {
       await prisma.advisor.update({
         where: { id: officer.id },

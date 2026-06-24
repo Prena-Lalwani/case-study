@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { prisma } from '../db.js'
+import { ACTIVE_LOAN_STATUSES } from '../lib/clientStatus.js'
 
 const router = Router()
 
@@ -133,6 +134,20 @@ router.post('/:id/handoff-delete', async (req, res) => {
   })
   const idMap = Object.fromEntries(replacements.map(a => [a.legacyId, a.id]))
 
+  /* INVARIANT: an active application can never be left unassigned. Every active
+   * loan this advisor owns must be reassigned to a real replacement before we
+   * remove them — reject the whole operation otherwise. */
+  const activeAssigned = await prisma.loanApplication.findMany({
+    where:  { assignedAdvisorId: advisor.id, status: { in: ACTIVE_LOAN_STATUSES } },
+    select: { id: true, legacyId: true },
+  })
+  const unreassigned = activeAssigned.filter(l => !idMap[loanReassignments[l.id]])
+  if (unreassigned.length > 0) {
+    return res.status(400).json({
+      error: `Active applications must be reassigned to another advisor before removal: ${unreassigned.map(l => l.legacyId ?? l.id).join(', ')}`,
+    })
+  }
+
   try {
     /* 1. Loans — reassign to replacement OR set null */
     for (const [loanUuid, newAdvisorLegacy] of Object.entries(loanReassignments)) {
@@ -165,10 +180,11 @@ router.post('/:id/handoff-delete', async (req, res) => {
       }
     }
 
-    /* 3. For loans/engagements not in the maps, the existing DELETE logic handles them
-       (unassigns loans, drops un-reassigned advisory assignments via cascade). */
+    /* 3. Any remaining loans still pointing at this advisor are non-active
+       (closed/rejected) — those may be safely unassigned. Active ones were
+       guaranteed reassigned above, so they're already pointing elsewhere. */
     await prisma.loanApplication.updateMany({
-      where: { assignedAdvisorId: advisor.id },
+      where: { assignedAdvisorId: advisor.id, status: { notIn: ACTIVE_LOAN_STATUSES } },
       data:  { assignedAdvisorId: null },
     })
     await prisma.advisorAssignment.deleteMany({ where: { advisorId: advisor.id } })
@@ -241,8 +257,20 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const advisor = await prisma.advisor.findUnique({ where: { legacyId: req.params.id } })
   if (!advisor) return res.status(404).json({ error: 'Advisor not found' })
+
+  /* INVARIANT: never orphan an active application. If this advisor still owns
+   * active loans, they must be handed off (use /handoff-delete) — refuse here. */
+  const activeCount = await prisma.loanApplication.count({
+    where: { assignedAdvisorId: advisor.id, status: { in: ACTIVE_LOAN_STATUSES } },
+  })
+  if (activeCount > 0) {
+    return res.status(409).json({
+      error: `This advisor has ${activeCount} active application(s). Reassign them before deleting.`,
+    })
+  }
+
   try {
-    /* 1. Unlink any loan applications they were handling (case officer) */
+    /* 1. Unlink any (closed/rejected) loan applications they were handling */
     const unlinkedLoans = await prisma.loanApplication.updateMany({
       where: { assignedAdvisorId: advisor.id },
       data:  { assignedAdvisorId: null },

@@ -233,10 +233,10 @@ async function seedApplicantsAndLoans () {
       create: { legacyId: clientLegacyId, ...clientData },
     })
 
-    /* Assign a case officer to decided / needs-review loans (not ones still analysing). */
-    const officer = summary.status === 'ai_reviewing'
-      ? null
-      : pickOfficer(summary.loanType)
+    /* Business rule: every ACTIVE application must have a case officer. We assign
+     * one to every loan regardless of status (a closed/rejected loan keeping its
+     * officer is harmless; an active one must never be unassigned). */
+    const officer = pickOfficer(summary.loanType)
 
     const loanData = {
       loanType: summary.loanType,
